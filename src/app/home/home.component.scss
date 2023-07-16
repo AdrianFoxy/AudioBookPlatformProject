@@ -1,0 +1,122 @@
+.poster_p{
+  font-size: 50px;
+}
+.container{
+  margin-top: 20px;
+}
+
+.poster_text{
+  margin-top: 80px;
+}
+
+.poster_text span {
+  color: orange;
+}
+
+.poster_secondary_text{
+  opacity: 0.8;
+}
+
+.img-poster {
+  max-width: 100%;
+  height: auto;
+}
+
+@media(max-width:992px){
+  .poster_text {
+    margin-top: 0;
+  }
+}
+
+.g_button {
+  width: auto;
+  height: 60px;
+  background: #8adeb4;
+  border-radius: 10px;
+  outline: none;
+  border: 2px solid #31312F;
+  border-bottom: 6px solid #31312F;
+  font-size: 18px;
+  padding: 10px 20px;
+}
+
+.o_button {
+  width: auto;
+  height: 60px;
+  background: orange;
+  border-radius: 10px;
+  outline: none;
+  border: 2px solid #31312F;
+  border-bottom: 6px solid #31312F;
+  font-size: 18px;
+  padding: 10px 20px;
+  margin-right: 10px;
+}
+
+.w_button {
+  width: auto;
+  height: 60px;
+  background: white;
+  border-radius: 10px;
+  outline: none;
+  border: 2px solid #31312F;
+  border-bottom: 6px solid #31312F;
+  font-size: 18px;
+  padding: 10px 20px;
+  margin-right: 10px;
+}
+
+.recomends{
+  margin-top: 100px;
+}
+
+.card-img{
+  border-radius: 20px;
+  width: 100%;
+  height: 450px;
+}
+
+.book_name{
+  text-decoration: none;
+  color: #000;
+}
+
+@media(max-width:1200px){
+  .card-img{
+    width: 100%;
+    height: 300px;
+  }
+}
+
+@media(max-width:992px){
+  .card-img{
+    width: 100%;
+    height: 250px;
+  }
+}
+
+@media(max-width:768px){
+  .card-img{
+    width: 100%;
+    height: 350px;
+  }
+}
+
+@media(max-width:500px){
+  .card-img{
+    width: 100%;
+    height: 300px;
+  }
+}
+
+@media(max-width:500px){
+  .card-img{
+    width: 100%;
+    height: 200px;
+  }
+}
+
+.card {
+  border: none;
+}
+
