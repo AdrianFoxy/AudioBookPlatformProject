@@ -4,7 +4,7 @@
       <p class="poster_p">Знайди книги для будь якого <span>моменту!</span></p>
       <p class="poster_secondary_text">Історії та пригоди для кожного дня, велика біблотека аудікниг,
         що постійно поповнюється новими творами. Приєднуйся до нас прямо зараз!</p>
-      <button class="o_button mt-3">Вперед до книг!</button>
+      <button class="o_button mt-3" routerLink="/library">Вперед до книг!</button>
       <button class="w_button mt-3">Підтримати проект.</button>
     </div>
     <div class="col d-none d-lg-flex">
@@ -18,76 +18,23 @@
       <h1>ТОП ТИЖНЯ</h1>
     </div>
     <div class="ml-3">
-      <button class="g_button mt-3">Більше →</button>
+      <button class="g_button mt-3" routerLink="/library">Більше →</button>
     </div>
   </div>
   <div class="mt-5">
     <div class="row mt-3">
-      <div class="col-md-3 col-6 mb-4">
+      <div *ngFor="let book of books" class="col-md-3 col-6 mb-4">
         <div class="card">
-          <a href=""><img src="/assets/images/books_templates/TheNameOfWind.jpg" class="card-img" alt="bookimg"></a>
-          <div class="card-body">
-            <a href="" class="book_name"><h5 class="card-title"><b>Ім'я вітру</b></h5></a>
-            <p class="card-text">
-              <span>Патрік Ротфусс</span>
-              <span class="float-end">
-                <i class="fa fa-star" style="color: #ffbc57;" aria-hidden="true"></i>
-                4.5
-              </span>
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <div class="books col-md-3 col-6 mb-4">
-        <div class="card">
-          <a href="">
-            <img src="/assets/images/books_templates/hobbit.jpg" class="card-img" alt="bookimg">
+          <a routerLink="/library/{{book.id}}">
+            <img [src]="book.imageSrc" class="card-img" alt="bookimg">
           </a>
           <div class="card-body">
-            <a href="" class="book_name"><h5 class="card-title"><b>Гоббіт</b></h5></a>
+            <a routerLink="/library/{{book.id}}" class="book_name"><h5 class="card-title"><b>{{ book.title }}</b></h5></a>
             <p class="card-text">
-              <span>Джон Толкін</span>
+              <span>{{ book.author }}</span>
               <span class="float-end">
                 <i class="fa fa-star" style="color: #ffbc57;" aria-hidden="true"></i>
-                4.2
-              </span>
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-3 col-6 mb-4">
-        <div class="card">
-          <a href="">
-            <img src="/assets/images/books_templates/mort.jpg" class="card-img" alt="bookimg">
-          </a>
-          <div class="card-body">
-            <a href="" class="book_name"><h5 class="card-title"><b>Морт</b></h5></a>
-            <p class="card-text">
-              <span>Тіррі Пратчетт</span>
-              <span class="float-end">
-                <i class="fa fa-star" style="color: #ffbc57;" aria-hidden="true"></i>
-                4.7
-              </span>
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-3 col-6 mb-4">
-        <div class="card">
-          <a href="">
-            <img src="/assets/images/books_templates/narnia.jpg" class="card-img" alt="bookimg">
-          </a>
-          <div class="card-body">
-            <a href="" class="book_name"><h5 class="card-title"><b>Хроніки Нарнії</b></h5></a>
-            <p class="card-text">
-              <a href=""></a>
-              <span>К.С. Льюїс</span>
-              <span class="float-end">
-                <i class="fa fa-star" style="color: #ffbc57;" aria-hidden="true"></i>
-                4.9
+                {{ book.rating }}
               </span>
             </p>
           </div>

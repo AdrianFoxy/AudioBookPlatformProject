@@ -2,12 +2,11 @@ import { Component } from '@angular/core';
 import { Book } from '../shared/models/book';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  selector: 'app-library',
+  templateUrl: './library.component.html',
+  styleUrls: ['./library.component.scss']
 })
-export class HomeComponent {
-
+export class LibraryComponent {
   books: Book[] = [
     {
       id: 2,
@@ -38,5 +37,4 @@ export class HomeComponent {
       rating: 4.9
     }
   ];
-
 }

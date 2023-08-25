@@ -4,21 +4,21 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NavBarComponent } from './core/nav-bar/nav-bar.component';
 import { HomeModule } from './home/home.module';
 import { CoreModule } from './core/core.module';
+import { LibraryModule } from './library/library.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavBarComponent
    ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     CoreModule,
-    HomeModule
+    HomeModule,
+    LibraryModule
   ],
   providers: [],
   bootstrap: [AppComponent]
