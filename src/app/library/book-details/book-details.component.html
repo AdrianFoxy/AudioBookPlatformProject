@@ -1,1 +1,21 @@
-<p>book-details works!</p>
+<div class="container">
+  <h1>Audio-Player-Tests</h1>
+  <ol>
+    <li *ngFor="let item of songs" (click)="openSong(item.url)">
+      {{item.name}}
+    </li>
+  </ol>
+  <button (click)="playSong()">play</button>
+  <button (click)="pauseSong()">pause</button>
+  <button (click)="stopSong()">stop</button>
+  <div>
+    <input type="range" min="0" max="1" step="0.01" value="0.5" (input)="vol($event)">
+  </div>
+
+  <div>
+    <span>{{ currentTime }}</span>
+    <progress max="100" [value]="currentPercentage" (click)="seekSong($event)"></progress>
+    <span>{{ duration }}</span>
+  </div>
+
+</div>
