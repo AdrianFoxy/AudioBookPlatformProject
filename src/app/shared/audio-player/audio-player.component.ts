@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { StreamState } from '../models/stream-state';
 import { AudioService } from 'src/app/core/audio_service/audio.service';
 
@@ -7,7 +7,7 @@ import { AudioService } from 'src/app/core/audio_service/audio.service';
   templateUrl: './audio-player.component.html',
   styleUrls: ['./audio-player.component.scss']
 })
-export class AudioPlayerComponent {
+export class AudioPlayerComponent implements OnDestroy {
 
   audioList = [
     {url:'/assets/audio/FlyMeToTheMoon.mp3', name: 'Fly Me To The Moon'},
@@ -27,6 +27,7 @@ export class AudioPlayerComponent {
     .subscribe(state => {
       this.state = state;
     });
+
   }
 
   playStream(url: string) {
@@ -80,4 +81,21 @@ export class AudioPlayerComponent {
   onSliderChangeEnd(change: Event) {
     this.audioService.seekTo(change);
   }
+
+  ngOnDestroy() {
+    this.audioService.pause();
+  }
+
+  getProgressBarBackground() {
+    if (this.state && this.state.duration !== undefined && this.state.currentTime !== undefined) {
+      const percentage = (this.state.currentTime / this.state.duration) * 100;
+      return {
+        background: `linear-gradient(to right, #47d38d ${percentage}%, #8adeb4 ${percentage}%)`
+      };
+    }
+    return {
+      background: '#47d38d'
+    };
+  }
+
 }
