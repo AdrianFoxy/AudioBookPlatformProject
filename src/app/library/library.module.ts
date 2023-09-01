@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { LibraryComponent } from './library.component';
 import { BookDetailsComponent } from './book-details/book-details.component';
 import { RouterModule } from '@angular/router';
+import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -13,7 +14,8 @@ import { RouterModule } from '@angular/router';
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    SharedModule
   ],
   exports:[
   ]

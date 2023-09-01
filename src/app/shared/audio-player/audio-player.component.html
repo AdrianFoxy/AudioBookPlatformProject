@@ -1,0 +1,24 @@
+<p>audio-player works! UHU</p>
+<ol>
+  <li *ngFor="let item of audioList; let i = index" (click)="openFile(item, i)">
+    {{item.name}}
+  </li>
+</ol>
+
+<div>
+  <button (click)="play()">play</button>
+  <button (click)="pause()">pause</button>
+  <button (click)="stop()">stop</button>
+</div>
+
+<div>
+  <span>{{state?.readableCurrentTime}}</span>
+  <input type="range" min="0" max="{{state?.duration}}" [value]="state?.currentTime" (input)="onSliderChangeEnd($event)" [disabled]="state?.error || currentFile.index === undefined">
+  <span>{{state?.readableDuration}}</span>
+</div>
+
+
+<div>
+  <span>Volume</span>
+  <input type="range" min="0" max="1" step="0.01" value="0.5" (input)="changeVolume($event)">
+</div>

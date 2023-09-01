@@ -1,26 +1,5 @@
 <div class="container">
   <h1>Audio-Player-Tests</h1>
-  <ol>
-    <li *ngFor="let item of audioList" (click)="openAudioFile(item.url)">
-      {{item.name}}
-    </li>
-  </ol>
-
-  <div>
-    <button (click)="playAudio()">play</button>
-    <button (click)="pauseAudio()">pause</button>
-    <button (click)="stopAudio()">stop</button>
-  </div>
-
-  <div>
-    <span>{{currentTime}}</span>
-    <input type="range" min="0" max="{{duration}}" [value]="seek" (input)="setSeekTo($event)">
-    <span>{{duration}}</span>
-  </div>
-
-  <div>
-    <span>Volume</span>
-    <input type="range" min="0" max="1" step="0.01" value="0.5" (input)="setVolume($event)">
-  </div>
-
+  <app-audio-player></app-audio-player>
 </div>
+
