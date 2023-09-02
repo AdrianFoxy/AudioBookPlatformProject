@@ -1,18 +1,20 @@
 <p>audio-player works! UHU</p>
-<ol>
-  <li *ngFor="let item of audioList; let i = index" (click)="openFile(item, i)">
-    {{item.name}}
-  </li>
-</ol>
 
 <div class="player_bg">
   <div class="row">
-    <div class="col-2">
-      <img src="/assets/images/books_templates/TheNameOfWind.jpg" alt="" class="player_img">
+
+
+    <div class="col-md-3 col-12 order-md-1 order-2">
+      <h3>PlayList</h3>
+      <ul class="list-group list-group-border">
+        <li class="list-group-item list-group-item-border" [class.active]="i === activeItemIndex" *ngFor="let item of audioList; let i = index"
+          (click)="setActiveItem(i); openFile(item, i)">{{item.name}}</li>
+      </ul>
     </div>
-    <div class="col-10">
+    <div class="col-md-9 col-12 order-md-2 order-1">
       <h4>Ім'я вітру</h4>
       <p>Патрік Ротфус • 24 chapters</p>
+      <p>Now playing: {{currentFile.name}}</p>
       <div>
         <div class="audio_time">
           <span class="current-time"
@@ -20,6 +22,8 @@
           <span class="total-duration"
             [hidden]="state?.error || currentFile.index === undefined">{{state?.readableDuration}}</span>
           <span class="current-time" *ngIf="state?.error || currentFile.index === undefined">00:00:00</span>
+          <span class="total-duration" *ngIf="state?.error || currentFile.index === undefined">00:00:00</span>
+
         </div>
 
         <input type="range" class="seek_slider" min="0" max="{{state?.duration}}" [value]="state?.currentTime"
@@ -28,10 +32,12 @@
       </div>
 
       <div class="parent">
-        <button class="round-1" [disabled]="isFirstPlaying()" (click)="previous()"><i class="fa fa-step-backward"></i></button>
+        <button class="round-1" [disabled]="isFirstPlaying()" (click)="previous()"><i
+            class="fa fa-step-backward"></i></button>
         <button class="round-1" *ngIf="!state?.playing" (click)="play()"> <i class="fa fa-play"></i> </button>
         <button class="round-1" *ngIf="state?.playing" (click)="pause()"> <i class="fa fa-pause"></i> </button>
-        <button class="round-1" [disabled]="isLastPlaying()" (click)="next()"><i class="fa fa-step-forward"></i></button>
+        <button class="round-1" [disabled]="isLastPlaying()" (click)="next()"><i
+            class="fa fa-step-forward"></i></button>
       </div>
       <div class="volume">
         <i class="fa fa-volume-down"></i>
@@ -41,8 +47,4 @@
       </div>
     </div>
   </div>
-</div>
-
-<div>
-  <button (click)="stop()">stop</button>
 </div>

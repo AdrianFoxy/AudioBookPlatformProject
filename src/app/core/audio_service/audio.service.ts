@@ -32,9 +32,9 @@ export class AudioService {
     currentTime: undefined,
     canplay: false,
     error: false,
+    ended: false
   };
-
-
+  currentFile: any;
 
   constructor() { }
 
@@ -47,13 +47,8 @@ export class AudioService {
       this.audioObj.play();
 
       const handler = (event: Event) => {
-        // console.log(event);
-        // this.seek = this.audio.currentTime;
-        // this.duration = this.formatTime(this.audio.duration);
-        // this.currentTime = this.formatTime(this.audio.currentTime);
         this.updateStateEvents(event);
         observer.next(event);
-
       }
 
       this.addEvent(this.audioObj, this.audioEvents, handler);
@@ -67,7 +62,6 @@ export class AudioService {
       }
     });
   }
-
 
   addEvent(obj: EventTarget, events: string[], handler: (event: Event) => void) {
     events.forEach(event => {
@@ -125,6 +119,7 @@ export class AudioService {
         this.state.canplay = true;
         break;
       case "playing":
+        this.state.ended = false;
         this.state.playing = true;
         break;
       case "pause":
@@ -140,6 +135,13 @@ export class AudioService {
         this.resetState();
         this.state.error = true;
         break;
+      case "ended":
+        // Добавляем вывод в консоль при событии "ended"
+        console.log("Аудиофайл завершил воспроизведение.");
+        this.state.ended = true;
+
+        break;
+
     }
     this.stateChange.next(this.state);
   }
@@ -152,7 +154,8 @@ export class AudioService {
       duration: undefined,
       currentTime: undefined,
       canplay: false,
-      error: false
+      error: false,
+      ended: false
     };
 
   }
