@@ -72,6 +72,13 @@ export class AudioPlayerComponent implements OnDestroy {
         this.activeItemIndex = this.currentFile.index;
         this.currentFile.currentTime = parsedData.currentTime;
         console.log('Parsed currentTime', this.currentFile.currentTime);
+        if(this.currentFile.currentTime){
+          const overlay = document.querySelector('.overlay');
+          if (overlay) {
+            overlay.classList.remove('hidden');
+            console.log('HIDDEN');
+          }
+        }
       }
     }
   }
@@ -91,11 +98,14 @@ export class AudioPlayerComponent implements OnDestroy {
   pause() {
     this.audioService.pause();
 
-    const saveData = {
-      currentFile: this.currentFile,
-      currentTime: this.state?.currentTime,
-    };
-    localStorage.setItem(this.currentSongKey, JSON.stringify(saveData));
+    if (this.state && this.state.currentTime !== undefined) {
+      const saveData = {
+        currentFile: this.currentFile,
+        currentTime: this.state?.currentTime,
+      };
+      localStorage.setItem(this.currentSongKey, JSON.stringify(saveData));
+    }
+
   }
 
   play() {
@@ -108,6 +118,15 @@ export class AudioPlayerComponent implements OnDestroy {
     } else {
       this.audioService.play();
     }
+
+    if(this.currentFile.currentTime){
+      const overlay = document.querySelector('.overlay');
+      if (overlay) {
+        overlay.classList.add('hidden');
+        console.log('HIDDEN');
+      }
+    }
+
   }
 
 
@@ -150,6 +169,10 @@ export class AudioPlayerComponent implements OnDestroy {
 
   setActiveItem(index: number) {
     this.activeItemIndex = index;
+  }
+
+  formatTime(time: number) {
+    return this.audioService.formatTime(time);
   }
 
   getProgressBarBackground() {

@@ -1,14 +1,23 @@
 <p>audio-player works! UHU</p>
 
 <div class="player_bg">
+  <div class="overlay hidden">
+    <div class="content row">
+      <div class="col-md-6">
+        <img src="/assets/images/fox_with_headphones.png">
+      </div>
+      <div class="col-md-6">
+        <p>Привіт! Ти зупинився  на прослуховуванні  {{currentFile.name}} на  {{formatTime(currentFile.currentTime)}}</p>
+        <button *ngIf="!state?.playing" (click)="play()">Продовжити?</button>
+      </div>
+    </div>
+  </div>
   <div class="row">
-
-
     <div class="col-md-3 col-12 order-md-1 order-2">
       <h3>PlayList</h3>
       <ul class="list-group list-group-border">
-        <li class="list-group-item list-group-item-border" [class.active]="i === activeItemIndex" *ngFor="let item of audioList; let i = index"
-          (click)="setActiveItem(i); openFile(item, i)">{{item.name}}</li>
+        <li class="list-group-item list-group-item-border" [class.active]="i === activeItemIndex"
+          *ngFor="let item of audioList; let i = index" (click)="setActiveItem(i); openFile(item, i)">{{item.name}}</li>
       </ul>
     </div>
     <div class="col-md-9 col-12 order-md-2 order-1">
@@ -18,7 +27,8 @@
       <div>
         <div class="audio_time">
           <span class="current-time"
-            [hidden]="state?.error || currentFile.index === undefined">{{state?.readableCurrentTime || '00:00:00' }}</span>
+            [hidden]="state?.error || currentFile.index === undefined">{{state?.readableCurrentTime || '00:00:00'
+            }}</span>
           <span class="total-duration"
             [hidden]="state?.error || currentFile.index === undefined">{{state?.readableDuration || '00:00:00' }}</span>
         </div>
