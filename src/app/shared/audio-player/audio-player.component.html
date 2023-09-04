@@ -12,18 +12,15 @@
       </ul>
     </div>
     <div class="col-md-9 col-12 order-md-2 order-1">
-      <h4>Ім'я вітру</h4>
-      <p>Патрік Ротфус • 24 chapters</p>
+      <h4>Book Name</h4>
+      <p>Author Name • number of chapters</p>
       <p>Now playing: {{currentFile.name}}</p>
       <div>
         <div class="audio_time">
           <span class="current-time"
-            [hidden]="state?.error || currentFile.index === undefined">{{state?.readableCurrentTime}}</span>
+            [hidden]="state?.error || currentFile.index === undefined">{{state?.readableCurrentTime || '00:00:00' }}</span>
           <span class="total-duration"
-            [hidden]="state?.error || currentFile.index === undefined">{{state?.readableDuration}}</span>
-          <span class="current-time" *ngIf="state?.error || currentFile.index === undefined">00:00:00</span>
-          <span class="total-duration" *ngIf="state?.error || currentFile.index === undefined">00:00:00</span>
-
+            [hidden]="state?.error || currentFile.index === undefined">{{state?.readableDuration || '00:00:00' }}</span>
         </div>
 
         <input type="range" class="seek_slider" min="0" max="{{state?.duration}}" [value]="state?.currentTime"

@@ -99,8 +99,13 @@ export class AudioService {
   }
 
   seekTo(ev: any) {
-    this.audioObj.currentTime = ev.target.value;
+    if (ev && ev.target && ev.target.value !== undefined) {
+      this.audioObj.currentTime = ev.target.value;
+    } else {
+      this.audioObj.currentTime = ev;
+    }
   }
+
 
   formatTime(time: number, format: string = 'HH:mm:ss') {
     const momentTime = time * 1000;
@@ -137,6 +142,7 @@ export class AudioService {
         break;
       case "ended":
         // Добавляем вывод в консоль при событии "ended"
+
         console.log("Аудиофайл завершил воспроизведение.");
         this.state.ended = true;
 

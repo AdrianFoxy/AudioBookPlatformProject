@@ -9,16 +9,17 @@ import { AudioService } from 'src/app/core/audio_service/audio.service';
 })
 export class AudioPlayerComponent implements OnDestroy {
 
+
   audioList = [
-    {url:'/assets/audio/FlyMeToTheMoon.mp3', name: 'Fly Me To The Moon'},
-    {url:'/assets/audio/LemonTree.mp3', name: 'Lemon Tree'},
-    {url:'/assets/audio/y2mate.is - Life Is Beautiful-a3v-WcQR8T0-192k-1693653889.mp3', name: 'Life Is Beautiful'},
-    {url:'/assets/audio/y2mate.is - Stray Gods The Ritual Red Path Everybody Wants to See You Fall in Love -qEyScxu714w-128k-1693649903.mp3', name: 'Everybody Wants to See You Fall in Love'},
-    {url: '/assets/audio/y2mate.is - JP Cooper She s On My Mind Official Video -5Z0EWqe6cLM-128k-1693650679.mp3', name: 'She s On My Mind'},
-    {url: '/assets/audio/y2mate.is - Adrift feat. Laura Bailey and Ashley Johnson from Stray Gods --HMq_9-Nn-A-192k-1693650865.mp3', name: 'Adrift'},
-    {url: '/assets/audio/y2mate.is - Morena Mariana Nolasco part. Vitor Kley Fan Animated Music Video Witch Bunny -jTWb-RIdN-I-192k-1693650931.mp3', name: 'Morena'},
-    {url: '/assets/audio/y2mate.is - Just The Two Of Us-52avIJWQWAY-192k-1693651021.mp3', name: 'Just Two Of Us'},
-    {url: '/assets/audio/y2mate.is - the_world_outside__is_gonna_be_the_death_of_me_-3qKf4GMz9Jo-192k-1693654398.mp3', name: 'The World Outside (Is Gonna Be the Death of Me)'}
+    { id: 'asd1asd', url: '/assets/audio/FlyMeToTheMoon.mp3', name: 'Fly Me To The Moon' },
+    { id: 'asd2asd', url: '/assets/audio/LemonTree.mp3', name: 'Lemon Tree' },
+    { id: 'asd3asd', url: '/assets/audio/y2mate.is - Life Is Beautiful-a3v-WcQR8T0-192k-1693653889.mp3', name: 'Life Is Beautiful' },
+    { id: 'asd4asd', url: '/assets/audio/y2mate.is - Stray Gods The Ritual Red Path Everybody Wants to See You Fall in Love -qEyScxu714w-128k-1693649903.mp3', name: 'Everybody Wants to See You Fall in Love' },
+    { id: 'asd5asd', url: '/assets/audio/y2mate.is - JP Cooper She s On My Mind Official Video -5Z0EWqe6cLM-128k-1693650679.mp3', name: 'She s On My Mind' },
+    { id: 'asd6asd', url: '/assets/audio/y2mate.is - Adrift feat. Laura Bailey and Ashley Johnson from Stray Gods --HMq_9-Nn-A-192k-1693650865.mp3', name: 'Adrift' },
+    { id: 'asd7asd', url: '/assets/audio/y2mate.is - Morena Mariana Nolasco part. Vitor Kley Fan Animated Music Video Witch Bunny -jTWb-RIdN-I-192k-1693650931.mp3', name: 'Morena' },
+    { id: 'asd8asd', url: '/assets/audio/y2mate.is - Just The Two Of Us-52avIJWQWAY-192k-1693651021.mp3', name: 'Just Two Of Us' },
+    { id: 'asd9asd', url: '/assets/audio/y2mate.is - the_world_outside__is_gonna_be_the_death_of_me_-3qKf4GMz9Jo-192k-1693654398.mp3', name: 'The World Outside (Is Gonna Be the Death of Me)' }
   ]
 
   files: Array<any> = [];
@@ -26,27 +27,53 @@ export class AudioPlayerComponent implements OnDestroy {
   currentFile: any = {};
   activeItemIndex: number = -1;
 
+  currentSongKey = 'currentSong';
+  SongKeyProgress = 'SongProgress';
+
+
   constructor(private audioService: AudioService) {
 
     this.files = this.audioList;
 
     // listen to stream state
     this.audioService.getState()
-    .subscribe(state => {
-      this.state = state;
-    });
+      .subscribe(state => {
+        this.state = state;
+      });
 
   }
 
   ngOnInit() {
-    // Add event "ended" to audio element
+    this.restorePlayerState();
+    this.nextAudioAfterEnded();
+    this.saveAudioDataBeforeF5();
+  }
+
+  saveAudioDataBeforeF5(){
+    window.addEventListener('beforeunload', () => {
+      this.pause();
+    });
+  }
+
+  nextAudioAfterEnded() {
     this.audioService.audioObj.addEventListener('ended', () => {
-      // console.log("Audio ended.");
-      // Play next
-      if(!this.isLastPlaying()){
+      if (!this.isLastPlaying()) {
         this.next();
       }
     });
+  }
+
+  restorePlayerState() {
+    const savedSong = localStorage.getItem(this.currentSongKey);
+    if (savedSong) {
+      const parsedData = JSON.parse(savedSong);
+      if (parsedData && parsedData.currentFile) {
+        this.currentFile = parsedData.currentFile;
+        this.activeItemIndex = this.currentFile.index;
+        this.currentFile.currentTime = parsedData.currentTime;
+        console.log('Parsed currentTime', this.currentFile.currentTime);
+      }
+    }
   }
 
   playStream(url: string) {
@@ -63,22 +90,37 @@ export class AudioPlayerComponent implements OnDestroy {
 
   pause() {
     this.audioService.pause();
+
+    const saveData = {
+      currentFile: this.currentFile,
+      currentTime: this.state?.currentTime,
+    };
+    localStorage.setItem(this.currentSongKey, JSON.stringify(saveData));
   }
 
   play() {
-    this.audioService.play();
+    console.log(this.state);
+
+    if (localStorage.getItem(this.currentSongKey) && !this.state?.canplay) {
+      console.log('Saved song data found.');
+      this.playStream(this.currentFile.file.url);
+      this.audioService.seekTo(this.currentFile.currentTime);
+    } else {
+      this.audioService.play();
+    }
   }
+
 
   stop() {
     this.audioService.stop();
   }
 
   next() {
-    if(!this.isLastPlaying()){
-          const index = this.currentFile.index + 1;
-    const file = this.files[index];
-    this.setActiveItem(index);
-    this.openFile(file, index);
+    if (!this.isLastPlaying()) {
+      const index = this.currentFile.index + 1;
+      const file = this.files[index];
+      this.setActiveItem(index);
+      this.openFile(file, index);
     }
   }
 
@@ -89,7 +131,7 @@ export class AudioPlayerComponent implements OnDestroy {
     this.openFile(file, index);
   }
 
-  changeVolume(ev:any){
+  changeVolume(ev: any) {
     this.audioService.setVolume(ev);
   }
 
@@ -103,11 +145,11 @@ export class AudioPlayerComponent implements OnDestroy {
 
   onSliderChangeEnd(change: Event) {
     this.audioService.seekTo(change);
+    console.log(change);
   }
 
-  ngOnDestroy() {
-    this.audioService.pause();
-    this.audioService.seekTo(0);
+  setActiveItem(index: number) {
+    this.activeItemIndex = index;
   }
 
   getProgressBarBackground() {
@@ -122,9 +164,10 @@ export class AudioPlayerComponent implements OnDestroy {
     };
   }
 
-  setActiveItem(index: number) {
-    this.activeItemIndex = index;
+  //Elsi ybrat - pri perehode na next stranici - music will play
+  //poetomy ne usal window.addEventListener
+  ngOnDestroy() {
+    this.pause();
   }
-
 
 }
