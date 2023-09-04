@@ -95,7 +95,11 @@ export class AudioService {
   }
 
   setVolume(ev:any){
-    this.audioObj.volume = ev.target.value;
+    if(ev && ev.target && ev.target.value !== undefined){
+      this.audioObj.volume = ev.target.value;
+    } else {
+      this.audioObj.volume = ev;
+    }
   }
 
   seekTo(ev: any) {
@@ -106,6 +110,10 @@ export class AudioService {
     }
   }
 
+  getVolume(){
+    //console.log(this.audioObj.volume);
+    return this.audioObj.volume;
+  }
 
   formatTime(time: number, format: string = 'HH:mm:ss') {
     const momentTime = time * 1000;

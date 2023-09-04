@@ -9,7 +9,6 @@ import { AudioService } from 'src/app/core/audio_service/audio.service';
 })
 export class AudioPlayerComponent implements OnDestroy {
 
-
   audioList = [
     { id: 'asd1asd', url: '/assets/audio/FlyMeToTheMoon.mp3', name: 'Fly Me To The Moon' },
     { id: 'asd2asd', url: '/assets/audio/LemonTree.mp3', name: 'Lemon Tree' },
@@ -26,6 +25,7 @@ export class AudioPlayerComponent implements OnDestroy {
   state: StreamState | undefined;
   currentFile: any = {};
   activeItemIndex: number = -1;
+
 
   currentSongKey = 'currentSong';
   SongKeyProgress = 'SongProgress';
@@ -71,6 +71,9 @@ export class AudioPlayerComponent implements OnDestroy {
         this.currentFile = parsedData.currentFile;
         this.activeItemIndex = this.currentFile.index;
         this.currentFile.currentTime = parsedData.currentTime;
+        this.changeVolume(parsedData.currentVolume);
+        this.currentFile.currentVolume = parsedData.currentVolume;
+
         console.log('Parsed currentTime', this.currentFile.currentTime);
         if(this.currentFile.currentTime){
           const overlay = document.querySelector('.overlay');
@@ -93,19 +96,21 @@ export class AudioPlayerComponent implements OnDestroy {
     this.currentFile.name = file.name;
     this.audioService.stop();
     this.playStream(file.url);
+    if(this.currentFile.currentVolume){
+      this.changeVolume(this.currentFile.currentVolume);
+    }
   }
 
   pause() {
     this.audioService.pause();
-
     if (this.state && this.state.currentTime !== undefined) {
       const saveData = {
         currentFile: this.currentFile,
         currentTime: this.state?.currentTime,
+        currentVolume: this.audioService.getVolume()
       };
       localStorage.setItem(this.currentSongKey, JSON.stringify(saveData));
     }
-
   }
 
   play() {
@@ -152,6 +157,7 @@ export class AudioPlayerComponent implements OnDestroy {
 
   changeVolume(ev: any) {
     this.audioService.setVolume(ev);
+    //console.log(ev);
   }
 
   isFirstPlaying() {
