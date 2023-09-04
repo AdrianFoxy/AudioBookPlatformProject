@@ -95,11 +95,24 @@ export class AudioService {
   }
 
   setVolume(ev:any){
-    this.audioObj.volume = ev.target.value;
+    if(ev && ev.target && ev.target.value !== undefined){
+      this.audioObj.volume = ev.target.value;
+    } else {
+      this.audioObj.volume = ev;
+    }
   }
 
   seekTo(ev: any) {
-    this.audioObj.currentTime = ev.target.value;
+    if (ev && ev.target && ev.target.value !== undefined) {
+      this.audioObj.currentTime = ev.target.value;
+    } else {
+      this.audioObj.currentTime = ev;
+    }
+  }
+
+  getVolume(){
+    //console.log(this.audioObj.volume);
+    return this.audioObj.volume;
   }
 
   formatTime(time: number, format: string = 'HH:mm:ss') {
@@ -137,6 +150,7 @@ export class AudioService {
         break;
       case "ended":
         // Добавляем вывод в консоль при событии "ended"
+
         console.log("Аудиофайл завершил воспроизведение.");
         this.state.ended = true;
 

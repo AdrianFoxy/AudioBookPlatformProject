@@ -1,29 +1,36 @@
 <p>audio-player works! UHU</p>
 
 <div class="player_bg">
+  <div class="overlay hidden">
+    <div class="content row">
+      <div class="col-md-6">
+        <img src="/assets/images/fox_with_headphones.png">
+      </div>
+      <div class="col-md-6">
+        <p>Привіт! Ти зупинився  на прослуховуванні  {{currentFile.name}} на  {{formatTime(currentFile.currentTime)}}</p>
+        <button *ngIf="!state?.playing" (click)="play()">Продовжити?</button>
+      </div>
+    </div>
+  </div>
   <div class="row">
-
-
     <div class="col-md-3 col-12 order-md-1 order-2">
       <h3>PlayList</h3>
       <ul class="list-group list-group-border">
-        <li class="list-group-item list-group-item-border" [class.active]="i === activeItemIndex" *ngFor="let item of audioList; let i = index"
-          (click)="setActiveItem(i); openFile(item, i)">{{item.name}}</li>
+        <li class="list-group-item list-group-item-border" [class.active]="i === activeItemIndex"
+          *ngFor="let item of audioList; let i = index" (click)="setActiveItem(i); openFile(item, i)">{{item.name}}</li>
       </ul>
     </div>
     <div class="col-md-9 col-12 order-md-2 order-1">
-      <h4>Ім'я вітру</h4>
-      <p>Патрік Ротфус • 24 chapters</p>
+      <h4>Book Name</h4>
+      <p>Author Name • number of chapters</p>
       <p>Now playing: {{currentFile.name}}</p>
       <div>
         <div class="audio_time">
           <span class="current-time"
-            [hidden]="state?.error || currentFile.index === undefined">{{state?.readableCurrentTime}}</span>
+            [hidden]="state?.error || currentFile.index === undefined">{{state?.readableCurrentTime || '00:00:00'
+            }}</span>
           <span class="total-duration"
-            [hidden]="state?.error || currentFile.index === undefined">{{state?.readableDuration}}</span>
-          <span class="current-time" *ngIf="state?.error || currentFile.index === undefined">00:00:00</span>
-          <span class="total-duration" *ngIf="state?.error || currentFile.index === undefined">00:00:00</span>
-
+            [hidden]="state?.error || currentFile.index === undefined">{{state?.readableDuration || '00:00:00' }}</span>
         </div>
 
         <input type="range" class="seek_slider" min="0" max="{{state?.duration}}" [value]="state?.currentTime"
@@ -41,7 +48,7 @@
       </div>
       <div class="volume">
         <i class="fa fa-volume-down"></i>
-        <input type="range" class="volume_slider" min="0" max="1" step="0.01" value="0.5"
+        <input type="range" class="volume_slider" min="0" max="1" step="0.01" value="{{currentFile.currentVolume}}"
           (input)="changeVolume($event)">
         <i class="fa fa-volume-up"></i>
       </div>
