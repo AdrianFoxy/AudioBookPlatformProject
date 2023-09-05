@@ -84,6 +84,9 @@ export class AudioPlayerComponent implements OnDestroy {
         }
       }
     }
+
+    console.log('testst');
+
   }
 
   playStream(url: string) {
@@ -92,10 +95,17 @@ export class AudioPlayerComponent implements OnDestroy {
   }
 
   openFile(file: { url: string; name: string }, index: any) {
+
+    // Save old volume for new audio
+    const volumeBefore = this.currentFile.currentVolume;
+
     this.currentFile = { index, file };
     this.currentFile.name = file.name;
     this.audioService.stop();
     this.playStream(file.url);
+
+    // Set old volume for new song
+    this.currentFile.currentVolume = volumeBefore;
     if(this.currentFile.currentVolume){
       this.changeVolume(this.currentFile.currentVolume);
     }
@@ -123,17 +133,20 @@ export class AudioPlayerComponent implements OnDestroy {
     } else {
       this.audioService.play();
     }
-
-    if(this.currentFile.currentTime){
-      const overlay = document.querySelector('.overlay');
-      if (overlay) {
-        overlay.classList.add('hidden');
-        console.log('HIDDEN');
-      }
-    }
-
+    this.hideOverlay();
   }
 
+  playwithoutcontinue(){
+    console.log('playwithoutcontinue', this.state);
+
+    if (localStorage.getItem(this.currentSongKey) && !this.state?.canplay) {
+      console.log('Saved song data found.');
+      this.playStream(this.currentFile.file.url);
+      this.audioService.seekTo(this.currentFile.currentTime);
+      this.pause();
+    }
+    this.hideOverlay();
+  }
 
   stop() {
     this.audioService.stop();
@@ -157,7 +170,6 @@ export class AudioPlayerComponent implements OnDestroy {
 
   changeVolume(ev: any) {
     this.audioService.setVolume(ev);
-    //console.log(ev);
   }
 
   isFirstPlaying() {
@@ -193,8 +205,16 @@ export class AudioPlayerComponent implements OnDestroy {
     };
   }
 
-  //Elsi ybrat - pri perehode na next stranici - music will play
-  //poetomy ne usal window.addEventListener
+  hideOverlay(){
+    if(this.currentFile.currentTime){
+      const overlay = document.querySelector('.overlay');
+      if (overlay) {
+        overlay.classList.add('hidden');
+        console.log('HIDDEN');
+      }
+    }
+  }
+
   ngOnDestroy() {
     this.pause();
   }
