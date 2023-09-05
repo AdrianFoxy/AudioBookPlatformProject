@@ -6,7 +6,7 @@
         <img src="/assets/images/fox_with_headphones.png">
       </div>
       <div class="col-md-6 mt-4">
-        <p>Привіт! Ти зупинився  на прослуховуванні  {{currentFile.name}} на  {{formatTime(currentFile.currentTime)}}</p>
+        <p>Привіт! Ти зупинився на прослуховуванні {{currentFile.name}} на {{formatTime(currentFile.currentTime)}}</p>
         <button *ngIf="!state?.playing" (click)="play()">Продовжити?</button>
       </div>
     </div>
@@ -22,7 +22,8 @@
     <div class="col-md-9 col-12 order-md-2 order-1">
       <h4>Book Name</h4>
       <p>Author Name • number of chapters</p>
-      <p>Now playing: {{currentFile.name}}</p>
+      <p *ngIf="currentFile.name">Now playing: {{ currentFile.name }}</p>
+      <p *ngIf="!currentFile.name">Choose Audio</p>
       <div>
         <div class="audio_time">
           <span class="current-time"
