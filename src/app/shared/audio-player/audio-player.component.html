@@ -1,13 +1,12 @@
-<p>audio-player works! UHU</p>
-
 <div class="player_bg">
   <div class="overlay hidden">
     <div class="content row">
-      <div class="col-md-6">
+      <button class="close-button" (click)="playwithoutcontinue()">&times;</button>
+      <div class="col-md-6 mt-4">
         <img src="/assets/images/fox_with_headphones.png">
       </div>
-      <div class="col-md-6">
-        <p>Привіт! Ти зупинився  на прослуховуванні  {{currentFile.name}} на  {{formatTime(currentFile.currentTime)}}</p>
+      <div class="col-md-6 mt-4">
+        <p>Привіт! Ти зупинився на прослуховуванні {{currentFile.name}} на {{formatTime(currentFile.currentTime)}}</p>
         <button *ngIf="!state?.playing" (click)="play()">Продовжити?</button>
       </div>
     </div>
@@ -23,7 +22,14 @@
     <div class="col-md-9 col-12 order-md-2 order-1">
       <h4>Book Name</h4>
       <p>Author Name • number of chapters</p>
-      <p>Now playing: {{currentFile.name}}</p>
+      <p *ngIf="currentFile.name">Now playing: {{ currentFile.name }}</p>
+      <p *ngIf="!currentFile.name">Choose Audio</p>
+      <input type="number" [(ngModel)]="sleepMinutes" placeholder="Enter minutes">
+      <button (click)="setSleepTimer(sleepMinutes)">Set sleep timer</button>
+      <p *ngIf="countdownMinutes > 0 || countdownSeconds > 0">
+        Countdown: {{ countdownMinutes || '00' }} min {{ countdownSeconds || '00' }} sec
+      </p>
+
       <div>
         <div class="audio_time">
           <span class="current-time"

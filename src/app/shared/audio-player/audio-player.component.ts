@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
 import { StreamState } from '../models/stream-state';
 import { AudioService } from 'src/app/core/audio_service/audio.service';
 
@@ -26,21 +26,21 @@ export class AudioPlayerComponent implements OnDestroy {
   currentFile: any = {};
   activeItemIndex: number = -1;
 
-
   currentSongKey = 'currentSong';
   SongKeyProgress = 'SongProgress';
 
+  sleepMinutes: number = 0;
+  countdownMinutes: number = 0;
+  countdownSeconds: number = 0;
+  countdownInterval: any;
 
-  constructor(private audioService: AudioService) {
-
+  constructor(private audioService: AudioService, private cdr: ChangeDetectorRef) {
     this.files = this.audioList;
-
     // listen to stream state
     this.audioService.getState()
       .subscribe(state => {
         this.state = state;
       });
-
   }
 
   ngOnInit() {
@@ -49,6 +49,164 @@ export class AudioPlayerComponent implements OnDestroy {
     this.saveAudioDataBeforeF5();
   }
 
+  playStream(url: string) {
+    this.audioService.playStream(url).subscribe(events => {
+    });
+  }
+
+  openFile(file: { url: string; name: string }, index: any) {
+
+    // Save old volume for new audio
+    var volumeBefore = this.currentFile.currentVolume;
+
+    this.currentFile = { index, file };
+    this.currentFile.name = file.name;
+    this.audioService.stop();
+    this.playStream(file.url);
+
+    // Set old volume for new song
+    this.currentFile.currentVolume = volumeBefore;
+    if(this.currentFile.currentVolume){
+      this.changeVolume(this.currentFile.currentVolume);
+    }
+  }
+
+  pause() {
+    this.audioService.pause();
+
+    clearInterval(this.countdownInterval);
+
+    if (this.state && this.state.currentTime !== undefined) {
+      const saveData = {
+        currentFile: this.currentFile,
+        currentTime: this.state?.currentTime,
+        currentVolume: this.audioService.getVolume()
+      };
+      localStorage.setItem(this.currentSongKey, JSON.stringify(saveData));
+    }
+  }
+
+  play() {
+    console.log(this.state);
+
+    if (localStorage.getItem(this.currentSongKey) && !this.state?.canplay) {
+      console.log('Saved song data found.');
+      this.playStream(this.currentFile.file.url);
+      this.audioService.seekTo(this.currentFile.currentTime);
+    } else {
+      this.audioService.play();
+    }
+    this.hideOverlay();
+  }
+
+  playwithoutcontinue(){
+    console.log('playwithoutcontinue', this.state);
+
+    if (localStorage.getItem(this.currentSongKey) && !this.state?.canplay) {
+      console.log('Saved song data found.');
+      this.playStream(this.currentFile.file.url);
+      this.audioService.seekTo(this.currentFile.currentTime);
+      this.pause();
+    }
+    this.hideOverlay();
+  }
+
+  stop() {
+    this.audioService.stop();
+  }
+
+  next() {
+    if (!this.isLastPlaying()) {
+      const index = this.currentFile.index + 1;
+      const file = this.files[index];
+      this.setActiveItem(index);
+      this.openFile(file, index);
+    }
+  }
+
+  previous() {
+    const index = this.currentFile.index - 1;
+    const file = this.files[index];
+    this.setActiveItem(index);
+    this.openFile(file, index);
+  }
+
+  changeVolume(ev: any) {
+    this.audioService.setVolume(ev);
+  }
+
+  isFirstPlaying() {
+    return this.currentFile.index === 0;
+  }
+
+  isLastPlaying() {
+    return this.currentFile.index === this.files.length - 1;
+  }
+
+  onSliderChangeEnd(change: Event) {
+    this.audioService.seekTo(change);
+    console.log(change);
+  }
+
+  setActiveItem(index: number) {
+    this.activeItemIndex = index;
+  }
+
+  formatTime(time: number) {
+    return this.audioService.formatTime(time);
+  }
+
+  // scss methods
+
+  getProgressBarBackground() {
+    if (this.state && this.state.duration !== undefined && this.state.currentTime !== undefined) {
+      const percentage = (this.state.currentTime / this.state.duration) * 100;
+      return {
+        background: `linear-gradient(to right, #47d38d ${percentage}%, #8adeb4 ${percentage}%)`
+      };
+    }
+    return {
+      background: '#47d38d'
+    };
+  }
+
+  hideOverlay(){
+    if(this.currentFile.currentTime){
+      const overlay = document.querySelector('.overlay');
+      if (overlay) {
+        overlay.classList.add('hidden');
+        console.log('Hidden overlay added');
+      }
+    }
+  }
+
+  // Sleep Timer Methods
+  setSleepTimer(minutes: number) {
+    const totalSeconds = minutes * 60;
+    this.countdownMinutes = Math.floor(totalSeconds / 60);
+    this.countdownSeconds = totalSeconds % 60;
+    this.startCountdown();
+  }
+
+  startCountdown() {
+    this.countdownInterval = setInterval(() => {
+      if (this.countdownSeconds === 0) {
+        if (this.countdownMinutes === 0) {
+          clearInterval(this.countdownInterval); // Stop timer if 0
+          this.pause();
+        } else {
+          this.countdownMinutes--;
+          this.countdownSeconds = 59;
+        }
+      } else {
+        this.countdownSeconds--;
+      }
+      this.cdr.detectChanges(); // Update
+    }, 1000); // Update every 1 second
+  }
+
+
+  // Restore Data Methods
   saveAudioDataBeforeF5(){
     window.addEventListener('beforeunload', () => {
       this.pause();
@@ -79,122 +237,14 @@ export class AudioPlayerComponent implements OnDestroy {
           const overlay = document.querySelector('.overlay');
           if (overlay) {
             overlay.classList.remove('hidden');
-            console.log('HIDDEN');
+            console.log('Hidden overlay removed');
           }
         }
       }
     }
   }
 
-  playStream(url: string) {
-    this.audioService.playStream(url).subscribe(events => {
-    });
-  }
-
-  openFile(file: { url: string; name: string }, index: any) {
-    this.currentFile = { index, file };
-    this.currentFile.name = file.name;
-    this.audioService.stop();
-    this.playStream(file.url);
-    if(this.currentFile.currentVolume){
-      this.changeVolume(this.currentFile.currentVolume);
-    }
-  }
-
-  pause() {
-    this.audioService.pause();
-    if (this.state && this.state.currentTime !== undefined) {
-      const saveData = {
-        currentFile: this.currentFile,
-        currentTime: this.state?.currentTime,
-        currentVolume: this.audioService.getVolume()
-      };
-      localStorage.setItem(this.currentSongKey, JSON.stringify(saveData));
-    }
-  }
-
-  play() {
-    console.log(this.state);
-
-    if (localStorage.getItem(this.currentSongKey) && !this.state?.canplay) {
-      console.log('Saved song data found.');
-      this.playStream(this.currentFile.file.url);
-      this.audioService.seekTo(this.currentFile.currentTime);
-    } else {
-      this.audioService.play();
-    }
-
-    if(this.currentFile.currentTime){
-      const overlay = document.querySelector('.overlay');
-      if (overlay) {
-        overlay.classList.add('hidden');
-        console.log('HIDDEN');
-      }
-    }
-
-  }
-
-
-  stop() {
-    this.audioService.stop();
-  }
-
-  next() {
-    if (!this.isLastPlaying()) {
-      const index = this.currentFile.index + 1;
-      const file = this.files[index];
-      this.setActiveItem(index);
-      this.openFile(file, index);
-    }
-  }
-
-  previous() {
-    const index = this.currentFile.index - 1;
-    const file = this.files[index];
-    this.setActiveItem(index);
-    this.openFile(file, index);
-  }
-
-  changeVolume(ev: any) {
-    this.audioService.setVolume(ev);
-    //console.log(ev);
-  }
-
-  isFirstPlaying() {
-    return this.currentFile.index === 0;
-  }
-
-  isLastPlaying() {
-    return this.currentFile.index === this.files.length - 1;
-  }
-
-  onSliderChangeEnd(change: Event) {
-    this.audioService.seekTo(change);
-    console.log(change);
-  }
-
-  setActiveItem(index: number) {
-    this.activeItemIndex = index;
-  }
-
-  formatTime(time: number) {
-    return this.audioService.formatTime(time);
-  }
-
-  getProgressBarBackground() {
-    if (this.state && this.state.duration !== undefined && this.state.currentTime !== undefined) {
-      const percentage = (this.state.currentTime / this.state.duration) * 100;
-      return {
-        background: `linear-gradient(to right, #47d38d ${percentage}%, #8adeb4 ${percentage}%)`
-      };
-    }
-    return {
-      background: '#47d38d'
-    };
-  }
-
-  //Elsi ybrat - pri perehode na next stranici - music will play
-  //poetomy ne usal window.addEventListener
+  // On Destroy
   ngOnDestroy() {
     this.pause();
   }
