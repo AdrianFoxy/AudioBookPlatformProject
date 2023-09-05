@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
 import { StreamState } from '../models/stream-state';
 import { AudioService } from 'src/app/core/audio_service/audio.service';
 
@@ -26,67 +26,27 @@ export class AudioPlayerComponent implements OnDestroy {
   currentFile: any = {};
   activeItemIndex: number = -1;
 
-
   currentSongKey = 'currentSong';
   SongKeyProgress = 'SongProgress';
 
+  sleepMinutes: number = 0;
+  countdownMinutes: number = 0;
+  countdownSeconds: number = 0;
+  countdownInterval: any;
 
-  constructor(private audioService: AudioService) {
-
+  constructor(private audioService: AudioService, private cdr: ChangeDetectorRef) {
     this.files = this.audioList;
-
     // listen to stream state
     this.audioService.getState()
       .subscribe(state => {
         this.state = state;
       });
-
   }
 
   ngOnInit() {
     this.restorePlayerState();
     this.nextAudioAfterEnded();
     this.saveAudioDataBeforeF5();
-  }
-
-  saveAudioDataBeforeF5(){
-    window.addEventListener('beforeunload', () => {
-      this.pause();
-    });
-  }
-
-  nextAudioAfterEnded() {
-    this.audioService.audioObj.addEventListener('ended', () => {
-      if (!this.isLastPlaying()) {
-        this.next();
-      }
-    });
-  }
-
-  restorePlayerState() {
-    const savedSong = localStorage.getItem(this.currentSongKey);
-    if (savedSong) {
-      const parsedData = JSON.parse(savedSong);
-      if (parsedData && parsedData.currentFile) {
-        this.currentFile = parsedData.currentFile;
-        this.activeItemIndex = this.currentFile.index;
-        this.currentFile.currentTime = parsedData.currentTime;
-        this.changeVolume(parsedData.currentVolume);
-        this.currentFile.currentVolume = parsedData.currentVolume;
-
-        console.log('Parsed currentTime', this.currentFile.currentTime);
-        if(this.currentFile.currentTime){
-          const overlay = document.querySelector('.overlay');
-          if (overlay) {
-            overlay.classList.remove('hidden');
-            console.log('HIDDEN');
-          }
-        }
-      }
-    }
-
-    console.log('testst');
-
   }
 
   playStream(url: string) {
@@ -97,7 +57,7 @@ export class AudioPlayerComponent implements OnDestroy {
   openFile(file: { url: string; name: string }, index: any) {
 
     // Save old volume for new audio
-    const volumeBefore = this.currentFile.currentVolume;
+    var volumeBefore = this.currentFile.currentVolume;
 
     this.currentFile = { index, file };
     this.currentFile.name = file.name;
@@ -113,6 +73,9 @@ export class AudioPlayerComponent implements OnDestroy {
 
   pause() {
     this.audioService.pause();
+
+    clearInterval(this.countdownInterval);
+
     if (this.state && this.state.currentTime !== undefined) {
       const saveData = {
         currentFile: this.currentFile,
@@ -193,6 +156,8 @@ export class AudioPlayerComponent implements OnDestroy {
     return this.audioService.formatTime(time);
   }
 
+  // scss methods
+
   getProgressBarBackground() {
     if (this.state && this.state.duration !== undefined && this.state.currentTime !== undefined) {
       const percentage = (this.state.currentTime / this.state.duration) * 100;
@@ -210,11 +175,76 @@ export class AudioPlayerComponent implements OnDestroy {
       const overlay = document.querySelector('.overlay');
       if (overlay) {
         overlay.classList.add('hidden');
-        console.log('HIDDEN');
+        console.log('Hidden overlay added');
       }
     }
   }
 
+  // Sleep Timer Methods
+  setSleepTimer(minutes: number) {
+    const totalSeconds = minutes * 60;
+    this.countdownMinutes = Math.floor(totalSeconds / 60);
+    this.countdownSeconds = totalSeconds % 60;
+    this.startCountdown();
+  }
+
+  startCountdown() {
+    this.countdownInterval = setInterval(() => {
+      if (this.countdownSeconds === 0) {
+        if (this.countdownMinutes === 0) {
+          clearInterval(this.countdownInterval); // Stop timer if 0
+          this.pause();
+        } else {
+          this.countdownMinutes--;
+          this.countdownSeconds = 59;
+        }
+      } else {
+        this.countdownSeconds--;
+      }
+      this.cdr.detectChanges(); // Update
+    }, 1000); // Update every 1 second
+  }
+
+
+  // Restore Data Methods
+  saveAudioDataBeforeF5(){
+    window.addEventListener('beforeunload', () => {
+      this.pause();
+    });
+  }
+
+  nextAudioAfterEnded() {
+    this.audioService.audioObj.addEventListener('ended', () => {
+      if (!this.isLastPlaying()) {
+        this.next();
+      }
+    });
+  }
+
+  restorePlayerState() {
+    const savedSong = localStorage.getItem(this.currentSongKey);
+    if (savedSong) {
+      const parsedData = JSON.parse(savedSong);
+      if (parsedData && parsedData.currentFile) {
+        this.currentFile = parsedData.currentFile;
+        this.activeItemIndex = this.currentFile.index;
+        this.currentFile.currentTime = parsedData.currentTime;
+        this.changeVolume(parsedData.currentVolume);
+        this.currentFile.currentVolume = parsedData.currentVolume;
+
+        console.log('Parsed currentTime', this.currentFile.currentTime);
+        if(this.currentFile.currentTime){
+          const overlay = document.querySelector('.overlay');
+          if (overlay) {
+            overlay.classList.remove('hidden');
+            console.log('Hidden overlay removed');
+          }
+        }
+      }
+    }
+  }
+
+  // On Destroy
   ngOnDestroy() {
     this.pause();
   }

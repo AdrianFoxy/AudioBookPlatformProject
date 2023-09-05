@@ -24,6 +24,12 @@
       <p>Author Name • number of chapters</p>
       <p *ngIf="currentFile.name">Now playing: {{ currentFile.name }}</p>
       <p *ngIf="!currentFile.name">Choose Audio</p>
+      <input type="number" [(ngModel)]="sleepMinutes" placeholder="Enter minutes">
+      <button (click)="setSleepTimer(sleepMinutes)">Set sleep timer</button>
+      <p *ngIf="countdownMinutes > 0 || countdownSeconds > 0">
+        Countdown: {{ countdownMinutes || '00' }} min {{ countdownSeconds || '00' }} sec
+      </p>
+
       <div>
         <div class="audio_time">
           <span class="current-time"

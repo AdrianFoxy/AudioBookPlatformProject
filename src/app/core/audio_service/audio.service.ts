@@ -149,11 +149,7 @@ export class AudioService {
         this.state.error = true;
         break;
       case "ended":
-        // Добавляем вывод в консоль при событии "ended"
-
-        console.log("Аудиофайл завершил воспроизведение.");
         this.state.ended = true;
-
         break;
 
     }
