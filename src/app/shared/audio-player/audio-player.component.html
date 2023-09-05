@@ -1,12 +1,11 @@
-<p>audio-player works! UHU</p>
-
 <div class="player_bg">
   <div class="overlay hidden">
     <div class="content row">
-      <div class="col-md-6">
+      <button class="close-button" (click)="playwithoutcontinue()">&times;</button>
+      <div class="col-md-6 mt-4">
         <img src="/assets/images/fox_with_headphones.png">
       </div>
-      <div class="col-md-6">
+      <div class="col-md-6 mt-4">
         <p>Привіт! Ти зупинився  на прослуховуванні  {{currentFile.name}} на  {{formatTime(currentFile.currentTime)}}</p>
         <button *ngIf="!state?.playing" (click)="play()">Продовжити?</button>
       </div>
