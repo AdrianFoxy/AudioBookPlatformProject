@@ -180,6 +180,14 @@ export class AudioPlayerComponent implements OnDestroy {
     }
   }
 
+
+  stopTimer(){
+    clearInterval(this.countdownInterval);
+    this.countdownInterval = null;
+    this.countdownMinutes = 0;
+    this.countdownSeconds = 0;
+  }
+
   // Sleep Timer Methods
   setSleepTimer(minutes: number) {
     const totalSeconds = minutes * 60;
