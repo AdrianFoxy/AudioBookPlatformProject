@@ -213,6 +213,9 @@ export class AudioPlayerComponent implements OnDestroy {
     }, 1000); // Update every 1 second
   }
 
+  formatWithLeadingZeros(value: number): string {
+    return value < 10 ? `0${value}` : `${value}`;
+  }
 
   // Restore Data Methods
   saveAudioDataBeforeF5(){

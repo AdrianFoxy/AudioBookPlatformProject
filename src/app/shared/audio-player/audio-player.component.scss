@@ -236,7 +236,8 @@ i.fa-volume-up {
   background-color: transparent;
   border: none;
   color: black;
-  font-size: 25px;
+  font-size: 26px;
+  position: relative;
 }
 
 .btn:focus,
@@ -257,7 +258,14 @@ i.fa-volume-up {
 }
 
 .timer {
-  font-size: 20px;
+  font-size: 15px;
+  position: absolute;
+  top: 55%;
+  right: 30%;
+  color: #333; /* Пример цвета текста */
+  background-color: #47d38d;
+  border: 2px solid black;
+  border-radius: 20px;
 }
 
 .dropdown-title {
