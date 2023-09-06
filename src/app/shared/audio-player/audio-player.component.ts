@@ -58,11 +58,17 @@ export class AudioPlayerComponent implements OnDestroy {
 
     // Save old volume for new audio
     var volumeBefore = this.currentFile.currentVolume;
-
+    var playbackRateBefore = this.currentFile.playbackRate;
     this.currentFile = { index, file };
     this.currentFile.name = file.name;
     this.audioService.stop();
     this.playStream(file.url);
+
+    // UpdatePlaybackRate
+    this.currentFile.playbackRate = playbackRateBefore;
+    if(this.currentFile.playbackRate){
+      this.changePlaybackRate(this.currentFile.playbackRate);
+    }
 
     // Set old volume for new song
     this.currentFile.currentVolume = volumeBefore;
@@ -80,7 +86,8 @@ export class AudioPlayerComponent implements OnDestroy {
       const saveData = {
         currentFile: this.currentFile,
         currentTime: this.state?.currentTime,
-        currentVolume: this.audioService.getVolume()
+        currentVolume: this.audioService.getVolume(),
+        playbackRate: this.currentFile.playbackRate
       };
       localStorage.setItem(this.currentSongKey, JSON.stringify(saveData));
     }
@@ -90,9 +97,12 @@ export class AudioPlayerComponent implements OnDestroy {
     console.log(this.state);
 
     if (localStorage.getItem(this.currentSongKey) && !this.state?.canplay) {
+
       console.log('Saved song data found.');
       this.playStream(this.currentFile.file.url);
       this.audioService.seekTo(this.currentFile.currentTime);
+      this.changePlaybackRate(this.currentFile.playbackRate);
+
     } else {
       this.audioService.play();
     }
@@ -133,7 +143,24 @@ export class AudioPlayerComponent implements OnDestroy {
 
   changeVolume(ev: any) {
     this.audioService.setVolume(ev);
+    this.currentFile.currentVolume = this.audioService.getVolume();
   }
+
+  changePlaybackRate(speed: number) {
+    this.audioService.setPlaybackRate(speed);
+    this.currentFile.playbackRate = speed;
+  }
+
+  convertToPercentage(value: number): string {
+    if (value < 0) {
+      value = 0;
+    } else if (value > 1) {
+      value = 1;
+    }
+    const percentage = Math.round(value * 100);
+    return percentage + '%';
+  }
+
 
   isFirstPlaying() {
     return this.currentFile.index === 0;
@@ -191,7 +218,6 @@ export class AudioPlayerComponent implements OnDestroy {
   // Sleep Timer Methods
   setSleepTimer(minutes: number) {
     this.stopTimer();
-
     const totalSeconds = minutes * 60;
     this.countdownMinutes = Math.floor(totalSeconds / 60);
     this.countdownSeconds = totalSeconds % 60;
@@ -242,6 +268,8 @@ export class AudioPlayerComponent implements OnDestroy {
         this.currentFile = parsedData.currentFile;
         this.activeItemIndex = this.currentFile.index;
         this.currentFile.currentTime = parsedData.currentTime;
+        this.currentFile.playbackRate = parsedData.playbackRate;
+
         this.changeVolume(parsedData.currentVolume);
         this.currentFile.currentVolume = parsedData.currentVolume;
 

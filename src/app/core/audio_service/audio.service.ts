@@ -102,6 +102,10 @@ export class AudioService {
     }
   }
 
+  getVolume(){
+    return this.audioObj.volume;
+  }
+
   seekTo(ev: any) {
     if (ev && ev.target && ev.target.value !== undefined) {
       this.audioObj.currentTime = ev.target.value;
@@ -110,8 +114,13 @@ export class AudioService {
     }
   }
 
-  getVolume(){
-    //console.log(this.audioObj.volume);
+  setPlaybackRate(speed: number){
+    if(this.audioObj){
+      this.audioObj.playbackRate = speed;
+    }
+  }
+
+  getPlayBackRate(){
     return this.audioObj.volume;
   }
 
