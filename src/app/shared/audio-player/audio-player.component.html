@@ -6,13 +6,13 @@
         <img src="/assets/images/fox_with_headphones.png">
       </div>
       <div class="col-md-6 mt-4">
-        <p>Привіт! Ти зупинився на прослуховуванні {{currentFile.name}} на {{formatTime(currentFile.currentTime)}}</p>
-        <button *ngIf="!state?.playing" (click)="play()">Продовжити?</button>
+        <p>Привіт! Ти зупинився на {{currentFile.name}}, час: {{formatTime(currentFile.currentTime)}}</p>
+        <button *ngIf="!state?.playing" (click)="play()">Продовжити</button>
       </div>
     </div>
   </div>
   <div class="row">
-    <div class="col-md-3 col-12 order-md-1 order-2">
+    <div class="col-md-3 col-12 order-md-1 order-2 mt-2">
       <h3>PlayList</h3>
       <ul class="list-group list-group-border">
         <li class="list-group-item list-group-item-border" [class.active]="i === activeItemIndex"
@@ -20,11 +20,11 @@
       </ul>
     </div>
     <div class="col-md-9 col-12 order-md-2 order-1">
-      <div class="audio_header">
-        <div class="title">
-          <h4>Book Name</h4>
+      <div class="row">
+        <div class="col-6 col-sm-8 col-xl-9 mt-2">
+          <h4> Book NameBook NameBook NameBook Name</h4>
         </div>
-        <div class="settings">
+        <div class="col-6 col-sm-4 col-xl-3 mt-2">
           <div class="btn-group" dropdown>
             <button dropdownToggle type="button" class="btn dropdown-toggle" aria-controls="dropdown-basic">
               <i class="fa fa-clock-o" aria-hidden="true"></i>
@@ -60,8 +60,6 @@
           </div>
         </div>
       </div>
-
-
 
       <p>Author Name • number of chapters</p>
       <p *ngIf="currentFile.name">Now playing: {{ currentFile.name }}</p>
