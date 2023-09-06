@@ -38,7 +38,8 @@
     max-width: 200px;
     max-height: 200px
   }
-  button{
+
+  button {
     width: auto;
     height: 50px;
     background: #8adeb4;
@@ -60,6 +61,29 @@
     cursor: pointer;
     color: #31312F;
   }
+
+  @media (max-width: 500px) {
+    button {
+      font-size: 15px;
+    }
+    p {
+      font-size: 15px;
+    }
+    padding: 10px;
+  }
+
+  @media (max-width: 420px) {
+    img {
+      max-height: 140px
+    }
+    padding: 0px;
+  }
+
+  @media (max-width: 386px) {
+    button{
+      padding: 0px;
+    }
+  }
 }
 
 .hidden {
@@ -73,7 +97,6 @@
   outline: none;
   border: 2px solid black;
   border-bottom: 4px solid black;
-
 }
 
 .buttons {
@@ -130,7 +153,7 @@
 .seek_slider {
   width: 100%;
   height: 10px;
-  -webkit-appearance: none;
+  appearance: none;
   background: #47d38d;
   border-radius: 15px;
   cursor: pointer;
@@ -138,7 +161,7 @@
 }
 
 .seek_slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
+  appearance: none;
   background: #47d38d;
   width: 20px;
   height: 20px;
@@ -205,4 +228,88 @@ i.fa-volume-up {
   border: 2px solid black;
   border-bottom: 4px solid black;
   background-color: orange;
+}
+
+.btn {
+  background-color: transparent;
+  border: none;
+  color: black;
+  font-size: 26px;
+  position: relative;
+  margin-bottom: 5px;
+}
+
+.btn:focus,
+.btn:active {
+  outline: none;
+  box-shadow: none;
+}
+
+.dropdown-item {
+  cursor: pointer;
+}
+
+.dropdown-item:hover {
+  border: 2px solid black;
+  border-bottom: 4px solid black;
+  background-color: orange;
+}
+
+.current_value {
+  font-size: 15px;
+  position: absolute;
+  top: 58%;
+  right: 32%;
+  color: #333;
+  background-color: #47d38d;
+  border: 2px solid black;
+  border-radius: 20px;
+  padding: 2px;
+}
+
+.dropdown-title {
+  text-decoration: none;
+  color: black;
+  margin-left: px;
+}
+
+.volume_slider {
+  transform: rotate(270deg);
+  position: relative;
+  height: 120px;
+}
+
+.volume.vertical {
+  flex-direction: column;
+  align-items: center;
+}
+
+.volume_slider i {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 20px;
+  text-align: center;
+}
+
+#dropdown-sleeptimer,
+#dropdown-volume,
+#dropdown-speed {
+  min-width: 40px;
+}
+
+#dropdown-volume li {
+  width: 40px;
+}
+
+
+#dropdown-speed li{
+  width: 120px;
+}
+
+ul#dropdown-volume,
+ul#dropdown-speed {
+  padding: 0;
+  margin: 0;
 }
