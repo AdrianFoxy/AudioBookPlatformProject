@@ -8,13 +8,19 @@
 
 body {
   font-family: Georgia, serif;
+  background-color: #fff;
+}
+
+.dark-theme {
+  background-color: #2b2b2b;
 }
 
 :root {
   --base-orange-color: orange;
   --base-green-color: #8adeb4;
-  --base-light-bg-color: #fefefe;
+  --base-light-bg-color: #fff;
   --base-light-border-color: #000000;
+
 }
 
 .button{
@@ -39,3 +45,4 @@ body {
 .w_button {
   background: var(--base-light-bg-color);
 }
+
