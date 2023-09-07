@@ -230,6 +230,12 @@ i.fa-volume-up {
   background-color: orange;
 }
 
+.list-group-item.played {
+  text-decoration: line-through;
+  color: #888;
+}
+
+
 .btn {
   background-color: transparent;
   border: none;
