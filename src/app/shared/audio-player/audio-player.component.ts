@@ -328,3 +328,4 @@ export class AudioPlayerComponent implements OnDestroy {
     this.pause();
   }
 }
+

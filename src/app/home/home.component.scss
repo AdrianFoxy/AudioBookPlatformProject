@@ -10,7 +10,7 @@
 }
 
 .poster_text span {
-  color: orange;
+  color:  var(--base-orange-color);;
 }
 
 .poster_secondary_text{
@@ -26,44 +26,6 @@
   .poster_text {
     margin-top: 0;
   }
-}
-
-.g_button {
-  width: auto;
-  height: 60px;
-  background: #8adeb4;
-  border-radius: 10px;
-  outline: none;
-  border: 2px solid #31312F;
-  border-bottom: 6px solid #31312F;
-  font-size: 18px;
-  padding: 10px 20px;
-}
-
-.o_button {
-  width: auto;
-  height: 60px;
-  background: orange;
-  border-radius: 10px;
-  outline: none;
-  border: 2px solid #31312F;
-  border-bottom: 6px solid #31312F;
-  font-size: 18px;
-  padding: 10px 20px;
-  margin-right: 10px;
-}
-
-.w_button {
-  width: auto;
-  height: 60px;
-  background: white;
-  border-radius: 10px;
-  outline: none;
-  border: 2px solid #31312F;
-  border-bottom: 6px solid #31312F;
-  font-size: 18px;
-  padding: 10px 20px;
-  margin-right: 10px;
 }
 
 .recomends{
@@ -121,7 +83,7 @@
 }
 
 .card-title:hover{
-  color: orange;
+  color:  var(--base-orange-color);;
 }
 
 

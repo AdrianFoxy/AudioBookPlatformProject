@@ -1,34 +1,36 @@
 <header>
-  <div class="container-fluid">
-    <div class="navb-logo d-lg-none">
-      <img src="/assets/images/logo.png" alt="Logo">
+  <div class="container">
+    <div class="row">
+      <!-- Первый див с логотипом и меню -->
+      <div class="col-11 col-md-10">
+        <div class="d-lg-none">
+          <img class="logo" src="/assets/images/logo.png" alt="Logo">
+        </div>
+        <div class="d-none d-lg-flex">
+          <img class="logo" src="/assets/images/logo.png" alt="Logo">
+          <div class="item hover-underline-animation">
+            <a routerLink="/">Головна</a>
+          </div>
+          <div class="item hover-underline-animation">
+            <a routerLink="/library">Бібліотека</a>
+          </div>
+          <div class="item hover-underline-animation">
+            <a href="">Добірки</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2 mt-3 d-none d-lg-flex">
+        <button class="button g_button mr-2" d-none>Увійти </button>
+        <button class="button g_button">Реєстрація </button>
+      </div>
+      <div class="col-1 mobile-toggler d-lg-none">
+        <a href="#" data-bs-toggle="modal" data-bs-target="#navbModal">
+          <i class="fa fa-reorder"></i>
+        </a>
+      </div>
     </div>
-    <div class="navb-items d-none d-lg-flex">
-      <div class="navb-logo">
-        <img src="/assets/images/logo.png" alt="Logo">
-      </div>
-      <div class="item hover-underline-animation" >
-        <a routerLink="/">Головна</a>
-      </div>
-      <div class="item hover-underline-animation">
-        <a routerLink="/library">Бібліотека</a>
-      </div>
-      <div class="item hover-underline-animation">
-        <a href="">Добірки</a>
-      </div>
 
-    </div>
 
-    <div class="busket-auth d-none d-lg-flex">
-      <button class="g_button">Увійти </button>
-      <button class="g_button">Реєстрація </button>
-    </div>
-
-    <div class="mobile-toggler d-lg-none">
-      <a href="#" data-bs-toggle="modal" data-bs-target="#navbModal">
-        <i class="fa fa-reorder"></i>
-      </a>
-    </div>
 
     <!-- Modal -->
     <div class="modal fade" id="navbModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -43,9 +45,7 @@
 
             <div class="modal-line">
               <i class="fa fa-home"></i>
-              <a routerLink="/"
-              routerLinkActive="active"
-              >Home</a>
+              <a routerLink="/" routerLinkActive="active">Home</a>
             </div>
 
             <div class="modal-line">
