@@ -8,4 +8,41 @@
 
 body {
   font-family: Georgia, serif;
+  background-color: #fff;
 }
+
+.dark-theme {
+  background-color: #2b2b2b;
+}
+
+:root {
+  --base-orange-color: orange;
+  --base-green-color: #8adeb4;
+  --base-light-bg-color: #fff;
+  --base-light-border-color: #000000;
+
+}
+
+.button{
+  width: auto;
+  height: 60px;
+  border-radius: 10px;
+  outline: none;
+  border: 2px solid var(--base-light-border-color);
+  border-bottom: 6px solid var(--base-light-border-color);
+  font-size: 18px;
+  padding: 10px 20px;
+}
+
+.g_button {
+  background: var(--base-green-color);
+}
+
+.o_button {
+  background: var(--base-orange-color);
+}
+
+.w_button {
+  background: var(--base-light-bg-color);
+}
+

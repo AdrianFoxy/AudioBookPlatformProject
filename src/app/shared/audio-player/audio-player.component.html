@@ -15,7 +15,7 @@
     <div class="col-md-3 col-12 order-md-1 order-2 mt-2">
       <h3>PlayList</h3>
       <ul class="list-group list-group-border">
-        <li class="list-group-item list-group-item-border" [class.active]="i === activeItemIndex"
+        <li class="list-group-item list-group-item-border" [class.active]="i === activeItemIndex" [class.played]="isSongPlayed(item.id)"
           *ngFor="let item of audioList; let i = index" (click)="setActiveItem(i); openFile(item, i)">{{item.name}}</li>
       </ul>
     </div>

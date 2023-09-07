@@ -26,8 +26,7 @@ export class AudioPlayerComponent implements OnDestroy {
   currentFile: any = {};
   activeItemIndex: number = -1;
 
-  currentSongKey = 'currentSong';
-  SongKeyProgress = 'SongProgress';
+  currentAudioKey = 'currentAudio';
 
   sleepMinutes: number = 0;
   countdownMinutes: number = 0;
@@ -49,6 +48,9 @@ export class AudioPlayerComponent implements OnDestroy {
     this.saveAudioDataBeforeF5();
   }
 
+
+  // Basic player methods
+
   playStream(url: string) {
     this.audioService.playStream(url).subscribe(events => {
     });
@@ -66,13 +68,13 @@ export class AudioPlayerComponent implements OnDestroy {
 
     // UpdatePlaybackRate
     this.currentFile.playbackRate = playbackRateBefore;
-    if(this.currentFile.playbackRate){
+    if (this.currentFile.playbackRate) {
       this.changePlaybackRate(this.currentFile.playbackRate);
     }
 
     // Set old volume for new song
     this.currentFile.currentVolume = volumeBefore;
-    if(this.currentFile.currentVolume){
+    if (this.currentFile.currentVolume) {
       this.changeVolume(this.currentFile.currentVolume);
     }
   }
@@ -89,14 +91,14 @@ export class AudioPlayerComponent implements OnDestroy {
         currentVolume: this.audioService.getVolume(),
         playbackRate: this.currentFile.playbackRate
       };
-      localStorage.setItem(this.currentSongKey, JSON.stringify(saveData));
+      localStorage.setItem(this.currentAudioKey, JSON.stringify(saveData));
     }
   }
 
   play() {
     console.log(this.state);
 
-    if (localStorage.getItem(this.currentSongKey) && !this.state?.canplay) {
+    if (localStorage.getItem(this.currentAudioKey) && !this.state?.canplay) {
 
       console.log('Saved song data found.');
       this.playStream(this.currentFile.file.url);
@@ -109,11 +111,11 @@ export class AudioPlayerComponent implements OnDestroy {
     this.hideOverlay();
   }
 
-  playwithoutcontinue(){
+  playwithoutcontinue() {
     console.log('playwithoutcontinue', this.state);
 
-    if (localStorage.getItem(this.currentSongKey) && !this.state?.canplay) {
-      console.log('Saved song data found.');
+    if (localStorage.getItem(this.currentAudioKey) && !this.state?.canplay) {
+      // console.log('Saved song data found.');
       this.playStream(this.currentFile.file.url);
       this.audioService.seekTo(this.currentFile.currentTime);
       this.pause();
@@ -141,27 +143,6 @@ export class AudioPlayerComponent implements OnDestroy {
     this.openFile(file, index);
   }
 
-  changeVolume(ev: any) {
-    this.audioService.setVolume(ev);
-    this.currentFile.currentVolume = this.audioService.getVolume();
-  }
-
-  changePlaybackRate(speed: number) {
-    this.audioService.setPlaybackRate(speed);
-    this.currentFile.playbackRate = speed;
-  }
-
-  convertToPercentage(value: number): string {
-    if (value < 0) {
-      value = 0;
-    } else if (value > 1) {
-      value = 1;
-    }
-    const percentage = Math.round(value * 100);
-    return percentage + '%';
-  }
-
-
   isFirstPlaying() {
     return this.currentFile.index === 0;
   }
@@ -175,47 +156,56 @@ export class AudioPlayerComponent implements OnDestroy {
     console.log(change);
   }
 
-  setActiveItem(index: number) {
-    this.activeItemIndex = index;
+  // SETTING METHODS, LIKE VOLUME AND PLAYBACK RATE
+
+  changeVolume(ev: any) {
+    this.audioService.setVolume(ev);
+    this.currentFile.currentVolume = this.audioService.getVolume();
   }
 
-  formatTime(time: number) {
-    return this.audioService.formatTime(time);
-  }
-
-  // scss methods
-
-  getProgressBarBackground() {
-    if (this.state && this.state.duration !== undefined && this.state.currentTime !== undefined) {
-      const percentage = (this.state.currentTime / this.state.duration) * 100;
-      return {
-        background: `linear-gradient(to right, #47d38d ${percentage}%, #8adeb4 ${percentage}%)`
-      };
-    }
-    return {
-      background: '#47d38d'
-    };
-  }
-
-  hideOverlay(){
-    if(this.currentFile.currentTime){
-      const overlay = document.querySelector('.overlay');
-      if (overlay) {
-        overlay.classList.add('hidden');
-        console.log('Hidden overlay added');
-      }
+  changePlaybackRate(speed: number) {
+    if (isFinite(speed) && speed >= 0.5 && speed <= 4.0) {
+      this.audioService.setPlaybackRate(speed);
+      this.currentFile.playbackRate = speed;
+    } else {
+      // Handle invalid playback rate value here (e.g., show an error message)
+      console.error('Invalid playback rate value:', speed);
     }
   }
 
 
-  stopTimer(){
+  // ENDED AUDIO ID METHODS
+  getPlayedSongIds(): string[] {
+    const storedIdsString = localStorage.getItem('playedSongIds');
+    return storedIdsString ? JSON.parse(storedIdsString) : [];
+  }
+
+  savePlayedSongIds(ids: string[]) {
+    localStorage.setItem('playedSongIds', JSON.stringify(ids));
+  }
+
+  addToLocalStorage(id: string) {
+    let storedIds = this.getPlayedSongIds();
+
+    if (!storedIds.includes(id)) {
+      storedIds.push(id);
+      this.savePlayedSongIds(storedIds);
+    }
+  }
+
+  isSongPlayed(id: string): boolean {
+    const storedIds = this.getPlayedSongIds();
+    return storedIds.includes(id);
+  }
+
+  // TIMER METHODS
+  stopTimer() {
     clearInterval(this.countdownInterval);
     this.countdownInterval = null;
     this.countdownMinutes = 0;
     this.countdownSeconds = 0;
   }
 
-  // Sleep Timer Methods
   setSleepTimer(minutes: number) {
     this.stopTimer();
     const totalSeconds = minutes * 60;
@@ -245,8 +235,23 @@ export class AudioPlayerComponent implements OnDestroy {
     return value < 10 ? `0${value}` : `${value}`;
   }
 
-  // Restore Data Methods
-  saveAudioDataBeforeF5(){
+  // Secondary methods, data converting, restore data, method for OnInit and etc
+
+  convertToPercentage(value: number): string {
+    if (value < 0) {
+      value = 0;
+    } else if (value > 1) {
+      value = 1;
+    }
+    const percentage = Math.round(value * 100);
+    return percentage + '%';
+  }
+
+  formatTime(time: number) {
+    return this.audioService.formatTime(time);
+  }
+
+  saveAudioDataBeforeF5() {
     window.addEventListener('beforeunload', () => {
       this.pause();
     });
@@ -254,14 +259,16 @@ export class AudioPlayerComponent implements OnDestroy {
 
   nextAudioAfterEnded() {
     this.audioService.audioObj.addEventListener('ended', () => {
+      this.addToLocalStorage(this.currentFile.file.id);
       if (!this.isLastPlaying()) {
+        // console.log(this.currentFile);
         this.next();
       }
     });
   }
 
   restorePlayerState() {
-    const savedSong = localStorage.getItem(this.currentSongKey);
+    const savedSong = localStorage.getItem(this.currentAudioKey);
     if (savedSong) {
       const parsedData = JSON.parse(savedSong);
       if (parsedData && parsedData.currentFile) {
@@ -273,21 +280,52 @@ export class AudioPlayerComponent implements OnDestroy {
         this.changeVolume(parsedData.currentVolume);
         this.currentFile.currentVolume = parsedData.currentVolume;
 
-        console.log('Parsed currentTime', this.currentFile.currentTime);
-        if(this.currentFile.currentTime){
+        // console.log('Parsed currentTime', this.currentFile.currentTime);
+        if (this.currentFile.currentTime) {
           const overlay = document.querySelector('.overlay');
           if (overlay) {
             overlay.classList.remove('hidden');
-            console.log('Hidden overlay removed');
+            // console.log('Hidden overlay removed');
           }
         }
       }
     }
   }
 
-  // On Destroy
+  // SCCS METHOD
+
+  // update audio progress bar
+  getProgressBarBackground() {
+    if (this.state && this.state.duration !== undefined && this.state.currentTime !== undefined) {
+      const percentage = (this.state.currentTime / this.state.duration) * 100;
+      return {
+        background: `linear-gradient(to right, #47d38d ${percentage}%, #8adeb4 ${percentage}%)`
+      };
+    }
+    return {
+      background: '#47d38d'
+    };
+  }
+
+  // active element in playlist
+  setActiveItem(index: number) {
+    this.activeItemIndex = index;
+  }
+
+  // overlay after using F5 or just open page after
+  hideOverlay() {
+    if (this.currentFile.currentTime) {
+      const overlay = document.querySelector('.overlay');
+      if (overlay) {
+        overlay.classList.add('hidden');
+        // console.log('Hidden overlay added');
+      }
+    }
+  }
+
+  // ON DESTROY
   ngOnDestroy() {
     this.pause();
   }
-
 }
+
