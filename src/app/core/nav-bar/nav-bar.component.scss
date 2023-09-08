@@ -1,14 +1,8 @@
-a{
-  text-decoration: none;
-  color: black;
-}
-
 .logo{
   width: 100px;
   height: 100px;
   cursor: pointer;
 }
-
 
 header .item{
   text-align: center;
@@ -30,7 +24,7 @@ header .item{
   height: 2px;
   bottom: 0;
   left: 0;
-  background-color:  var(--base-orange-color);;
+  background-color:  var(--base-orange-color);
   transform-origin: bottom right;
   transition: transform 0.25s ease-out;
 }

@@ -7,9 +7,12 @@
       <button class="button o_button mt-3 mr-2" routerLink="/library">Вперед до книг!</button>
       <button class="button w_button mt-3">Підтримати проект.</button>
     </div>
+
     <div class="col d-none d-lg-flex">
-      <img src="/assets/images/home_page_img.png" class="img-poster">
+      <img *ngIf="isLightTheme()" src="/assets/images/light_theme_poster.png" alt="Light Image" class="img-poster">
+      <img *ngIf="isDarkTheme()" src="/assets/images/dark_theme_poster.png" alt="Dark Image" class="img-poster">
     </div>
+
   </div>
 </div>
 <div class="container recomends">
@@ -21,7 +24,7 @@
       <button class="button g_button mt-3" routerLink="/library">Більше →</button>
     </div>
   </div>
-  <div class="mt-5">
+  <div class="mt-2">
     <div class="row mt-3">
       <div *ngFor="let book of books" class="col-md-3 col-6 mb-4">
         <div class="card">

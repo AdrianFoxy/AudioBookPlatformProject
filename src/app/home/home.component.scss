@@ -1,8 +1,10 @@
-.poster_p{
-  font-size: 50px;
-}
 .container{
   margin-top: 20px;
+}
+
+// Poster
+.poster_p{
+  font-size: 50px;
 }
 
 .poster_text{
@@ -10,7 +12,13 @@
 }
 
 .poster_text span {
-  color:  var(--base-orange-color);;
+  color:  var(--base-orange-color);
+}
+
+@media(max-width:992px){
+  .poster_text {
+    margin-top: 0;
+  }
 }
 
 .poster_secondary_text{
@@ -22,68 +30,9 @@
   height: auto;
 }
 
-@media(max-width:992px){
-  .poster_text {
-    margin-top: 0;
-  }
-}
-
 .recomends{
   margin-top: 100px;
 }
 
-.card-img{
-  border-radius: 20px;
-  width: 100%;
-  height: 450px;
-}
-
-.book_name{
-  text-decoration: none;
-  color: #000;
-}
-
-@media(max-width:1200px){
-  .card-img{
-    width: 100%;
-    height: 300px;
-  }
-}
-
-@media(max-width:992px){
-  .card-img{
-    width: 100%;
-    height: 250px;
-  }
-}
-
-@media(max-width:768px){
-  .card-img{
-    width: 100%;
-    height: 350px;
-  }
-}
-
-@media(max-width:500px){
-  .card-img{
-    width: 100%;
-    height: 300px;
-  }
-}
-
-@media(max-width:500px){
-  .card-img{
-    width: 100%;
-    height: 200px;
-  }
-}
-
-.card {
-  border: none;
-}
-
-.card-title:hover{
-  color:  var(--base-orange-color);;
-}
 
 
