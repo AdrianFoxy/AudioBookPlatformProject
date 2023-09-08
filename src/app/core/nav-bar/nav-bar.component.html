@@ -1,13 +1,14 @@
 <header>
   <div class="container">
     <div class="row">
-      <!-- Первый див с логотипом и меню -->
       <div class="col-11 col-md-10">
         <div class="d-lg-none">
-          <img class="logo" src="/assets/images/fox_logo.png" alt="Logo">
+          <img class="logo" *ngIf="!isLightTheme()" src="/assets/images/dark_theme_logo.png" alt="Logo">
+          <img class="logo" *ngIf="isLightTheme()" src="/assets/images/fox_logo.png" alt="Logo">
         </div>
         <div class="d-none d-lg-flex">
-          <img class="logo" src="/assets/images/fox_logo.png" alt="Logo">
+          <img class="logo" *ngIf="!isLightTheme()" src="/assets/images/dark_theme_logo.png" alt="Logo">
+          <img class="logo" *ngIf="isLightTheme()" src="/assets/images/fox_logo.png" alt="Logo">
           <div class="item hover-underline-animation">
             <a routerLink="/">Головна</a>
           </div>
@@ -45,7 +46,7 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <img src="/assets/images/logo.png" alt="Logo">
+            <img src="/assets/images/fox_logo.png" alt="Logo">
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
 

@@ -6,6 +6,10 @@
   background-color: var(--base-dark-main-color) !important;
 }
 
+.dark-theme .card-title:hover{
+  color:  var(--base-dark-main-color);
+}
+
 .dark-theme .o_button {
   background: var(--base-dark-main-color);
 }
