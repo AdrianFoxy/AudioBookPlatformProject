@@ -8,6 +8,14 @@ import { Book } from '../shared/models/book';
 })
 export class HomeComponent {
 
+  isLightTheme() {
+    return localStorage.getItem('theme') === 'light';
+  }
+
+  isDarkTheme() {
+    return localStorage.getItem('theme') === 'dark';
+  }
+
   books: Book[] = [
     {
       id: 2,

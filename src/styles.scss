@@ -6,21 +6,34 @@
 /* Importing Datepicker SCSS file. */
 @import "node_modules/ngx-bootstrap/datepicker/bs-datepicker";
 
-body {
-  font-family: Georgia, serif;
-  background-color: #fff;
-}
-
-.dark-theme {
-  background-color: #2b2b2b;
-}
+@import "customTheme";
 
 :root {
   --base-orange-color: orange;
   --base-green-color: #8adeb4;
   --base-light-bg-color: #fff;
-  --base-light-border-color: #000000;
+  --base-light-border-color: #000;
+  --base-light-text-color: #000;
 
+  --base-dark-text-color: #fff;
+  --base-dark-border-color: #373737;
+  --base-dark-main-color: #574ccf;;
+  --base-dark-secondary-color: #b2c0ff;
+
+}
+
+body {
+  font-family: Georgia, serif;
+  background-color: #fff;
+}
+
+a{
+  text-decoration: none;
+  color: black;
+}
+a:hover{
+  text-decoration: none;
+  color: black;
 }
 
 .button{
@@ -46,3 +59,58 @@ body {
   background: var(--base-light-bg-color);
 }
 
+// Book card styles
+
+.card-img{
+  border-radius: 20px;
+  width: 100%;
+  height: 450px;
+}
+
+.book_name{
+  text-decoration: none;
+  color: #000;
+}
+
+@media(max-width:1200px){
+  .card-img{
+    width: 100%;
+    height: 300px;
+  }
+}
+
+@media(max-width:992px){
+  .card-img{
+    width: 100%;
+    height: 250px;
+  }
+}
+
+@media(max-width:768px){
+  .card-img{
+    width: 100%;
+    height: 350px;
+  }
+}
+
+@media(max-width:500px){
+  .card-img{
+    width: 100%;
+    height: 300px;
+  }
+}
+
+@media(max-width:500px){
+  .card-img{
+    width: 100%;
+    height: 200px;
+  }
+}
+
+.card {
+  border: none;
+}
+
+.card-title:hover{
+  color:  var(--base-orange-color);;
+}

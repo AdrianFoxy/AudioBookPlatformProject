@@ -4,10 +4,10 @@
       <!-- Первый див с логотипом и меню -->
       <div class="col-11 col-md-10">
         <div class="d-lg-none">
-          <img class="logo" src="/assets/images/logo.png" alt="Logo">
+          <img class="logo" src="/assets/images/fox_logo.png" alt="Logo">
         </div>
         <div class="d-none d-lg-flex">
-          <img class="logo" src="/assets/images/logo.png" alt="Logo">
+          <img class="logo" src="/assets/images/fox_logo.png" alt="Logo">
           <div class="item hover-underline-animation">
             <a routerLink="/">Головна</a>
           </div>
@@ -18,10 +18,8 @@
             <a href="">Добірки</a>
           </div>
           <div class="dark_mode_toggle">
-            <!-- <input type="checkbox" (change)="changeThemeColor()"> -->
-
             <label class="d_mode_label">
-              <input type="checkbox" class="d_mode_input" (change)="changeThemeColor()">
+              <input type="checkbox" class="d_mode_input" [checked]="!isLightTheme()" (change)="changeThemeColor()">
               <i class="fa fa-sun-o sun" aria-hidden="true"></i>
               <i class="fa fa-moon-o moon" aria-hidden="true"></i>
               <span class="toggle"></span>
