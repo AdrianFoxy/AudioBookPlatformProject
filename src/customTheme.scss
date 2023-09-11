@@ -122,3 +122,7 @@
     background: none !important;
   }
 }
+
+.dark-theme .parent button:active {
+  background-color: var(--base-dark-main-color) !important;
+}
