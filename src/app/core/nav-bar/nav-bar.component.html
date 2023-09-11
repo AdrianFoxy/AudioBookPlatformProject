@@ -3,12 +3,12 @@
     <div class="row">
       <div class="col-11 col-md-10">
         <div class="d-lg-none">
-          <img class="logo" *ngIf="!isLightTheme()" src="/assets/images/dark_theme_logo.png" alt="Logo">
-          <img class="logo" *ngIf="isLightTheme()" src="/assets/images/fox_logo.png" alt="Logo">
+          <img class="logo" *ngIf="!darkmodeService.isLightTheme()" src="/assets/images/dark_theme_logo.png" alt="Logo">
+          <img class="logo" *ngIf="darkmodeService.isLightTheme()" src="/assets/images/fox_logo.png" alt="Logo">
         </div>
         <div class="d-none d-lg-flex">
-          <img class="logo" *ngIf="!isLightTheme()" src="/assets/images/dark_theme_logo.png" alt="Logo">
-          <img class="logo" *ngIf="isLightTheme()" src="/assets/images/fox_logo.png" alt="Logo">
+          <img class="logo" *ngIf="!darkmodeService.isLightTheme()" src="/assets/images/dark_theme_logo.png" alt="Logo">
+          <img class="logo" *ngIf="darkmodeService.isLightTheme()" src="/assets/images/fox_logo.png" alt="Logo">
           <div class="item hover-underline-animation">
             <a routerLink="/">Головна</a>
           </div>
@@ -20,7 +20,7 @@
           </div>
           <div class="dark_mode_toggle">
             <label class="d_mode_label">
-              <input type="checkbox" class="d_mode_input" [checked]="!isLightTheme()" (change)="changeThemeColor()">
+              <input type="checkbox" class="d_mode_input" [checked]="!darkmodeService.isLightTheme()" (change)="darkmodeService.changeThemeColor()">
               <i class="fa fa-sun-o sun" aria-hidden="true"></i>
               <i class="fa fa-moon-o moon" aria-hidden="true"></i>
               <span class="toggle"></span>
@@ -71,7 +71,6 @@
           </div>
 
           <div class="mobile-modal-footer">
-
             <a target="_blank" href="#"><i class="fa fa-telegram fa-lg"></i></a>
             <a target="_blank" href="#"><i class="fa fa-telegram fa-lg"></i></a>
             <a target="_blank" href="#"><i class="fa fa-telegram fa-lg"></i></a>

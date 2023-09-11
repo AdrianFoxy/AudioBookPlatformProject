@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
 import { StreamState } from '../models/stream-state';
-import { AudioService } from 'src/app/core/audio_service/audio.service';
+import { AudioService } from 'src/app/core/services/audio_service/audio.service';
+import { DarkModeService } from 'src/app/core/services/dark-mode-service/dark-mode.service';
 
 @Component({
   selector: 'app-audio-player',
@@ -33,7 +34,7 @@ export class AudioPlayerComponent implements OnDestroy {
   countdownSeconds: number = 0;
   countdownInterval: any;
 
-  constructor(private audioService: AudioService, private cdr: ChangeDetectorRef) {
+  constructor(public darkmodeService: DarkModeService, private audioService: AudioService, private cdr: ChangeDetectorRef) {
     this.files = this.audioList;
     // listen to stream state
     this.audioService.getState()
@@ -296,15 +297,27 @@ export class AudioPlayerComponent implements OnDestroy {
 
   // update audio progress bar
   getProgressBarBackground() {
-    if (this.state && this.state.duration !== undefined && this.state.currentTime !== undefined) {
-      const percentage = (this.state.currentTime / this.state.duration) * 100;
+    if(!this.darkmodeService.isLightTheme()){
+      if (this.state && this.state.duration !== undefined && this.state.currentTime !== undefined) {
+        const percentage = (this.state.currentTime / this.state.duration) * 100;
+        return {
+          background: `linear-gradient(to right, #546ace ${percentage}%, #d7d7d8 ${percentage}%)`
+        };
+      }
       return {
-        background: `linear-gradient(to right, #47d38d ${percentage}%, #8adeb4 ${percentage}%)`
+        background: '#546ace'
+      };
+    } else {
+      if (this.state && this.state.duration !== undefined && this.state.currentTime !== undefined) {
+        const percentage = (this.state.currentTime / this.state.duration) * 100;
+        return {
+          background: `linear-gradient(to right, #47d38d ${percentage}%, #d5e0ff ${percentage}%)`
+        };
+      }
+      return {
+        background: '#47d38d'
       };
     }
-    return {
-      background: '#47d38d'
-    };
   }
 
   // active element in playlist

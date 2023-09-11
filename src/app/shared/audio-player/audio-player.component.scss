@@ -90,15 +90,6 @@
   display: none;
 }
 
-.player_img {
-  border-radius: 20px;
-  width: 100%;
-  border-radius: 10px;
-  outline: none;
-  border: 2px solid black;
-  border-bottom: 4px solid black;
-}
-
 .buttons {
   display: flex;
   flex-direction: row;
@@ -133,7 +124,6 @@
   transition: all 0.2s ease;
   border: 2px solid black;
   border-bottom: 4px solid black;
-
 }
 
 .parent button:active {
@@ -227,14 +217,13 @@ i.fa-volume-up {
 .list-group-item.active {
   border: 2px solid black;
   border-bottom: 4px solid black;
-  background-color: var(--base-orange-color);;
+  background-color: var(--base-orange-color);
 }
 
 .list-group-item.played {
   text-decoration: line-through;
   color: #888;
 }
-
 
 .btn {
   background-color: transparent;
@@ -258,7 +247,7 @@ i.fa-volume-up {
 .dropdown-item:hover {
   border: 2px solid black;
   border-bottom: 4px solid black;
-  background-color: var(--base-orange-color);;
+  background-color: var(--base-orange-color);
 }
 
 .current_value {
