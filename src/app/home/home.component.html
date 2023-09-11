@@ -9,8 +9,8 @@
     </div>
 
     <div class="col d-none d-lg-flex">
-      <img *ngIf="isLightTheme()" src="/assets/images/light_theme_poster.png" alt="Light Image" class="img-poster">
-      <img *ngIf="isDarkTheme()" src="/assets/images/dark_theme_poster.png" alt="Dark Image" class="img-poster">
+      <img *ngIf="darkmodeService.isLightTheme()" src="/assets/images/light_theme_poster.png" alt="Light Image" class="img-poster">
+      <img *ngIf="!darkmodeService.isLightTheme()" src="/assets/images/dark_theme_poster.png" alt="Dark Image" class="img-poster">
     </div>
 
   </div>

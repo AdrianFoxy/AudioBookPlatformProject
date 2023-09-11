@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Book } from '../shared/models/book';
+import { DarkModeService } from '../core/services/dark-mode-service/dark-mode.service';
 
 @Component({
   selector: 'app-home',
@@ -8,12 +9,7 @@ import { Book } from '../shared/models/book';
 })
 export class HomeComponent {
 
-  isLightTheme() {
-    return localStorage.getItem('theme') === 'light';
-  }
-
-  isDarkTheme() {
-    return localStorage.getItem('theme') === 'dark';
+  constructor(public darkmodeService: DarkModeService) {
   }
 
   books: Book[] = [
