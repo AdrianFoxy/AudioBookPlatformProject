@@ -6,8 +6,8 @@
   background-color: var(--base-dark-main-color) !important;
 }
 
-.dark-theme .card-title:hover{
-  color:  var(--base-dark-main-color);
+.dark-theme .card-title:hover {
+  color: var(--base-dark-main-color);
 }
 
 .dark-theme .o_button {
@@ -18,12 +18,12 @@
   background: var(--base-dark-secondary-color);
 }
 
-.dark-theme .card{
+.dark-theme .card {
   background: #1e1e1e;
   color: var(--base-dark-text-color);
 }
 
-.dark-theme .button{
+.dark-theme .button {
   border: 2px solid var(--base-dark-border-color);
   border-bottom: 6px solid var(--base-dark-border-color);
 }
@@ -40,13 +40,13 @@
 }
 
 .dark-theme a,
-.dark-theme a:hover  {
+.dark-theme a:hover {
   text-decoration: none;
   color: var(--base-dark-text-color);
 }
 
 .dark-theme .nav-links li a,
-.dark-theme .social h3{
+.dark-theme .social h3 {
   color: var(--base-dark-text-color) !important;
 }
 
@@ -67,7 +67,7 @@
   color: var(--base-light-text-color) !important;
 }
 
-.dark-theme .overlay{
+.dark-theme .overlay {
   background-color: rgb(87, 76, 208, 0.6) !important;
 }
 
@@ -78,7 +78,7 @@
 .dark-theme .list-group::-webkit-scrollbar-track {
   background:
     linear-gradient(to right,
-    var(--base-dark-main-color) 0 6px,
+      var(--base-dark-main-color) 0 6px,
       /* 6 px orange */
       black 6px 9px,
       /* 3 px black */
@@ -95,7 +95,7 @@
   background-color: var(--base-dark-seek-color) !important;
 }
 
-.dark-theme .list-group-item.active{
+.dark-theme .list-group-item.active {
   background-color: var(--base-dark-main-color) !important;
 }
 
@@ -113,11 +113,11 @@
   background-color: var(--dark-mode-bg) !important;
   color: var(--base-dark-text-color) !important;
 
-  button{
+  button {
     background: var(--base-dark-secondary-color) !important;
   }
 
-  .close-button{
+  .close-button {
     color: var(--base-dark-secondary-color) !important;
     background: none !important;
   }
@@ -126,3 +126,19 @@
 .dark-theme .parent button:active {
   background-color: var(--base-dark-main-color) !important;
 }
+
+// Book details page
+.dark-theme .book_details .title,
+.dark-theme .book_details .attb_span,
+.dark-theme .book_details .description,
+.dark-theme .reviews .user-name,
+.dark-theme .reviews .raiting,
+.dark-theme .reviews .review_text{
+  color: var(--base-dark-text-color) !important;
+}
+
+.dark-theme .book_details .show-more{
+  color: var(--base-dark-main-color) !important;
+}
+
+
