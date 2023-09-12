@@ -15,6 +15,25 @@
     border: 2px solid var(--base-light-border-color);
     border-bottom: 6px solid var(--base-light-border-color);
   }
+
+  @media(max-width:1200px){
+    .poster_img{
+      height: 350px;
+    }
+  }
+
+  @media(max-width:992px){
+    .poster_img{
+      height: 250px;
+    }
+  }
+
+  @media(max-width:768px){
+    .poster_img{
+      height: 100%;
+    }
+  }
+
   .title{
     display: flex;
     justify-content: space-between;
