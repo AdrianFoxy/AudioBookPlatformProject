@@ -1,5 +1,33 @@
 <div class="container">
-  <h1>Audio-Player-Tests</h1>
-  <app-audio-player></app-audio-player>
+  <div class="book_details row mt-4 mb-4">
+    <div class="poster_block col-4">
+      <img class="poster_img" src="/assets/images/books_templates/aline_in_zadzercal.jpg" alt="">
+    </div>
+    <div class="col-8">
+      <div class="title">
+        <h1>Аліса в задзеркаллі</h1>
+        <span class="raiting float-end">
+          <i class="fa fa-star" style="color: #ffbc57;" aria-hidden="true"></i>
+          5.0, <span class="secondary_txt">12 оцінок</span>
+        </span>
+      </div>
+      <hr>
+      <p class="secondary_txt">Автор: <a class="a_btns" href="">Льюїс Керрол</a></p>
+      <p class="secondary_txt">Читає: <a class="a_btns" href="">Характерник</a></p>
+      <p class="secondary_txt">Жанри: <a class="a_btns" href="">Фентезі</a></p>
+      <p class="secondary_txt">Видавництво: <span class="attb_span">КСД</span></p>
+      <p class="secondary_txt">Мова: <span class="attb_span">Українська</span></p>
+      <p class="secondary_txt">Тривалість: <span class="attb_span">01:34:34</span></p>
+      <hr>
+      <h2>Про книгу:</h2>
+      <div>
+        <p class="description" [innerHTML]="isExpanded ? fullText : truncatedText"></p>
+        <a class="show-more" (click)="toggleText()">
+          {{ isExpanded ? 'Скрити опис' : 'Більше' }}
+        </a>
+      </div>
+    </div>
+  </div>
 </div>
+<app-audio-player></app-audio-player>
 
