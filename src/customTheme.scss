@@ -130,10 +130,15 @@
 // Book details page
 .dark-theme .book_details .title,
 .dark-theme .book_details .attb_span,
-.dark-theme .book_details .description{
+.dark-theme .book_details .description,
+.dark-theme .reviews .user-name,
+.dark-theme .reviews .raiting,
+.dark-theme .reviews .review_text{
   color: var(--base-dark-text-color) !important;
 }
 
 .dark-theme .book_details .show-more{
   color: var(--base-dark-main-color) !important;
 }
+
+

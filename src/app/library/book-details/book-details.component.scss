@@ -4,7 +4,6 @@
   align-items: center;
 }
 
-
 .book_details{
   .poster_img{
     margin-top: 10px;
@@ -33,13 +32,6 @@
       height: 100%;
     }
   }
-
-  .title{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
   .a_btns:hover {
     text-decoration: underline;
   }
@@ -53,8 +45,29 @@
     cursor: pointer;
     color: var(--base-orange-color);
   }
+}
 
-  hr{
-    color: grey;
+.title{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.reviews{
+  .review{
+    border-radius: 20px;
+    padding: 15px 20px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
   }
+  .user-name{
+    font-size: 20px;
+  }
+  .date{
+    font-size: 15px;
+    color: gray;
+  }
+}
+
+hr{
+  color: grey;
 }
