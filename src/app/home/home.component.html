@@ -9,40 +9,29 @@
     </div>
 
     <div class="col d-none d-lg-flex">
-      <img *ngIf="darkmodeService.isLightTheme()" src="/assets/images/light_theme_poster.png" alt="Light Image" class="img-poster">
-      <img *ngIf="!darkmodeService.isLightTheme()" src="/assets/images/dark_theme_poster.png" alt="Dark Image" class="img-poster">
+      <img *ngIf="darkmodeService.isLightTheme()" src="/assets/images/light_theme_poster.png" alt="Light Image"
+        class="img-poster">
+      <img *ngIf="!darkmodeService.isLightTheme()" src="/assets/images/dark_theme_poster.png" alt="Dark Image"
+        class="img-poster">
     </div>
 
   </div>
 </div>
 <div class="container recomends">
+  <hr>
+  <br>
   <div class="d-flex justify-content-between align-items-center">
-    <div>
-      <h1>ТОП ТИЖНЯ</h1>
-    </div>
-    <div class="ml-3">
-      <button class="button g_button mt-3" routerLink="/library">Більше →</button>
-    </div>
+    <h1>Топ тижня:</h1>
+    <button class="button g_button mt-3" routerLink="/library">Більше →</button>
   </div>
-  <div class="mt-2">
-    <div class="row mt-3">
-      <div *ngFor="let book of books" class="col-md-3 col-6 mb-4">
-        <div class="card">
-          <a routerLink="/library/{{book.id}}">
-            <img [src]="book.imageSrc" class="card-img" alt="bookimg">
-          </a>
-          <div class="card-body">
-            <a routerLink="/library/{{book.id}}" class="book_name"><h5 class="card-title"><b>{{ book.title }}</b></h5></a>
-            <p class="card-text">
-              <span>{{ book.author }}</span>
-              <span class="float-end">
-                <i class="fa fa-star" style="color: #ffbc57;" aria-hidden="true"></i>
-                {{ book.rating }}
-              </span>
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
+  <div class="mt-4">
+    <app-recomentdations></app-recomentdations>
+  </div>
+  <hr>
+  <div class="d-flex justify-content-between align-items-center">
+    <h1>Вас зацікавить:</h1>
+  </div>
+  <div class="mt-4">
+    <app-recomentdations></app-recomentdations>
   </div>
 </div>
