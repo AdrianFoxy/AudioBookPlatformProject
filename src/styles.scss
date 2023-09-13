@@ -61,58 +61,10 @@ a:hover{
   background: var(--base-light-bg-color);
 }
 
-// Book card styles
-
-.card-img{
-  border-radius: 20px;
-  width: 100%;
-  height: 450px;
+hr{
+  color: grey;
 }
-
-.book_name{
-  text-decoration: none;
-  color: #000;
-}
-
-@media(max-width:1200px){
-  .card-img{
-    width: 100%;
-    height: 300px;
-  }
-}
-
-@media(max-width:992px){
-  .card-img{
-    width: 100%;
-    height: 250px;
-  }
-}
-
-@media(max-width:768px){
-  .card-img{
-    width: 100%;
-    height: 350px;
-  }
-}
-
-@media(max-width:500px){
-  .card-img{
-    width: 100%;
-    height: 300px;
-  }
-}
-
-@media(max-width:500px){
-  .card-img{
-    width: 100%;
-    height: 200px;
-  }
-}
-
-.card {
-  border: none;
-}
-
-.card-title:hover{
-  color:  var(--base-orange-color);;
+.slick-prev:before,
+.slick-next:before {
+  color: grey;
 }
