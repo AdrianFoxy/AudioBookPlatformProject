@@ -1,7 +1,7 @@
 <header>
   <div class="container">
     <div class="row">
-      <div class="col-11 col-md-10">
+      <div class="col-11 col-md-9">
         <div class="d-lg-none">
           <img class="logo" *ngIf="!darkmodeService.isLightTheme()" src="/assets/images/dark_theme_logo.png" alt="Logo">
           <img class="logo" *ngIf="darkmodeService.isLightTheme()" src="/assets/images/fox_logo.png" alt="Logo">
@@ -10,13 +10,14 @@
           <img class="logo" *ngIf="!darkmodeService.isLightTheme()" src="/assets/images/dark_theme_logo.png" alt="Logo">
           <img class="logo" *ngIf="darkmodeService.isLightTheme()" src="/assets/images/fox_logo.png" alt="Logo">
           <div class="item hover-underline-animation">
-            <a routerLink="/">Головна</a>
+            <a routerLink="/">{{ 'Home' | translate }}</a>
+
           </div>
           <div class="item hover-underline-animation">
-            <a routerLink="/library">Бібліотека</a>
+            <a routerLink="/library">{{ 'Library' | translate }}</a>
           </div>
           <div class="item hover-underline-animation">
-            <a href="">Добірки</a>
+            <a href="">{{ 'Selections' | translate }}</a>
           </div>
           <div class="dark_mode_toggle">
             <label class="d_mode_label">
@@ -28,9 +29,9 @@
           </div>
         </div>
       </div>
-      <div class="col-md-2 mt-3 d-none d-lg-flex">
-        <button class="button g_button mr-2" d-none>Увійти </button>
-        <button class="button g_button">Реєстрація </button>
+      <div class="col-md-3 mt-3 d-none d-lg-flex">
+        <button class="button g_button mr-2" d-none>{{ 'Log In' | translate }}</button>
+        <button class="button g_button">{{ 'Create Account' | translate }} </button>
       </div>
       <div class="col-1 mobile-toggler d-lg-none">
         <a href="#" data-bs-toggle="modal" data-bs-target="#navbModal">
