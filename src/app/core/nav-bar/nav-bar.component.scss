@@ -4,7 +4,7 @@
   cursor: pointer;
 }
 
-header .item{
+.item{
   text-align: center;
   font-size: 30px;
   margin: 20px;
@@ -34,19 +34,8 @@ header .item{
   transform-origin: bottom left;
 }
 
-.cart-no {
-  position: absolute;
-  min-height: 25px;
-  min-width: 25px;
-  border-radius: 50%;
-  background-color: var(--base-orange-color);;
-  color: white;
-  text-align: center;
-  top: -12px;
-  right: 32px;
-}
-
-.mobile-toggler{
+.mobile-toggler,
+.navbar-toggler{
   font-size: 35px;
 }
 
@@ -66,7 +55,7 @@ header .item{
   border-radius: 0;
   height: 100vh;
   overflow: scroll;
-  background-color: var(--base-light-bg-color);;
+  background-color: var(--base-light-bg-color);
 }
 
 .modal .header{
