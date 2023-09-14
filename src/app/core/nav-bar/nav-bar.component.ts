@@ -10,7 +10,7 @@ import { TranslateService } from '@ngx-translate/core';
 export class NavBarComponent implements OnInit {
 
   constructor(public darkmodeService: DarkModeService, private translate: TranslateService) {
-    this.translate.setDefaultLang('en');
+    this.translate.setDefaultLang('ua');
 
   }
 
