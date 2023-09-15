@@ -8,6 +8,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { RecomentdationsComponent } from './recomentdations/recomentdations.component';
 import { RouterModule } from '@angular/router';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
     BrowserAnimationsModule,
     RouterModule,
     BsDropdownModule.forRoot(),
-    SlickCarouselModule
+    SlickCarouselModule,
+    TranslateModule.forChild()
   ],
   exports: [
     AudioPlayerComponent,
