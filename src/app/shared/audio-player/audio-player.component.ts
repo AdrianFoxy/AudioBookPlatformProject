@@ -19,7 +19,8 @@ export class AudioPlayerComponent implements OnDestroy {
     { id: 'asd6asd', url: '/assets/audio/y2mate.is - Adrift feat. Laura Bailey and Ashley Johnson from Stray Gods --HMq_9-Nn-A-192k-1693650865.mp3', name: 'Adrift' },
     { id: 'asd7asd', url: '/assets/audio/y2mate.is - Morena Mariana Nolasco part. Vitor Kley Fan Animated Music Video Witch Bunny -jTWb-RIdN-I-192k-1693650931.mp3', name: 'Morena' },
     { id: 'asd8asd', url: '/assets/audio/y2mate.is - Just The Two Of Us-52avIJWQWAY-192k-1693651021.mp3', name: 'Just Two Of Us' },
-    { id: 'asd9asd', url: '/assets/audio/y2mate.is - the_world_outside__is_gonna_be_the_death_of_me_-3qKf4GMz9Jo-192k-1693654398.mp3', name: 'The World Outside (Is Gonna Be the Death of Me)' }
+    { id: 'asd9asd', url: '/assets/audio/y2mate.is - the_world_outside__is_gonna_be_the_death_of_me_-3qKf4GMz9Jo-192k-1693654398.mp3', name: 'The World Outside (Is Gonna Be the Death of Me)' },
+    { id: 'asd10asd', url: 'https://github.com/AdrianFoxy/AudioBooksStorage/blob/main/GoodMorning/Chapter1.mp3?raw=true', name: 'ABookChapter'}
   ]
 
   files: Array<any> = [];
@@ -40,7 +41,13 @@ export class AudioPlayerComponent implements OnDestroy {
     this.audioService.getState()
       .subscribe(state => {
         this.state = state;
+        // console.log(this.state);
+
+        // if(this.state.playing == false && this.state.readableDuration != null){
+        //   console.log('loading file');
+        // }
       });
+
   }
 
   ngOnInit() {
@@ -101,7 +108,7 @@ export class AudioPlayerComponent implements OnDestroy {
 
     if (localStorage.getItem(this.currentAudioKey) && !this.state?.canplay) {
 
-      console.log('Saved song data found.');
+      // console.log('Saved song data found.');
       this.playStream(this.currentFile.file.url);
       this.audioService.seekTo(this.currentFile.currentTime);
       this.changePlaybackRate(this.currentFile.playbackRate);
@@ -113,13 +120,22 @@ export class AudioPlayerComponent implements OnDestroy {
   }
 
   playwithoutcontinue() {
-    console.log('playwithoutcontinue', this.state);
+    // console.log('playwithoutcontinue', this.state);
 
     if (localStorage.getItem(this.currentAudioKey) && !this.state?.canplay) {
       // console.log('Saved song data found.');
       this.playStream(this.currentFile.file.url);
-      this.audioService.seekTo(this.currentFile.currentTime);
-      this.pause();
+
+      let hasStartedPlaying = false;
+
+      this.audioService.getState().subscribe(state => {
+        if (state.canplay && !hasStartedPlaying) {
+          hasStartedPlaying = true;
+          this.audioService.seekTo(this.currentFile.currentTime);
+          this.audioService.pause();
+          this.hideOverlay();
+        }
+      });
     }
     this.hideOverlay();
   }
@@ -280,6 +296,11 @@ export class AudioPlayerComponent implements OnDestroy {
 
         this.changeVolume(parsedData.currentVolume);
         this.currentFile.currentVolume = parsedData.currentVolume;
+
+        const sliderElement = document.querySelector('.seek_slider') as HTMLInputElement;
+        if (sliderElement) {
+          sliderElement.value = String(parsedData.currentTime);
+        }
 
         // console.log('Parsed currentTime', this.currentFile.currentTime);
         if (this.currentFile.currentTime) {

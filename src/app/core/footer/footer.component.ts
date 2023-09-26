@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { DarkModeService } from '../services/dark-mode-service/dark-mode.service';
 
 @Component({
   selector: 'app-footer',
@@ -8,11 +9,11 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class FooterComponent {
 
-  constructor(private translate: TranslateService) {
+  constructor(public darkmodeService: DarkModeService, private translate: TranslateService) {
 
   }
 
-  switchLanguage(language: string){
+  switchLanguage(language: string) {
     this.translate.use(language);
   }
 }

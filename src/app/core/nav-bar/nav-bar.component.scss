@@ -54,7 +54,7 @@
 .modal-content{
   border-radius: 0;
   height: 100vh;
-  overflow: scroll;
+  overflow-y: scroll;
   background-color: var(--base-light-bg-color);
 }
 

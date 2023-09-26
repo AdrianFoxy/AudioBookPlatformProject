@@ -32,7 +32,7 @@
           <li class="nav-item">
             <div class="dark_mode_toggle">
               <label class="d_mode_label">
-                <input type="checkbox" class="d_mode_input" [checked]="!darkmodeService.isLightTheme()"
+                <input type="checkbox" id="darkmode_toggle_box" class="d_mode_input" [checked]="!darkmodeService.isLightTheme()"
                   (change)="darkmodeService.changeThemeColor()">
                 <i class="fa fa-sun-o sun" aria-hidden="true"></i>
                 <i class="fa fa-moon-o moon" aria-hidden="true"></i>
