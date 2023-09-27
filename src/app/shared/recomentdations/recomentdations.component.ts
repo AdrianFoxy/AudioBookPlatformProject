@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Book } from '../models/book';
+import { Book_Test } from '../models/book_test';
 
 @Component({
   selector: 'app-recomentdations',
@@ -8,7 +8,7 @@ import { Book } from '../models/book';
 })
 export class RecomentdationsComponent {
 
-  books: Book[] = [
+  books: Book_Test[] = [
     {
       id: 2,
       title: 'Ім\'я вітру',
@@ -56,7 +56,7 @@ export class RecomentdationsComponent {
   slideConfig = {
     "slidesToShow": 4,
     "slidesToScroll": 4,
-    "autoplay":true,
+    "autoplay":false,
     "autoplaySpeed":5000,
     "pauseOnHover":true,
     "infinitee": true,

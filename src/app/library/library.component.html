@@ -1,8 +1,14 @@
-<div>
-  <div>
-    <div style="color: red;">
-      <p>library works!</p>
-
-    </div>
+<div class="container">
+  <div class="row">
+    <section class="col-9">
+      <div class="row row-cols-md-3">
+        <div class="col" *ngFor="let audiobook of audioBooks">
+          <app-audiobook-item [audiobook]="audiobook"></app-audiobook-item>
+        </div>
+      </div>
+    </section>
+    <section class="col-3">
+      Filters
+    </section>
   </div>
 </div>

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Book } from '../shared/models/book';
+import { Book_Test } from '../shared/models/book_test';
 import { DarkModeService } from '../core/services/dark-mode-service/dark-mode.service';
 
 @Component({
@@ -12,7 +12,7 @@ export class HomeComponent {
   constructor(public darkmodeService: DarkModeService) {
   }
 
-  books: Book[] = [
+  books: Book_Test[] = [
     {
       id: 2,
       title: 'Ім\'я вітру',

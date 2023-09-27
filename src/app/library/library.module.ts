@@ -4,13 +4,15 @@ import { LibraryComponent } from './library.component';
 import { BookDetailsComponent } from './book-details/book-details.component';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
+import { AudiobookItemComponent } from './audiobook-item/audiobook-item.component';
 
 
 
 @NgModule({
   declarations: [
     LibraryComponent,
-    BookDetailsComponent
+    BookDetailsComponent,
+    AudiobookItemComponent
   ],
   imports: [
     CommonModule,
@@ -18,6 +20,7 @@ import { SharedModule } from '../shared/shared.module';
     SharedModule
   ],
   exports:[
+    LibraryComponent
   ]
 })
 export class LibraryModule { }
