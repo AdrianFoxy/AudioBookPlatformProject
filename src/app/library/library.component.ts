@@ -12,7 +12,6 @@ export class LibraryComponent implements OnInit {
   audioBooks: AudioBook[] = [];
 
   constructor(private libraryService: LibraryService){
-
   }
 
   ngOnInit(): void {
@@ -21,5 +20,14 @@ export class LibraryComponent implements OnInit {
       error: error => console.log(error)
     })
   }
+
+  formatLabel(value: number): string {
+    if (value >= 1000) {
+      return Math.round(value / 1000) + 'k';
+    }
+
+    return `${value}`;
+  }
+
 
 }

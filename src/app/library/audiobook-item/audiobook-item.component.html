@@ -9,9 +9,6 @@
     </div>
   </div>
   <div class="card-body">
-    <a routerLink="/library/{{audiobook.id}}" class="book_name">
-      <h5 class="card-title"><b>{{audiobook.name}}</b></h5>
-    </a>
     <p class="card-text">
       <span *ngFor="let author of audiobook.author">{{author.name}}</span>
       <span class="float-end">
@@ -19,5 +16,8 @@
         {{audiobook.rating}}
       </span>
     </p>
+    <a routerLink="/library/{{audiobook.id}}" class="book_name">
+      <p class="card-title">{{truncateName(audiobook.name)}}</p>
+    </a>
   </div>
 </div>
