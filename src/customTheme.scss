@@ -145,3 +145,15 @@
 .dark-theme .footer .nav-links li a:hover {
   color: var(--base-dark-main-color) !important;
 }
+
+// Nav-bar modal
+.dark-theme .modal-content{
+  background-color: var(--dark-mode-bg) !important;
+}
+.dark-theme .btn-cls {
+  color: var(--base-dark-text-color) !important;
+}
+
+.dark-theme .modal-item a::after {
+  background-color: var(--base-dark-main-color) !important;
+}

@@ -32,8 +32,8 @@
           <li class="nav-item">
             <div class="dark_mode_toggle">
               <label class="d_mode_label">
-                <input type="checkbox" id="darkmode_toggle_box" class="d_mode_input" [checked]="!darkmodeService.isLightTheme()"
-                  (change)="darkmodeService.changeThemeColor()">
+                <input type="checkbox" id="darkmode_toggle_box" class="d_mode_input"
+                  [checked]="!darkmodeService.isLightTheme()" (change)="darkmodeService.changeThemeColor()">
                 <i class="fa fa-sun-o sun" aria-hidden="true"></i>
                 <i class="fa fa-moon-o moon" aria-hidden="true"></i>
                 <span class="toggle"></span>
@@ -43,7 +43,7 @@
         </ul>
         <div class="my-2 my-lg-0">
           <button class="button g_button mr-2 mb-1">{{ 'Log In' | translate }}</button>
-          <button class="button g_button">{{ 'Create Account' | translate }} </button>
+          <button class="button g_button">{{ 'Create Account' | translate }}</button>
         </div>
       </div>
     </nav>
@@ -52,36 +52,59 @@
     <div class="modal fade" id="navbModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
-          <div class="modal-header">
-            <img src="/assets/images/fox_logo.png" alt="Logo">
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <div class="modal-head">
+            <div class="dark_mode_toggle">
+              <label class="d_mode_label">
+                <input type="checkbox" id="modal_darkmode_toggle_box" class="d_mode_input"
+                  [checked]="!darkmodeService.isLightTheme()" (change)="darkmodeService.changeThemeColor()">
+                <i class="fa fa-sun-o sun" aria-hidden="true"></i>
+                <i class="fa fa-moon-o moon" aria-hidden="true"></i>
+                <span class="toggle"></span>
+              </label>
+            </div>
+            <a class="btn-cls" data-bs-dismiss="modal" aria-label="Close">
+              <i class="fa fa-times" aria-hidden="true"></i>
+            </a>
           </div>
 
           <div class="modal-body">
-
-            <div class="modal-line">
-              <i class="fa fa-home"></i>
-              <a routerLink="/" routerLinkActive="active">Home</a>
+            <div class="modal-item">
+              <a routerLink="/" routerLinkActive="active">
+                {{ 'Home' | translate }}
+              </a>
             </div>
-
-            <div class="modal-line">
-              <i class="fa fa-coffee"></i><a href="#">About</a>
+            <div class="modal-item">
+              <a href="#">
+                {{ 'Library' | translate }}
+              </a>
             </div>
-
-            <div class="modal-line">
-              <i class="fa fa-book"></i> <a href="#">Catalog</a>
+            <div class="modal-item">
+              <a href="#">{{ 'Selections' | translate }}</a>
             </div>
-
-            <div class="modal-line">
-              <i class="fa fa-user"></i><a href="#">UserName</a>
+            <div class="modal-item">
+              <a href="#">{{ 'Log In' | translate }}</a>
+            </div>
+            <div class="modal-item">
+              <a href="#">{{ 'Create Account' | translate }}</a>
             </div>
           </div>
 
-          <div class="mobile-modal-footer">
-            <a target="_blank" href="#"><i class="fa fa-telegram fa-lg"></i></a>
-            <a target="_blank" href="#"><i class="fa fa-telegram fa-lg"></i></a>
-            <a target="_blank" href="#"><i class="fa fa-telegram fa-lg"></i></a>
-            <a target="_blank" href="#"><i class="fa fa-telegram fa-lg"></i></a>
+          <div class="social mt-5">
+            <h3>Stay in touch</h3>
+            <ul class="list-unstyled">
+              <li class="in"><a href="#"><span class="icon-instagram"><i class="fa fa-instagram" aria-hidden="true"></i>
+                  </span></a></li>
+              <li class="fb"><a href="#"><span class="icon-facebook"><i class="fa fa-facebook" aria-hidden="true"></i>
+                  </span></a></li>
+              <li class="tw"><a href="#"><span class="icon-twitter"><i class="fa fa-twitter" aria-hidden="true"></i>
+                  </span></a></li>
+              <li class="gt"><a href="#"><span class="icon-github"><i class="fa fa-github" aria-hidden="true"></i>
+                  </span></a></li>
+            </ul>
+            <div class="mt-2">
+              <a style="cursor: pointer;" (click)="switchLanguage('en')"><img class="lang-img" src="/assets/icons/united-kingdom.png" alt="en"></a>
+              <a style="cursor: pointer;" (click)="switchLanguage('ua')"><img class="lang-img" src="/assets/icons/ukraine.png" alt="ua"></a>
+            </div>
           </div>
         </div>
       </div>
