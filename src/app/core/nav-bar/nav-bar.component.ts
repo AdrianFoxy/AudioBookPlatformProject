@@ -18,4 +18,8 @@ export class NavBarComponent implements OnInit {
     this.darkmodeService.setCurrentTheme();
   }
 
+  switchLanguage(language: string) {
+    this.translate.use(language);
+  }
+
 }

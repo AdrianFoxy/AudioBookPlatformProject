@@ -28,7 +28,7 @@
 }
 
 .footer .nav-links li a:hover {
-  color: #4200ff;
+  color: var(--base-orange-color);
 }
 
 .footer .social h3 {
@@ -75,10 +75,4 @@ a {
 a,
 a:hover {
   text-decoration: none !important;
-}
-
-.lang-img{
-  height: 30px;
-  width: 30px;
-  margin-left: 5px;
 }
