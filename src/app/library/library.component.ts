@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AudioBook } from '../shared/models/audiobook';
 import { LibraryService } from './library.service';
+import { Genre } from '../shared/models/genre';
 
 @Component({
   selector: 'app-library',
@@ -10,6 +11,11 @@ import { LibraryService } from './library.service';
 export class LibraryComponent implements OnInit {
 
   audioBooks: AudioBook[] = [];
+  sortOptions = [
+    {name: 'За алфавітом', value: 'name'},
+    {name: 'Рейтинг: від нізького до виского', value: 'rateAsc'},
+    {name: 'Рейтинг: від високого до нізького', value: 'rateDesc'},
+  ];
 
   constructor(private libraryService: LibraryService){
   }

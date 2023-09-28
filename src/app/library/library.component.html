@@ -8,8 +8,13 @@
       </div>
     </section>
     <section class="col-3">
-      <span>Фільтри</span>
-      <span class="float-end">Очистити <i class="fa fa-times" aria-hidden="true"></i></span>
+      <p>
+        <span>Фільтри</span>
+        <span class="float-end">
+          Очистити
+          <i class="fa fa-times" aria-hidden="true"></i>
+        </span>
+      </p>
       <div class="filters mt-2">
         <mat-form-field class="full-width">
           <mat-label>Select</mat-label>
@@ -24,11 +29,19 @@
           <input value="8" matSliderEndThumb>
         </mat-slider>
 
-        <p>Тривалість (хв)</p>
-        <mat-slider min="0" max="6000" step="30" showTickMarks discrete [displayWith]="formatLabel">
-          <input value="2000" matSliderStartThumb>
-          <input value="4000" matSliderEndThumb>
-        </mat-slider>
+        <p>Тривалість (години)</p>
+        <mat-chip-listbox aria-label="Fish selection" multiple>
+          <mat-chip-option>0-10</mat-chip-option>
+          <mat-chip-option>10-20</mat-chip-option>
+          <mat-chip-option color="accent" selected>20-30</mat-chip-option>
+          <mat-chip-option color="warn">30-40</mat-chip-option>
+          <mat-chip-option color="warn">40-50</mat-chip-option>
+          <mat-chip-option color="warn">60-70</mat-chip-option>
+          <mat-chip-option color="warn">70-80</mat-chip-option>
+          <mat-chip-option color="warn">80<</mat-chip-option>
+        </mat-chip-listbox>
+
+
         <p>Винятки</p>
         <mat-form-field class="full-width">
           <mat-label>Select</mat-label>

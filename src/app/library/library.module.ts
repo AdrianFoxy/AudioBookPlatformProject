@@ -11,6 +11,8 @@ import {MatSelectModule} from '@angular/material/select';
 
 import {MatSliderModule} from '@angular/material/slider';
 
+import {MatChipsModule} from '@angular/material/chips';
+
 
 @NgModule({
   declarations: [
@@ -24,6 +26,7 @@ import {MatSliderModule} from '@angular/material/slider';
     MatFormFieldModule,
     MatSelectModule,
     MatSliderModule,
+    MatChipsModule,
     SharedModule
   ],
   exports:[
