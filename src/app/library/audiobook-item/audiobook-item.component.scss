@@ -1,30 +1,28 @@
 .book-card {
   display: flex;
   border: none;
-  max-width: 300px;
+  max-width: 160px;
 
   .book-card__cover {
     position: relative;
-    width: 200px;
-    height: 300px;
-    margin: 0 auto 8px auto;
+    width: 160px;
     perspective: 1000px;
   }
 
   .book-card__book {
     transform-style: preserve-3d;
     transition: all 250ms ease;
-    height: 300px;
+    height: 240px;
   }
 
   .book-card__book-front {
     position: absolute;
-    height: 300px;
+    height: 240px;
   }
 
   .book-card__book-back {
-    height: 300px;
-    width: 200px;
+    height: 240px;
+    width: 160px;
     position: absolute;
     top: 0;
     transform: translateZ(-40px);
@@ -45,10 +43,11 @@
 
   .book-card__img {
     background-color: #e1e1e1;
-    width: 200px;
-    height: 300px;
+    width: 160px;
+    height: 240px;
     border: 2px solid var(--base-light-border-color);
     border-left: 3px solid var(--base-light-border-color);
+    cursor: pointer;
   }
 
   @media(max-width:992px) {
@@ -76,6 +75,19 @@
       height: 230px;
     }
 
+  }
+
+  .card-text{
+    font-size: 12px;
+    margin: 0;
+    margin-top: 10px;
+  }
+  .card-title{
+    font-size: 14px;
+  }
+
+  .card-body{
+    padding: 0px;
   }
 
   .card-title:hover {
