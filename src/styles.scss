@@ -19,26 +19,28 @@
   --base-dark-border-color: #373737;
   --base-dark-main-color: #574ccf;
   --base-dark-secondary-color: #b2c0ff;
-  --base-dark-seek-color:#546ace;
+  --base-dark-seek-color: #546ace;
 
   --dark-mode-bg: #1e1e1e;
 }
 
 body {
-  font-family:Georgia, 'Times New Roman', Times, serif;
+  font-family: Georgia, 'Times New Roman', Times, serif;
   background-color: #fff;
+
 }
 
-a{
-  text-decoration: none;
-  color: black;
-}
-a:hover{
+a {
   text-decoration: none;
   color: black;
 }
 
-.button{
+a:hover {
+  text-decoration: none;
+  color: black;
+}
+
+.button {
   width: auto;
   height: 60px;
   border-radius: 10px;
@@ -61,17 +63,17 @@ a:hover{
   background: var(--base-light-bg-color);
 }
 
-hr{
+hr {
   color: grey;
 }
+
 .slick-prev:before,
 .slick-next:before {
   color: grey;
 }
 
-.lang-img{
+.lang-img {
   height: 30px;
   width: 30px;
   margin-left: 5px;
 }
-

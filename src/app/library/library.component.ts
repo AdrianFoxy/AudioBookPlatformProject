@@ -128,7 +128,9 @@ export class LibraryComponent implements OnInit {
   }
 
   onSortSelected(event: any){
-    this.sortingAndPaginationParams.sort = event.target.value;
+    console.log('asdasd');
+
+    this.sortingAndPaginationParams.sort = event.value;
     console.log(this.sortingAndPaginationParams.sort);
 
     this.getAudioBooksForLibrary();

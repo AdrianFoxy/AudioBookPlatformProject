@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container alternativ-angular-mats">
   <div class="row">
     <section class="col-9">
       <div class="d-flex justify-content-between align-items center pb-2 mt-2">
@@ -9,7 +9,7 @@
         ></app-paging-header>
         <div class="d-flex mt-2">
           <input (keyup.enter)="onSearch()" type="text" placeholder="Search" class="form-control me-2" #search>
-          <button (click)="onSearch()" class="btn btn-outline primary mx-2">Search</button>
+          <button (click)="onSearch()" class="search-btn btn btn-outline primary mx-2">Search</button>
         </div>
       </div>
 
@@ -28,7 +28,7 @@
       </div>
     </section>
     <section class="col-3 mt-4">
-      <p>
+      <p class="filtering-header">
         <span>Фільтри</span>
         <a class="reset-btn float-end" (click)="onReset()">
           Очистити
@@ -37,12 +37,12 @@
       </p>
       <div class="filters mt-2">
 
-        <select id="sortingSelect" class="form-select mb-4 full-width" (change)="onSortSelected($event)">
-          <option *ngFor="let sort of sortOptions"
-              [value]="sort.value">
-              {{sort.name}}
-          </option>
-        </select>
+        <mat-form-field class="full-width">
+          <mat-label>Сортування</mat-label>
+          <mat-select (selectionChange)="onSortSelected($event)" [value]="sortOptions[0].value">
+            <mat-option *ngFor="let sort of sortOptions" [value]="sort.value">{{ sort.name }}</mat-option>
+          </mat-select>
+        </mat-form-field>
 
         <mat-form-field class="full-width">
           <mat-label>Жанри</mat-label>
@@ -156,13 +156,13 @@
           </mat-select>
         </mat-form-field>
 
-        <p>Рейтинг</p>
+        <p class="filtering-label">Рейтинг</p>
         <mat-slider min="0" max="10" step="1" showTickMarks discrete [displayWith]="formatLabel">
           <input value="2" matSliderStartThumb>
           <input value="8" matSliderEndThumb>
         </mat-slider>
 
-        <p>Тривалість (години)</p>
+        <p class="filtering-label">Тривалість (години)</p>
         <mat-chip-listbox aria-label="Fish selection" multiple>
           <mat-chip-option>0-10</mat-chip-option>
           <mat-chip-option>10-20</mat-chip-option>
@@ -175,7 +175,7 @@
         </mat-chip-listbox>
 
 
-        <p>Винятки</p>
+        <p class="filtering-label mt-3">Винятки</p>
         <mat-form-field class="full-width">
           <mat-label>Select</mat-label>
           <mat-select>
@@ -183,8 +183,6 @@
             <mat-option value="two">Second option</mat-option>
           </mat-select>
         </mat-form-field>
-
-
       </div>
 
     </section>
