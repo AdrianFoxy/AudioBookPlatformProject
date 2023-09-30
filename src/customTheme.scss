@@ -1,8 +1,53 @@
 .dark-theme {
   background: var(--dark-mode-bg);
-  --mat-option-selected-state-label-text-color: #2b20ca;
 
+  // Selectors from angular materials
+  // Line under text
+  --mdc-filled-text-field-focus-active-indicator-color: #837e7d;
+  // label color text
+  --mdc-filled-text-field-focus-label-text-color: #626262;
+  // background color
+  --mdc-filled-text-field-container-color: #1d1d1d;
+  --mdc-filled-text-field-disabled-container-color: #464646;
+  --mdc-filled-text-field-label-text-color: #6c6c6c;
+  // Selected text color
+  --mat-select-enabled-trigger-text-color: #837e7d;
+
+  // options background
+  --mat-select-panel-background-color: #171717;
+
+  // color of selected option text
+  --mat-option-selected-state-label-text-color: white;
+  --mat-option-label-text-color: white;
+  --mat-option-hover-state-layer-color: rgba(255, 255, 255, 0.08);
+  --mat-option-focus-state-layer-color: rgba(255, 255, 255, 0.08);
+  --mat-option-selected-state-layer-color: rgba(255, 255, 255, 0.08);
+  --mat-select-enabled-arrow-color: rgba(255, 255, 255, 0.54);
+  --mat-select-disabled-arrow-color: rgba(255, 255, 255, 0.38);
+  --mat-select-focused-arrow-color: white;
+  --mat-select-invalid-arrow-color: rgba(244, 67, 54, 0.87)
 }
+
+// color of checkbox backgrounds
+.dark-theme .mat-primary .mat-pseudo-checkbox-checked.mat-pseudo-checkbox-full,
+.dark-theme .mat-primary .mat-pseudo-checkbox-indeterminate.mat-pseudo-checkbox-full {
+  background: #574ccf;
+}
+
+// effect pri navedenii
+.dark-theme .mat-mdc-form-field-focus-overlay {
+  background-color: rgba(105, 102, 102, 0.87)
+}
+
+.dark-theme .mat-primary .mat-pseudo-checkbox-checked.mat-pseudo-checkbox-minimal::after,
+.dark-theme .mat-primary .mat-pseudo-checkbox-indeterminate.mat-pseudo-checkbox-minimal::after {
+  color: white
+}
+
+.dark-theme .mat-mdc-select-arrow svg {
+  fill: white !important;
+}
+
 
 .dark-theme .hover-underline-animation::after {
   background-color: var(--base-dark-main-color) !important;
