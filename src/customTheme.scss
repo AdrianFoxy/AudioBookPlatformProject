@@ -1,5 +1,7 @@
 .dark-theme {
   background: var(--dark-mode-bg);
+  --mat-option-selected-state-label-text-color: #2b20ca;
+
 }
 
 .dark-theme .hover-underline-animation::after {
@@ -159,4 +161,19 @@
 
 .dark-theme .modal-item a::after {
   background-color: var(--base-dark-main-color) !important;
+}
+
+
+// Library
+
+.dark-theme .filtering-header,
+.dark-theme .filtering-label,
+.dark-theme .pagination-header,
+.dark-theme .search-btn {
+  color: var(--base-dark-text-color) !important;
+}
+
+.dark-theme .sorting{
+  background-color: #3c3c3c;
+  color: var(--base-dark-text-color)
 }
