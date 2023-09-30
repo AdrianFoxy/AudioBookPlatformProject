@@ -118,6 +118,12 @@ export class LibraryComponent implements OnInit {
   onReset(){
     if(this.searchTerm) this.searchTerm.nativeElement.value = '';
     this.filretingParams = new filtreingParams();
+    this.selectedIdGenres = new FormControl();
+    this.selectedIdAuthors = new FormControl();
+    this.selectedIdNarrators = new FormControl();
+    this.selectedIdBookSeries = new FormControl();
+    this.selectedIdBookLanguages = new FormControl();
+
     this.getAudioBooksForLibrary();
   }
 
