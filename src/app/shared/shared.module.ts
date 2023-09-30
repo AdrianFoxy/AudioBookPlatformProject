@@ -10,11 +10,17 @@ import { RouterModule } from '@angular/router';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { TranslateModule } from '@ngx-translate/core';
 
+import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { PagingHeaderComponent } from './paging-header/paging-header.component';
+import { PagerComponent } from './pager/pager.component';
+
 
 @NgModule({
   declarations: [
     AudioPlayerComponent,
-    RecomentdationsComponent
+    RecomentdationsComponent,
+    PagingHeaderComponent,
+    PagerComponent
   ],
   imports: [
     CommonModule,
@@ -23,11 +29,15 @@ import { TranslateModule } from '@ngx-translate/core';
     RouterModule,
     BsDropdownModule.forRoot(),
     SlickCarouselModule,
+    PaginationModule.forRoot(),
     TranslateModule.forChild()
   ],
   exports: [
     AudioPlayerComponent,
-    RecomentdationsComponent
+    RecomentdationsComponent,
+    PagingHeaderComponent,
+    PaginationModule,
+    PagerComponent
   ]
 })
 export class SharedModule { }

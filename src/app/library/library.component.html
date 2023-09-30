@@ -1,23 +1,43 @@
 <div class="container">
   <div class="row">
     <section class="col-9">
-      <div class="row row-cols-xl-5  row-cols-lg-4 row-cols-md-3 mt-5">
+      <div class="d-flex justify-content-between align-items center pb-2 mt-2">
+        <app-paging-header
+          [totalCount]="totalCount"
+          [pageNumber]="sortingAndPaginationParams.pageNumber"
+          [pageSize]="sortingAndPaginationParams.pageSize"
+        ></app-paging-header>
+        <div class="d-flex mt-2">
+          <input (keyup.enter)="onSearch()" type="text" placeholder="Search" class="form-control me-2" #search>
+          <button (click)="onSearch()" class="btn btn-outline primary mx-2">Search</button>
+        </div>
+      </div>
+
+      <div class="row row-cols-xl-5  row-cols-lg-4 row-cols-md-3 mt-2">
         <div class="col" *ngFor="let audiobook of audioBooks">
           <app-audiobook-item [audiobook]="audiobook"></app-audiobook-item>
         </div>
       </div>
+
+      <div class="d-flex justify-content-center" *ngIf="totalCount > 0">
+        <app-pager
+          [totalCount]="totalCount"
+          [pageSize]="sortingAndPaginationParams.pageSize"
+          (pageChanged)="onPageChanged($event)"
+        ></app-pager>
+      </div>
     </section>
-    <section class="col-3">
+    <section class="col-3 mt-4">
       <p>
         <span>Фільтри</span>
-        <span class="float-end">
+        <a class="reset-btn float-end" (click)="onReset()">
           Очистити
           <i class="fa fa-times" aria-hidden="true"></i>
-        </span>
+        </a>
       </p>
       <div class="filters mt-2">
 
-        <select class="form-select mb-4 full-width" (change)="onSortSelected($event)">
+        <select id="sortingSelect" class="form-select mb-4 full-width" (change)="onSortSelected($event)">
           <option *ngFor="let sort of sortOptions"
               [value]="sort.value">
               {{sort.name}}
@@ -31,7 +51,7 @@
             <mat-select-trigger>
               <mat-chip-listbox>
                 <mat-chip *ngFor="let genre of getByIds(selectedIdGenres.value, genres)" [removable]="true"
-                  (removed)="onFilterRemoved(genre.id, selectedIdGenres, 'genreIds')">
+                  (removed)="onFilterRemoved(genre.id, selectedIdGenres)">
                   {{ genre.name }}
                   <mat-icon matChipRemove>cancel</mat-icon>
                 </mat-chip>
@@ -53,7 +73,7 @@
             <mat-select-trigger>
               <mat-chip-listbox>
                 <mat-chip *ngFor="let author of getByIds(selectedIdAuthors.value, authors)" [removable]="true"
-                  (removed)="onFilterRemoved(author.id, selectedIdAuthors, 'authorIds')">
+                  (removed)="onFilterRemoved(author.id, selectedIdAuthors)">
                   {{ author.name }}
                   <mat-icon matChipRemove>cancel</mat-icon>
                 </mat-chip>
@@ -75,7 +95,7 @@
             <mat-select-trigger>
               <mat-chip-listbox>
                 <mat-chip *ngFor="let narrator of getByIds(selectedIdNarrators.value, narrators)" [removable]="true"
-                  (removed)="onFilterRemoved(narrator.id, selectedIdNarrators, 'narratorIds')">
+                  (removed)="onFilterRemoved(narrator.id, selectedIdNarrators)">
                   {{ narrator.name }}
                   <mat-icon matChipRemove>cancel</mat-icon>
                 </mat-chip>
@@ -97,7 +117,7 @@
             <mat-select-trigger>
               <mat-chip-listbox>
                 <mat-chip *ngFor="let bookSerie of getByIds(selectedIdBookSeries.value, bookSeries)" [removable]="true"
-                  (removed)="onFilterRemoved(bookSerie.id, selectedIdBookSeries, 'bookSeriresIds')">
+                  (removed)="onFilterRemoved(bookSerie.id, selectedIdBookSeries)">
                   {{ bookSerie.name }}
                   <mat-icon matChipRemove>cancel</mat-icon>
                 </mat-chip>
@@ -120,7 +140,7 @@
               <mat-chip-listbox>
                 <mat-chip *ngFor="let bookLanguage of getByIds(selectedIdBookLanguages.value, bookLanguages)"
                   [removable]="true"
-                  (removed)="onFilterRemoved(bookLanguage.id, selectedIdBookLanguages, 'bookLanguageIds')">
+                  (removed)="onFilterRemoved(bookLanguage.id, selectedIdBookLanguages)">
                   {{ bookLanguage.name }}
                   <mat-icon matChipRemove>cancel</mat-icon>
                 </mat-chip>

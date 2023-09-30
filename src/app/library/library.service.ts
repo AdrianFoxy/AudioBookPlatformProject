@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Pagination } from '../shared/models/pagination';
 import { AudioBook } from '../shared/models/audiobook';
 import { Genre } from '../shared/models/genre';
-import { filretingParams } from '../shared/models/audioBooksParams/filretingParams';
+import { filtreingParams } from '../shared/models/audioBooksParams/filtreingParams';
 import { Author } from '../shared/models/author';
 import { Narrator } from '../shared/models/narrator';
 import { BookSeries } from '../shared/models/bookSeries';
@@ -20,7 +20,7 @@ export class LibraryService {
 
   constructor(private http: HttpClient) { }
 
-  getAudioBooksForLibrary(filretingParams: filretingParams,
+  getAudioBooksForLibrary(filretingParams: filtreingParams,
     sortingAndPaginationParams: sortingAndPaginationParams)
   {
     let params = new HttpParams();
@@ -55,7 +55,11 @@ export class LibraryService {
       }
     }
 
-    if(sortingAndPaginationParams.sort) params = params.append('Sort', sortingAndPaginationParams.sort);
+    params = params.append('Sort', sortingAndPaginationParams.sort);
+    params = params.append('PageIndex', sortingAndPaginationParams.pageNumber);
+    params = params.append('PageSize', sortingAndPaginationParams.pageSize);
+    if(sortingAndPaginationParams.search) params = params.append('search', sortingAndPaginationParams.search);
+
 
     return this.http.get<Pagination<AudioBook[]>>(this.baseUrl + 'AudioBook', { params });
   }

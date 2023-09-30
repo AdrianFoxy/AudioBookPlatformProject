@@ -1,4 +1,4 @@
-export class filretingParams {
+export class filtreingParams {
   genreIds: number[] = [];
   authorIds: number[] = [];
   narratorIds: number[] = [];

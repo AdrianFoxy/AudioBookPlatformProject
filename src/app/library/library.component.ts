@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AudioBook } from '../shared/models/audiobook';
 import { LibraryService } from './library.service';
 import { Genre } from '../shared/models/genre';
 import { FormControl } from '@angular/forms';
-import { filretingParams } from '../shared/models/audioBooksParams/filretingParams';
+import { filtreingParams } from '../shared/models/audioBooksParams/filtreingParams';
 import { Author } from '../shared/models/author';
 import { Narrator } from '../shared/models/narrator';
 import { BookSeries } from '../shared/models/bookSeries';
@@ -17,9 +17,10 @@ import { sortingAndPaginationParams } from '../shared/models/audioBooksParams/so
 })
 export class LibraryComponent implements OnInit {
 
+  @ViewChild('search') searchTerm?: ElementRef;
   audioBooks: AudioBook[] = [];
 
-  filretingParams = new filretingParams();
+  filretingParams = new filtreingParams();
   sortingAndPaginationParams = new sortingAndPaginationParams();
 
   genres: Genre[] = [];
@@ -33,6 +34,8 @@ export class LibraryComponent implements OnInit {
     { name: 'Рейтинг: від низького до високого', value: 'rateAsc' },
     { name: 'Рейтинг: від високого до низького', value: 'rateDesc' },
   ];
+
+  totalCount = 0;
 
   // Search string for filtering params
   searchCtrl = new FormControl();
@@ -61,6 +64,11 @@ export class LibraryComponent implements OnInit {
     this.libraryService.getAudioBooksForLibrary(this.filretingParams, this.sortingAndPaginationParams).subscribe({
       next: response => {
         this.audioBooks = response.data;
+        this.sortingAndPaginationParams.pageNumber = response.pageIndex;
+        console.log(response.pageIndex);
+        this.sortingAndPaginationParams.pageSize = response.pageSize;
+        console.log(response.pageSize);
+        this.totalCount = response.count;
       },
       error: error => console.log(error)
     })
@@ -101,6 +109,18 @@ export class LibraryComponent implements OnInit {
     })
   }
 
+  onSearch(){
+    this.sortingAndPaginationParams.search = this.searchTerm?.nativeElement.value;
+    this.sortingAndPaginationParams.pageNumber = 1;
+    this.getAudioBooksForLibrary();
+  }
+
+  onReset(){
+    if(this.searchTerm) this.searchTerm.nativeElement.value = '';
+    this.filretingParams = new filtreingParams();
+    this.getAudioBooksForLibrary();
+  }
+
   onSortSelected(event: any){
     this.sortingAndPaginationParams.sort = event.target.value;
     console.log(this.sortingAndPaginationParams.sort);
@@ -108,14 +128,22 @@ export class LibraryComponent implements OnInit {
     this.getAudioBooksForLibrary();
   }
 
+  onPageChanged(event: any){
+    if(this.sortingAndPaginationParams.pageNumber !== event) {
+      this.sortingAndPaginationParams.pageNumber = event;
+      this.getAudioBooksForLibrary();
+    }
+  }
+
   // Get selected ids of entities for filtering
-  onFilterSelected<T extends number | string>(selectedIds: T[], filretingParamsProperty: keyof filretingParams) {
+  onFilterSelected<T extends number | string>(selectedIds: T[], filretingParamsProperty: keyof filtreingParams) {
     this.filretingParams[filretingParamsProperty] = selectedIds as number[];
+    this.sortingAndPaginationParams.pageNumber = 1;
     this.getAudioBooksForLibrary();
   }
 
   // Remove props from filtering
-  onFilterRemoved(item: string, control: FormControl, libParamsProperty: keyof filretingParams) {
+  onFilterRemoved(item: string, control: FormControl) {
     const itemsInFilter = control.value as string[];
     this.removeFirst(itemsInFilter, item);
     control.setValue(itemsInFilter);
