@@ -3,8 +3,8 @@
 /* Importing Bootstrap SCSS file. */
 @import "./node_modules/bootstrap/scss/bootstrap";
 
-/* Importing Datepicker SCSS file. */
-@import "node_modules/ngx-bootstrap/datepicker/bs-datepicker";
+// /* Importing Datepicker SCSS file. */
+// @import "node_modules/ngx-bootstrap/datepicker/bs-datepicker";
 
 @import "customTheme";
 
@@ -22,12 +22,31 @@
   --base-dark-seek-color: #546ace;
 
   --dark-mode-bg: #1e1e1e;
+
+
+}
+
+html {
+  font-family: 'Exo 2', sans-serif !important;
+  --mdc-filled-text-field-label-text-font: 'Exo 2', sans-serif;
+  --mdc-outlined-text-field-label-text-font: 'Exo 2', sans-serif;
+  --mat-form-field-container-text-font: 'Exo 2', sans-serif;
+  --mat-form-field-subscript-text-font: 'Exo 2', sans-serif;
+  --bs-body-font-family: 'Exo 2', sans-serif;
+  --mat-select-trigger-text-font: 'Exo 2', sans-serif;
+
+
+  .mat-mdc-standard-chip {
+    --mdc-chip-label-text-font: 'Exo 2', sans-serif;
+  }
+
+  .mat-mdc-option .mdc-list-item__primary-text {
+    font-family: 'Exo 2', sans-serif !important;
+  }
 }
 
 body {
-  font-family: Georgia, 'Times New Roman', Times, serif;
   background-color: #fff;
-
 }
 
 a {
