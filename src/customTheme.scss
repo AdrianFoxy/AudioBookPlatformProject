@@ -3,7 +3,7 @@
 
   // Selectors from angular materials
   // Line under text
-  --mdc-filled-text-field-focus-active-indicator-color: #837e7d;
+  --mdc-filled-text-field-focus-active-indicator-color: #574ccf;
   // label color text
   --mdc-filled-text-field-focus-label-text-color: #626262;
   // background color
@@ -26,6 +26,23 @@
   --mat-select-disabled-arrow-color: rgba(255, 255, 255, 0.38);
   --mat-select-focused-arrow-color: white;
   --mat-select-invalid-arrow-color: rgba(244, 67, 54, 0.87)
+
+}
+
+.dark-theme .mat-mdc-standard-chip:not(.mdc-evolution-chip--disabled) .mdc-evolution-chip__icon--trailing {
+  color: white !important;
+}
+
+.dark-theme .mat-mdc-standard-chip:not(.mdc-evolution-chip--disabled) {
+  background-color:  #1d1d1d !important;
+}
+
+.dark-theme .mat-mdc-standard-chip:not(.mdc-evolution-chip--disabled) .mdc-evolution-chip__text-label {
+ color: var(--mat-option-label-text-color) !important;
+}
+
+.dark-theme .mat-mdc-standard-chip:not(.mdc-evolution-chip--disabled) .mdc-evolution-chip__checkmark {
+  color: white !important;
 }
 
 // color of checkbox backgrounds
@@ -67,7 +84,7 @@
 }
 
 .dark-theme .card {
-  background: #1e1e1e;
+  background: var(--dark-mode-bg);
   color: var(--base-dark-text-color);
 }
 

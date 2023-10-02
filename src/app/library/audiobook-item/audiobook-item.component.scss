@@ -78,12 +78,18 @@
   }
 
   .card-text{
-    font-size: 12px;
+
     margin: 0;
     margin-top: 10px;
+
+    font-size: .75rem;
+    font-weight: 400;
+    line-height: 1.66;
   }
   .card-title{
-    font-size: 14px;
+    font-size: .85rem;
+    font-weight: 400;
+    line-height: 1.2;
   }
 
   .card-body{

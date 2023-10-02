@@ -9,6 +9,7 @@ import { Narrator } from '../shared/models/narrator';
 import { BookSeries } from '../shared/models/bookSeries';
 import { BookLanguage } from '../shared/models/bookLanguage';
 import { sortingAndPaginationParams } from '../shared/models/audioBooksParams/sortingAndPaginationParams';
+import { LanguageService } from '../core/services/language-service/language.service';
 
 @Component({
   selector: 'app-library',
@@ -30,9 +31,9 @@ export class LibraryComponent implements OnInit {
   bookLanguages: BookLanguage[] = [];
 
   sortOptions = [
-    { name: 'За алфавітом', value: 'name' },
-    { name: 'Рейтинг: від низького до високого', value: 'rateAsc' },
-    { name: 'Рейтинг: від високого до низького', value: 'rateDesc' },
+    { name: 'За алфавітом', engName: 'Alphabetically', value: 'name' },
+    { name: 'Рейтинг: від низького до високого', engName: 'Rating: from low to high', value: 'rateAsc' },
+    { name: 'Рейтинг: від високого до низького', engName: 'Rating: from high to low', value: 'rateDesc' },
   ];
 
   totalCount = 0;
@@ -46,7 +47,7 @@ export class LibraryComponent implements OnInit {
   selectedIdBookSeries = new FormControl();
   selectedIdBookLanguages = new FormControl();
 
-  constructor(private libraryService: LibraryService) {
+  constructor(private libraryService: LibraryService, public langService: LanguageService) {
   }
 
   ngOnInit(): void {
