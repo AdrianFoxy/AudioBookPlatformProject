@@ -30,9 +30,9 @@ export class LibraryComponent implements OnInit {
   bookLanguages: BookLanguage[] = [];
 
   sortOptions = [
-    { name: 'За алфавітом', value: 'name' },
-    { name: 'Рейтинг: від низького до високого', value: 'rateAsc' },
-    { name: 'Рейтинг: від високого до низького', value: 'rateDesc' },
+    { name: 'За алфавітом', engName: 'Alphabetically', value: 'name' },
+    { name: 'Рейтинг: від низького до високого', engName: 'Rating: from low to high', value: 'rateAsc' },
+    { name: 'Рейтинг: від високого до низького', engName: 'Rating: from high to low', value: 'rateDesc' },
   ];
 
   totalCount = 0;

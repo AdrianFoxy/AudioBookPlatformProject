@@ -37,7 +37,8 @@ import { PagerComponent } from './pager/pager.component';
     RecomentdationsComponent,
     PagingHeaderComponent,
     PaginationModule,
-    PagerComponent
+    PagerComponent,
+    TranslateModule
   ]
 })
 export class SharedModule { }
