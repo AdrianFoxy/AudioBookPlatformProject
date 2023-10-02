@@ -9,6 +9,7 @@ import { Narrator } from '../shared/models/narrator';
 import { BookSeries } from '../shared/models/bookSeries';
 import { BookLanguage } from '../shared/models/bookLanguage';
 import { sortingAndPaginationParams } from '../shared/models/audioBooksParams/sortingAndPaginationParams';
+import { LanguageService } from '../core/services/language-service/language.service';
 
 @Component({
   selector: 'app-library',
@@ -46,7 +47,7 @@ export class LibraryComponent implements OnInit {
   selectedIdBookSeries = new FormControl();
   selectedIdBookLanguages = new FormControl();
 
-  constructor(private libraryService: LibraryService) {
+  constructor(private libraryService: LibraryService, public langService: LanguageService) {
   }
 
   ngOnInit(): void {

@@ -40,7 +40,9 @@
         <mat-form-field class="full-width">
           <mat-label>{{ 'Sorting' | translate }}</mat-label>
           <mat-select (selectionChange)="onSortSelected($event)" [value]="sortOptions[0].value">
-            <mat-option *ngFor="let sort of sortOptions" [value]="sort.value">{{ sort.name }}</mat-option>
+            <mat-option *ngFor="let sort of sortOptions" [value]="sort.value">
+              {{ langService.whatCurrentLang() === 'en' ? sort.engName : sort.name }}
+            </mat-option>
           </mat-select>
         </mat-form-field>
 
