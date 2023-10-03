@@ -154,14 +154,14 @@ hr {
 
 .my-pagination .page-item.active .page-link{
   background-color: var(--base-orange-color);
-  color: black;
-  border-color: black;
+  color: var(--base-light-text-color);
+  border-color: var(--base-light-border-color);
 }
 
 .my-pagination .page-link {
-  background-color:#ffffff;
-  border-color: black;
-  color: black;
+  background-color:var(--base-light-bg-color);
+  border-color: var(--base-light-border-color);
+  color: var(--base-light-text-color);
 }
 
 .my-pagination .page-link:hover{
