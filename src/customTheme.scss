@@ -1,6 +1,7 @@
 .dark-theme {
   background: var(--dark-mode-bg);
 
+  --dark-mode-secondary-elements-bg: #3c3c3c;
   // Selectors from angular materials
   // Line under text
   --mdc-filled-text-field-focus-active-indicator-color: #574ccf;
@@ -227,7 +228,6 @@
 
 
 // Library
-
 .dark-theme .filtering-header,
 .dark-theme .filtering-label,
 .dark-theme .pagination-header,
@@ -236,6 +236,25 @@
 }
 
 .dark-theme .sorting{
-  background-color: #3c3c3c;
+  background-color: var(--dark-mode-secondary-elements-bg);
   color: var(--base-dark-text-color)
 }
+
+// Pager
+.dark-theme .my-pagination .page-item.active .page-link{
+  background-color: var(--base-dark-seek-color);
+  color: var(--base-dark-text-color);
+  border-color: var(--base-light-border-color);
+}
+
+.dark-theme .my-pagination .page-link {
+  background-color:var(--dark-mode-secondary-elements-bg);
+  border-color: var(--base-dark-border-color);
+  color: var(--base-dark-text-color);
+}
+
+.dark-theme .my-pagination .page-link:hover{
+  background-color: var(--base-dark-seek-color);
+  border: 2px solid var(--base-light-border-color);
+}
+
