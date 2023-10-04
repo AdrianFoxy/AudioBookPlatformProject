@@ -1,6 +1,6 @@
 export class sortingAndPaginationParams {
   sort = 'name';
   pageNumber = 1;
-  pageSize = 6;
+  pageSize = 15;
   search = '';
 }
