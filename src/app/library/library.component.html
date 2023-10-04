@@ -2,14 +2,13 @@
   <div class="row">
     <section class="col-9">
       <div class="d-flex justify-content-between align-items center pb-2 mt-2">
-        <app-paging-header
-          [totalCount]="totalCount"
-          [pageNumber]="sortingAndPaginationParams.pageNumber"
-          [pageSize]="sortingAndPaginationParams.pageSize"
-        ></app-paging-header>
+        <app-paging-header [totalCount]="totalCount" [pageNumber]="sortingAndPaginationParams.pageNumber"
+          [pageSize]="sortingAndPaginationParams.pageSize"></app-paging-header>
         <div class="d-flex mt-2">
-          <input (keyup.enter)="onSearch()" type="text" placeholder="{{ 'Search' | translate }}" class="form-control me-2" #search>
-          <button (click)="onSearch()" class="search-btn btn btn-outline primary mx-2">{{ 'Search' | translate }}</button>
+          <input (keyup.enter)="onSearch()" type="text" placeholder="{{ 'Search' | translate }}"
+            class="form-control me-2" #search>
+          <button (click)="onSearch()" class="search-btn btn btn-outline primary mx-2">{{ 'Search' | translate
+            }}</button>
         </div>
       </div>
 
@@ -20,11 +19,8 @@
       </div>
 
       <div class="d-flex justify-content-center mt-3" *ngIf="totalCount > 0">
-        <app-pager
-          [totalCount]="totalCount"
-          [pageSize]="sortingAndPaginationParams.pageSize"
-          (pageChanged)="onPageChanged($event)"
-        ></app-pager>
+        <app-pager [totalCount]="totalCount" [pageSize]="sortingAndPaginationParams.pageSize"
+          (pageChanged)="onPageChanged($event)"></app-pager>
       </div>
     </section>
     <section class="col-3 mt-4">
@@ -54,7 +50,7 @@
               <mat-chip-listbox>
                 <mat-chip *ngFor="let genre of getByIds(selectedIdGenres.value, genres)" [removable]="true"
                   (removed)="onFilterRemoved(genre.id, selectedIdGenres)">
-                  {{ genre.name }}
+                  {{ langService.whatCurrentLang() === 'en' ? genre.enName : genre.name }}
                   <mat-icon matChipRemove>close</mat-icon>
                 </mat-chip>
               </mat-chip-listbox>
@@ -62,8 +58,10 @@
             <mat-option>
               <ngx-mat-select-search [formControl]="searchCtrl" placeholderLabel="Пошук"></ngx-mat-select-search>
             </mat-option>
-            <mat-option *ngFor="let genre of genres | filter: searchCtrl.value: 'name'" [value]="genre.id">
-              {{ genre.name }}
+            <mat-option
+              *ngFor="let genre of genres | filter: searchCtrl.value: (langService.whatCurrentLang() === 'en' ? 'enName' : 'name')"
+              [value]="genre.id">
+              {{ langService.whatCurrentLang() === 'en' ? genre.enName : genre.name }}
             </mat-option>
           </mat-select>
         </mat-form-field>
@@ -76,7 +74,7 @@
               <mat-chip-listbox>
                 <mat-chip *ngFor="let author of getByIds(selectedIdAuthors.value, authors)" [removable]="true"
                   (removed)="onFilterRemoved(author.id, selectedIdAuthors)">
-                  {{ author.name }}
+                  {{ langService.whatCurrentLang() === 'en' ? author.enName : author.name }}
                   <mat-icon matChipRemove>close</mat-icon>
                 </mat-chip>
               </mat-chip-listbox>
@@ -84,8 +82,10 @@
             <mat-option>
               <ngx-mat-select-search [formControl]="searchCtrl" placeholderLabel="Пошук"></ngx-mat-select-search>
             </mat-option>
-            <mat-option *ngFor="let author of authors | filter: searchCtrl.value: 'name'" [value]="author.id">
-              {{author.name}}
+            <mat-option
+              *ngFor="let author of authors | filter: searchCtrl.value: (langService.whatCurrentLang() === 'en' ? 'enName' : 'name')"
+              [value]="author.id">
+              {{ langService.whatCurrentLang() === 'en' ? author.enName : author.name }}
             </mat-option>
           </mat-select>
         </mat-form-field>
@@ -107,7 +107,7 @@
               <ngx-mat-select-search [formControl]="searchCtrl" placeholderLabel="Пошук"></ngx-mat-select-search>
             </mat-option>
             <mat-option *ngFor="let narrator of narrators | filter: searchCtrl.value: 'name'" [value]="narrator.id">
-              {{narrator.name}}
+              {{ narrator.name }}
             </mat-option>
           </mat-select>
         </mat-form-field>
@@ -120,7 +120,7 @@
               <mat-chip-listbox>
                 <mat-chip *ngFor="let bookSerie of getByIds(selectedIdBookSeries.value, bookSeries)" [removable]="true"
                   (removed)="onFilterRemoved(bookSerie.id, selectedIdBookSeries)">
-                  {{ bookSerie.name }}
+                  {{ langService.whatCurrentLang() === 'en' ? bookSerie.enName : bookSerie.name }}
                   <mat-icon matChipRemove>close</mat-icon>
                 </mat-chip>
               </mat-chip-listbox>
@@ -128,8 +128,10 @@
             <mat-option>
               <ngx-mat-select-search [formControl]="searchCtrl" placeholderLabel="Пошук"></ngx-mat-select-search>
             </mat-option>
-            <mat-option *ngFor="let bookSerie of bookSeries | filter: searchCtrl.value: 'name'" [value]="bookSerie.id">
-              {{bookSerie.name}}
+            <mat-option
+              *ngFor="let bookSerie of bookSeries | filter: searchCtrl.value: (langService.whatCurrentLang() === 'en' ? 'enName' : 'name')"
+              [value]="bookSerie.id">
+              {{ langService.whatCurrentLang() === 'en' ? bookSerie.enName : bookSerie.name }}
             </mat-option>
           </mat-select>
         </mat-form-field>
@@ -141,9 +143,8 @@
             <mat-select-trigger>
               <mat-chip-listbox>
                 <mat-chip *ngFor="let bookLanguage of getByIds(selectedIdBookLanguages.value, bookLanguages)"
-                  [removable]="true"
-                  (removed)="onFilterRemoved(bookLanguage.id, selectedIdBookLanguages)">
-                  {{ bookLanguage.name }}
+                  [removable]="true" (removed)="onFilterRemoved(bookLanguage.id, selectedIdBookLanguages)">
+                  {{ langService.whatCurrentLang() === 'en' ? bookLanguage.enName : bookLanguage.name }}
                   <mat-icon matChipRemove>close</mat-icon>
                 </mat-chip>
               </mat-chip-listbox>
@@ -151,9 +152,10 @@
             <mat-option>
               <ngx-mat-select-search [formControl]="searchCtrl" placeholderLabel="Пошук"></ngx-mat-select-search>
             </mat-option>
-            <mat-option *ngFor="let bookLanguage of bookLanguages | filter: searchCtrl.value: 'name'"
+            <mat-option
+              *ngFor="let bookLanguage of bookLanguages | filter: searchCtrl.value: (langService.whatCurrentLang() === 'en' ? 'enName' : 'name')"
               [value]="bookLanguage.id">
-              {{bookLanguage.name}}
+              {{ langService.whatCurrentLang() === 'en' ? bookLanguage.enName : bookLanguage.name }}
             </mat-option>
           </mat-select>
         </mat-form-field>
