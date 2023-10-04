@@ -55,7 +55,40 @@ export class LibraryService {
       }
     }
 
+    if (filretingParams.genreIdsException && filretingParams.genreIdsException.length > 0) {
+      for (let i = 0; i < filretingParams.genreIdsException.length; i++) {
+        params = params.append('ExceptGenreIds', filretingParams.genreIdsException[i].toString());
+      }
+    }
+
+    if (filretingParams.authorIdsException && filretingParams.authorIdsException.length > 0) {
+      for (let i = 0; i < filretingParams.authorIdsException.length; i++) {
+        params = params.append('ExceptAuthorIds', filretingParams.authorIdsException[i].toString());
+      }
+    }
+
+    if (filretingParams.narratorIdsException && filretingParams.narratorIdsException.length > 0) {
+      for (let i = 0; i < filretingParams.narratorIdsException.length; i++) {
+        params = params.append('ExceptNarratorIds', filretingParams.narratorIdsException[i].toString());
+      }
+    }
+
+    if (filretingParams.bookSeriresIdsException && filretingParams.bookSeriresIdsException.length > 0) {
+      for (let i = 0; i < filretingParams.bookSeriresIdsException.length; i++) {
+        params = params.append('ExceptBookSeriesIds', filretingParams.bookSeriresIdsException[i].toString());
+      }
+    }
+
+    if (filretingParams.bookLanguageIdsException && filretingParams.bookLanguageIdsException.length > 0) {
+      for (let i = 0; i < filretingParams.bookLanguageIdsException.length; i++) {
+        params = params.append('ExceptBookLanguageIds', filretingParams.bookLanguageIdsException[i].toString());
+      }
+    }
+
+    params = params.append('LowerRating', sortingAndPaginationParams.lowerRating);
+    params = params.append('HighRating', sortingAndPaginationParams.highRating);
     params = params.append('Sort', sortingAndPaginationParams.sort);
+
     params = params.append('PageIndex', sortingAndPaginationParams.pageNumber);
     params = params.append('PageSize', sortingAndPaginationParams.pageSize);
     if(sortingAndPaginationParams.search) params = params.append('search', sortingAndPaginationParams.search);

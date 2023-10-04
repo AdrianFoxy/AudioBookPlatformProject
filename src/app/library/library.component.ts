@@ -34,18 +34,28 @@ export class LibraryComponent implements OnInit {
     { name: 'За алфавітом', engName: 'Alphabetically', value: 'name' },
     { name: 'Рейтинг: від низького до високого', engName: 'Rating: from low to high', value: 'rateAsc' },
     { name: 'Рейтинг: від високого до низького', engName: 'Rating: from high to low', value: 'rateDesc' },
+    { name: 'Час програвання: від низького до високого ', engName: 'Duration: from low to high', value: 'durAsc' },
+    { name: 'Час програвання: від високого до низького', engName: 'Duration: from high to low', value: 'durDesc' }
   ];
 
   totalCount = 0;
 
   // Search string for filtering params
   searchCtrl = new FormControl();
+
   // Filter params Ids
   selectedIdGenres = new FormControl();
   selectedIdAuthors = new FormControl();
   selectedIdNarrators = new FormControl();
   selectedIdBookSeries = new FormControl();
   selectedIdBookLanguages = new FormControl();
+
+  selectedIdGenresException = new FormControl();
+  selectedIdAuthorsException = new FormControl();
+  selectedIdNarratorsException = new FormControl();
+  selectedIdBookSeriesException = new FormControl();
+  selectedIdBookLanguagesException = new FormControl();
+
 
   constructor(private libraryService: LibraryService, public langService: LanguageService) {
   }
@@ -117,13 +127,21 @@ export class LibraryComponent implements OnInit {
   }
 
   onReset(){
+
     if(this.searchTerm) this.searchTerm.nativeElement.value = '';
+
     this.filretingParams = new filtreingParams();
     this.selectedIdGenres = new FormControl();
     this.selectedIdAuthors = new FormControl();
     this.selectedIdNarrators = new FormControl();
     this.selectedIdBookSeries = new FormControl();
     this.selectedIdBookLanguages = new FormControl();
+
+    this.selectedIdGenresException = new FormControl();
+    this.selectedIdAuthorsException = new FormControl();
+    this.selectedIdNarratorsException = new FormControl();
+    this.selectedIdBookSeriesException = new FormControl();
+    this.selectedIdBookLanguagesException = new FormControl();
 
     this.getAudioBooksForLibrary();
   }
@@ -134,6 +152,23 @@ export class LibraryComponent implements OnInit {
     this.sortingAndPaginationParams.sort = event.value;
     console.log(this.sortingAndPaginationParams.sort);
 
+    this.getAudioBooksForLibrary();
+  }
+
+  sliderStartValue = 0;
+  sliderEndValue = 10;
+
+  onSliderChange(event: Event): void {
+    const sliderValue = (event.target as HTMLInputElement).value;
+    if (event.target === document.querySelector('input[matSliderStartThumb]')) {
+      this.sliderStartValue = +sliderValue;
+    } else if (event.target === document.querySelector('input[matSliderEndThumb]')) {
+      this.sliderEndValue = +sliderValue;
+    }
+    this.sortingAndPaginationParams.lowerRating = this.sliderStartValue;
+    this.sortingAndPaginationParams.highRating = this.sliderEndValue;
+    // console.log('Slider Start Value:', this.sliderStartValue);
+    // console.log('Slider End Value:', this.sliderEndValue);
     this.getAudioBooksForLibrary();
   }
 
