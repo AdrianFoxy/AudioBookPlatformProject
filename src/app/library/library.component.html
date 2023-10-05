@@ -168,15 +168,13 @@
 
         <p class="filtering-label">{{ 'Duration' | translate }}</p>
         <mat-chip-listbox aria-label="Fish selection" multiple>
-          <mat-chip-option>0-10</mat-chip-option>
-          <mat-chip-option>10-20</mat-chip-option>
-          <mat-chip-option>20-30</mat-chip-option>
-          <mat-chip-option>30-40</mat-chip-option>
-          <mat-chip-option>40-50</mat-chip-option>
-          <mat-chip-option>60-70</mat-chip-option>
-          <mat-chip-option>70-80</mat-chip-option>
-          <mat-chip-option>{{ 'over80' | translate }}</mat-chip-option>
+          <mat-chip-option *ngFor="let chip of chipsDurationOptions"
+                           (click)="chipSelectionChange(chip)"
+                           [selected]="chip.selected">
+            {{ chip.max != 100000 ? (chip.min + ' - ' + chip.max) : ('over' | translate) + ' ' + chip.min }}
+          </mat-chip-option>
         </mat-chip-listbox>
+
 
 
         <p class="filtering-label mt-3">{{ 'Exceptions' | translate }}</p>

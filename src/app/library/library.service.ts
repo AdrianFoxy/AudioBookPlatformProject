@@ -87,6 +87,10 @@ export class LibraryService {
 
     params = params.append('LowerRating', sortingAndPaginationParams.lowerRating);
     params = params.append('HighRating', sortingAndPaginationParams.highRating);
+
+    params = params.append('LowerDuration', sortingAndPaginationParams.lowerDuration);
+    params = params.append('HighDuration', sortingAndPaginationParams.highDuration);
+
     params = params.append('Sort', sortingAndPaginationParams.sort);
 
     params = params.append('PageIndex', sortingAndPaginationParams.pageNumber);

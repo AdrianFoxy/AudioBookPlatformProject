@@ -6,4 +6,7 @@ export class sortingAndPaginationParams {
 
   lowerRating = 0;
   highRating = 0;
+
+  lowerDuration = 0;
+  highDuration = 0;
 }

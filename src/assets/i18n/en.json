@@ -31,6 +31,6 @@
   "Language": "Language",
   "Rating" : "Rating",
   "Duration": "Duratin (hours)",
-  "over80" : "over 80",
+  "over" : "over",
   "Exceptions": "Exceptions"
 }

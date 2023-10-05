@@ -38,6 +38,26 @@ export class LibraryComponent implements OnInit {
     { name: 'Час програвання: від високого до низького', engName: 'Duration: from high to low', value: 'durDesc' }
   ];
 
+  selectedChips: any[] = [];
+  lowerDurationValue: number = 0;
+  highDurationValue: number = 0;
+
+
+  chipsDurationOptions = [
+    {min: 0, max: 1, selected: false},
+    {min: 1, max: 2, selected: false},
+    {min: 2, max: 5, selected: false},
+    {min: 5, max: 10, selected: false},
+    {min: 10, max: 50, selected: false},
+    {min: 15, max: 20, selected: false},
+    {min: 20, max: 25, selected: false},
+    {min: 25, max: 30, selected: false},
+    {min: 30, max: 35, selected: false},
+    {min: 35, max: 40, selected: false},
+    {min: 40, max: 100000, selected: false}
+
+  ]
+
   totalCount = 0;
 
   // Search string for filtering params
@@ -76,9 +96,9 @@ export class LibraryComponent implements OnInit {
       next: response => {
         this.audioBooks = response.data;
         this.sortingAndPaginationParams.pageNumber = response.pageIndex;
-        console.log(response.pageIndex);
+        // console.log(response.pageIndex);
         this.sortingAndPaginationParams.pageSize = response.pageSize;
-        console.log(response.pageSize);
+        // console.log(response.pageSize);
         this.totalCount = response.count;
       },
       error: error => console.log(error)
@@ -167,8 +187,6 @@ export class LibraryComponent implements OnInit {
     }
     this.sortingAndPaginationParams.lowerRating = this.sliderStartValue;
     this.sortingAndPaginationParams.highRating = this.sliderEndValue;
-    // console.log('Slider Start Value:', this.sliderStartValue);
-    // console.log('Slider End Value:', this.sliderEndValue);
     this.getAudioBooksForLibrary();
   }
 
@@ -220,4 +238,93 @@ export class LibraryComponent implements OnInit {
     return `${value}`;
   }
 
+  chipSelectionChange(chip: any) {
+    const index = this.selectedChips.indexOf(chip);
+
+    if (index === -1) {
+      if (this.selectedChips.length >= 2) {
+        const chipIndex = this.chipsDurationOptions.findIndex((option) => option === chip);
+        if (chipIndex > 0) {
+          const prevChip = this.chipsDurationOptions[chipIndex - 1];
+
+          const lastSelectedChip = this.selectedChips[this.selectedChips.length - 1];
+          const lastIndex = this.chipsDurationOptions.findIndex(option => option === lastSelectedChip);
+
+          if (lastIndex < chipIndex){
+            // console.log("JUST ADD NEW");
+            this.selectedChips.pop();
+            this.selectedChips.push(chip);
+          }
+          else if (!this.selectedChips.includes(prevChip)) {
+            // console.log("ADDED PREV");
+            this.selectedChips.pop();
+            this.selectedChips.push(prevChip);
+          }
+          else {
+            // console.log("JUST DELETE");
+            this.selectedChips.pop();
+          }
+        }
+      } else {
+        this.selectedChips.push(chip);
+      }
+    } else {
+      this.selectedChips.splice(index, 1);
+    }
+
+    this.updateMinMaxValues();
+    this.activateChipsBetweenSelected();
+
+    this.sortingAndPaginationParams.lowerDuration = this.lowerDurationValue * 3600;
+    this.sortingAndPaginationParams.highDuration = this.highDurationValue * 3600;
+
+    this.getAudioBooksForLibrary();
+  }
+
+
+  activateChipsBetweenSelected() {
+    // Sort selectedChips by min
+    this.selectedChips.sort((a, b) => a.min - b.min);
+
+    // If selectedChips have only 1 value
+    if (this.selectedChips.length === 1) {
+      const selectedChip = this.selectedChips[0];
+
+      // Set selected: true for choosen chip and selected: false for everything else
+      this.chipsDurationOptions.forEach(chip => {
+        chip.selected = chip === selectedChip;
+      });
+    } else {
+      // Reset flag selected to false
+      this.chipsDurationOptions.forEach(chip => {
+        chip.selected = false;
+      });
+
+      // Set selected: true for chips between choosen
+      for (let i = 0; i < this.selectedChips.length - 1; i++) {
+        const currentChip = this.selectedChips[i];
+        const nextChip = this.selectedChips[i + 1];
+
+        const startIndex = this.chipsDurationOptions.indexOf(currentChip);
+        const endIndex = this.chipsDurationOptions.indexOf(nextChip);
+
+        if (startIndex !== -1 && endIndex !== -1) {
+          for (let j = startIndex; j <= endIndex; j++) {
+            this.chipsDurationOptions[j].selected = true;
+          }
+        }
+      }
+    }
+  }
+
+
+  updateMinMaxValues() {
+    if (this.selectedChips.length > 0) {
+      this.lowerDurationValue = Math.min(...this.selectedChips.map(chip => chip.min));
+      this.highDurationValue = Math.max(...this.selectedChips.map(chip => chip.max || 0));
+    } else {
+      this.lowerDurationValue = 0;
+      this.highDurationValue = 0;
+    }
+  }
 }
