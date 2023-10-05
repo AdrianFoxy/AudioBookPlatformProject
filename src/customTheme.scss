@@ -30,6 +30,19 @@
 
 }
 
+.dark-theme .mat-mdc-slider.mat-primary{
+  --mdc-slider-handle-color: #3f51b5;
+  --mdc-slider-focus-handle-color: #3f51b5;
+  --mdc-slider-hover-handle-color: #3f51b5;
+  --mdc-slider-active-track-color: #3f51b5;
+  --mdc-slider-inactive-track-color: #3f51b5;
+  --mdc-slider-with-tick-marks-active-container-color: #fff;
+  --mdc-slider-with-tick-marks-inactive-container-color: #3f51b5;
+  --mat-mdc-slider-ripple-color: #3f51b5;
+  --mat-mdc-slider-hover-ripple-color: rgba(63, 81, 181, 0.05);
+  --mat-mdc-slider-focus-ripple-color: rgba(63, 81, 181, 0.2);
+}
+
 .dark-theme .mat-mdc-standard-chip:not(.mdc-evolution-chip--disabled) .mdc-evolution-chip__icon--trailing {
   color: white !important;
 }

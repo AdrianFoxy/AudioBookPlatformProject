@@ -4,4 +4,10 @@ export class filtreingParams {
   narratorIds: number[] = [];
   bookSeriresIds: number[] = [];
   bookLanguageIds: number[] = [];
+
+  genreIdsException: number[] = [];
+  authorIdsException: number[] = [];
+  narratorIdsException: number[] = [];
+  bookSeriresIdsException: number[] = [];
+  bookLanguageIdsException: number[] = [];
 }
