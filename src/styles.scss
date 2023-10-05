@@ -58,6 +58,20 @@
   --bs-body-font-family: var(--main-font);
   --mat-select-trigger-text-font: var(--main-font);
 
+
+}
+
+.mat-mdc-slider.mat-primary{
+  --mdc-slider-handle-color: var(--mdc-filled-text-field-focus-active-indicator-color);
+  --mdc-slider-focus-handle-color: var(--mdc-filled-text-field-focus-active-indicator-color);
+  --mdc-slider-hover-handle-color: var(--mdc-filled-text-field-focus-active-indicator-color);
+  --mdc-slider-active-track-color: var(--mdc-filled-text-field-focus-active-indicator-color);
+  --mdc-slider-inactive-track-color: var(--mdc-filled-text-field-focus-active-indicator-color);
+  --mdc-slider-with-tick-marks-active-container-color: #fff;
+  --mdc-slider-with-tick-marks-inactive-container-color: var(--mdc-filled-text-field-focus-active-indicator-color);
+  --mat-mdc-slider-ripple-color: var(--mdc-filled-text-field-focus-active-indicator-color);
+  --mat-mdc-slider-hover-ripple-color: rgba(207, 89, 11, 0.05);
+  --mat-mdc-slider-focus-ripple-color: rgba(207, 89, 11, 0.05);
 }
 
 .mat-mdc-select-arrow svg {
@@ -168,3 +182,4 @@ hr {
   background-color: var(--base-orange-color);
   border: 2px solid var(--base-light-border-color);
 }
+
