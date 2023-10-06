@@ -1,6 +1,6 @@
 <div class="container alternativ-angular-mats">
   <div class="row">
-    <section class="col-9">
+    <section class="col-lg-9 order-2 order-lg-1">
       <div class="d-flex justify-content-between align-items center pb-2 mt-2">
         <app-paging-header [totalCount]="totalCount" [pageNumber]="sortingAndPaginationParams.pageNumber"
           [pageSize]="sortingAndPaginationParams.pageSize"></app-paging-header>
@@ -23,279 +23,291 @@
           (pageChanged)="onPageChanged($event)"></app-pager>
       </div>
     </section>
-    <section class="col-3 mt-4">
+    <section class="col-lg-3 order-1 order-lg-2 mt-4">
       <p class="filtering-header">
-        <span>{{ 'Filters' | translate }}</span>
+
+        <span class="d-none d-lg-inline" style="cursor: pointer;">
+          <i class="fa fa-filter"></i> {{ 'Filters' | translate }}
+        </span>
+
+        <span class="d-lg-none" style="cursor: pointer;" aria-hidden="true" data-toggle="collapse"
+        href="#collapseExample" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-filter"></i> {{ 'Filters' | translate }}</span>
+
         <a class="reset-btn float-end" (click)="onReset()">
           {{ 'Reset' | translate }}
           <i class="fa fa-times" aria-hidden="true"></i>
         </a>
       </p>
-      <div class="filters mt-2">
-
-        <mat-form-field class="full-width">
-          <mat-label>{{ 'Sorting' | translate }}</mat-label>
-          <mat-select (selectionChange)="onSortSelected($event)" [value]="sortOptions[0].value">
-            <mat-option *ngFor="let sort of sortOptions" [value]="sort.value">
-              {{ langService.whatCurrentLang() === 'en' ? sort.engName : sort.name }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-
-        <mat-form-field class="full-width">
-          <mat-label>{{ 'Genres' | translate }}</mat-label>
-          <mat-select [formControl]="selectedIdGenres" multiple
-            (selectionChange)="onFilterSelected(selectedIdGenres.value, 'genreIds')">
-            <mat-select-trigger>
-              <mat-chip-listbox>
-                <mat-chip *ngFor="let genre of getByIds(selectedIdGenres.value, genres)" [removable]="true"
-                  (removed)="onFilterRemoved(genre.id, selectedIdGenres)">
-                  {{ langService.whatCurrentLang() === 'en' ? genre.enName : genre.name }}
-                  <mat-icon matChipRemove>close</mat-icon>
-                </mat-chip>
-              </mat-chip-listbox>
-            </mat-select-trigger>
-            <mat-option>
-              <ngx-mat-select-search [formControl]="searchCtrl" placeholderLabel="Пошук"></ngx-mat-select-search>
-            </mat-option>
-            <mat-option
-              *ngFor="let genre of genres | filter: searchCtrl.value: (langService.whatCurrentLang() === 'en' ? 'enName' : 'name')"
-              [value]="genre.id">
-              {{ langService.whatCurrentLang() === 'en' ? genre.enName : genre.name }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-
-        <mat-form-field class="full-width">
-          <mat-label>{{ 'Authors' | translate }}</mat-label>
-          <mat-select [formControl]="selectedIdAuthors" multiple
-            (selectionChange)="onFilterSelected(selectedIdAuthors.value, 'authorIds')">
-            <mat-select-trigger>
-              <mat-chip-listbox>
-                <mat-chip *ngFor="let author of getByIds(selectedIdAuthors.value, authors)" [removable]="true"
-                  (removed)="onFilterRemoved(author.id, selectedIdAuthors)">
-                  {{ langService.whatCurrentLang() === 'en' ? author.enName : author.name }}
-                  <mat-icon matChipRemove>close</mat-icon>
-                </mat-chip>
-              </mat-chip-listbox>
-            </mat-select-trigger>
-            <mat-option>
-              <ngx-mat-select-search [formControl]="searchCtrl" placeholderLabel="Пошук"></ngx-mat-select-search>
-            </mat-option>
-            <mat-option
-              *ngFor="let author of authors | filter: searchCtrl.value: (langService.whatCurrentLang() === 'en' ? 'enName' : 'name')"
-              [value]="author.id">
-              {{ langService.whatCurrentLang() === 'en' ? author.enName : author.name }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-
-        <mat-form-field class="full-width">
-          <mat-label>{{ 'Narrators' | translate }}</mat-label>
-          <mat-select [formControl]="selectedIdNarrators" multiple
-            (selectionChange)="onFilterSelected(selectedIdNarrators.value, 'narratorIds')">
-            <mat-select-trigger>
-              <mat-chip-listbox>
-                <mat-chip *ngFor="let narrator of getByIds(selectedIdNarrators.value, narrators)" [removable]="true"
-                  (removed)="onFilterRemoved(narrator.id, selectedIdNarrators)">
-                  {{ narrator.name }}
-                  <mat-icon matChipRemove>close</mat-icon>
-                </mat-chip>
-              </mat-chip-listbox>
-            </mat-select-trigger>
-            <mat-option>
-              <ngx-mat-select-search [formControl]="searchCtrl" placeholderLabel="Пошук"></ngx-mat-select-search>
-            </mat-option>
-            <mat-option *ngFor="let narrator of narrators | filter: searchCtrl.value: 'name'" [value]="narrator.id">
-              {{ narrator.name }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-
-        <mat-form-field class="full-width">
-          <mat-label>{{ 'Book Series' | translate }}</mat-label>
-          <mat-select [formControl]="selectedIdBookSeries" multiple
-            (selectionChange)="onFilterSelected(selectedIdBookSeries.value, 'bookSeriresIds')">
-            <mat-select-trigger>
-              <mat-chip-listbox>
-                <mat-chip *ngFor="let bookSerie of getByIds(selectedIdBookSeries.value, bookSeries)" [removable]="true"
-                  (removed)="onFilterRemoved(bookSerie.id, selectedIdBookSeries)">
-                  {{ langService.whatCurrentLang() === 'en' ? bookSerie.enName : bookSerie.name }}
-                  <mat-icon matChipRemove>close</mat-icon>
-                </mat-chip>
-              </mat-chip-listbox>
-            </mat-select-trigger>
-            <mat-option>
-              <ngx-mat-select-search [formControl]="searchCtrl" placeholderLabel="Пошук"></ngx-mat-select-search>
-            </mat-option>
-            <mat-option
-              *ngFor="let bookSerie of bookSeries | filter: searchCtrl.value: (langService.whatCurrentLang() === 'en' ? 'enName' : 'name')"
-              [value]="bookSerie.id">
-              {{ langService.whatCurrentLang() === 'en' ? bookSerie.enName : bookSerie.name }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-
-        <mat-form-field class="full-width">
-          <mat-label>{{ 'Language' | translate }}</mat-label>
-          <mat-select [formControl]="selectedIdBookLanguages" multiple
-            (selectionChange)="onFilterSelected(selectedIdBookLanguages.value, 'bookLanguageIds')">
-            <mat-select-trigger>
-              <mat-chip-listbox>
-                <mat-chip *ngFor="let bookLanguage of getByIds(selectedIdBookLanguages.value, bookLanguages)"
-                  [removable]="true" (removed)="onFilterRemoved(bookLanguage.id, selectedIdBookLanguages)">
-                  {{ langService.whatCurrentLang() === 'en' ? bookLanguage.enName : bookLanguage.name }}
-                  <mat-icon matChipRemove>close</mat-icon>
-                </mat-chip>
-              </mat-chip-listbox>
-            </mat-select-trigger>
-            <mat-option>
-              <ngx-mat-select-search [formControl]="searchCtrl" placeholderLabel="Пошук"></ngx-mat-select-search>
-            </mat-option>
-            <mat-option
-              *ngFor="let bookLanguage of bookLanguages | filter: searchCtrl.value: (langService.whatCurrentLang() === 'en' ? 'enName' : 'name')"
-              [value]="bookLanguage.id">
-              {{ langService.whatCurrentLang() === 'en' ? bookLanguage.enName : bookLanguage.name }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-
-        <p class="filtering-label">{{ 'Rating' | translate }}</p>
-        <mat-slider min="0" max="10" step="1" showTickMarks discrete [displayWith]="formatLabel"   (input)="onSliderChange($event)">
-          <input value="0" matSliderStartThumb>
-          <input value="10" matSliderEndThumb>
-        </mat-slider>
-
-        <p class="filtering-label">{{ 'Duration' | translate }}</p>
-        <mat-chip-listbox aria-label="Fish selection" multiple>
-          <mat-chip-option *ngFor="let chip of chipsDurationOptions"
-                           (click)="chipSelectionChange(chip)"
-                           [selected]="chip.selected">
-            {{ chip.max != 100000 ? (chip.min + ' - ' + chip.max) : ('over' | translate) + ' ' + chip.min }}
-          </mat-chip-option>
-        </mat-chip-listbox>
 
 
+      <div class="collapse d-lg-block" id="collapseExample">
+        <div class="filters mt-2">
+          <mat-form-field  class="single-element">
+            <mat-label>{{ 'Sorting' | translate }}</mat-label>
+            <mat-select (selectionChange)="onSortSelected($event)" [value]="sortOptions[0].value">
+              <mat-option *ngFor="let sort of sortOptions" [value]="sort.value">
+                {{ langService.whatCurrentLang() === 'en' ? sort.engName : sort.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
 
-        <p class="filtering-label mt-3">{{ 'Exceptions' | translate }}</p>
-        <mat-form-field class="full-width">
-          <mat-label>{{ 'Genres' | translate }}</mat-label>
-          <mat-select [formControl]="selectedIdGenresException" multiple
-            (selectionChange)="onFilterSelected(selectedIdGenresException.value, 'genreIdsException')">
-            <mat-select-trigger>
-              <mat-chip-listbox>
-                <mat-chip *ngFor="let genre of getByIds(selectedIdGenresException.value, genres)" [removable]="true"
-                  (removed)="onFilterRemoved(genre.id, selectedIdGenresException)">
-                  {{ langService.whatCurrentLang() === 'en' ? genre.enName : genre.name }}
-                  <mat-icon matChipRemove>close</mat-icon>
-                </mat-chip>
-              </mat-chip-listbox>
-            </mat-select-trigger>
-            <mat-option>
-              <ngx-mat-select-search [formControl]="searchCtrl" placeholderLabel="Пошук"></ngx-mat-select-search>
-            </mat-option>
-            <mat-option
-              *ngFor="let genre of genres | filter: searchCtrl.value: (langService.whatCurrentLang() === 'en' ? 'enName' : 'name')"
-              [value]="genre.id">
-              {{ langService.whatCurrentLang() === 'en' ? genre.enName : genre.name }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
+          <mat-form-field class="full-width" >
+            <mat-label class="">{{ 'Genres' | translate }}</mat-label>
+            <mat-select [formControl]="selectedIdGenres" multiple
+              (selectionChange)="onFilterSelected(selectedIdGenres.value, 'genreIds')" placeholder="{{ 'Genres' | translate }}">
+              <mat-select-trigger>
+                <mat-chip-listbox>
+                  <mat-chip *ngFor="let genre of getByIds(selectedIdGenres.value, genres)" [removable]="true"
+                    (removed)="onFilterRemoved(genre.id, selectedIdGenres)">
+                    {{ langService.whatCurrentLang() === 'en' ? genre.enName : genre.name }}
+                    <mat-icon matChipRemove>close</mat-icon>
+                  </mat-chip>
+                </mat-chip-listbox>
+              </mat-select-trigger>
+              <mat-option>
+                <ngx-mat-select-search [formControl]="searchCtrl" placeholderLabel="Пошук"></ngx-mat-select-search>
+              </mat-option>
+              <mat-option
+                *ngFor="let genre of genres | filter: searchCtrl.value: (langService.whatCurrentLang() === 'en' ? 'enName' : 'name')"
+                [value]="genre.id">
+                {{ langService.whatCurrentLang() === 'en' ? genre.enName : genre.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
 
-        <mat-form-field class="full-width">
-          <mat-label>{{ 'Authors' | translate }}</mat-label>
-          <mat-select [formControl]="selectedIdAuthorsException" multiple
-            (selectionChange)="onFilterSelected(selectedIdAuthorsException.value, 'authorIdsException')">
-            <mat-select-trigger>
-              <mat-chip-listbox>
-                <mat-chip *ngFor="let author of getByIds(selectedIdAuthorsException.value, authors)" [removable]="true"
-                  (removed)="onFilterRemoved(author.id, selectedIdAuthorsException)">
-                  {{ langService.whatCurrentLang() === 'en' ? author.enName : author.name }}
-                  <mat-icon matChipRemove>close</mat-icon>
-                </mat-chip>
-              </mat-chip-listbox>
-            </mat-select-trigger>
-            <mat-option>
-              <ngx-mat-select-search [formControl]="searchCtrl" placeholderLabel="Пошук"></ngx-mat-select-search>
-            </mat-option>
-            <mat-option
-              *ngFor="let author of authors | filter: searchCtrl.value: (langService.whatCurrentLang() === 'en' ? 'enName' : 'name')"
-              [value]="author.id">
-              {{ langService.whatCurrentLang() === 'en' ? author.enName : author.name }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
+          <mat-form-field class="full-width">
+            <mat-label>{{ 'Authors' | translate }}</mat-label>
+            <mat-select [formControl]="selectedIdAuthors" multiple
+              (selectionChange)="onFilterSelected(selectedIdAuthors.value, 'authorIds')">
+              <mat-select-trigger>
+                <mat-chip-listbox>
+                  <mat-chip *ngFor="let author of getByIds(selectedIdAuthors.value, authors)" [removable]="true"
+                    (removed)="onFilterRemoved(author.id, selectedIdAuthors)">
+                    {{ langService.whatCurrentLang() === 'en' ? author.enName : author.name }}
+                    <mat-icon matChipRemove>close</mat-icon>
+                  </mat-chip>
+                </mat-chip-listbox>
+              </mat-select-trigger>
+              <mat-option>
+                <ngx-mat-select-search [formControl]="searchCtrl" placeholderLabel="Пошук"></ngx-mat-select-search>
+              </mat-option>
+              <mat-option
+                *ngFor="let author of authors | filter: searchCtrl.value: (langService.whatCurrentLang() === 'en' ? 'enName' : 'name')"
+                [value]="author.id">
+                {{ langService.whatCurrentLang() === 'en' ? author.enName : author.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
 
-        <mat-form-field class="full-width">
-          <mat-label>{{ 'Narrators' | translate }}</mat-label>
-          <mat-select [formControl]="selectedIdNarratorsException" multiple
-            (selectionChange)="onFilterSelected(selectedIdNarratorsException.value, 'narratorIdsException')">
-            <mat-select-trigger>
-              <mat-chip-listbox>
-                <mat-chip *ngFor="let narrator of getByIds(selectedIdNarratorsException.value, narrators)" [removable]="true"
-                  (removed)="onFilterRemoved(narrator.id, selectedIdNarratorsException)">
-                  {{ narrator.name }}
-                  <mat-icon matChipRemove>close</mat-icon>
-                </mat-chip>
-              </mat-chip-listbox>
-            </mat-select-trigger>
-            <mat-option>
-              <ngx-mat-select-search [formControl]="searchCtrl" placeholderLabel="Пошук"></ngx-mat-select-search>
-            </mat-option>
-            <mat-option *ngFor="let narrator of narrators | filter: searchCtrl.value: 'name'" [value]="narrator.id">
-              {{ narrator.name }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
+          <mat-form-field class="full-width">
+            <mat-label>{{ 'Narrators' | translate }}</mat-label>
+            <mat-select [formControl]="selectedIdNarrators" multiple
+              (selectionChange)="onFilterSelected(selectedIdNarrators.value, 'narratorIds')">
+              <mat-select-trigger>
+                <mat-chip-listbox>
+                  <mat-chip *ngFor="let narrator of getByIds(selectedIdNarrators.value, narrators)" [removable]="true"
+                    (removed)="onFilterRemoved(narrator.id, selectedIdNarrators)">
+                    {{ narrator.name }}
+                    <mat-icon matChipRemove>close</mat-icon>
+                  </mat-chip>
+                </mat-chip-listbox>
+              </mat-select-trigger>
+              <mat-option>
+                <ngx-mat-select-search [formControl]="searchCtrl" placeholderLabel="Пошук"></ngx-mat-select-search>
+              </mat-option>
+              <mat-option *ngFor="let narrator of narrators | filter: searchCtrl.value: 'name'" [value]="narrator.id">
+                {{ narrator.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
 
-        <mat-form-field class="full-width">
-          <mat-label>{{ 'Book Series' | translate }}</mat-label>
-          <mat-select [formControl]="selectedIdBookSeriesException" multiple
-            (selectionChange)="onFilterSelected(selectedIdBookSeriesException.value, 'bookSeriresIdsException')">
-            <mat-select-trigger>
-              <mat-chip-listbox>
-                <mat-chip *ngFor="let bookSerie of getByIds(selectedIdBookSeriesException.value, bookSeries)" [removable]="true"
-                  (removed)="onFilterRemoved(bookSerie.id, selectedIdBookSeriesException)">
-                  {{ langService.whatCurrentLang() === 'en' ? bookSerie.enName : bookSerie.name }}
-                  <mat-icon matChipRemove>close</mat-icon>
-                </mat-chip>
-              </mat-chip-listbox>
-            </mat-select-trigger>
-            <mat-option>
-              <ngx-mat-select-search [formControl]="searchCtrl" placeholderLabel="Пошук"></ngx-mat-select-search>
-            </mat-option>
-            <mat-option
-              *ngFor="let bookSerie of bookSeries | filter: searchCtrl.value: (langService.whatCurrentLang() === 'en' ? 'enName' : 'name')"
-              [value]="bookSerie.id">
-              {{ langService.whatCurrentLang() === 'en' ? bookSerie.enName : bookSerie.name }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
+          <mat-form-field class="full-width">
+            <mat-label>{{ 'Book Series' | translate }}</mat-label>
+            <mat-select [formControl]="selectedIdBookSeries" multiple
+              (selectionChange)="onFilterSelected(selectedIdBookSeries.value, 'bookSeriresIds')">
+              <mat-select-trigger>
+                <mat-chip-listbox>
+                  <mat-chip *ngFor="let bookSerie of getByIds(selectedIdBookSeries.value, bookSeries)" [removable]="true"
+                    (removed)="onFilterRemoved(bookSerie.id, selectedIdBookSeries)">
+                    {{ langService.whatCurrentLang() === 'en' ? bookSerie.enName : bookSerie.name }}
+                    <mat-icon matChipRemove>close</mat-icon>
+                  </mat-chip>
+                </mat-chip-listbox>
+              </mat-select-trigger>
+              <mat-option>
+                <ngx-mat-select-search [formControl]="searchCtrl" placeholderLabel="Пошук"></ngx-mat-select-search>
+              </mat-option>
+              <mat-option
+                *ngFor="let bookSerie of bookSeries | filter: searchCtrl.value: (langService.whatCurrentLang() === 'en' ? 'enName' : 'name')"
+                [value]="bookSerie.id">
+                {{ langService.whatCurrentLang() === 'en' ? bookSerie.enName : bookSerie.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
 
-        <mat-form-field class="full-width">
-          <mat-label>{{ 'Language' | translate }}</mat-label>
-          <mat-select [formControl]="selectedIdBookLanguagesException" multiple
-            (selectionChange)="onFilterSelected(selectedIdBookLanguagesException.value, 'bookLanguageIdsException')">
-            <mat-select-trigger>
-              <mat-chip-listbox>
-                <mat-chip *ngFor="let bookLanguage of getByIds(selectedIdBookLanguagesException.value, bookLanguages)"
-                  [removable]="true" (removed)="onFilterRemoved(bookLanguage.id, selectedIdBookLanguagesException)">
-                  {{ langService.whatCurrentLang() === 'en' ? bookLanguage.enName : bookLanguage.name }}
-                  <mat-icon matChipRemove>close</mat-icon>
-                </mat-chip>
-              </mat-chip-listbox>
-            </mat-select-trigger>
-            <mat-option>
-              <ngx-mat-select-search [formControl]="searchCtrl" placeholderLabel="Пошук"></ngx-mat-select-search>
-            </mat-option>
-            <mat-option
-              *ngFor="let bookLanguage of bookLanguages | filter: searchCtrl.value: (langService.whatCurrentLang() === 'en' ? 'enName' : 'name')"
-              [value]="bookLanguage.id">
-              {{ langService.whatCurrentLang() === 'en' ? bookLanguage.enName : bookLanguage.name }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
+          <mat-form-field class="full-width">
+            <mat-label>{{ 'Language' | translate }}</mat-label>
+            <mat-select [formControl]="selectedIdBookLanguages" multiple
+              (selectionChange)="onFilterSelected(selectedIdBookLanguages.value, 'bookLanguageIds')">
+              <mat-select-trigger>
+                <mat-chip-listbox>
+                  <mat-chip *ngFor="let bookLanguage of getByIds(selectedIdBookLanguages.value, bookLanguages)"
+                    [removable]="true" (removed)="onFilterRemoved(bookLanguage.id, selectedIdBookLanguages)">
+                    {{ langService.whatCurrentLang() === 'en' ? bookLanguage.enName : bookLanguage.name }}
+                    <mat-icon matChipRemove>close</mat-icon>
+                  </mat-chip>
+                </mat-chip-listbox>
+              </mat-select-trigger>
+              <mat-option>
+                <ngx-mat-select-search [formControl]="searchCtrl" placeholderLabel="Пошук"></ngx-mat-select-search>
+              </mat-option>
+              <mat-option
+                *ngFor="let bookLanguage of bookLanguages | filter: searchCtrl.value: (langService.whatCurrentLang() === 'en' ? 'enName' : 'name')"
+                [value]="bookLanguage.id">
+                {{ langService.whatCurrentLang() === 'en' ? bookLanguage.enName : bookLanguage.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <p class="filtering-label">{{ 'Rating' | translate }}</p>
+          <mat-slider min="0" max="10" step="1" showTickMarks discrete [displayWith]="formatLabel"
+            (input)="onSliderChange($event)">
+            <input value="0" matSliderStartThumb>
+            <input value="10" matSliderEndThumb>
+          </mat-slider>
+
+          <p class="filtering-label">{{ 'Duration' | translate }}</p>
+          <mat-chip-listbox aria-label="Fish selection" multiple>
+            <mat-chip-option *ngFor="let chip of chipsDurationOptions" (click)="chipSelectionChange(chip)"
+              [selected]="chip.selected">
+              {{ chip.max != 100000 ? (chip.min + ' - ' + chip.max) : ('over' | translate) + ' ' + chip.min }}
+            </mat-chip-option>
+          </mat-chip-listbox>
+
+
+
+          <p class="filtering-label mt-3">{{ 'Exceptions' | translate }}</p>
+          <mat-form-field class="full-width">
+            <mat-label>{{ 'Genres' | translate }}</mat-label>
+            <mat-select [formControl]="selectedIdGenresException" multiple
+              (selectionChange)="onFilterSelected(selectedIdGenresException.value, 'genreIdsException')">
+              <mat-select-trigger>
+                <mat-chip-listbox>
+                  <mat-chip *ngFor="let genre of getByIds(selectedIdGenresException.value, genres)" [removable]="true"
+                    (removed)="onFilterRemoved(genre.id, selectedIdGenresException)">
+                    {{ langService.whatCurrentLang() === 'en' ? genre.enName : genre.name }}
+                    <mat-icon matChipRemove>close</mat-icon>
+                  </mat-chip>
+                </mat-chip-listbox>
+              </mat-select-trigger>
+              <mat-option>
+                <ngx-mat-select-search [formControl]="searchCtrl" placeholderLabel="Пошук"></ngx-mat-select-search>
+              </mat-option>
+              <mat-option
+                *ngFor="let genre of genres | filter: searchCtrl.value: (langService.whatCurrentLang() === 'en' ? 'enName' : 'name')"
+                [value]="genre.id">
+                {{ langService.whatCurrentLang() === 'en' ? genre.enName : genre.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="full-width">
+            <mat-label>{{ 'Authors' | translate }}</mat-label>
+            <mat-select [formControl]="selectedIdAuthorsException" multiple
+              (selectionChange)="onFilterSelected(selectedIdAuthorsException.value, 'authorIdsException')">
+              <mat-select-trigger>
+                <mat-chip-listbox>
+                  <mat-chip *ngFor="let author of getByIds(selectedIdAuthorsException.value, authors)" [removable]="true"
+                    (removed)="onFilterRemoved(author.id, selectedIdAuthorsException)">
+                    {{ langService.whatCurrentLang() === 'en' ? author.enName : author.name }}
+                    <mat-icon matChipRemove>close</mat-icon>
+                  </mat-chip>
+                </mat-chip-listbox>
+              </mat-select-trigger>
+              <mat-option>
+                <ngx-mat-select-search [formControl]="searchCtrl" placeholderLabel="Пошук"></ngx-mat-select-search>
+              </mat-option>
+              <mat-option
+                *ngFor="let author of authors | filter: searchCtrl.value: (langService.whatCurrentLang() === 'en' ? 'enName' : 'name')"
+                [value]="author.id">
+                {{ langService.whatCurrentLang() === 'en' ? author.enName : author.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="full-width">
+            <mat-label>{{ 'Narrators' | translate }}</mat-label>
+            <mat-select [formControl]="selectedIdNarratorsException" multiple
+              (selectionChange)="onFilterSelected(selectedIdNarratorsException.value, 'narratorIdsException')">
+              <mat-select-trigger>
+                <mat-chip-listbox>
+                  <mat-chip *ngFor="let narrator of getByIds(selectedIdNarratorsException.value, narrators)"
+                    [removable]="true" (removed)="onFilterRemoved(narrator.id, selectedIdNarratorsException)">
+                    {{ narrator.name }}
+                    <mat-icon matChipRemove>close</mat-icon>
+                  </mat-chip>
+                </mat-chip-listbox>
+              </mat-select-trigger>
+              <mat-option>
+                <ngx-mat-select-search [formControl]="searchCtrl" placeholderLabel="Пошук"></ngx-mat-select-search>
+              </mat-option>
+              <mat-option *ngFor="let narrator of narrators | filter: searchCtrl.value: 'name'" [value]="narrator.id">
+                {{ narrator.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="full-width">
+            <mat-label>{{ 'Book Series' | translate }}</mat-label>
+            <mat-select [formControl]="selectedIdBookSeriesException" multiple
+              (selectionChange)="onFilterSelected(selectedIdBookSeriesException.value, 'bookSeriresIdsException')">
+              <mat-select-trigger>
+                <mat-chip-listbox>
+                  <mat-chip *ngFor="let bookSerie of getByIds(selectedIdBookSeriesException.value, bookSeries)"
+                    [removable]="true" (removed)="onFilterRemoved(bookSerie.id, selectedIdBookSeriesException)">
+                    {{ langService.whatCurrentLang() === 'en' ? bookSerie.enName : bookSerie.name }}
+                    <mat-icon matChipRemove>close</mat-icon>
+                  </mat-chip>
+                </mat-chip-listbox>
+              </mat-select-trigger>
+              <mat-option>
+                <ngx-mat-select-search [formControl]="searchCtrl" placeholderLabel="Пошук"></ngx-mat-select-search>
+              </mat-option>
+              <mat-option
+                *ngFor="let bookSerie of bookSeries | filter: searchCtrl.value: (langService.whatCurrentLang() === 'en' ? 'enName' : 'name')"
+                [value]="bookSerie.id">
+                {{ langService.whatCurrentLang() === 'en' ? bookSerie.enName : bookSerie.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="full-width">
+            <mat-label>{{ 'Language' | translate }}</mat-label>
+            <mat-select [formControl]="selectedIdBookLanguagesException" multiple
+              (selectionChange)="onFilterSelected(selectedIdBookLanguagesException.value, 'bookLanguageIdsException')">
+              <mat-select-trigger>
+                <mat-chip-listbox>
+                  <mat-chip *ngFor="let bookLanguage of getByIds(selectedIdBookLanguagesException.value, bookLanguages)"
+                    [removable]="true" (removed)="onFilterRemoved(bookLanguage.id, selectedIdBookLanguagesException)">
+                    {{ langService.whatCurrentLang() === 'en' ? bookLanguage.enName : bookLanguage.name }}
+                    <mat-icon matChipRemove>close</mat-icon>
+                  </mat-chip>
+                </mat-chip-listbox>
+              </mat-select-trigger>
+              <mat-option>
+                <ngx-mat-select-search [formControl]="searchCtrl" placeholderLabel="Пошук"></ngx-mat-select-search>
+              </mat-option>
+              <mat-option
+                *ngFor="let bookLanguage of bookLanguages | filter: searchCtrl.value: (langService.whatCurrentLang() === 'en' ? 'enName' : 'name')"
+                [value]="bookLanguage.id">
+                {{ langService.whatCurrentLang() === 'en' ? bookLanguage.enName : bookLanguage.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
       </div>
+
+
 
     </section>
   </div>
