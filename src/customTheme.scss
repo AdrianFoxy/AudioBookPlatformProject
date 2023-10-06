@@ -271,3 +271,12 @@
   border: 2px solid var(--base-light-border-color);
 }
 
+// SEARCH
+.dark-theme .search input:focus{
+  box-shadow: 0 0 0 0.15rem var(--base-dark-main-color) !important;
+  border: none;
+ }
+
+ .dark-theme .search-btn-cl{
+  color: white;
+ }

@@ -4,12 +4,19 @@
       <div class="d-flex justify-content-between align-items center pb-2 mt-2">
         <app-paging-header [totalCount]="totalCount" [pageNumber]="sortingAndPaginationParams.pageNumber"
           [pageSize]="sortingAndPaginationParams.pageSize"></app-paging-header>
-        <div class="d-flex mt-2">
+        <!-- <div class="d-flex mt-2">
           <input (keyup.enter)="onSearch()" type="text" placeholder="{{ 'Search' | translate }}"
             class="form-control me-2" #search>
           <button (click)="onSearch()" class="search-btn btn btn-outline primary mx-2">{{ 'Search' | translate
             }}</button>
-        </div>
+        </div> -->
+
+        <form class="search form-inline">
+          <input (keyup.enter)="onSearch()"  class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search"
+            aria-label="Search" #search>
+          <i (click)="onSearch()" class="fa fa-search ml-2 search-btn-cl" style="cursor: pointer" aria-hidden="true"></i>
+        </form>
+
       </div>
 
       <div class="row row-cols-xl-5  row-cols-lg-4 row-cols-md-3 mt-2">
@@ -54,7 +61,7 @@
           <mat-form-field class="full-width" >
             <mat-label class="">{{ 'Genres' | translate }}</mat-label>
             <mat-select [formControl]="selectedIdGenres" multiple
-              (selectionChange)="onFilterSelected(selectedIdGenres.value, 'genreIds')" placeholder="{{ 'Genres' | translate }}">
+              (selectionChange)="onFilterSelected(selectedIdGenres.value, 'genreIds')">
               <mat-select-trigger>
                 <mat-chip-listbox>
                   <mat-chip *ngFor="let genre of getByIds(selectedIdGenres.value, genres)" [removable]="true"

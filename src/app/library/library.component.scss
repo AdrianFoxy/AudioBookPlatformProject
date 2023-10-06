@@ -20,4 +20,8 @@ mat-slider {
   border: black 2px solid;
 }
 
-
+// SEARCH
+.search input:focus{
+  box-shadow: 0 0 0 0.15rem var(--base-orange-color);
+  border: none;
+ }
