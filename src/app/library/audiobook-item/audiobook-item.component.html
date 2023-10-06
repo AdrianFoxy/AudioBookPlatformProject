@@ -1,16 +1,10 @@
-<div class="card book-card" *ngIf="audiobook">
-  <div class="book-card__cover">
-    <div class="book-card__book">
-      <div class="book-card__book-front">
-        <img class="card-img book-card__img" src="{{audiobook.pictureUrl}}" alt="Harry Potter">
-      </div>
-      <div class="book-card__book-back"></div>
-      <div class="book-card__book-side"></div>
-    </div>
+<div class="book-card" *ngIf="audiobook">
+  <div class="card-img-cont">
+    <img class="card-img" src="{{audiobook.pictureUrl}}" alt="Harry Potter">
   </div>
   <div class="card-body">
     <p class="card-text">
-      <span *ngFor="let author of audiobook.author">{{author.name}}</span>
+      <span class="card-author-title" *ngFor="let author of audiobook.author">{{author.name}}</span>
       <span class="float-end">
         <i class="fa fa-star" style="color: #ffbc57;" aria-hidden="true"></i>
         {{audiobook.rating}}
@@ -21,3 +15,4 @@
     </a>
   </div>
 </div>
+
