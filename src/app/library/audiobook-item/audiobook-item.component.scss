@@ -1,87 +1,10 @@
-.book-card {
-  display: flex;
-  border: none;
+.book-card{
+  margin-bottom: 20px;
   max-width: 160px;
 
-  .book-card__cover {
-    position: relative;
-    width: 160px;
-    perspective: 1000px;
-  }
-
-  .book-card__book {
-    transform-style: preserve-3d;
-    transition: all 250ms ease;
-    height: 240px;
-  }
-
-  .book-card__book-front {
-    position: absolute;
-    height: 240px;
-  }
-
-  .book-card__book-back {
-    height: 240px;
-    width: 160px;
-    position: absolute;
-    top: 0;
-    transform: translateZ(-40px);
-  }
-
-  .book-card__book-side {
-    position: absolute;
-    top: 5px;
-    bottom: 2px;
-    right: -29px;
-    width: 40px;
-    background-size: 5px;
-    background-color: #e1e1e1;
-    background-image: linear-gradient(to right, #ccc 35%, #e1e1e1 35%);
-    opacity: 0;
-    transform: rotate3d(0, 1, 0, 90deg);
-  }
-
-  .book-card__img {
-    background-color: #e1e1e1;
-    width: 160px;
-    height: 240px;
-    border: 2px solid var(--base-light-border-color);
-    border-left: 3px solid var(--base-light-border-color);
-    cursor: pointer;
-  }
-
-  @media(max-width:992px) {
-    .book-card__img {
-      width: 150px;
-      height: 230px;
-    }
-
-    .book-card__book-back {
-      height: 230px;
-      width: 150px;
-    }
-
-    .book-card__book-front {
-      height: 230px;
-    }
-
-    .book-card__book{
-      width: 150px;
-      height: 230px;
-    }
-
-    .book-card__cover {
-      width: 150px;
-      height: 230px;
-    }
-
-  }
-
   .card-text{
-
     margin: 0;
     margin-top: 10px;
-
     font-size: .75rem;
     font-weight: 400;
     line-height: 1.66;
@@ -90,10 +13,6 @@
     font-size: .85rem;
     font-weight: 400;
     line-height: 1.2;
-  }
-
-  .card-body{
-    padding: 0px;
   }
 
   .card-title:hover {
@@ -105,18 +24,38 @@
     color: #000;
   }
 
-  // STATES
-  &:hover {
-    .book-card__book {
-      transform: rotate3d(0, -1, 0, 30deg) translate(-15px, -30px);
-    }
+  .card-img-cont {
+    display: flex;
+    justify-content: center;
+  }
 
-    .book-card__book-back {
-      box-shadow: 5px 10px 15px rgba(0, 0, 0, 0.35);
-    }
+  .card-img{
+    height: 240px;
+    cursor: pointer;
+    border: 2px solid var(--base-light-border-color);
+  }
 
-    .book-card__book-side {
-      opacity: 1;
+  @media(max-width:576px){
+    .card-img{
+      width: 100%;
+      max-width: 210px;
+      height: 280px;
     }
+  }
+
+  @media(max-width:470px){
+    .card-img{
+      width: 100%;
+      height: auto;
+      max-height: 240px;
+      min-height: 240px;
+    }
+  }
+}
+
+@media(max-width:576px){
+
+  .book-card {
+    max-width: 254px; /* Измените максимальную ширину на 100% при ширине экрана до 576px */
   }
 }
