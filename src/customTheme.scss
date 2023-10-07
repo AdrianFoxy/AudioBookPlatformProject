@@ -282,5 +282,17 @@
  }
 
  .dark-theme .search-btn-cl{
-  color: white;
+  color: var(--base-dark-text-color);
  }
+
+ .dark-theme p{
+  color: var(--base-dark-text-color);
+ }
+
+ .dark-theme .player-p{
+  color: var(--base-light-text-color);
+ }
+//  .dark-theme .a_btns{
+//   color: var(--base-dark-text-color);
+//  }
+

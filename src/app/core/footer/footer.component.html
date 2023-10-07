@@ -6,12 +6,12 @@
           <a href="#">FoxWithBook</a>
         </div>
         <ul class="list-unstyled nav-links mb-5">
-          <li><a class="footer_a" href="#">{{ 'About' | translate }}</a></li>
-          <li><a class="footer_a" href="#">{{ 'Library' | translate }}</a></li>
+          <li><a class="footer_a" routerLink="/about">{{ 'About' | translate }}</a></li>
+          <li><a class="footer_a" routerLink="/library">{{ 'Library' | translate }}</a></li>
           <li><a class="footer_a" href="#">{{ 'Selections' | translate }}</a></li>
-          <li><a class="footer_a" href="#">{{ 'Support' | translate }}</a></li>
+          <li><a class="footer_a" href="https://savelife.in.ua/?gclid=CjwKCAjw4P6oBhBsEiwAKYVkq3Nm0eULSGkS6sZQXUrusrn0Flq24IVW7Oo5fl-rUP3MaHaWXWhc6BoCWpkQAvD_BwE">{{ 'Support' | translate }}</a></li>
           <li><a class="footer_a" href="#">FAQ</a></li>
-          <li><a class="footer_a" href="#">{{ 'Contacts' | translate }}</a></li>
+          <li><a class="footer_a" href="https://github.com/AdrianFoxy">{{ 'Contacts' | translate }}</a></li>
         </ul>
 
         <div class="social mb-4">
@@ -23,13 +23,14 @@
                 </span></a></li>
             <li class="tw"><a href="#"><span class="icon-twitter"><i class="fa fa-twitter" aria-hidden="true"></i>
                 </span></a></li>
-            <li class="gt"><a href="#"><span class="icon-github"><i class="fa fa-github" aria-hidden="true"></i>
+            <li class="gt"><a href="https://github.com/AdrianFoxy"><span class="icon-github"><i class="fa fa-github" aria-hidden="true"></i>
                 </span></a></li>
           </ul>
         </div>
 
         <div class="copyright">
           <p class="mb-0"><small>&copy; FoxWithBook. All Rights Reserved.</small></p>
+          <p class="mb-0"><small>Actually just little pet-project.</small></p>
           <div class="mt-2">
             <a style="cursor: pointer;" (click)="langService.switchLanguage('en')"><img class="lang-img" src="/assets/icons/united-kingdom.png" alt="en"></a>
             <a style="cursor: pointer;" (click)="langService.switchLanguage('ua')"><img class="lang-img" src="/assets/icons/ukraine.png" alt="ua"></a>

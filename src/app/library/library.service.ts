@@ -9,6 +9,7 @@ import { Narrator } from '../shared/models/narrator';
 import { BookSeries } from '../shared/models/bookSeries';
 import { BookLanguage } from '../shared/models/bookLanguage';
 import { sortingAndPaginationParams } from '../shared/models/audioBooksParams/sortingAndPaginationParams';
+import { SingleAudioBook } from '../shared/models/singleAudioBook';
 
 
 @Injectable({
@@ -99,6 +100,10 @@ export class LibraryService {
 
 
     return this.http.get<Pagination<AudioBook[]>>(this.baseUrl + 'AudioBook', { params });
+  }
+
+  getAudioBook(id: number){
+    return this.http.get<SingleAudioBook>(this.baseUrl + 'AudioBook/' + id);
   }
 
   getGenresForFilter() {
