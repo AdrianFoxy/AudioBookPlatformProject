@@ -52,8 +52,8 @@
             </mat-select>
           </mat-form-field>
 
-          <mat-form-field class="full-width" >
-            <mat-label class="">{{ 'Genres' | translate }}</mat-label>
+          <mat-form-field class="full-width">
+            <mat-label>{{ 'Genres' | translate }}</mat-label>
             <mat-select [formControl]="selectedIdGenres" multiple
               (selectionChange)="onFilterSelected(selectedIdGenres.value, 'genreIds')">
               <mat-select-trigger>
@@ -75,6 +75,7 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
+
 
           <mat-form-field class="full-width">
             <mat-label>{{ 'Authors' | translate }}</mat-label>
