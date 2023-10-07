@@ -163,6 +163,8 @@ export class LibraryComponent implements OnInit {
     this.selectedIdBookSeriesException = new FormControl();
     this.selectedIdBookLanguagesException = new FormControl();
 
+    this.sortingAndPaginationParams.sort = 'name';
+
     this.getAudioBooksForLibrary();
   }
 

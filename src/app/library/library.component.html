@@ -43,9 +43,9 @@
 
       <div class="collapse d-lg-block" id="collapseExample">
         <div class="filters mt-2">
-          <mat-form-field  class="single-element">
+          <mat-form-field class="single-element">
             <mat-label>{{ 'Sorting' | translate }}</mat-label>
-            <mat-select (selectionChange)="onSortSelected($event)" [value]="sortOptions[0].value">
+            <mat-select (selectionChange)="onSortSelected($event)" [(ngModel)]="sortingAndPaginationParams.sort">
               <mat-option *ngFor="let sort of sortOptions" [value]="sort.value">
                 {{ langService.whatCurrentLang() === 'en' ? sort.engName : sort.name }}
               </mat-option>
