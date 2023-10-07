@@ -1,27 +1,17 @@
-import { ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { StreamState } from '../models/stream-state';
 import { AudioService } from 'src/app/core/services/audio_service/audio.service';
 import { DarkModeService } from 'src/app/core/services/dark-mode-service/dark-mode.service';
+import { SingleAudioBook } from '../models/singleAudioBook';
 
 @Component({
   selector: 'app-audio-player',
   templateUrl: './audio-player.component.html',
   styleUrls: ['./audio-player.component.scss']
 })
-export class AudioPlayerComponent implements OnDestroy {
+export class AudioPlayerComponent implements OnDestroy, OnInit {
 
-  audioList = [
-    { id: 'asd1asd', url: '/assets/audio/FlyMeToTheMoon.mp3', name: 'Fly Me To The Moon' },
-    { id: 'asd2asd', url: '/assets/audio/LemonTree.mp3', name: 'Lemon Tree' },
-    { id: 'asd3asd', url: '/assets/audio/y2mate.is - Life Is Beautiful-a3v-WcQR8T0-192k-1693653889.mp3', name: 'Life Is Beautiful' },
-    { id: 'asd4asd', url: '/assets/audio/y2mate.is - Stray Gods The Ritual Red Path Everybody Wants to See You Fall in Love -qEyScxu714w-128k-1693649903.mp3', name: 'Everybody Wants to See You Fall in Love' },
-    { id: 'asd5asd', url: '/assets/audio/y2mate.is - JP Cooper She s On My Mind Official Video -5Z0EWqe6cLM-128k-1693650679.mp3', name: 'She s On My Mind' },
-    { id: 'asd6asd', url: '/assets/audio/y2mate.is - Adrift feat. Laura Bailey and Ashley Johnson from Stray Gods --HMq_9-Nn-A-192k-1693650865.mp3', name: 'Adrift' },
-    { id: 'asd7asd', url: '/assets/audio/y2mate.is - Morena Mariana Nolasco part. Vitor Kley Fan Animated Music Video Witch Bunny -jTWb-RIdN-I-192k-1693650931.mp3', name: 'Morena' },
-    { id: 'asd8asd', url: '/assets/audio/y2mate.is - Just The Two Of Us-52avIJWQWAY-192k-1693651021.mp3', name: 'Just Two Of Us' },
-    { id: 'asd9asd', url: '/assets/audio/y2mate.is - the_world_outside__is_gonna_be_the_death_of_me_-3qKf4GMz9Jo-192k-1693654398.mp3', name: 'The World Outside (Is Gonna Be the Death of Me)' },
-    { id: 'asd10asd', url: 'https://github.com/AdrianFoxy/AudioBooksStorage/blob/main/GoodMorning/Chapter1.mp3?raw=true', name: 'ABookChapter'}
-  ]
+  @Input() audiobook?: SingleAudioBook
 
   files: Array<any> = [];
   state: StreamState | undefined;
@@ -36,7 +26,7 @@ export class AudioPlayerComponent implements OnDestroy {
   countdownInterval: any;
 
   constructor(public darkmodeService: DarkModeService, private audioService: AudioService, private cdr: ChangeDetectorRef) {
-    this.files = this.audioList;
+
     // listen to stream state
     this.audioService.getState()
       .subscribe(state => {
@@ -56,9 +46,7 @@ export class AudioPlayerComponent implements OnDestroy {
     this.saveAudioDataBeforeF5();
   }
 
-
   // Basic player methods
-
   playStream(url: string) {
     this.audioService.playStream(url).subscribe(events => {
     });
@@ -91,8 +79,10 @@ export class AudioPlayerComponent implements OnDestroy {
     this.audioService.pause();
 
     clearInterval(this.countdownInterval);
+    console.log("pause test before if");
 
     if (this.state && this.state.currentTime !== undefined) {
+      console.log("pause test after if");
       const saveData = {
         currentFile: this.currentFile,
         currentTime: this.state?.currentTime,
@@ -286,6 +276,8 @@ export class AudioPlayerComponent implements OnDestroy {
 
   restorePlayerState() {
     const savedSong = localStorage.getItem(this.currentAudioKey);
+    console.log("Restore up");
+
     if (savedSong) {
       const parsedData = JSON.parse(savedSong);
       if (parsedData && parsedData.currentFile) {
@@ -304,8 +296,14 @@ export class AudioPlayerComponent implements OnDestroy {
 
         // console.log('Parsed currentTime', this.currentFile.currentTime);
         if (this.currentFile.currentTime) {
+          console.log("Restore current file");
+
           const overlay = document.querySelector('.overlay');
+          console.log("Overlay value:", overlay);
+
           if (overlay) {
+            console.log("Overlay remove hidden test");
+
             overlay.classList.remove('hidden');
             // console.log('Hidden overlay removed');
           }

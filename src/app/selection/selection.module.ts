@@ -10,6 +10,9 @@ import { SelectionComponent } from './selection.component';
   ],
   imports: [
     CommonModule
+  ],
+  exports: [
+    SelectionComponent
   ]
 })
 export class SelectionModule { }

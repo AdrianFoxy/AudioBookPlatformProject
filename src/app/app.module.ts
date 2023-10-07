@@ -10,6 +10,8 @@ import { LibraryModule } from './library/library.module';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader'
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { AboutModule } from './about/about.module';
+import { SelectionModule } from './selection/selection.module';
 
 
 export function HttpLoaderFactory(http:HttpClient){
@@ -27,6 +29,8 @@ export function HttpLoaderFactory(http:HttpClient){
     CoreModule,
     HomeModule,
     LibraryModule,
+    AboutModule,
+    SelectionModule,
     HttpClientModule,
     TranslateModule.forRoot({
       loader: {

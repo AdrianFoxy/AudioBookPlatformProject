@@ -10,6 +10,9 @@ import { AboutComponent } from './about.component';
   ],
   imports: [
     CommonModule
+  ],
+  exports: [
+    AboutComponent
   ]
 })
 export class AboutModule { }
