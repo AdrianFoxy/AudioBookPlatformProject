@@ -56,27 +56,13 @@ export class AudioPlayerComponent implements OnDestroy, OnInit {
 
   openFile(file: BookAudioFile, index: any) {
 
-    console.log('Open file moment');
-    console.log("test1");
-
-    console.log(file); // Check the value of the `file` variable.
-    console.log(file?.name); // Check the value of the `name` property.
-
-    console.log(file.name + 'AudioFule');
-    console.log("test2");
-
     // Save old volume for new audio
     var volumeBefore = this.currentFile.currentVolume !== undefined ? this.currentFile.currentVolume : 1;
-    console.log(this.currentFile.currentVolume);
 
     var playbackRateBefore = this.currentFile.playbackRate !== undefined ? this.currentFile.playbackRate : 1;
-    console.log(this.currentFile.playbackRate);
-
-    console.log(this.currentFile.currentVolume + ' ' + this.currentFile.playbackRate);
 
     this.currentFile = { index, file };
     this.currentFile.name = file.name;
-    console.log(file.name + 'AudioFule');
 
     this.audioService.stop();
     this.playStream(file.audioFileUrl);
@@ -95,18 +81,12 @@ export class AudioPlayerComponent implements OnDestroy, OnInit {
   }
 
   pause() {
-    if (this.state && this.state.playing === true) { // Проверяем, проигрывается ли аудио в текущем состоянии
+    if (this.state && this.state.playing === true) {
 
-      this.audioService.pause(); // Пауза только если аудио воспроизводится
-
+      this.audioService.pause();
       clearInterval(this.countdownInterval);
-      console.log("Пауза: до проверки");
-
-      console.log('ПАУЗА: ');
-      console.log(this.state.currentTime);
 
       if (this.state.currentTime !== undefined) {
-        console.log("Пауза: после проверки");
         const existingDataString = localStorage.getItem(this.currentAudioKey);
         let existingData = existingDataString ? JSON.parse(existingDataString) : {};
 
@@ -118,11 +98,6 @@ export class AudioPlayerComponent implements OnDestroy, OnInit {
           currentVolume: this.audioService.getVolume(),
           playbackRate: this.currentFile.playbackRate
         };
-
-        console.log('ПАУЗА ПОСЛЕ ПРОВЕРКИ:');
-        console.log(this.state.currentTime);
-
-        // Сохраняем обновленные данные в локальное хранилище
         localStorage.setItem(this.currentAudioKey, JSON.stringify(existingData));
       }
     }
@@ -130,29 +105,22 @@ export class AudioPlayerComponent implements OnDestroy, OnInit {
 
 
   play() {
+    const currentAudioFileUrl = this.currentFile.file?.audioFileUrl;
 
-    // Case if current audio in service and in real diffent, dont let play audio from one book in other
-    if(this.audioService.currentAudioFile() != this.currentFile.file.audioFileUrl){
-      this.playStream(this.currentFile.file.audioFileUrl);
-      this.audioService.seekTo(this.currentFile.currentTime);
-      this.changePlaybackRate(this.currentFile.playbackRate);
+    if (currentAudioFileUrl) {
+      const isDifferentAudio = this.audioService.currentAudioFile() !== currentAudioFileUrl;
+      const isLocalStorageSet = localStorage.getItem(this.currentAudioKey);
+
+      if (isDifferentAudio || (isLocalStorageSet && !this.state?.canplay)) {
+        this.audioService.setCurrentAudioFile(currentAudioFileUrl);
+        this.playStream(currentAudioFileUrl);
+        this.audioService.seekTo(this.currentFile.currentTime);
+        this.changePlaybackRate(this.currentFile.playbackRate);
+      } else {
+        this.audioService.play();
+      }
     }
-    console.log(this.audioService.currentAudioFile());
 
-    if (localStorage.getItem(this.currentAudioKey) && !this.state?.canplay) {
-
-      this.audioService.setCurrentAudioFile(this.currentFile.file.audioFileUrl);
-      this.playStream(this.currentFile.file.audioFileUrl);
-      this.audioService.seekTo(this.currentFile.currentTime);
-      this.changePlaybackRate(this.currentFile.playbackRate);
-
-    }
-    else {
-      console.log('ELSE PLAY TEST');
-      console.log(this.currentFile);
-
-      this.audioService.play();
-    }
     this.hideOverlay();
   }
 
@@ -426,7 +394,7 @@ export class AudioPlayerComponent implements OnDestroy, OnInit {
   // ON DESTROY
   ngOnDestroy() {
     this.pause();
-    console.log("On Destroy works");
+    // console.log("On Destroy works");
   }
 }
 
