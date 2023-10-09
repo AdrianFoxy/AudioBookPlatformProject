@@ -101,6 +101,10 @@ export class AudioService {
     return this.audioObj.src;
   }
 
+  setCurrentAudioFile(url: string){
+    this.audioObj.src = url;
+  }
+
   play() {
     this.audioObj.play();
   }
@@ -203,5 +207,4 @@ export class AudioService {
   getState(): Observable<StreamState> {
     return this.stateChange.asObservable();
   }
-
 }

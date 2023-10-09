@@ -31,7 +31,7 @@ export class AudioPlayerComponent implements OnDestroy, OnInit {
 
 
   constructor(public darkmodeService: DarkModeService, private audioService: AudioService,
-     private cdr: ChangeDetectorRef, private activatedRoute: ActivatedRoute) {
+    private cdr: ChangeDetectorRef, private activatedRoute: ActivatedRoute) {
 
     // listen to stream state
     this.audioService.getState()
@@ -69,7 +69,7 @@ export class AudioPlayerComponent implements OnDestroy, OnInit {
     var volumeBefore = this.currentFile.currentVolume !== undefined ? this.currentFile.currentVolume : 1;
     console.log(this.currentFile.currentVolume);
 
-    var playbackRateBefore = this.currentFile.playbackRate !== undefined ? this.currentFile.playbackRate: 1;
+    var playbackRateBefore = this.currentFile.playbackRate !== undefined ? this.currentFile.playbackRate : 1;
     console.log(this.currentFile.playbackRate);
 
     console.log(this.currentFile.currentVolume + ' ' + this.currentFile.playbackRate);
@@ -95,18 +95,23 @@ export class AudioPlayerComponent implements OnDestroy, OnInit {
   }
 
   pause() {
-    if (this.state && this.state.playing === true) { // Check if the audio is currently playing in the state
-      this.audioService.pause(); // Pause only if it's playing
+    if (this.state && this.state.playing === true) { // Проверяем, проигрывается ли аудио в текущем состоянии
+
+      this.audioService.pause(); // Пауза только если аудио воспроизводится
 
       clearInterval(this.countdownInterval);
-      console.log("pause test before if");
+      console.log("Пауза: до проверки");
 
-      console.log('PAUSE TEST:');
+      console.log('ПАУЗА: ');
       console.log(this.state.currentTime);
 
       if (this.state.currentTime !== undefined) {
-        console.log("pause test after if");
-        const saveData = {
+        console.log("Пауза: после проверки");
+        const existingDataString = localStorage.getItem(this.currentAudioKey);
+        let existingData = existingDataString ? JSON.parse(existingDataString) : {};
+
+        existingData = {
+          ...existingData,
           audioBookId: this.audiobook?.id,
           currentFile: this.currentFile,
           currentTime: this.state.currentTime,
@@ -114,49 +119,47 @@ export class AudioPlayerComponent implements OnDestroy, OnInit {
           playbackRate: this.currentFile.playbackRate
         };
 
-        console.log('PAUSE AFTER IF TEST:');
+        console.log('ПАУЗА ПОСЛЕ ПРОВЕРКИ:');
         console.log(this.state.currentTime);
 
-
-        localStorage.setItem(this.currentAudioKey, JSON.stringify(saveData));
+        // Сохраняем обновленные данные в локальное хранилище
+        localStorage.setItem(this.currentAudioKey, JSON.stringify(existingData));
       }
     }
   }
 
+
   play() {
-    console.log(this.state);
+
+    // Case if current audio in service and in real diffent, dont let play audio from one book in other
+    if(this.audioService.currentAudioFile() != this.currentFile.file.audioFileUrl){
+      this.playStream(this.currentFile.file.audioFileUrl);
+      this.audioService.seekTo(this.currentFile.currentTime);
+      this.changePlaybackRate(this.currentFile.playbackRate);
+    }
+    console.log(this.audioService.currentAudioFile());
 
     if (localStorage.getItem(this.currentAudioKey) && !this.state?.canplay) {
 
+      this.audioService.setCurrentAudioFile(this.currentFile.file.audioFileUrl);
       this.playStream(this.currentFile.file.audioFileUrl);
       this.audioService.seekTo(this.currentFile.currentTime);
       this.changePlaybackRate(this.currentFile.playbackRate);
 
-    } else {
+    }
+    else {
+      console.log('ELSE PLAY TEST');
+      console.log(this.currentFile);
+
       this.audioService.play();
     }
     this.hideOverlay();
   }
 
+
+  // DO SOMETHING LATER
   playwithoutcontinue() {
-    console.log('playwithoutcontinue', this.state);
-
-    if (localStorage.getItem(this.currentAudioKey) && !this.state?.canplay) {
-      console.log('Saved song data found.');
-      this.playStream(this.currentFile.file.url);
-
-      let hasStartedPlaying = false;
-
-      this.audioService.getState().subscribe(state => {
-        if (state.canplay && !hasStartedPlaying) {
-          hasStartedPlaying = true;
-          this.audioService.seekTo(this.currentFile.currentTime);
-          this.audioService.pause();
-          this.hideOverlay();
-        }
-      });
-    }
-    this.hideOverlay();
+    this.play();
   }
 
   stop() {
@@ -164,15 +167,10 @@ export class AudioPlayerComponent implements OnDestroy, OnInit {
   }
 
   next() {
-    console.log("Before next if");
-
     if (!this.isLastPlaying()) {
-      console.log("After next if");
-
       const index = this.currentFile.index + 1;
-
       const file = this.audiobook?.bookAudioFile[index];
-      if(file){
+      if (file) {
         this.setActiveItem(index);
         this.openFile(file, index);
       }
@@ -183,7 +181,7 @@ export class AudioPlayerComponent implements OnDestroy, OnInit {
     const index = this.currentFile.index - 1;
     const file = this.audiobook?.bookAudioFile[index];
 
-    if(file){
+    if (file) {
       this.setActiveItem(index);
       this.openFile(file, index);
     }
@@ -199,7 +197,7 @@ export class AudioPlayerComponent implements OnDestroy, OnInit {
 
   onSliderChangeEnd(change: Event) {
     this.audioService.seekTo(change);
-    console.log(change);
+    // console.log(change);
   }
 
   // SETTING METHODS, LIKE VOLUME AND PLAYBACK RATE
@@ -220,32 +218,47 @@ export class AudioPlayerComponent implements OnDestroy, OnInit {
   }
 
 
-  // ENDED AUDIO ID METHODS
-  getPlayedSongIds(): number[] {
-    const storedIds = localStorage.getItem('playedSongIds');
-    return storedIds? JSON.parse(storedIds) : [];
+  getPlayedSongIds(): Set<number> {
+    const existingDataString = localStorage.getItem(this.currentAudioKey);
+    let existingData = existingDataString ? JSON.parse(existingDataString) : {};
+
+    if (existingData.hasOwnProperty('playedAudioIds')) {
+      return new Set(existingData.playedAudioIds);
+    } else {
+      return new Set();
+    }
   }
 
-  savePlayedSongIds(ids: number[]) {
-    localStorage.setItem('playedSongIds', JSON.stringify(ids));
+
+  savePlayedSongIds(ids: Set<number>) {
+    const localStorageValue = localStorage.getItem(this.currentAudioKey);
+
+    if (localStorageValue) {
+      const currentAudioData = JSON.parse(localStorageValue);
+      const playedAudioIds = new Set(currentAudioData.playedAudioIds || []);
+
+      ids.forEach(id => playedAudioIds.add(id));
+
+      currentAudioData.playedAudioIds = Array.from(playedAudioIds);
+      localStorage.setItem(this.currentAudioKey, JSON.stringify(currentAudioData));
+    } else {
+      const playedAudioIds = Array.from(ids);
+      localStorage.setItem(this.currentAudioKey, JSON.stringify({ playedAudioIds }));
+    }
   }
 
   addToLocalStorage(id: number) {
-    let storedIds = this.getPlayedSongIds();
-
-    if (!storedIds.includes(id)) {
-      storedIds.push(id);
+    const storedIds = this.getPlayedSongIds();
+    // console.log('ADD TO LOCAL STORAGE');
+    if (!storedIds.has(id)) {
+      storedIds.add(id);
       this.savePlayedSongIds(storedIds);
     }
   }
 
   isSongPlayed(id: number): boolean {
-    // console.log("SongPlayedTEST" + storedIds.includes(id));
-    // console.log(typeof id);
-    // console.log(storedIds);
-    // console.log(typeof storedIds);
     const storedIds = this.getPlayedSongIds();
-    return storedIds.includes(id);
+    return storedIds.has(id);
   }
 
   // TIMER METHODS
@@ -309,7 +322,8 @@ export class AudioPlayerComponent implements OnDestroy, OnInit {
 
   nextAudioAfterEnded() {
     this.audioService.audioObj.addEventListener('ended', () => {
-      this.addToLocalStorage(this.currentFile.file.id);
+      if (this.currentFile)
+        this.addToLocalStorage(this.currentFile.file.id);
 
       if (!this.isLastPlaying()) {
         console.log(this.currentFile);
@@ -320,20 +334,16 @@ export class AudioPlayerComponent implements OnDestroy, OnInit {
 
   restorePlayerState() {
     const savedSong = localStorage.getItem(this.currentAudioKey);
-    console.log("Restore up");
+    // console.log("Restore up");
 
     if (savedSong) {
-      console.log("Restore up part 1");
-
       const parsedData = JSON.parse(savedSong);
       const id = this.currentAudioBookId;
       console.log(parsedData.audioBookId + ' ' + id);
 
       if (parsedData && parsedData.currentFile && parsedData.audioBookId == id) {
-        console.log("Restore up part 2, final");
 
         this.currentFile = parsedData.currentFile;
-        console.log(this.currentFile);
 
         this.activeItemIndex = this.currentFile.index;
         this.currentFile.currentTime = parsedData.currentTime;
@@ -347,27 +357,24 @@ export class AudioPlayerComponent implements OnDestroy, OnInit {
           sliderElement.value = String(parsedData.currentTime);
         }
         if (this.currentFile.currentTime) {
-          console.log("Restore current file");
-
+          // console.log("Restore current file");
           const overlay = document.querySelector('.overlay');
-          console.log("Overlay value:", overlay);
+          // console.log("Overlay value:", overlay);
 
           if (overlay) {
-            console.log("Overlay remove hidden test");
-
+            // console.log("Overlay remove hidden test");
             overlay.classList.remove('hidden');
-            // console.log('Hidden overlay removed');
           }
         }
       }
     }
   }
 
-  setDefaultAudioValumeAndPlayBackRate(){
-    if(!this.currentFile.currentVolume){
+  setDefaultAudioValumeAndPlayBackRate() {
+    if (!this.currentFile.currentVolume) {
       this.currentFile.currentVolume = 1;
     }
-    if(!this.currentFile.playbackRate){
+    if (!this.currentFile.playbackRate) {
       this.currentFile.playbackRate = 1;
     }
   }
@@ -376,7 +383,7 @@ export class AudioPlayerComponent implements OnDestroy, OnInit {
 
   // update audio progress bar
   getProgressBarBackground() {
-    if(!this.darkmodeService.isLightTheme()){
+    if (!this.darkmodeService.isLightTheme()) {
       if (this.state && this.state.duration !== undefined && this.state.currentTime !== undefined) {
         const percentage = (this.state.currentTime / this.state.duration) * 100;
         return {
@@ -402,11 +409,7 @@ export class AudioPlayerComponent implements OnDestroy, OnInit {
   // active element in playlist
   setActiveItem(index: number) {
     this.activeItemIndex = index;
-    console.log('Set active is ok' + this.activeItemIndex);
-  }
-
-  hasActiveItem(): boolean {
-    return this.activeItemIndex !== -1;
+    // console.log('Set active is ok' + this.activeItemIndex);
   }
 
   // overlay after using F5 or just open page after
@@ -423,8 +426,7 @@ export class AudioPlayerComponent implements OnDestroy, OnInit {
   // ON DESTROY
   ngOnDestroy() {
     this.pause();
-    this.currentFile = undefined;
-    console.log("it works!");
+    console.log("On Destroy works");
   }
 }
 
