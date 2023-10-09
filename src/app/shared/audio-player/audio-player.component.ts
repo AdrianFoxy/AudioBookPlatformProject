@@ -118,8 +118,11 @@ export class AudioPlayerComponent implements OnDestroy, OnInit {
   play() {
     console.log(this.state);
 
-    if (localStorage.getItem(this.currentAudioKey) && !this.state?.canplay) {
-      console.log('File restored');
+    if (localStorage.getItem(this.currentAudioKey)) {
+      console.log('File restored' + this.currentFile);
+      console.log(this.currentFile);
+      console.log(this.currentFile.file.audioFileUrl);
+
 
       this.playStream(this.currentFile.file.audioFileUrl);
       this.audioService.seekTo(this.currentFile.currentTime);
@@ -329,6 +332,8 @@ export class AudioPlayerComponent implements OnDestroy, OnInit {
         console.log("Restore up part 2, final");
 
         this.currentFile = parsedData.currentFile;
+        console.log(this.currentFile);
+
         this.activeItemIndex = this.currentFile.index;
         this.currentFile.currentTime = parsedData.currentTime;
         this.currentFile.playbackRate = parsedData.playbackRate;
