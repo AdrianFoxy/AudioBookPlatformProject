@@ -42,6 +42,7 @@ export class AudioPlayerComponent implements OnDestroy, OnInit {
   }
 
   ngOnInit() {
+    this.setDefaultAudioValumeAndPlayBackRate();
     this.restorePlayerState();
     this.nextAudioAfterEnded();
     this.saveAudioDataBeforeF5();
@@ -359,6 +360,15 @@ export class AudioPlayerComponent implements OnDestroy, OnInit {
           }
         }
       }
+    }
+  }
+
+  setDefaultAudioValumeAndPlayBackRate(){
+    if(!this.currentFile.currentVolume){
+      this.currentFile.currentVolume = 1;
+    }
+    if(!this.currentFile.playbackRate){
+      this.currentFile.playbackRate = 1;
     }
   }
 
