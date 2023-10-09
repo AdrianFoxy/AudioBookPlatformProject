@@ -29,7 +29,7 @@
   </div>
 
   <hr>
-  <app-audio-player [audiobook]="audiobook"></app-audio-player>
+  <app-audio-player *ngIf="audiobook" [audiobook]="audiobook"></app-audio-player>
   <hr>
   <h2>Схожі книги:</h2>
   <app-recomentdations></app-recomentdations>

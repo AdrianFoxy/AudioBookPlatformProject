@@ -1,5 +1,5 @@
-<div class="container player_bg" *ngIf="audiobook">
-  <div class="overlay">
+<div class="container player_bg">
+  <div class="overlay hidden">
     <div class="content row">
       <button class="close-button" (click)="playwithoutcontinue()">&times;</button>
       <div class="col-md-6 mt-4">
@@ -11,16 +11,17 @@
       </div>
     </div>
   </div>
-  <div class="row">
+  <div class="row" *ngIf="audiobook">
     <div class="col-md-3 col-12 order-md-1 order-2 mt-2">
       <h3 class="audio-player-h3">PlayList</h3>
       <ul class="list-group list-group-border">
-        <li class="list-group-item list-group-item-border" [class.active]="i === activeItemIndex" [class.played]="isSongPlayed(audio.id.toString())"
-          *ngFor="let audio of audiobook.bookAudioFile; let i = index" (click)="setActiveItem(i); openFile({ url: audio.audioFileUrl, name: audio.name }, i)">{{audio.name}}</li>
+        <li class="list-group-item list-group-item-border" [class.active]="i === activeItemIndex" [class.played]="isSongPlayed(audio.id)"
+          *ngFor="let audio of audiobook.bookAudioFile; let i = index" (click)="setActiveItem(i); openFile(audio, i)" >
+          {{audio.name}}</li>
       </ul>
     </div>
 
-    <div class="col-md-9 col-12 order-md-2 order-1">
+    <div class="col-md-9 col-12 order-md-2 order-1" *ngIf="audiobook">
       <div class="row">
         <div class="col-sm-8 col-md-5 col-lg-8 col-12 order-sm-1 order-2">
           <h4 class="audio-player-h4">{{audiobook.name}}</h4>
@@ -29,7 +30,8 @@
           <div class="btn-group" dropdown>
             <button dropdownToggle type="button" class="btn dropdown-toggle" aria-controls="dropdown-basic">
               <i class="fa fa-clock-o" aria-hidden="true"></i>
-              <span class="current_value" *ngIf="countdownMinutes > 0 || countdownSeconds > 0"> {{ formatWithLeadingZeros(countdownMinutes) }}:{{ formatWithLeadingZeros(countdownSeconds) }}</span>
+              <span class="current_value" *ngIf="countdownMinutes > 0 || countdownSeconds > 0"> {{
+                formatWithLeadingZeros(countdownMinutes) }}:{{ formatWithLeadingZeros(countdownSeconds) }}</span>
             </button>
             <ul id="dropdown-sleeptimer" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
               <li role="menuitem"><a class="dropdown-item" (click)="stopTimer()">disable</a></li>
@@ -67,44 +69,43 @@
             <ul id="dropdown-speed" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
               <li role="menuitem">
                 <div class="volume vertical">
-                  <li role="menuitem"><a class="dropdown-item" (click)="changePlaybackRate(0.5)">0.5x</a></li>
-                  <li role="menuitem"><a class="dropdown-item" (click)="changePlaybackRate(0.75)">0.75x</a></li>
-                  <li role="menuitem"><a class="dropdown-item" (click)="changePlaybackRate(1.0)">1.0x (Normal)</a></li>
-                  <li role="menuitem"><a class="dropdown-item" (click)="changePlaybackRate(1.25)">1.25x</a></li>
-                  <li role="menuitem"><a class="dropdown-item" (click)="changePlaybackRate(1.5)">1.5x</a></li>
-                  <li role="menuitem"><a class="dropdown-item" (click)="changePlaybackRate(2)">2.0x</a></li>
-                </div>
-              </li>
-            </ul>
+              <li role="menuitem"><a class="dropdown-item" (click)="changePlaybackRate(0.5)">0.5x</a></li>
+              <li role="menuitem"><a class="dropdown-item" (click)="changePlaybackRate(0.75)">0.75x</a></li>
+              <li role="menuitem"><a class="dropdown-item" (click)="changePlaybackRate(1.0)">1.0x (Normal)</a></li>
+              <li role="menuitem"><a class="dropdown-item" (click)="changePlaybackRate(1.25)">1.25x</a></li>
+              <li role="menuitem"><a class="dropdown-item" (click)="changePlaybackRate(1.5)">1.5x</a></li>
+              <li role="menuitem"><a class="dropdown-item" (click)="changePlaybackRate(2)">2.0x</a></li>
           </div>
-      </div>
-      </div>
-
-      <p class="player-p" *ngFor="let author of audiobook.author">{{author.name}} • number of chapters</p>
-      <p class="player-p" *ngIf="currentFile.name">Now playing: {{ currentFile.name }}</p>
-      <p class="player-p" *ngIf="!currentFile.name">Choose Audio</p>
-      <div>
-        <div class="audio_time">
-          <span class="current-time"
-            [hidden]="state?.error || currentFile.index === undefined">{{state?.readableCurrentTime || '00:00:00'
-            }}</span>
-          <span class="total-duration"
-            [hidden]="state?.error || currentFile.index === undefined">{{state?.readableDuration || '00:00:00' }}</span>
+          </li>
+          </ul>
         </div>
-
-        <input type="range" class="seek_slider" min="0" max="{{state?.duration}}" [value]="state?.currentTime"
-          (input)="onSliderChangeEnd($event)" [disabled]="state?.error || currentFile.index === undefined"
-          [ngStyle]="getProgressBarBackground()">
-      </div>
-
-      <div class="parent">
-        <button class="round-1" [disabled]="isFirstPlaying()" (click)="previous()"><i
-            class="fa fa-step-backward"></i></button>
-        <button class="round-1" *ngIf="!state?.playing" (click)="play()"> <i class="fa fa-play"></i> </button>
-        <button class="round-1" *ngIf="state?.playing" (click)="pause()"> <i class="fa fa-pause"></i> </button>
-        <button class="round-1" [disabled]="isLastPlaying()" (click)="next()"><i
-            class="fa fa-step-forward"></i></button>
       </div>
     </div>
+
+    <p class="player-p" *ngFor="let author of audiobook.author">{{author.name}} • {{ audiobook.bookAudioFile.length }} глав</p>
+    <p class="player-p" *ngIf="currentFile.name">Now playing: {{ currentFile.name }}</p>
+    <p class="player-p" *ngIf="!currentFile.name">Choose Audio</p>
+    <div>
+      <div class="audio_time">
+        <span class="current-time"
+          [hidden]="state?.error || currentFile.index === undefined">{{state?.readableCurrentTime || '00:00:00'
+          }}</span>
+        <span class="total-duration"
+          [hidden]="state?.error || currentFile.index === undefined">{{state?.readableDuration || '00:00:00' }}</span>
+      </div>
+
+      <input type="range" class="seek_slider" min="0" max="{{state?.duration}}" [value]="state?.currentTime"
+        (input)="onSliderChangeEnd($event)" [disabled]="state?.error || currentFile.index === undefined"
+        [ngStyle]="getProgressBarBackground()">
+    </div>
+
+    <div class="parent">
+      <button class="round-1" [disabled]="isFirstPlaying()" (click)="previous()"><i
+          class="fa fa-step-backward"></i></button>
+      <button class="round-1" *ngIf="!state?.playing" [disabled]="currentFile.index === undefined" (click)="play()"> <i class="fa fa-play"></i> </button>
+      <button class="round-1" *ngIf="state?.playing" (click)="pause()"> <i class="fa fa-pause"></i> </button>
+      <button class="round-1" [disabled]="isLastPlaying()" (click)="next()"><i class="fa fa-step-forward"></i></button>
+    </div>
   </div>
+</div>
 </div>

@@ -38,30 +38,46 @@ export class AudioService {
 
   constructor() { }
 
-  streamObservable(url: string){
+  streamObservable(url: string) {
     return new Observable(observer => {
-
-      // Code to play choosen audio
       this.audioObj.src = url;
-      this.audioObj.load();
-      this.audioObj.play();
 
-      const handler = (event: Event) => {
+      const loadedmetadataHandler = () => {
+        // Audio is ready to play, so you can call play() here
+        this.audioObj.play();
+      };
+
+      const eventHandler = (event: Event) => {
         this.updateStateEvents(event);
         observer.next(event);
-      }
+      };
 
-      this.addEvent(this.audioObj, this.audioEvents, handler);
+      const errorHandler = (error: Event) => {
+        // Handle any errors that may occur during loading or playback
+        observer.error(error);
+      };
 
-      return () => {
-        // Stop Playing
+      // Add event listeners
+      this.audioObj.addEventListener("loadedmetadata", loadedmetadataHandler);
+      this.addEvent(this.audioObj, this.audioEvents, eventHandler);
+      this.audioObj.addEventListener("error", errorHandler);
+
+      // Cleanup function
+      const cleanup = () => {
+        // Remove event listeners
+        this.audioObj.removeEventListener("loadedmetadata", loadedmetadataHandler);
+        this.removeEvent(this.audioObj, this.audioEvents, eventHandler);
+        this.audioObj.removeEventListener("error", errorHandler);
+
+        // Stop playing and reset audio
         this.audioObj.pause();
         this.audioObj.currentTime = 0;
-        // remove event listeners
-        this.removeEvent(this.audioObj, this.audioEvents, handler);
-      }
+      };
+
+      return cleanup;
     });
   }
+
 
   addEvent(obj: EventTarget, events: string[], handler: (event: Event) => void) {
     events.forEach(event => {
@@ -79,6 +95,14 @@ export class AudioService {
 
   playStream(url: string) {
     return this.streamObservable(url).pipe(takeUntil(this.stop$));
+  }
+
+  currentAudioFile(){
+    return this.audioObj.src;
+  }
+
+  setCurrentAudioFile(url: string){
+    this.audioObj.src = url;
   }
 
   play() {
@@ -162,6 +186,7 @@ export class AudioService {
         break;
 
     }
+
     this.stateChange.next(this.state);
   }
 
@@ -182,5 +207,4 @@ export class AudioService {
   getState(): Observable<StreamState> {
     return this.stateChange.asObservable();
   }
-
 }
