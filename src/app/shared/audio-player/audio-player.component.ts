@@ -101,6 +101,9 @@ export class AudioPlayerComponent implements OnDestroy, OnInit {
       clearInterval(this.countdownInterval);
       console.log("pause test before if");
 
+      console.log('PAUSE TEST:');
+      console.log(this.state.currentTime);
+
       if (this.state.currentTime !== undefined) {
         console.log("pause test after if");
         const saveData = {
@@ -110,29 +113,26 @@ export class AudioPlayerComponent implements OnDestroy, OnInit {
           currentVolume: this.audioService.getVolume(),
           playbackRate: this.currentFile.playbackRate
         };
+
+        console.log('PAUSE AFTER IF TEST:');
+        console.log(this.state.currentTime);
+
+
         localStorage.setItem(this.currentAudioKey, JSON.stringify(saveData));
       }
     }
   }
 
-
   play() {
     console.log(this.state);
 
-    if (localStorage.getItem(this.currentAudioKey)) {
-      console.log('File restored' + this.currentFile);
-      console.log(this.currentFile);
-      console.log(this.currentFile.file.audioFileUrl);
-
+    if (localStorage.getItem(this.currentAudioKey) && !this.state?.canplay) {
 
       this.playStream(this.currentFile.file.audioFileUrl);
       this.audioService.seekTo(this.currentFile.currentTime);
       this.changePlaybackRate(this.currentFile.playbackRate);
-    }
-    else {
-      console.log('Play new or continue');
-      console.log(this.audioService.currentAudioFile());
 
+    } else {
       this.audioService.play();
     }
     this.hideOverlay();
@@ -190,10 +190,7 @@ export class AudioPlayerComponent implements OnDestroy, OnInit {
   }
 
   isFirstPlaying() {
-    // console.log(this.currentFile.index === 0);
-
     return this.currentFile.index === 0;
-    // return this.currentFile.file === this.audiobook?.bookAudioFile[0];
   }
 
   isLastPlaying() {
@@ -224,16 +221,16 @@ export class AudioPlayerComponent implements OnDestroy, OnInit {
 
 
   // ENDED AUDIO ID METHODS
-  getPlayedSongIds(): string[] {
-    const storedIdsString = localStorage.getItem('playedSongIds');
-    return storedIdsString ? JSON.parse(storedIdsString) : [];
+  getPlayedSongIds(): number[] {
+    const storedIds = localStorage.getItem('playedSongIds');
+    return storedIds? JSON.parse(storedIds) : [];
   }
 
-  savePlayedSongIds(ids: string[]) {
+  savePlayedSongIds(ids: number[]) {
     localStorage.setItem('playedSongIds', JSON.stringify(ids));
   }
 
-  addToLocalStorage(id: string) {
+  addToLocalStorage(id: number) {
     let storedIds = this.getPlayedSongIds();
 
     if (!storedIds.includes(id)) {
@@ -242,9 +239,12 @@ export class AudioPlayerComponent implements OnDestroy, OnInit {
     }
   }
 
-  isSongPlayed(id: string): boolean {
+  isSongPlayed(id: number): boolean {
+    // console.log("SongPlayedTEST" + storedIds.includes(id));
+    // console.log(typeof id);
+    // console.log(storedIds);
+    // console.log(typeof storedIds);
     const storedIds = this.getPlayedSongIds();
-
     return storedIds.includes(id);
   }
 

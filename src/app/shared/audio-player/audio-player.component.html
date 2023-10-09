@@ -15,13 +15,13 @@
     <div class="col-md-3 col-12 order-md-1 order-2 mt-2">
       <h3 class="audio-player-h3">PlayList</h3>
       <ul class="list-group list-group-border">
-        <li class="list-group-item list-group-item-border" [class.active]="i === activeItemIndex"
-          *ngFor="let audio of audiobook.bookAudioFile; let i = index" (click)="setActiveItem(i); openFile(audio, i)">
+        <li class="list-group-item list-group-item-border" [class.active]="i === activeItemIndex" [class.played]="isSongPlayed(audio.id)"
+          *ngFor="let audio of audiobook.bookAudioFile; let i = index" (click)="setActiveItem(i); openFile(audio, i)" >
           {{audio.name}}</li>
       </ul>
     </div>
 
-    <div class="col-md-9 col-12 order-md-2 order-1">
+    <div class="col-md-9 col-12 order-md-2 order-1" *ngIf="audiobook">
       <div class="row">
         <div class="col-sm-8 col-md-5 col-lg-8 col-12 order-sm-1 order-2">
           <h4 class="audio-player-h4">{{audiobook.name}}</h4>
