@@ -5,6 +5,7 @@ import { DarkModeService } from 'src/app/core/services/dark-mode-service/dark-mo
 import { SingleAudioBook } from '../models/singleAudioBook';
 import { ActivatedRoute } from '@angular/router';
 import { BookAudioFile } from '../models/bookAudioFile';
+import { LanguageService } from 'src/app/core/services/language-service/language.service';
 
 @Component({
   selector: 'app-audio-player',
@@ -31,7 +32,8 @@ export class AudioPlayerComponent implements OnDestroy, OnInit {
 
 
   constructor(public darkmodeService: DarkModeService, private audioService: AudioService,
-    private cdr: ChangeDetectorRef, private activatedRoute: ActivatedRoute) {
+    private cdr: ChangeDetectorRef, private activatedRoute: ActivatedRoute,
+    public langService: LanguageService) {
 
     // listen to stream state
     this.audioService.getState()

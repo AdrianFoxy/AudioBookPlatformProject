@@ -6,14 +6,14 @@
         <img src="/assets/images/fox_with_headphones.png">
       </div>
       <div class="col-md-6 mt-4">
-        <p>Привіт! Ти зупинився на {{currentFile.name}}, час: {{formatTime(currentFile.currentTime)}}</p>
-        <button *ngIf="!state?.playing" (click)="play()">Продовжити</button>
+        <p>{{ 'YouStoppedAt' | translate }} {{currentFile.name}}, {{ 'Time' | translate }}: {{formatTime(currentFile.currentTime)}}</p>
+        <button *ngIf="!state?.playing" (click)="play()">{{ 'Continue' | translate }}</button>
       </div>
     </div>
   </div>
   <div class="row" *ngIf="audiobook">
     <div class="col-md-3 col-12 order-md-1 order-2 mt-2">
-      <h3 class="audio-player-h3">PlayList</h3>
+      <h3 class="audio-player-h3">{{ 'PlayList' | translate }}</h3>
       <ul class="list-group list-group-border">
         <li class="list-group-item list-group-item-border" [class.active]="i === activeItemIndex" [class.played]="isSongPlayed(audio.id)"
           *ngFor="let audio of audiobook.bookAudioFile; let i = index" (click)="setActiveItem(i); openFile(audio, i)" >
@@ -34,13 +34,13 @@
                 formatWithLeadingZeros(countdownMinutes) }}:{{ formatWithLeadingZeros(countdownSeconds) }}</span>
             </button>
             <ul id="dropdown-sleeptimer" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
-              <li role="menuitem"><a class="dropdown-item" (click)="stopTimer()">disable</a></li>
-              <li role="menuitem"><a class="dropdown-item" (click)="setSleepTimer(10)">10min</a></li>
-              <li role="menuitem"><a class="dropdown-item" (click)="setSleepTimer(20)">20min</a></li>
-              <li role="menuitem"><a class="dropdown-item" (click)="setSleepTimer(30)">30min</a></li>
-              <li role="menuitem"><a class="dropdown-item" (click)="setSleepTimer(40)">40min</a></li>
-              <li role="menuitem"><a class="dropdown-item" (click)="setSleepTimer(50)">50min</a></li>
-              <li role="menuitem"><a class="dropdown-item" (click)="setSleepTimer(60)">60min</a></li>
+              <li role="menuitem"><a class="dropdown-item" (click)="stopTimer()">{{ 'Disable' | translate }}</a></li>
+              <li role="menuitem"><a class="dropdown-item" (click)="setSleepTimer(10)">10{{ 'Minutes' | translate }}</a></li>
+              <li role="menuitem"><a class="dropdown-item" (click)="setSleepTimer(20)">20{{ 'Minutes' | translate }}</a></li>
+              <li role="menuitem"><a class="dropdown-item" (click)="setSleepTimer(30)">30{{ 'Minutes' | translate }}</a></li>
+              <li role="menuitem"><a class="dropdown-item" (click)="setSleepTimer(40)">40{{ 'Minutes' | translate }}</a></li>
+              <li role="menuitem"><a class="dropdown-item" (click)="setSleepTimer(50)">50{{ 'Minutes' | translate }}</a></li>
+              <li role="menuitem"><a class="dropdown-item" (click)="setSleepTimer(60)">60{{ 'Minutes' | translate }}</a></li>
             </ul>
           </div>
 
@@ -71,7 +71,7 @@
                 <div class="volume vertical">
               <li role="menuitem"><a class="dropdown-item" (click)="changePlaybackRate(0.5)">0.5x</a></li>
               <li role="menuitem"><a class="dropdown-item" (click)="changePlaybackRate(0.75)">0.75x</a></li>
-              <li role="menuitem"><a class="dropdown-item" (click)="changePlaybackRate(1.0)">1.0x (Normal)</a></li>
+              <li role="menuitem"><a class="dropdown-item" (click)="changePlaybackRate(1.0)">1.0x {{ 'Normal' | translate }}</a></li>
               <li role="menuitem"><a class="dropdown-item" (click)="changePlaybackRate(1.25)">1.25x</a></li>
               <li role="menuitem"><a class="dropdown-item" (click)="changePlaybackRate(1.5)">1.5x</a></li>
               <li role="menuitem"><a class="dropdown-item" (click)="changePlaybackRate(2)">2.0x</a></li>
@@ -82,9 +82,9 @@
       </div>
     </div>
 
-    <p class="player-p" *ngFor="let author of audiobook.author">{{author.name}} • {{ audiobook.bookAudioFile.length }} глав</p>
-    <p class="player-p" *ngIf="currentFile.name">Now playing: {{ currentFile.name }}</p>
-    <p class="player-p" *ngIf="!currentFile.name">Choose Audio</p>
+    <p class="player-p" *ngFor="let author of audiobook.author">{{ langService.whatCurrentLang() === 'en' ? author.enName : author.name }} • {{ audiobook.bookAudioFile.length }} {{ 'AudioFiles' | translate }}</p>
+    <p class="player-p" *ngIf="currentFile.name">{{ 'Now-playing' | translate }}: {{ currentFile.name }}</p>
+    <p class="player-p" *ngIf="!currentFile.name">{{ 'Choose-Audio' | translate }}</p>
     <div>
       <div class="audio_time">
         <span class="current-time"

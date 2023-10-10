@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { LanguageService } from 'src/app/core/services/language-service/language.service';
 import { AudioBook } from 'src/app/shared/models/audiobook';
 
 @Component({
@@ -8,7 +9,9 @@ import { AudioBook } from 'src/app/shared/models/audiobook';
 })
 export class AudiobookItemComponent {
 
-  @Input() audiobook?: AudioBook
+  constructor(public langService: LanguageService) {}
+
+  @Input() audiobook?: AudioBook;
 
   truncateName(name: string): string {
     const length = name.length;
