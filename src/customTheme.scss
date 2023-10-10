@@ -1,6 +1,13 @@
 .dark-theme {
   background: var(--dark-mode-bg);
 
+  --base-dark-text-color: #fff;
+  --base-dark-border-color: #373737;
+  --base-dark-main-color: #574ccf;
+  --base-dark-secondary-color: #b2c0ff;
+  --base-dark-seek-color: #546ace;
+
+  --dark-mode-bg: #121212;
   --dark-mode-secondary-elements-bg: #3c3c3c;
   // Selectors from angular materials
   // Line under text

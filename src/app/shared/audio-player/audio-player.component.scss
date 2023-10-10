@@ -23,19 +23,6 @@
 
 }
 
-.overlay_loader{
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: red;
-  z-index: 3;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .content {
   width: 50%;
   text-align: center;
@@ -109,6 +96,18 @@
   justify-content: right;
 }
 
+.buttons-manager{
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+
+.buttons-manager-row-1 {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
 .buttons-manager-row-2{
   display: flex;
   flex-direction: row;
@@ -131,21 +130,16 @@
   color: #8adeb4;;
 }
 
+.buttons-manager-row-1 .btn-mng-row-1:active {
+  background-color: #8adeb4;
+  box-shadow: 0 0 2px darkslategray;
+  transform: translateY(2px);
+}
+
 .material-symbols-outlined {
   font-size: 40px;
 }
 
-.buttons-manager{
-  margin-top: 15px;
-  margin-bottom: 10px;
-}
-
-.buttons-manager-row-1 {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-}
 
 .buttons-manager-row-1 .btn-mng-row-1 {
   background-color: white;
@@ -179,13 +173,6 @@
   .buttons-manager-row-2 {
     display: none;
   }
-}
-
-
-.buttons-manager-row-1 .btn-mng-row-1:active {
-  background-color: #8adeb4;
-  box-shadow: 0 0 2px darkslategray;
-  transform: translateY(2px);
 }
 
 .seek_slider {
