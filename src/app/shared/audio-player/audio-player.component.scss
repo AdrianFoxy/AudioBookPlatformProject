@@ -103,20 +103,13 @@
   display: none;
 }
 
-.buttons {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin-bottom: 30px;
-}
-
 .volume {
   margin-top: 15px;
   display: flex;
   justify-content: right;
 }
 
-.parent {
+.buttons-manager-row-2{
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -124,7 +117,37 @@
   margin-top: 10px;
 }
 
-.parent button {
+.btn-forward-back{
+  border: 0;
+  padding: 0;
+  background-color: none;
+  font-size: 30px;
+  margin-left: 10px;
+  margin-right: 10px;
+  background-color: var(--base-orange-color);
+}
+
+.btn-forward-back:active{
+  color: #8adeb4;;
+}
+
+.material-symbols-outlined {
+  font-size: 40px;
+}
+
+.buttons-manager{
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+
+.buttons-manager-row-1 {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.buttons-manager-row-1 .btn-mng-row-1 {
   background-color: white;
   color: black;
   border: none;
@@ -137,20 +160,32 @@
   transition: all 0.2s ease;
   border: 2px solid black;
   border-bottom: 4px solid black;
+  border-radius: 70%;
 }
 
-.parent button:active {
+@media (max-width: 576px) {
+  .buttons-manager-row-1 .btn-mng-row-1{
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  .buttons-manager-row-1 .btn-forward-back{
+    display: none;
+  }
+
+}
+
+@media (min-width: 576px) {
+  .buttons-manager-row-2 {
+    display: none;
+  }
+}
+
+
+.buttons-manager-row-1 .btn-mng-row-1:active {
   background-color: #8adeb4;
   box-shadow: 0 0 2px darkslategray;
   transform: translateY(2px);
-}
-
-.parent button:not(:first-child) {
-  margin-left: 30px;
-}
-
-.round-1 {
-  border-radius: 70%;
 }
 
 .seek_slider {

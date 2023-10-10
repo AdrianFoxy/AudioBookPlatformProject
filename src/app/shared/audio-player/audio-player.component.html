@@ -99,13 +99,44 @@
         [ngStyle]="getProgressBarBackground()">
     </div>
 
-    <div class="parent">
-      <button class="round-1" [disabled]="isFirstPlaying()" (click)="previous()"><i
-          class="fa fa-step-backward"></i></button>
-      <button class="round-1" *ngIf="!state?.playing" [disabled]="" (click)="play()"> <i class="fa fa-play"></i> </button>
-      <button class="round-1" *ngIf="state?.playing" (click)="pause()"> <i class="fa fa-pause"></i> </button>
-      <button class="round-1" [disabled]="isLastPlaying()" (click)="next()"><i class="fa fa-step-forward"></i></button>
+    <div class="buttons-manager">
+      <div class="buttons-manager-row-1">
+        <button class="btn-mng-row-1" [disabled]="isFirstPlaying()" (click)="previous()"><i class="fa fa-step-backward"></i></button>
+
+        <button class="btn-forward-back">
+          <span class="material-symbols-outlined">
+          replay_10
+          </span>
+        </button>
+
+        <button class="btn-mng-row-1" *ngIf="!state?.playing" [disabled]="" (click)="play()"> <i class="fa fa-play"></i> </button>
+        <button class="btn-mng-row-1" *ngIf="state?.playing" (click)="pause()"> <i class="fa fa-pause"></i> </button>
+
+        <button class="btn-forward-back">
+          <span class="material-symbols-outlined">
+            forward_10
+          </span>
+        </button>
+
+        <button class="btn-mng-row-1" [disabled]="isLastPlaying()" (click)="next()"><i class="fa fa-step-forward"></i></button>
+      </div>
+
+      <div class="buttons-manager-row-2">
+        <button class="btn-forward-back">
+          <span class="material-symbols-outlined">
+          replay_10
+          </span>
+        </button>
+
+        <button class="btn-forward-back">
+          <span class="material-symbols-outlined">
+            forward_10
+          </span>
+        </button>
+      </div>
     </div>
   </div>
+
+
 </div>
 </div>
