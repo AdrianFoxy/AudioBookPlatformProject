@@ -168,6 +168,28 @@ export class AudioPlayerComponent implements OnDestroy, OnInit {
     // console.log(change);
   }
 
+  skipForward() {
+    if (this.state && this.state.currentTime !== undefined && this.state.duration !== undefined) {
+      const currentTime = this.state.currentTime + 10;
+      if (currentTime < this.state.duration) {
+        this.audioService.seekTo(currentTime);
+      } else {
+        this.next();
+      }
+    }
+  }
+
+  skipBackward() {
+    if (this.state && this.state.currentTime !== undefined) {
+      const currentTime = this.state.currentTime - 10;
+      if (currentTime >= 0) {
+        this.audioService.seekTo(currentTime);
+      } else {
+        this.previous();
+      }
+    }
+  }
+
   // SETTING METHODS, LIKE VOLUME AND PLAYBACK RATE
 
   changeVolume(ev: any) {
