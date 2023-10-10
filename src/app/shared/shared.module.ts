@@ -25,7 +25,6 @@ import { PagerComponent } from './pager/pager.component';
   imports: [
     CommonModule,
     FormsModule,
-    BrowserAnimationsModule,
     RouterModule,
     BsDropdownModule.forRoot(),
     SlickCarouselModule,
