@@ -17,41 +17,31 @@
   --base-light-border-color: #000;
   --base-light-text-color: #000;
 
-  --base-dark-text-color: #fff;
-  --base-dark-border-color: #373737;
-  --base-dark-main-color: #574ccf;
-  --base-dark-secondary-color: #b2c0ff;
-  --base-dark-seek-color: #546ace;
+  // Line under text
+  --mdc-filled-text-field-focus-active-indicator-color: #e97c00;
+  // label color text
+  --mdc-filled-text-field-focus-label-text-color: #1d1d1d;
+  // background color
+  --mdc-filled-text-field-container-color: #fff;
+  --mdc-filled-text-field-disabled-container-color: #464646;
+  --mdc-filled-text-field-label-text-color: #6c6c6c;
+  // Selected text color
+  --mat-select-enabled-trigger-text-color: #837e7d;
 
-  --dark-mode-bg: #121212;
+  // options background
+  --mat-select-panel-background-color: #fff;
 
-    // Line under text
-    --mdc-filled-text-field-focus-active-indicator-color: #e97c00;
-    // label color text
-    --mdc-filled-text-field-focus-label-text-color: #1d1d1d;
-    // background color
-    --mdc-filled-text-field-container-color: #fff;
-    --mdc-filled-text-field-disabled-container-color: #464646;
-    --mdc-filled-text-field-label-text-color: #6c6c6c;
-    // Selected text color
-    --mat-select-enabled-trigger-text-color: #837e7d;
-
-    // options background
-    --mat-select-panel-background-color: #fff;
-
-    // color of selected option text
-    --mat-option-selected-state-label-text-color: #1d1d1d;
-    --mat-option-label-text-color: #1d1d1d;
-    --mat-option-hover-state-layer-color: rgba(255, 255, 255, 0.08);
-    --mat-option-focus-state-layer-color: rgba(255, 255, 255, 0.08);
-    --mat-option-selected-state-layer-color: rgba(255, 255, 255, 0.08);
-    --mat-select-enabled-arrow-color: rgba(255, 255, 255, 0.54);
-    --mat-select-disabled-arrow-color: rgba(255, 255, 255, 0.38);
-    --mat-select-focused-arrow-color: #1d1d1d;
-    --mat-select-invalid-arrow-color: rgba(244, 67, 54, 0.87)
-
-  // Fonts
-  --mdc-filled-text-field-label-text-font:  var(--main-font);
+  // color of selected option text
+  --mat-option-selected-state-label-text-color: #1d1d1d;
+  --mat-option-label-text-color: #1d1d1d;
+  --mat-option-hover-state-layer-color: rgba(255, 255, 255, 0.08);
+  --mat-option-focus-state-layer-color: rgba(255, 255, 255, 0.08);
+  --mat-option-selected-state-layer-color: rgba(255, 255, 255, 0.08);
+  --mat-select-enabled-arrow-color: rgba(255, 255, 255, 0.54);
+  --mat-select-disabled-arrow-color: rgba(255, 255, 255, 0.38);
+  --mat-select-focused-arrow-color: #1d1d1d;
+  --mat-select-invalid-arrow-color: rgba(244, 67, 54, 0.87) // Fonts
+    --mdc-filled-text-field-label-text-font: var(--main-font);
   --mdc-outlined-text-field-label-text-font: var(--main-font);
   --mat-form-field-container-text-font: var(--main-font);
   --mat-form-field-subscript-text-font: var(--main-font);
@@ -61,7 +51,7 @@
 
 }
 
-.mat-mdc-slider.mat-primary{
+.mat-mdc-slider.mat-primary {
   --mdc-slider-handle-color: var(--mdc-filled-text-field-focus-active-indicator-color);
   --mdc-slider-focus-handle-color: var(--mdc-filled-text-field-focus-active-indicator-color);
   --mdc-slider-hover-handle-color: var(--mdc-filled-text-field-focus-active-indicator-color);
@@ -87,7 +77,7 @@
   --mdc-chip-label-text-font: var(--main-font);
 }
 
-.mat-mdc-option .mdc-list-item__primary-text{
+.mat-mdc-option .mdc-list-item__primary-text {
   font-family: 'Exo 2', sans-serif !important;
 }
 
@@ -98,7 +88,7 @@
 }
 
 .mat-mdc-standard-chip:not(.mdc-evolution-chip--disabled) {
-  background-color:  white !important;
+  background-color: white !important;
 }
 
 .mat-mdc-standard-chip:not(.mdc-evolution-chip--disabled) .mdc-evolution-chip__text-label {
@@ -110,7 +100,7 @@
 }
 
 
-html{
+html {
   font-family: var(--main-font) !important;
 }
 
@@ -166,20 +156,21 @@ hr {
   margin-left: 5px;
 }
 
-.my-pagination .page-item.active .page-link{
+// Pagination
+
+.my-pagination .page-item.active .page-link {
   background-color: var(--base-orange-color);
   color: var(--base-light-text-color);
   border-color: var(--base-light-border-color);
 }
 
 .my-pagination .page-link {
-  background-color:var(--base-light-bg-color);
+  background-color: var(--base-light-bg-color);
   border-color: var(--base-light-border-color);
   color: var(--base-light-text-color);
 }
 
-.my-pagination .page-link:hover{
+.my-pagination .page-link:hover {
   background-color: var(--base-orange-color);
   border: 2px solid var(--base-light-border-color);
 }
-

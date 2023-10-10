@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SingleAudioBook } from 'src/app/shared/models/singleAudioBook';
 import { LibraryService } from '../library.service';
 import { ActivatedRoute } from '@angular/router';
+import { LanguageService } from 'src/app/core/services/language-service/language.service';
 
 @Component({
   selector: 'app-book-details',
@@ -15,7 +16,8 @@ export class BookDetailsComponent implements OnInit {
 
   audiobook?: SingleAudioBook;
 
-  constructor(private libraryService: LibraryService, private activatedRoute: ActivatedRoute) {
+  constructor(private libraryService: LibraryService, private activatedRoute: ActivatedRoute,
+    public langService: LanguageService) {
   }
 
   ngOnInit(): void {

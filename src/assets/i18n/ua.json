@@ -32,5 +32,22 @@
   "Rating" : "Рейтнг",
   "Duration": "Тривалість (години)",
   "over" : "більше",
-  "Exceptions": "Винятки"
+  "Exceptions": "Винятки",
+  "S-Duration": "Тривалість",
+  "About-Book": "Про книгу",
+  "More-Desc": "Більше",
+  "Less-Desc": "Скрити опис",
+  "PlayList": "Список відтворення",
+  "Similar-books": "Схожі книги",
+  "This-is-usually-listened-too": "З цим слухають",
+  "Feedback": "Відгуки",
+  "YouStoppedAt": "Привіт! Ти зупинився на ",
+  "Time": "час",
+  "Continue": "Продовжити",
+  "Disable": "Вимкнути",
+  "Minutes": "хв",
+  "Normal": "Норма",
+  "AudioFiles": "Аудіо-файлів",
+  "Now-playing": "Зараз грає",
+  "Choose-Audio": "Оберіть аудіофайл зі списку відтворення"
 }

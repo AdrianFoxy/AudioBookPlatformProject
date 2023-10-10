@@ -12,17 +12,17 @@
         </span>
       </div>
       <hr>
-      <p class="secondary_txt">Автор: <a class="a_btns" href="" *ngFor="let author of audiobook.author">{{author.name}}</a></p>
-      <p class="secondary_txt">Читає: <a class="a_btns" href="">{{ audiobook.narrator.name }}</a></p>
-      <p class="secondary_txt">Жанри: <a class="a_btns" href="" *ngFor="let genre of audiobook.genre; let last = last">{{genre.name}}{{ last ? '' : ', ' }}</a></p>
-      <p class="secondary_txt">Мова: <span class="attb_span">{{ audiobook.bookLanguage.name }}</span></p>
-      <p class="secondary_txt">Тривалість: <span class="attb_span">{{audiobook.bookDuration}}</span></p>
+      <p class="secondary_txt">{{ 'Authors' | translate }}: <a class="a_btns" href="" *ngFor="let author of audiobook.author">{{ langService.whatCurrentLang() === 'en' ? author.enName : author.name }}</a></p>
+      <p class="secondary_txt">{{ 'Narrators' | translate }}: <a class="a_btns" href="">{{ audiobook.narrator.name }}</a></p>
+      <p class="secondary_txt">{{ 'Genres' | translate }}: <a class="a_btns" href="" *ngFor="let genre of audiobook.genre; let last = last">{{ langService.whatCurrentLang() === 'en' ? genre.enName : genre.name }}{{ last ? '' : ', ' }}</a></p>
+      <p class="secondary_txt">{{ 'Language' | translate }}: <span class="attb_span">{{ langService.whatCurrentLang() === 'en' ? audiobook.bookLanguage.enName : audiobook.bookLanguage.name }} {{ audiobook.bookLanguage.name }}</span></p>
+      <p class="secondary_txt">{{ 'S-Duration' | translate }}: <span class="attb_span">{{audiobook.bookDuration}}</span></p>
       <hr>
-      <h2>Про книгу:</h2>
+      <h2>{{ 'About-Book' | translate }}:</h2>
       <div>
         <p class="description" [innerHTML]="isExpanded ? audiobook.description : truncatedText"></p>
         <a class="show-more" (click)="toggleText(audiobook.description)">
-          {{ isExpanded ? 'Скрити опис' : 'Більше' }}
+          {{ isExpanded ? ('Less-Desc' | translate) : ('More-Desc' | translate) }}
         </a>
       </div>
     </div>
@@ -31,16 +31,16 @@
   <hr>
   <app-audio-player *ngIf="audiobook" [audiobook]="audiobook"></app-audio-player>
   <hr>
-  <h2>Схожі книги:</h2>
+  <h2>{{ 'Similar-books' | translate }}:</h2>
   <app-recomentdations></app-recomentdations>
   <hr>
-  <h2>З цим слухають:</h2>
+  <h2>{{ 'This-is-usually-listened-too' | translate }}:</h2>
   <app-recomentdations></app-recomentdations>
   <hr>
 
   <div class="row reviews">
     <div class="col-md-2 mb-3">
-      <h2>Відгуки</h2>
+      <h2>{{ 'Feedback' | translate }}</h2>
     </div>
     <div class="col-md-10">
       <div class="review mb-3">
