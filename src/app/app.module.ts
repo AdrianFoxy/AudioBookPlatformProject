@@ -28,7 +28,6 @@ export function HttpLoaderFactory(http:HttpClient){
     BrowserAnimationsModule,
     CoreModule,
     HomeModule,
-    LibraryModule,
     AboutModule,
     SelectionModule,
     HttpClientModule,

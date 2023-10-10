@@ -22,6 +22,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 
 import { FilterPipe } from './pipes/filter.pipe';
+import { LibraryRoutingModule } from './library-routing.module';
 
 
 @NgModule({
@@ -33,7 +34,7 @@ import { FilterPipe } from './pipes/filter.pipe';
   ],
   imports: [
     CommonModule,
-    RouterModule,
+    LibraryRoutingModule,
     MatFormFieldModule,
     MatSelectModule,
     MatSliderModule,
@@ -46,7 +47,6 @@ import { FilterPipe } from './pipes/filter.pipe';
     SharedModule
   ],
   exports:[
-    LibraryComponent
   ]
 })
 export class LibraryModule { }

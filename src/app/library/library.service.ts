@@ -10,6 +10,7 @@ import { BookSeries } from '../shared/models/bookSeries';
 import { BookLanguage } from '../shared/models/bookLanguage';
 import { sortingAndPaginationParams } from '../shared/models/audioBooksParams/sortingAndPaginationParams';
 import { SingleAudioBook } from '../shared/models/singleAudioBook';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({
@@ -17,7 +18,9 @@ import { SingleAudioBook } from '../shared/models/singleAudioBook';
 })
 export class LibraryService {
 
-  baseUrl = 'https://localhost:7088/api/';
+  //baseUrl = 'https://localhost:7088/api/';
+  private baseUrl = environment.apiUrl
+  // private baseUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) { }
 
