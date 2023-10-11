@@ -3,7 +3,7 @@
     <div ngxSlickItem *ngFor="let book of books" class="slide">
       <div class="card">
         <div class="img-container">
-          <a class="img_a" routerLink="/library/{{book.id}}">
+          <a class="img_a">
             <div class="card-img-container">
               <img [src]="book.imageSrc" class="card-img" alt="bookimg">
 
@@ -11,7 +11,7 @@
           </a>
         </div>
         <div class="card-body">
-          <a routerLink="/library/{{book.id}}" class="book_name">
+          <a class="book_name">
             <h5 class="card-title"><b>{{ book.title }}</b></h5>
           </a>
           <p class="card-text">

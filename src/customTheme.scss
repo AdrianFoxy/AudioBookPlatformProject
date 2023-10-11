@@ -9,22 +9,22 @@
 
   --dark-mode-bg: #121212;
   --dark-mode-secondary-elements-bg: #3c3c3c;
-  // Selectors from angular materials
-  // Line under text
+  /* Selectors from angular materials */
+  /* Line under text */
   --mdc-filled-text-field-focus-active-indicator-color: #574ccf;
-  // label color text
+  /* label color text */
   --mdc-filled-text-field-focus-label-text-color: #626262;
-  // background color
+  /* background color*/
   --mdc-filled-text-field-container-color: #1d1d1d;
   --mdc-filled-text-field-disabled-container-color: #464646;
   --mdc-filled-text-field-label-text-color: #6c6c6c;
-  // Selected text color
+  /* Selected text color */
   --mat-select-enabled-trigger-text-color: #837e7d;
 
-  // options background
+  /* options background */
   --mat-select-panel-background-color: #171717;
 
-  // color of selected option text
+  /* color of selected option text */
   --mat-option-selected-state-label-text-color: white;
   --mat-option-label-text-color: white;
   --mat-option-hover-state-layer-color: rgba(255, 255, 255, 0.08);
@@ -66,13 +66,13 @@
   color: white !important;
 }
 
-// color of checkbox backgrounds
+/* color of checkbox backgrounds */
 .dark-theme .mat-primary .mat-pseudo-checkbox-checked.mat-pseudo-checkbox-full,
 .dark-theme .mat-primary .mat-pseudo-checkbox-indeterminate.mat-pseudo-checkbox-full {
   background: #574ccf;
 }
 
-// effect pri navedenii
+/* effect pri navedenii */
 .dark-theme .mat-mdc-form-field-focus-overlay {
   background-color: rgba(105, 102, 102, 0.87)
 }
@@ -149,7 +149,7 @@
   color: var(--base-dark-text-color) !important;
 }
 
-// Audio Player
+/* Audio Player */
 .dark-theme .player_bg {
   background: var(--base-dark-main-color) !important;
   color: var(--base-light-text-color);
@@ -227,7 +227,7 @@
   color: var(--base-dark-secondary-color) !important;
 }
 
-// Book details page
+/* Book details page */
 .dark-theme .book_details .title,
 .dark-theme .book_details .attb_span,
 .dark-theme .book_details .description,
@@ -245,7 +245,7 @@
   color: var(--base-dark-main-color) !important;
 }
 
-// Nav-bar modal
+/* Nav-bar modal */
 .dark-theme .modal-content{
   background-color: var(--dark-mode-bg) !important;
 }
@@ -257,8 +257,11 @@
   background-color: var(--base-dark-main-color) !important;
 }
 
+.dark-theme .item {
+  color: var(--base-dark-text-color)
+}
 
-// Library
+/* Library */
 .dark-theme .filtering-header,
 .dark-theme .filtering-label,
 .dark-theme .pagination-header,
@@ -271,7 +274,7 @@
   color: var(--base-dark-text-color)
 }
 
-// Pager
+/* Pager */
 .dark-theme .my-pagination .page-item.active .page-link{
   background-color: var(--base-dark-seek-color);
   color: var(--base-dark-text-color);
@@ -289,7 +292,7 @@
   border: 2px solid var(--base-light-border-color);
 }
 
-// SEARCH
+/* SEARCH */
 .dark-theme .search input:focus{
   box-shadow: 0 0 0 0.15rem var(--base-dark-main-color) !important;
   border: none;
@@ -306,7 +309,4 @@
  .dark-theme .player-p{
   color: var(--base-light-text-color);
  }
-//  .dark-theme .a_btns{
-//   color: var(--base-dark-text-color);
-//  }
 
