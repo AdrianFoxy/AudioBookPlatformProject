@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="row">
+    <div class="col poster_text">
+      <p class="poster_p">{{ 'Post-Ad-Title' | translate }} <span>{{ 'Post-Ad-Title-Moment' | translate }}</span></p>
+      <p class="poster_secondary_text">{{ 'Post-Ad-Text' | translate }} </p>
+      <button class="button o_button mt-3 mr-2" routerLink="/library">{{ 'Post-Ad-Btn-To-Lib' | translate }} </button>
+      <button class="button w_button mt-3">{{ 'Post-Add-Btn-Support' | translate }}</button>
+    </div>
+
+    <div class="col d-none d-lg-flex">
+      <img *ngIf="darkmodeService.isLightTheme()" src="/assets/images/light_theme_poster.png" alt="Light Image"
+        class="img-poster">
+      <img *ngIf="!darkmodeService.isLightTheme()" src="/assets/images/dark_theme_poster.png" alt="Dark Image"
+        class="img-poster">
+    </div>
+
+  </div>
+</div>
+<div class="container recomends">
+  <hr>
+  <br>
+  <div class="d-flex justify-content-between align-items-center">
+    <h1>{{ 'Top-Of-The-Week' | translate }}</h1>
+    <button class="button g_button mt-3" routerLink="/library">{{ 'More' | translate }} →</button>
+  </div>
+  <div class="mt-4">
+    <app-recomentdations></app-recomentdations>
+  </div>
+  <hr>
+  <div class="d-flex justify-content-between align-items-center">
+    <h1>{{ 'YWB-Interested' | translate }}</h1>
+  </div>
+  <div class="mt-4">
+    <app-recomentdations></app-recomentdations>
+  </div>
+</div>

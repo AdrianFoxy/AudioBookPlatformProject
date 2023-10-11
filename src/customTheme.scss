@@ -1,0 +1,312 @@
+.dark-theme {
+  background: var(--dark-mode-bg);
+
+  --base-dark-text-color: #fff;
+  --base-dark-border-color: #373737;
+  --base-dark-main-color: #574ccf;
+  --base-dark-secondary-color: #b2c0ff;
+  --base-dark-seek-color: #546ace;
+
+  --dark-mode-bg: #121212;
+  --dark-mode-secondary-elements-bg: #3c3c3c;
+  /* Selectors from angular materials */
+  /* Line under text */
+  --mdc-filled-text-field-focus-active-indicator-color: #574ccf;
+  /* label color text */
+  --mdc-filled-text-field-focus-label-text-color: #626262;
+  /* background color*/
+  --mdc-filled-text-field-container-color: #1d1d1d;
+  --mdc-filled-text-field-disabled-container-color: #464646;
+  --mdc-filled-text-field-label-text-color: #6c6c6c;
+  /* Selected text color */
+  --mat-select-enabled-trigger-text-color: #837e7d;
+
+  /* options background */
+  --mat-select-panel-background-color: #171717;
+
+  /* color of selected option text */
+  --mat-option-selected-state-label-text-color: white;
+  --mat-option-label-text-color: white;
+  --mat-option-hover-state-layer-color: rgba(255, 255, 255, 0.08);
+  --mat-option-focus-state-layer-color: rgba(255, 255, 255, 0.08);
+  --mat-option-selected-state-layer-color: rgba(255, 255, 255, 0.08);
+  --mat-select-enabled-arrow-color: rgba(255, 255, 255, 0.54);
+  --mat-select-disabled-arrow-color: rgba(255, 255, 255, 0.38);
+  --mat-select-focused-arrow-color: white;
+  --mat-select-invalid-arrow-color: rgba(244, 67, 54, 0.87)
+
+}
+
+.dark-theme .mat-mdc-slider.mat-primary{
+  --mdc-slider-handle-color: #3f51b5;
+  --mdc-slider-focus-handle-color: #3f51b5;
+  --mdc-slider-hover-handle-color: #3f51b5;
+  --mdc-slider-active-track-color: #3f51b5;
+  --mdc-slider-inactive-track-color: #3f51b5;
+  --mdc-slider-with-tick-marks-active-container-color: #fff;
+  --mdc-slider-with-tick-marks-inactive-container-color: #3f51b5;
+  --mat-mdc-slider-ripple-color: #3f51b5;
+  --mat-mdc-slider-hover-ripple-color: rgba(63, 81, 181, 0.05);
+  --mat-mdc-slider-focus-ripple-color: rgba(63, 81, 181, 0.2);
+}
+
+.dark-theme .mat-mdc-standard-chip:not(.mdc-evolution-chip--disabled) .mdc-evolution-chip__icon--trailing {
+  color: white !important;
+}
+
+.dark-theme .mat-mdc-standard-chip:not(.mdc-evolution-chip--disabled) {
+  background-color:  #1d1d1d !important;
+}
+
+.dark-theme .mat-mdc-standard-chip:not(.mdc-evolution-chip--disabled) .mdc-evolution-chip__text-label {
+ color: var(--mat-option-label-text-color) !important;
+}
+
+.dark-theme .mat-mdc-standard-chip:not(.mdc-evolution-chip--disabled) .mdc-evolution-chip__checkmark {
+  color: white !important;
+}
+
+/* color of checkbox backgrounds */
+.dark-theme .mat-primary .mat-pseudo-checkbox-checked.mat-pseudo-checkbox-full,
+.dark-theme .mat-primary .mat-pseudo-checkbox-indeterminate.mat-pseudo-checkbox-full {
+  background: #574ccf;
+}
+
+/* effect pri navedenii */
+.dark-theme .mat-mdc-form-field-focus-overlay {
+  background-color: rgba(105, 102, 102, 0.87)
+}
+
+.dark-theme .mat-primary .mat-pseudo-checkbox-checked.mat-pseudo-checkbox-minimal::after,
+.dark-theme .mat-primary .mat-pseudo-checkbox-indeterminate.mat-pseudo-checkbox-minimal::after {
+  color: white
+}
+
+.dark-theme .mat-mdc-select-arrow svg {
+  fill: white !important;
+}
+
+
+.dark-theme .hover-underline-animation::after {
+  background-color: var(--base-dark-main-color) !important;
+}
+
+.dark-theme .card-title:hover {
+  color: var(--base-dark-main-color) !important;
+}
+
+
+.dark-theme .o_button {
+  background: var(--base-dark-main-color);
+}
+
+.dark-theme .g_button {
+  background: var(--base-dark-secondary-color);
+}
+
+.dark-theme .card {
+  background: var(--dark-mode-bg);
+  color: var(--base-dark-text-color);
+}
+
+.dark-theme .button {
+  border: 2px solid var(--base-dark-border-color);
+  border-bottom: 6px solid var(--base-dark-border-color);
+}
+
+.dark-theme .poster_p,
+.dark-theme .poster_secondary_text,
+.dark-theme h1,
+.dark-theme h2,
+.dark-theme h3,
+.dark-theme h4,
+.dark-theme h5,
+.dark-theme .footer {
+  color: var(--base-dark-text-color);
+}
+
+.dark-theme a,
+.dark-theme a:hover {
+  text-decoration: none;
+  color: var(--base-dark-text-color);
+}
+
+.dark-theme .nav-links li a,
+.dark-theme .social h3 {
+  color: var(--base-dark-text-color) !important;
+}
+
+.dark-theme .poster_text span,
+.dark-theme .footer-site-logo a {
+  color: var(--base-dark-main-color) !important;
+}
+
+.dark-theme .card-text{
+  color: #a9a9a9;
+}
+
+.dark-theme .card-title{
+  color: var(--base-dark-text-color) !important;
+}
+
+/* Audio Player */
+.dark-theme .player_bg {
+  background: var(--base-dark-main-color) !important;
+  color: var(--base-light-text-color);
+}
+
+.dark-theme .audio-player-h3,
+.dark-theme .audio-player-h4 {
+  color: var(--base-light-text-color) !important;
+}
+
+.dark-theme .overlay {
+  background-color: rgb(87, 76, 208, 0.6) !important;
+}
+
+.dark-theme .seek_slider::-webkit-slider-thumb {
+  background: var(--base-dark-seek-color) !important;
+}
+
+.dark-theme .list-group::-webkit-scrollbar-track {
+  background:
+    linear-gradient(to right,
+      var(--base-dark-main-color) 0 6px,
+      /* 6 px orange */
+      black 6px 9px,
+      /* 3 px black */
+      var(--base-dark-seek-color) 9px 11px,
+      /* 2 px green */
+      black 11px 14px,
+      /* 3 px black */
+      var(--base-dark-main-color) 14px 20px
+      /* 6 px orange */
+    ) !important;
+}
+
+.dark-theme .list-group::-webkit-scrollbar-thumb {
+  background-color: var(--base-dark-seek-color) !important;
+}
+
+.dark-theme .list-group-item.active {
+  background-color: var(--base-dark-main-color) !important;
+}
+
+.dark-theme .current_value {
+  background-color: var(--base-dark-seek-color) !important;
+  color: var(--base-light-border-color) !important;
+}
+
+.dark-theme .dropdown-item:hover {
+  background-color: var(--base-dark-main-color) !important;
+  color: var(--base-dark-text-color) !important;
+}
+
+.dark-theme .content {
+  background-color: var(--dark-mode-bg) !important;
+  color: var(--base-dark-text-color) !important;
+
+  button {
+    background: var(--base-dark-secondary-color) !important;
+  }
+
+  .close-button {
+    color: var(--base-dark-secondary-color) !important;
+    background: none !important;
+  }
+}
+
+.dark-theme .buttons-manager-row-1 .btn-mng-row-1:active {
+  background-color: var(--base-dark-main-color) !important;
+}
+
+.dark-theme .btn-forward-back{
+  background-color: var(--base-dark-main-color) !important;
+}
+.dark-theme .btn-forward-back:active{
+  color: var(--base-dark-secondary-color) !important;
+}
+
+/* Book details page */
+.dark-theme .book_details .title,
+.dark-theme .book_details .attb_span,
+.dark-theme .book_details .description,
+.dark-theme .reviews .user-name,
+.dark-theme .reviews .raiting,
+.dark-theme .reviews .review_text{
+  color: var(--base-dark-text-color) !important;
+}
+
+.dark-theme .book_details .show-more{
+  color: var(--base-dark-main-color) !important;
+}
+
+.dark-theme .footer .nav-links li a:hover {
+  color: var(--base-dark-main-color) !important;
+}
+
+/* Nav-bar modal */
+.dark-theme .modal-content{
+  background-color: var(--dark-mode-bg) !important;
+}
+.dark-theme .btn-cls {
+  color: var(--base-dark-text-color) !important;
+}
+
+.dark-theme .modal-item a::after {
+  background-color: var(--base-dark-main-color) !important;
+}
+
+.dark-theme .item {
+  color: var(--base-dark-text-color)
+}
+
+/* Library */
+.dark-theme .filtering-header,
+.dark-theme .filtering-label,
+.dark-theme .pagination-header,
+.dark-theme .search-btn {
+  color: var(--base-dark-text-color) !important;
+}
+
+.dark-theme .sorting{
+  background-color: var(--dark-mode-secondary-elements-bg);
+  color: var(--base-dark-text-color)
+}
+
+/* Pager */
+.dark-theme .my-pagination .page-item.active .page-link{
+  background-color: var(--base-dark-seek-color);
+  color: var(--base-dark-text-color);
+  border-color: var(--base-light-border-color);
+}
+
+.dark-theme .my-pagination .page-link {
+  background-color:var(--dark-mode-secondary-elements-bg);
+  border-color: var(--base-dark-border-color);
+  color: var(--base-dark-text-color);
+}
+
+.dark-theme .my-pagination .page-link:hover{
+  background-color: var(--base-dark-seek-color);
+  border: 2px solid var(--base-light-border-color);
+}
+
+/* SEARCH */
+.dark-theme .search input:focus{
+  box-shadow: 0 0 0 0.15rem var(--base-dark-main-color) !important;
+  border: none;
+ }
+
+ .dark-theme .search-btn-cl{
+  color: var(--base-dark-text-color);
+ }
+
+ .dark-theme p{
+  color: var(--base-dark-text-color);
+ }
+
+ .dark-theme .player-p{
+  color: var(--base-light-text-color);
+ }
+

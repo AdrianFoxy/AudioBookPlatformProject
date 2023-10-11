@@ -1,0 +1,142 @@
+<div class="container player_bg">
+  <div class="overlay hidden">
+    <div class="content row">
+      <button class="close-button" (click)="playwithoutcontinue()">&times;</button>
+      <div class="col-md-6 mt-4">
+        <img src="/assets/images/fox_with_headphones.png">
+      </div>
+      <div class="col-md-6 mt-4">
+        <p>{{ 'YouStoppedAt' | translate }} {{currentFile.name}}, {{ 'Time' | translate }}: {{formatTime(currentFile.currentTime)}}</p>
+        <button *ngIf="!state?.playing" (click)="play()">{{ 'Continue' | translate }}</button>
+      </div>
+    </div>
+  </div>
+  <div class="row" *ngIf="audiobook">
+    <div class="col-md-3 col-12 order-md-1 order-2 mt-2">
+      <h3 class="audio-player-h3">{{ 'PlayList' | translate }}</h3>
+      <ul class="list-group list-group-border">
+        <li class="list-group-item list-group-item-border" [class.active]="i === activeItemIndex" [class.played]="isSongPlayed(audio.id)"
+          *ngFor="let audio of audiobook.bookAudioFile; let i = index" (click)="setActiveItem(i); openFile(audio, i)" >
+          {{audio.name}}</li>
+      </ul>
+    </div>
+
+    <div class="col-md-9 col-12 order-md-2 order-1" *ngIf="audiobook">
+      <div class="row">
+        <div class="col-sm-8 col-md-5 col-lg-8 col-12 order-sm-1 order-2">
+          <h4 class="audio-player-h4">{{audiobook.name}}</h4>
+        </div>
+        <div class="col-sm-4 col-md-7 col-lg-4 col-12 order-sm-2 order-1">
+          <div class="btn-group" dropdown>
+            <button dropdownToggle type="button" class="btn dropdown-toggle" aria-controls="dropdown-basic">
+              <i class="fa fa-clock-o" aria-hidden="true"></i>
+              <span class="current_value" *ngIf="countdownMinutes > 0 || countdownSeconds > 0"> {{
+                formatWithLeadingZeros(countdownMinutes) }}:{{ formatWithLeadingZeros(countdownSeconds) }}</span>
+            </button>
+            <ul id="dropdown-sleeptimer" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+              <li role="menuitem"><a class="dropdown-item" (click)="stopTimer()">{{ 'Disable' | translate }}</a></li>
+              <li role="menuitem"><a class="dropdown-item" (click)="setSleepTimer(10)">10{{ 'Minutes' | translate }}</a></li>
+              <li role="menuitem"><a class="dropdown-item" (click)="setSleepTimer(20)">20{{ 'Minutes' | translate }}</a></li>
+              <li role="menuitem"><a class="dropdown-item" (click)="setSleepTimer(30)">30{{ 'Minutes' | translate }}</a></li>
+              <li role="menuitem"><a class="dropdown-item" (click)="setSleepTimer(40)">40{{ 'Minutes' | translate }}</a></li>
+              <li role="menuitem"><a class="dropdown-item" (click)="setSleepTimer(50)">50{{ 'Minutes' | translate }}</a></li>
+              <li role="menuitem"><a class="dropdown-item" (click)="setSleepTimer(60)">60{{ 'Minutes' | translate }}</a></li>
+            </ul>
+          </div>
+
+          <div class="btn-group" dropdown>
+            <button dropdownToggle type="button" class="btn dropdown-toggle" aria-controls="dropdown-basic">
+              <i class="fa fa-volume-off" aria-hidden="true"></i>
+              <span class="current_value">{{convertToPercentage(currentFile.currentVolume)}}</span>
+            </button>
+            <ul id="dropdown-volume" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+              <li role="menuitem">
+                <div class="volume vertical">
+                  <i class="fa fa-volume-up"></i>
+                  <input type="range" class="volume_slider vertical" min="0" max="1" step="0.01"
+                    value="{{currentFile.currentVolume}}" (input)="changeVolume($event)">
+                  <i class="fa fa-volume-down"></i>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="btn-group" dropdown>
+            <button dropdownToggle type="button" class="btn dropdown-toggle" aria-controls="dropdown-basic">
+              <i class="fa fa-cog" aria-hidden="true"></i>
+              <span class="current_value">{{this.currentFile.playbackRate}}x</span>
+            </button>
+            <ul id="dropdown-speed" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+              <li role="menuitem">
+                <div class="volume vertical">
+              <li role="menuitem"><a class="dropdown-item" (click)="changePlaybackRate(0.5)">0.5x</a></li>
+              <li role="menuitem"><a class="dropdown-item" (click)="changePlaybackRate(0.75)">0.75x</a></li>
+              <li role="menuitem"><a class="dropdown-item" (click)="changePlaybackRate(1.0)">1.0x {{ 'Normal' | translate }}</a></li>
+              <li role="menuitem"><a class="dropdown-item" (click)="changePlaybackRate(1.25)">1.25x</a></li>
+              <li role="menuitem"><a class="dropdown-item" (click)="changePlaybackRate(1.5)">1.5x</a></li>
+              <li role="menuitem"><a class="dropdown-item" (click)="changePlaybackRate(2)">2.0x</a></li>
+          </div>
+          </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <p class="player-p" *ngFor="let author of audiobook.author">{{ langService.whatCurrentLang() === 'en' ? author.enName : author.name }} • {{ audiobook.bookAudioFile.length }} {{ 'AudioFiles' | translate }}</p>
+    <p class="player-p" *ngIf="currentFile.name">{{ 'Now-playing' | translate }}: {{ currentFile.name }}</p>
+    <p class="player-p" *ngIf="!currentFile.name">{{ 'Choose-Audio' | translate }}</p>
+    <div>
+      <div class="audio_time">
+        <span class="current-time"
+          [hidden]="state?.error || currentFile.index === undefined">{{state?.readableCurrentTime || '00:00:00'
+          }}</span>
+        <span class="total-duration"
+          [hidden]="state?.error || currentFile.index === undefined">{{state?.readableDuration || '00:00:00' }}</span>
+      </div>
+
+      <input type="range" class="seek_slider" min="0" max="{{state?.duration}}" [value]="state?.currentTime"
+        (input)="onSliderChangeEnd($event)" [disabled]="state?.error || currentFile.index === undefined"
+        [ngStyle]="getProgressBarBackground()">
+    </div>
+
+    <div class="buttons-manager">
+      <div class="buttons-manager-row-1">
+        <button class="btn-mng-row-1" [disabled]="isFirstPlaying()" (click)="previous()"><i class="fa fa-step-backward"></i></button>
+
+        <button (click)="skipBackward()" class="btn-forward-back">
+          <span class="material-symbols-outlined">
+          replay_10
+          </span>
+        </button>
+
+        <button class="btn-mng-row-1" *ngIf="!state?.playing" [disabled]="" (click)="play()"> <i class="fa fa-play"></i> </button>
+        <button class="btn-mng-row-1" *ngIf="state?.playing" (click)="pause()"> <i class="fa fa-pause"></i> </button>
+
+        <button (click)="skipForward()" class="btn-forward-back">
+          <span class="material-symbols-outlined">
+            forward_10
+          </span>
+        </button>
+
+        <button class="btn-mng-row-1" [disabled]="isLastPlaying()" (click)="next()"><i class="fa fa-step-forward"></i></button>
+      </div>
+
+      <div class="buttons-manager-row-2">
+        <button (click)="skipBackward()" class="btn-forward-back">
+          <span class="material-symbols-outlined">
+          replay_10
+          </span>
+        </button>
+
+        <button (click)="skipForward()" class="btn-forward-back">
+          <span class="material-symbols-outlined">
+            forward_10
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+</div>

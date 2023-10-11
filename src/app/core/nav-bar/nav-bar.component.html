@@ -1,0 +1,112 @@
+<header>
+  <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light">
+      <a class="navbar-brand" href="#">
+        <img class="logo" src="/assets/images/new_logo.png" alt="Logo">
+      </a>
+
+      <div class="navbar-toggler mobile-toggler d-lg-none">
+        <a href="#" data-bs-toggle="modal" data-bs-target="#navbModal">
+          <i class="fa fa-reorder"></i>
+        </a>
+      </div>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <div class="item hover-underline-animation">
+              <a routerLink="/">{{ 'Home' | translate }}</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <div class="item hover-underline-animation">
+              <a routerLink="/library">{{ 'Library' | translate }}</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <div class="item hover-underline-animation">
+              <a routerLink="/selection">{{ 'Selections' | translate }}</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <div class="dark_mode_toggle">
+              <label class="d_mode_label">
+                <input type="checkbox" id="darkmode_toggle_box" class="d_mode_input"
+                  [checked]="!darkmodeService.isLightTheme()" (change)="darkmodeService.changeThemeColor()">
+                <i class="fa fa-sun-o sun" aria-hidden="true"></i>
+                <i class="fa fa-moon-o moon" aria-hidden="true"></i>
+                <span class="toggle"></span>
+              </label>
+            </div>
+          </li>
+        </ul>
+        <div class="my-2 my-lg-0">
+          <button class="button g_button mr-2 mb-1">{{ 'Log In' | translate }}</button>
+          <button class="button g_button">{{ 'Create Account' | translate }}</button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Modal -->
+    <div class="modal fade" id="navbModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-head">
+            <div class="dark_mode_toggle">
+              <label class="d_mode_label">
+                <input type="checkbox" id="modal_darkmode_toggle_box" class="d_mode_input"
+                  [checked]="!darkmodeService.isLightTheme()" (change)="darkmodeService.changeThemeColor()">
+                <i class="fa fa-sun-o sun" aria-hidden="true"></i>
+                <i class="fa fa-moon-o moon" aria-hidden="true"></i>
+                <span class="toggle"></span>
+              </label>
+            </div>
+            <a class="btn-cls" data-bs-dismiss="modal" aria-label="Close">
+              <i class="fa fa-times" aria-hidden="true"></i>
+            </a>
+          </div>
+
+          <div class="modal-body">
+            <div class="modal-item">
+              <a routerLink="/" routerLinkActive="active">
+                {{ 'Home' | translate }}
+              </a>
+            </div>
+            <div class="modal-item">
+              <a routerLink="/library">
+                {{ 'Library' | translate }}
+              </a>
+            </div>
+            <div class="modal-item">
+              <a routerLink="/selection">{{ 'Selections' | translate }}</a>
+            </div>
+            <div class="modal-item">
+              <a href="#">{{ 'Log In' | translate }}</a>
+            </div>
+            <div class="modal-item">
+              <a href="#">{{ 'Create Account' | translate }}</a>
+            </div>
+          </div>
+
+          <div class="social mt-5">
+            <h3>Stay in touch</h3>
+            <ul class="list-unstyled">
+              <li class="in"><a href="#"><span class="icon-instagram"><i class="fa fa-instagram" aria-hidden="true"></i>
+                  </span></a></li>
+              <li class="fb"><a href="#"><span class="icon-facebook"><i class="fa fa-facebook" aria-hidden="true"></i>
+                  </span></a></li>
+              <li class="tw"><a href="#"><span class="icon-twitter"><i class="fa fa-twitter" aria-hidden="true"></i>
+                  </span></a></li>
+              <li class="gt"><a href="#"><span class="icon-github"><i class="fa fa-github" aria-hidden="true"></i>
+                  </span></a></li>
+            </ul>
+            <div class="mt-2">
+              <a style="cursor: pointer;" (click)="langService.switchLanguage('en')"><img class="lang-img" src="/assets/icons/united-kingdom.png" alt="en"></a>
+              <a style="cursor: pointer;" (click)="langService.switchLanguage('ua')"><img class="lang-img" src="/assets/icons/ukraine.png" alt="ua"></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

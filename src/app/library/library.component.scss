@@ -1,0 +1,39 @@
+.full-width {
+  width: 100%;
+}
+
+.single-element {
+  width: 100%;
+}
+
+mat-slider {
+  width: 100%;
+}
+
+.reset-btn{
+  cursor: pointer;
+}
+
+.sorting {
+  padding: 8px;
+  border-radius: 20px;
+  border: black 2px solid;
+}
+
+// SEARCH
+.search input:focus{
+  box-shadow: 0 0 0 0.15rem var(--base-orange-color);
+  border: none;
+ }
+
+.audio-book-obj{
+  display: flex;
+  justify-content: center;
+}
+
+
+@media(max-width:315px){
+  .search{
+    font-size: 12px;
+  }
+}

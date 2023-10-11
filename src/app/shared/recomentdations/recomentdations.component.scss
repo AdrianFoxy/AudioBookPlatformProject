@@ -1,0 +1,36 @@
+.card-img{
+  border-radius: 20px;
+  width: 200px;
+  height: 300px;
+  border: 2px solid var(--base-light-border-color);
+  border-bottom: 6px solid var(--base-light-border-color);
+}
+
+.book_name{
+  text-decoration: none;
+  color: #000;
+}
+
+@media(max-width:992px){
+  .card-img{
+    width: 150px;
+    height: 230px;
+  }
+}
+
+.img-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  border: none;
+}
+
+.card-title:hover{
+  color: var(--base-orange-color);
+}
+

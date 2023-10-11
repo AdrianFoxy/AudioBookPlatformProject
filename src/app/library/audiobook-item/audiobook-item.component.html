@@ -1,0 +1,18 @@
+<div class="book-card" *ngIf="audiobook">
+  <div class="card-img-cont">
+    <img class="card-img" src="{{audiobook.pictureUrl}}" alt="Harry Potter">
+  </div>
+  <div class="card-body">
+    <p class="card-text">
+      <span class="card-author-title" *ngFor="let author of audiobook.author">{{author.name}}</span>
+      <span class="float-end">
+        <i class="fa fa-star" style="color: #ffbc57;" aria-hidden="true"></i>
+        {{audiobook.rating}}
+      </span>
+    </p>
+    <a routerLink="/library/{{audiobook.id}}" class="book_name">
+      <p class="card-title">{{truncateName(audiobook.name)}}</p>
+    </a>
+  </div>
+</div>
+

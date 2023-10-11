@@ -1,1 +1,168 @@
-/* You can add global styles to this file, and also import other style files */
+@import "customTheme";
+
+:root {
+  --main-font: 'Exo 2', sans-serif;
+
+  --base-orange-color: orange;
+  --base-green-color: #8adeb4;
+  --base-light-bg-color: #fff;
+  --base-light-border-color: #000;
+  --base-light-text-color: #000;
+
+  /* Line under text */
+  --mdc-filled-text-field-focus-active-indicator-color: #e97c00;
+  /* label color text */
+  --mdc-filled-text-field-focus-label-text-color: #1d1d1d;
+  /* background color */
+  --mdc-filled-text-field-container-color: #fff;
+  --mdc-filled-text-field-disabled-container-color: #464646;
+  --mdc-filled-text-field-label-text-color: #6c6c6c;
+  /* Selected text color */
+  --mat-select-enabled-trigger-text-color: #837e7d;
+
+  /* options background */
+  --mat-select-panel-background-color: #fff;
+
+  /* color of selected option text */
+  --mat-option-selected-state-label-text-color: #1d1d1d;
+  --mat-option-label-text-color: #1d1d1d;
+  --mat-option-hover-state-layer-color: rgba(255, 255, 255, 0.08);
+  --mat-option-focus-state-layer-color: rgba(255, 255, 255, 0.08);
+  --mat-option-selected-state-layer-color: rgba(255, 255, 255, 0.08);
+  --mat-select-enabled-arrow-color: rgba(255, 255, 255, 0.54);
+  --mat-select-disabled-arrow-color: rgba(255, 255, 255, 0.38);
+  --mat-select-focused-arrow-color: #1d1d1d;
+  --mat-select-invalid-arrow-color: rgba(244, 67, 54, 0.87) /* Fonts */
+    --mdc-filled-text-field-label-text-font: var(--main-font);
+  --mdc-outlined-text-field-label-text-font: var(--main-font);
+  --mat-form-field-container-text-font: var(--main-font);
+  --mat-form-field-subscript-text-font: var(--main-font);
+  --bs-body-font-family: var(--main-font);
+  --mat-select-trigger-text-font: var(--main-font);
+}
+
+.mat-mdc-slider.mat-primary {
+  --mdc-slider-handle-color: var(--mdc-filled-text-field-focus-active-indicator-color);
+  --mdc-slider-focus-handle-color: var(--mdc-filled-text-field-focus-active-indicator-color);
+  --mdc-slider-hover-handle-color: var(--mdc-filled-text-field-focus-active-indicator-color);
+  --mdc-slider-active-track-color: var(--mdc-filled-text-field-focus-active-indicator-color);
+  --mdc-slider-inactive-track-color: var(--mdc-filled-text-field-focus-active-indicator-color);
+  --mdc-slider-with-tick-marks-active-container-color: #fff;
+  --mdc-slider-with-tick-marks-inactive-container-color: var(--mdc-filled-text-field-focus-active-indicator-color);
+  --mat-mdc-slider-ripple-color: var(--mdc-filled-text-field-focus-active-indicator-color);
+  --mat-mdc-slider-hover-ripple-color: rgba(207, 89, 11, 0.05);
+  --mat-mdc-slider-focus-ripple-color: rgba(207, 89, 11, 0.05);
+}
+
+.mat-mdc-select-arrow svg {
+  fill: #1d1d1d !important;
+}
+
+.mat-primary .mat-pseudo-checkbox-checked.mat-pseudo-checkbox-minimal::after,
+.mat-primary .mat-pseudo-checkbox-indeterminate.mat-pseudo-checkbox-minimal::after {
+  color: #1d1d1d;
+}
+
+.mat-mdc-standard-chip {
+  --mdc-chip-label-text-font: var(--main-font);
+}
+
+.mat-mdc-option .mdc-list-item__primary-text {
+  font-family: 'Exo 2', sans-serif !important;
+}
+
+/* mat-chip */
+
+.mat-mdc-standard-chip:not(.mdc-evolution-chip--disabled) .mdc-evolution-chip__icon--trailing {
+  color: #1d1d1d !important;
+}
+
+.mat-mdc-standard-chip:not(.mdc-evolution-chip--disabled) {
+  background-color: white !important;
+}
+
+.mat-mdc-standard-chip:not(.mdc-evolution-chip--disabled) .mdc-evolution-chip__text-label {
+  color: black !important;
+}
+
+.mat-mdc-standard-chip:not(.mdc-evolution-chip--disabled) .mdc-evolution-chip__checkmark {
+  color: black !important;
+}
+
+
+html {
+  font-family: var(--main-font) !important;
+}
+
+body {
+  background-color: #fff;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+a:hover {
+  text-decoration: none;
+  color: black;
+}
+
+.button {
+  width: auto;
+  height: 60px;
+  border-radius: 10px;
+  outline: none;
+  border: 2px solid var(--base-light-border-color);
+  border-bottom: 6px solid var(--base-light-border-color);
+  font-size: 18px;
+  padding: 10px 20px;
+}
+
+.g_button {
+  background: var(--base-green-color);
+}
+
+.o_button {
+  background: var(--base-orange-color);
+}
+
+.w_button {
+  background: var(--base-light-bg-color);
+}
+
+hr {
+  color: grey;
+}
+
+.slick-prev:before,
+.slick-next:before {
+  color: grey;
+}
+
+.lang-img {
+  height: 30px;
+  width: 30px;
+  margin-left: 5px;
+}
+
+/* Pagination */
+.my-pagination .page-item.active .page-link {
+  background-color: var(--base-orange-color);
+  color: var(--base-light-text-color);
+  border-color: var(--base-light-border-color);
+}
+
+.my-pagination .page-link {
+  background-color: var(--base-light-bg-color);
+  border-color: var(--base-light-border-color);
+  color: var(--base-light-text-color);
+}
+
+.my-pagination .page-link:hover {
+  background-color: var(--base-orange-color);
+  border: 2px solid var(--base-light-border-color);
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
