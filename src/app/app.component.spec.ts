@@ -14,16 +14,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'ABP_Client'`, () => {
+  it(`should have as title 'ABP_Client_Re'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('ABP_Client');
+    expect(app.title).toEqual('ABP_Client_Re');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('ABP_Client app is running!');
+    expect(compiled.querySelector('.content span')?.textContent).toContain('ABP_Client_Re app is running!');
   });
 });

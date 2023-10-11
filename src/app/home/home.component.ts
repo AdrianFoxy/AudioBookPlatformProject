@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Book_Test } from '../shared/models/book_test';
 import { DarkModeService } from '../core/services/dark-mode-service/dark-mode.service';
 
 @Component({
@@ -11,36 +10,4 @@ export class HomeComponent {
 
   constructor(public darkmodeService: DarkModeService) {
   }
-
-  books: Book_Test[] = [
-    {
-      id: 2,
-      title: 'Ім\'я вітру',
-      author: 'Патрік Ротфусс',
-      imageSrc: '/assets/images/books_templates/TheNameOfWind.jpg',
-      rating: 4.5
-    },
-    {
-      id: 3,
-      title: 'Гоббіт',
-      author: 'Джон Толкін',
-      imageSrc: '/assets/images/books_templates/hobbit.jpg',
-      rating: 4.2
-    },
-    {
-      id: 100,
-      title: 'Морт',
-      author: 'Тіррі Пратчетт',
-      imageSrc: '/assets/images/books_templates/mort.jpg',
-      rating: 4.7
-    },
-    {
-      id: 200,
-      title: 'Хроніки Нарнії',
-      author: 'К.С. Льюїс',
-      imageSrc: '/assets/images/books_templates/narnia.jpg',
-      rating: 4.9
-    }
-  ];
-
 }
