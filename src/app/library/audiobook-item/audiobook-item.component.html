@@ -1,6 +1,6 @@
 <div class="book-card" *ngIf="audiobook">
   <div class="card-img-cont">
-    <img class="card-img" src="{{audiobook.pictureUrl}}" alt="Harry Potter">
+    <img routerLink="/library/{{audiobook.id}}" class="card-img" src="{{audiobook.pictureUrl}}" alt="Harry Potter">
   </div>
   <div class="card-body">
     <p class="card-text">
