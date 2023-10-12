@@ -18,4 +18,6 @@ export class NavBarComponent {
   ngOnInit() {
     this.darkmodeService.setCurrentTheme();
   }
+
+
 }
