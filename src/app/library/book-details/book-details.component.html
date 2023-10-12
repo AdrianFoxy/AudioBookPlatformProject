@@ -15,7 +15,7 @@
       <p class="secondary_txt">{{ 'Authors' | translate }}: <a class="a_btns" href="" *ngFor="let author of audiobook.author">{{ langService.whatCurrentLang() === 'en' ? author.enName : author.name }}</a></p>
       <p class="secondary_txt">{{ 'Narrators' | translate }}: <a class="a_btns" href="">{{ audiobook.narrator.name }}</a></p>
       <p class="secondary_txt">{{ 'Genres' | translate }}: <a class="a_btns" href="" *ngFor="let genre of audiobook.genre; let last = last">{{ langService.whatCurrentLang() === 'en' ? genre.enName : genre.name }}{{ last ? '' : ', ' }}</a></p>
-      <p class="secondary_txt">{{ 'Language' | translate }}: <span class="attb_span">{{ langService.whatCurrentLang() === 'en' ? audiobook.bookLanguage.enName : audiobook.bookLanguage.name }} {{ audiobook.bookLanguage.name }}</span></p>
+      <p class="secondary_txt">{{ 'Language' | translate }}: <span class="attb_span">{{ langService.whatCurrentLang() === 'en' ? audiobook.bookLanguage.enName : audiobook.bookLanguage.name }}</span></p>
       <p class="secondary_txt">{{ 'S-Duration' | translate }}: <span class="attb_span">{{audiobook.bookDuration}}</span></p>
       <hr>
       <h2>{{ 'About-Book' | translate }}:</h2>
