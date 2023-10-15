@@ -208,3 +208,9 @@ input:checked~.sun {
 input:checked~.toggle {
   background: #2b2b2b;
 }
+
+.loader-container{
+  position: fixed;
+  width: 100%;
+  z-index: 99;
+}

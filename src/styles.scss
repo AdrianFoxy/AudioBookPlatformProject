@@ -45,6 +45,15 @@ body {
   --mat-select-trigger-text-font: var(--main-font);
 }
 
+.mat-mdc-progress-bar {
+  --mdc-linear-progress-active-indicator-color: var(--base-orange-color);
+  --mdc-linear-progress-track-color: rgba(162, 79, 31, 0.25)
+}
+
+.mat-mdc-progress-spinner {
+  --mdc-circular-progress-active-indicator-color: var(--base-orange-color);
+}
+
 .mat-mdc-slider.mat-primary {
   --mdc-slider-handle-color: var(--mdc-filled-text-field-focus-active-indicator-color);
   --mdc-slider-focus-handle-color: var(--mdc-filled-text-field-focus-active-indicator-color);

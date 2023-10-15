@@ -6,6 +6,7 @@ import { FooterComponent } from './footer/footer.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { RouterModule } from '@angular/router';
 
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { RouterModule } from '@angular/router';
     SharedModule,
     RouterModule,
     TranslateModule.forChild(),
+    MatProgressBarModule
   ], exports: [
     NavBarComponent,
     FooterComponent

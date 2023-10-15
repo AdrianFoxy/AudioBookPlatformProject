@@ -1,4 +1,7 @@
 <header>
+  <div *ngIf="loaderService.isLoading | async" class="loader-container">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  </div>
   <div class="container">
     <nav class="navbar navbar-expand-lg navbar-light">
       <a class="navbar-brand" href="#">

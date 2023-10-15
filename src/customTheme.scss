@@ -310,3 +310,12 @@
 .dark-theme .player-p {
   color: var(--base-light-text-color);
 }
+
+.dark-theme .mat-mdc-progress-bar {
+  --mdc-linear-progress-active-indicator-color: var(--base-dark-main-color);
+  --mdc-linear-progress-track-color: rgba(176, 76, 219, 0.25);
+}
+
+.dark-theme .mat-mdc-progress-spinner {
+  --mdc-circular-progress-active-indicator-color:  var(--base-dark-main-color);
+}

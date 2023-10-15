@@ -37,3 +37,13 @@ mat-slider {
     font-size: 12px;
   }
 }
+
+.loader-container {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: 99;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

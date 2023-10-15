@@ -14,6 +14,12 @@
       </div>
 
       <div class="row row-cols-xl-5 row-cols-lg-4 row-cols-md-4 row-cols-sm-3 row-cols-2 mt-2">
+
+        <div *ngIf="totalCount == 0">
+          <div *ngIf="loaderService.isLoading | async" class="loader-container">
+            <mat-spinner></mat-spinner>
+          </div>
+        </div>
         <div class="col audio-book-obj" *ngFor="let audiobook of audioBooks">
           <app-audiobook-item [audiobook]="audiobook"></app-audiobook-item>
         </div>
