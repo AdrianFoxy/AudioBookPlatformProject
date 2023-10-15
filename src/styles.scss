@@ -71,6 +71,16 @@ body {
   fill: #1d1d1d !important;
 }
 
+/* color of checkbox backgrounds */
+.mat-primary .mat-pseudo-checkbox-checked.mat-pseudo-checkbox-full,
+.mat-primary .mat-pseudo-checkbox-indeterminate.mat-pseudo-checkbox-full {
+  background: var(--base-orange-color);
+}
+
+.mat-pseudo-checkbox-full {
+  color: var(--base-light-border-color);
+}
+
 .mat-primary .mat-pseudo-checkbox-checked.mat-pseudo-checkbox-minimal::after,
 .mat-primary .mat-pseudo-checkbox-indeterminate.mat-pseudo-checkbox-minimal::after {
   color: #1d1d1d;

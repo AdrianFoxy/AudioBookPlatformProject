@@ -76,6 +76,10 @@
   background-color: rgba(105, 102, 102, 0.87)
 }
 
+.dark-theme  .mat-pseudo-checkbox-full {
+  color: white;
+}
+
 .dark-theme .mat-primary .mat-pseudo-checkbox-checked.mat-pseudo-checkbox-minimal::after,
 .dark-theme .mat-primary .mat-pseudo-checkbox-indeterminate.mat-pseudo-checkbox-minimal::after {
   color: white

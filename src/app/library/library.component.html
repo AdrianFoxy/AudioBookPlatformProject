@@ -17,7 +17,7 @@
 
         <div *ngIf="totalCount == 0">
           <div *ngIf="loaderService.isLoading | async" class="loader-container">
-            <mat-spinner></mat-spinner>
+            <mat-spinner class=""></mat-spinner>
           </div>
         </div>
         <div class="col audio-book-obj" *ngFor="let audiobook of audioBooks">
