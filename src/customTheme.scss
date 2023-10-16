@@ -311,6 +311,15 @@
   color: var(--base-dark-text-color);
 }
 
+.dark-theme ol{
+  color: var(--base-dark-text-color);
+}
+
+.dark-theme .stack-trace{
+  background-color: rgb(26, 23, 27) !important;
+}
+
+
 .dark-theme .player-p {
   color: var(--base-light-text-color);
 }
