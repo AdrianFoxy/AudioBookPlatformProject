@@ -7,9 +7,9 @@ import { TranslateModule } from '@ngx-translate/core';
 import { RouterModule } from '@angular/router';
 
 import {MatProgressBarModule} from '@angular/material/progress-bar';
-import { TestErrorComponent } from './test-error/test-error.component';
-import { NotFoundComponent } from './not-found/not-found.component';
-import { ServerErrorComponent } from './server-error/server-error.component';
+import { TestErrorComponent } from './errors/test-error/test-error.component';
+import { NotFoundComponent } from './errors/not-found/not-found.component';
+import { ServerErrorComponent } from './errors/server-error/server-error.component';
 
 import { ToastrModule } from 'ngx-toastr';
 
