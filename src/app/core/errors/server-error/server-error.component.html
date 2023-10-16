@@ -8,7 +8,7 @@
       <li>Check the network tab in chrome dev tools</li>
       <li>Reproduce the request in postman - if the same error occurs then definately not angular!</li>
     </ol>
-    <h5>Stack trace</h5>
+    <h5 *ngIf="error.details">Stack trace</h5>
     <code class="stack-trace mt-5">{{error.details}}</code>
   </ng-container>
 </div>

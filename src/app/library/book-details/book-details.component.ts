@@ -20,22 +20,26 @@ export class BookDetailsComponent implements OnInit {
     public langService: LanguageService) {
   }
 
-  ngOnInit(): void {
-    this.loadSingleAudioBook();
+  async ngOnInit(): Promise<void> {
+    await this.incrementViewCount();
+    await this.loadSingleAudioBook();
   }
 
-  loadSingleAudioBook() {
+  async incrementViewCount() {
+    const id = this.activatedRoute.snapshot.paramMap.get('id');
+    if (id !== null) {
+      await this.libraryService.incrementViewCount(+id).toPromise();
+    }
+  }
+
+  async loadSingleAudioBook() {
     const id = this.activatedRoute.snapshot.paramMap.get('id')
     if (id) {
-      this.libraryService.getAudioBook(+id).subscribe({
-        next: audiobook => {
-          this.audiobook = audiobook;
-          if (this.audiobook?.description) {
-            this.truncateText(this.audiobook.description);
-          }
-        },
-        error: error => console.log(error)
-      });
+      const audiobook = await this.libraryService.getAudioBook(+id).toPromise();
+      this.audiobook = audiobook;
+      if (this.audiobook?.description) {
+        this.truncateText(this.audiobook.description);
+      }
     }
   }
 

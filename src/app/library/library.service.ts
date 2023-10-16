@@ -128,4 +128,12 @@ export class LibraryService {
   getBookLanguagesForFilter() {
     return this.http.get<BookLanguage[]>(this.baseUrl + 'Filtering/filter-bookLanguage');
   }
+
+  incrementViewCount(id: number) {
+    const url = `${this.baseUrl}AudioBook/increment-viewcount/${id}`;
+    console.log(url);
+
+    return this.http.put(url, null);
+  }
+
 }

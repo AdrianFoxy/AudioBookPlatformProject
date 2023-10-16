@@ -11,6 +11,7 @@ export interface SingleAudioBook {
   pictureUrl: string;
   rating: number;
   bookDuration: string;
+  viewCount: number,
   genre: Genre[];
   author: Author[];
   bookAudioFile: BookAudioFile[];
