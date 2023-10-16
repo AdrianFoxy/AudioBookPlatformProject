@@ -323,3 +323,9 @@
 .dark-theme .mat-mdc-progress-spinner {
   --mdc-circular-progress-active-indicator-color:  var(--base-dark-main-color);
 }
+
+.dark-theme .view-stars {
+  i{
+    color: var(--base-dark-main-color) !important;
+  }
+}
