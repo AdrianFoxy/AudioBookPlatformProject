@@ -1,3 +1,7 @@
 <div class="container">
-  <p>not-found works!</p>
+  <div class="error-container">
+    <img class="error-img" *ngIf="!darkmodeService.isLightTheme()" src="/assets/images/errors-imgs/dark-theme-404.png" alt="404">
+    <img class="error-img" *ngIf="darkmodeService.isLightTheme()" src="/assets/images/errors-imgs/light-theme-404.png" alt="404">
+    <p>{{ '404msg' | translate }}</p>
+  </div>
 </div>
