@@ -10,6 +10,7 @@ import { BookSeries } from '../shared/models/bookSeries';
 import { BookLanguage } from '../shared/models/bookLanguage';
 import { sortingAndPaginationParams } from '../shared/models/audioBooksParams/sortingAndPaginationParams';
 import { LanguageService } from '../core/services/language-service/language.service';
+import { LoaderService } from '../core/services/loader-service/loader.service';
 
 @Component({
   selector: 'app-library',
@@ -77,7 +78,8 @@ export class LibraryComponent implements OnInit {
   selectedIdBookLanguagesException = new FormControl();
 
 
-  constructor(private libraryService: LibraryService, public langService: LanguageService) {
+  constructor(private libraryService: LibraryService, public langService: LanguageService,
+    public loaderService:LoaderService) {
   }
 
   ngOnInit(): void {

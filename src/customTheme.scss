@@ -76,6 +76,10 @@
   background-color: rgba(105, 102, 102, 0.87)
 }
 
+.dark-theme  .mat-pseudo-checkbox-full {
+  color: white;
+}
+
 .dark-theme .mat-primary .mat-pseudo-checkbox-checked.mat-pseudo-checkbox-minimal::after,
 .dark-theme .mat-primary .mat-pseudo-checkbox-indeterminate.mat-pseudo-checkbox-minimal::after {
   color: white
@@ -307,6 +311,30 @@
   color: var(--base-dark-text-color);
 }
 
+.dark-theme ol{
+  color: var(--base-dark-text-color);
+}
+
+.dark-theme .stack-trace{
+  background-color: rgb(26, 23, 27) !important;
+}
+
+
 .dark-theme .player-p {
   color: var(--base-light-text-color);
+}
+
+.dark-theme .mat-mdc-progress-bar {
+  --mdc-linear-progress-active-indicator-color: var(--base-dark-main-color);
+  --mdc-linear-progress-track-color: rgba(176, 76, 219, 0.25);
+}
+
+.dark-theme .mat-mdc-progress-spinner {
+  --mdc-circular-progress-active-indicator-color:  var(--base-dark-main-color);
+}
+
+.dark-theme .view-stars {
+  i{
+    color: var(--base-dark-main-color) !important;
+  }
 }

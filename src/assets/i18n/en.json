@@ -50,5 +50,8 @@
   "Normal": "Normal",
   "AudioFiles": "Audio files",
   "Now-playing": "Now playing",
-  "Choose-Audio": "Choose audio from playlist"
+  "Choose-Audio": "Choose audio from playlist",
+  "Favor": "Favorite",
+  "Views": "Views",
+  "404msg": "Ooooops, looks like we lost this page. Saaaaad ( ´•︵•` )"
 }

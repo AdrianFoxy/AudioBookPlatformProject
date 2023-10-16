@@ -1,7 +1,19 @@
 <div class="container">
   <div *ngIf="audiobook" class="book_details row mt-4 mb-4">
     <div class="poster_block col-md-4 mb-3">
-      <img class="poster_img" src="{{audiobook.pictureUrl}}" alt="">
+      <img class="poster_img" src="{{audiobook.pictureUrl}}" alt="book-picture">
+      <div class="view-stars">
+        <p>
+          {{ 'Favor' | translate }}
+          <i class="fa fa-heart" aria-hidden="true"></i>
+          123
+        </p>
+        <p>
+           {{ 'Views' | translate }}
+          <i class="fa fa-eye" aria-hidden="true"></i>
+          {{audiobook.viewCount}}
+        </p>
+      </div>
     </div>
     <div class="col-md-8">
       <div class="title">

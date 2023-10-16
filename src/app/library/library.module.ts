@@ -16,6 +16,7 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { AudiobookItemComponent } from './audiobook-item/audiobook-item.component';
 import { BookDetailsComponent } from './book-details/book-details.component';
 
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { BookDetailsComponent } from './book-details/book-details.component';
     MatIconModule,
     ReactiveFormsModule,
     NgxMatSelectSearchModule,
+    MatProgressSpinnerModule,
     MatInputModule,
     FormsModule,
     SharedModule

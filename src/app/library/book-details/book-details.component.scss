@@ -53,6 +53,23 @@
   align-items: center;
 }
 
+.view-stars {
+  margin-top: 10px;
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  i{
+    color: var(--base-orange-color);
+  }
+}
+
+.view-stars p {
+  margin: 0;
+}
+
+
 .reviews{
   .review{
     border-radius: 20px;
