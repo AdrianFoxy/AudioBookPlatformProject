@@ -338,3 +338,13 @@
     color: var(--base-dark-main-color) !important;
   }
 }
+
+/* Auth */
+.dark-theme .nav-bar-toggle{
+  color: var(--base-dark-text-color) !important;
+}
+
+.dark-theme  .input-form-custom input:focus{
+  box-shadow: 0 0 0 0.15rem var(--base-dark-main-color);
+  border: none;
+}

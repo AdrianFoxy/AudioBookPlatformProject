@@ -13,6 +13,7 @@ const routes: Routes = [
   {path: 'not-found', component: NotFoundComponent },
   {path: 'server-error', component: ServerErrorComponent },
   {path: 'library', loadChildren: () => import('./library/library.module').then(m => m.LibraryModule)},
+  {path: 'account', loadChildren: () => import('./account/account.module').then(m => m.AccountModule)},
   {path: 'selection', component: SelectionComponent},
   {path: 'about', component: AboutComponent},
   {path: '**', redirectTo: '', pathMatch: 'full'}
