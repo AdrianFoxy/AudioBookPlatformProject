@@ -8,16 +8,25 @@
           alt="Phone image">
       </div>
       <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
-        <form>
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
 
           <h2 class="mt-3">It's time to login ( ͡❛ ⏥ ͡❛)</h2>
-          <div class="form-floating mt-3 mb-3">
-            <input type="text" class="form-control" id="floatingInput" placeholder="Tom">
+          <!-- <div class="form-floating mt-3 mb-3">
+            <input type="password" formControlName="password" class="form-control" id="floatingInput" placeholder="qwerty" autocomplete="username">
             <label for="floatingInput">Login</label>
           </div>
 
           <div class="form-floating mb-3">
-            <input type="password" class="form-control" id="floatingPassword" placeholder="qwerty">
+            <input type="password" formControlName="password" class="form-control" id="floatingPassword" placeholder="qwerty" autocomplete="new-password">
+            <label for="floatingPassword">Password</label>
+          </div> -->
+
+          <div class="form-floating mt-3 mb-3">
+            <input type="text" formControlName="username" class="form-control" id="floatingInput" placeholder="username" autocomplete="username">
+            <label for="floatingInput">Login</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="password" formControlName="password" class="form-control" id="floatingPassword" placeholder="password" autocomplete="password">
             <label for="floatingPassword">Password</label>
           </div>
 

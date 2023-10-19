@@ -10,6 +10,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { AudioPlayerComponent } from './audio-player/audio-player.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { AudioPlayerComponent } from './audio-player/audio-player.component';
     RouterModule,
     BsDropdownModule.forRoot(),
     PaginationModule.forRoot(),
-    TranslateModule.forChild()
+    TranslateModule.forChild(),
+    ReactiveFormsModule
   ],
   exports:[
     RecomentdationsComponent,
@@ -32,7 +34,8 @@ import { AudioPlayerComponent } from './audio-player/audio-player.component';
     PaginationModule,
     PagerComponent,
     AudioPlayerComponent,
-    TranslateModule
+    TranslateModule,
+    ReactiveFormsModule
   ]
 })
 export class SharedModule { }
