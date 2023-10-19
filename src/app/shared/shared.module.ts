@@ -11,13 +11,15 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { AudioPlayerComponent } from './audio-player/audio-player.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { TextInputComponent } from './components/text-input/text-input.component';
 
 @NgModule({
   declarations: [
     RecomentdationsComponent,
     PagingHeaderComponent,
     PagerComponent,
-    AudioPlayerComponent
+    AudioPlayerComponent,
+    TextInputComponent
   ],
   imports: [
     CommonModule,
@@ -36,7 +38,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     AudioPlayerComponent,
     TranslateModule,
     ReactiveFormsModule,
-    BsDropdownModule
+    BsDropdownModule,
+    TextInputComponent
   ]
 })
 export class SharedModule { }

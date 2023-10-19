@@ -8,28 +8,12 @@
           alt="Phone image">
       </div>
       <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
-        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <form class="input-form-custom" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
 
           <h2 class="mt-3">It's time to login ( ͡❛ ⏥ ͡❛)</h2>
-          <!-- <div class="form-floating mt-3 mb-3">
-            <input type="password" formControlName="password" class="form-control" id="floatingInput" placeholder="qwerty" autocomplete="username">
-            <label for="floatingInput">Login</label>
-          </div>
 
-          <div class="form-floating mb-3">
-            <input type="password" formControlName="password" class="form-control" id="floatingPassword" placeholder="qwerty" autocomplete="new-password">
-            <label for="floatingPassword">Password</label>
-          </div> -->
-
-          <div class="form-floating mt-3 mb-3">
-            <input type="text" formControlName="username" class="form-control" id="floatingInput" placeholder="username" autocomplete="username">
-            <label for="floatingInput">Login</label>
-          </div>
-          <div class="form-floating mb-3">
-            <input type="password" formControlName="password" class="form-control" id="floatingPassword" placeholder="password" autocomplete="password">
-            <label for="floatingPassword">Password</label>
-          </div>
-
+          <app-text-input [formControl]="loginForm.controls['username']" [label]="'Username'"></app-text-input>
+          <app-text-input [formControl]="loginForm.controls['password']" [type]="'password'" [label]="'Password'"></app-text-input>
 
           <div class="d-flex justify-content-around align-items-center mb-4">
             <a class="a_btns" routerLink="/account/register">Register</a>
@@ -37,7 +21,7 @@
           </div>
 
           <!-- Submit button -->
-          <button type="submit" class="button account-btn g_button mr-2 mb-1">Sign in</button>
+          <button [disabled]="loginForm.invalid" type="submit" class="button account-btn g_button mr-2 mb-1">Sign in</button>
 
           <div class="divider d-flex align-items-center my-4">
             <p class="text-center fw-bold mx-3 mb-0">OR</p>
