@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { AccountService } from './account/account.service';
 
 @Component({
   selector: 'app-root',
@@ -7,11 +8,20 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit{
+  title = 'ABP_Client_Re';
 
   private baseUrl = environment.apiUrl
 
+  constructor(private accountService: AccountService){
+
+  }
   ngOnInit(): void {
     console.log('HELLO WORLD' + this.baseUrl);
+    this.loadCurrentUser();
   }
-  title = 'ABP_Client_Re';
+
+  loadCurrentUser(){
+    const token = localStorage.getItem('token');
+    if(token) this.accountService.loadCurrentUser(token).subscribe();
+  }
 }

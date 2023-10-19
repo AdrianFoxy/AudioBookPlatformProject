@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DarkModeService } from '../services/dark-mode-service/dark-mode.service';
 import { LanguageService } from '../services/language-service/language.service';
 import { LoaderService } from '../services/loader-service/loader.service';
+import { AccountService } from 'src/app/account/account.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -12,7 +13,7 @@ import { LoaderService } from '../services/loader-service/loader.service';
 export class NavBarComponent {
 
   constructor(public darkmodeService: DarkModeService, public langService: LanguageService,
-    public loaderService: LoaderService) {
+    public loaderService: LoaderService, public accountService: AccountService) {
     this.langService.setCurrentLang();
   }
 

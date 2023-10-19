@@ -35,7 +35,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     PagerComponent,
     AudioPlayerComponent,
     TranslateModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BsDropdownModule
   ]
 })
 export class SharedModule { }
