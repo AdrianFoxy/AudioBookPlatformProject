@@ -17,7 +17,7 @@ export class LoadingInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     this.loaderService.isLoading.next(true);
 
-    if (request.url.includes('/Auth/emailexists')) {
+    if (request.url.includes('/Auth/emailexists') || request.url.includes('/Auth/usernameexists')) {
       return next.handle(request).pipe(
         delay(1000),
         finalize(() => {

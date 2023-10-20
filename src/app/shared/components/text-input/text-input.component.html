@@ -14,6 +14,7 @@
   <div *ngIf="control.errors?.['email']" class="invalid-feedback">Invalid email adress</div>
   <div *ngIf="control.errors?.['pattern']" class="invalid-feedback">Password must have 1 Uppercase, 1 Lowercase, 1 number, 1 non alphanumeric and at least 6 characters</div>
   <div *ngIf="control.errors?.['emailExists']" class="invalid-feedback">Email adress is taken</div>
+  <div *ngIf="control.errors?.['usernameExists']" class="invalid-feedback">Username is taken</div>
   <div *ngIf="control.errors?.['passwordMismatch']" class="invalid-feedback">Passwords do not match</div>
   <div *ngIf="control.errors?.['maxlength']" class="invalid-feedback">Value is too long, max lenth is 200</div>
 </div>

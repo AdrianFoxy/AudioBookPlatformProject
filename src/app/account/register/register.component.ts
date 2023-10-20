@@ -29,7 +29,7 @@ export class RegisterComponent {
 
   registerForm = this.fb.group({
     email: ['', [Validators.required, Validators.email, Validators.maxLength(200)], [this.validateEmailNotTaken()]],
-    username: ['', [Validators.required, Validators.maxLength(200)]],
+    username: ['', [Validators.required, Validators.maxLength(200)], [this.validateUserNameNotTaken()]],
     dateOfBirth: ['', [Validators.required]],
     password: ['', [Validators.required, Validators.pattern(this.complexPassword)], [this.validatePasswordMatch()]],
     confirmPassword: ['', [Validators.required], [this.validatePasswordMatch()]]
@@ -55,6 +55,21 @@ export class RegisterComponent {
         switchMap(() => {
           return this.accountService.checkEmailExists(control.value).pipe(
             map(result => result ? {emailExists: true}: null),
+            finalize(() => control.markAsTouched())
+          )
+        })
+      )
+    }
+  }
+
+  validateUserNameNotTaken(): AsyncValidatorFn{
+    return (control: AbstractControl) => {
+      return control.valueChanges.pipe(
+        debounceTime(1000),
+        take(1),
+        switchMap(() => {
+          return this.accountService.checkUserNameExists(control.value).pipe(
+            map(result => result ? {usernameExists: true}: null),
             finalize(() => control.markAsTouched())
           )
         })
