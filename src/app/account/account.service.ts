@@ -54,4 +54,8 @@ export class AccountService {
   checkEmailExists(email: string){
     return this.http.get<boolean>(this.baseUrl + 'Auth/emailexists?email=' + email);
   }
+
+  checkUserNameExists(username: string){
+    return this.http.get<boolean>(this.baseUrl + 'Auth/usernameexists?username=' + username);
+  }
 }

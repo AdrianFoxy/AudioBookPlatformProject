@@ -13,6 +13,11 @@ import { AudioPlayerComponent } from './audio-player/audio-player.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TextInputComponent } from './components/text-input/text-input.component';
 
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatNativeDateModule} from '@angular/material/core';
+
 @NgModule({
   declarations: [
     RecomentdationsComponent,
@@ -28,7 +33,8 @@ import { TextInputComponent } from './components/text-input/text-input.component
     BsDropdownModule.forRoot(),
     PaginationModule.forRoot(),
     TranslateModule.forChild(),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatFormFieldModule, MatInputModule, MatDatepickerModule, MatNativeDateModule
   ],
   exports:[
     RecomentdationsComponent,
@@ -39,7 +45,8 @@ import { TextInputComponent } from './components/text-input/text-input.component
     TranslateModule,
     ReactiveFormsModule,
     BsDropdownModule,
-    TextInputComponent
+    TextInputComponent,
+    MatFormFieldModule, MatInputModule, MatDatepickerModule, MatNativeDateModule
   ]
 })
 export class SharedModule { }
