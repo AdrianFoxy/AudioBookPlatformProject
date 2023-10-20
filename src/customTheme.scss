@@ -20,7 +20,6 @@
   --mdc-filled-text-field-label-text-color: #6c6c6c;
   /* Selected text color */
   --mat-select-enabled-trigger-text-color: #837e7d;
-
   /* options background */
   --mat-select-panel-background-color: #171717;
 
@@ -33,7 +32,40 @@
   --mat-select-enabled-arrow-color: rgba(255, 255, 255, 0.54);
   --mat-select-disabled-arrow-color: rgba(255, 255, 255, 0.38);
   --mat-select-focused-arrow-color: white;
-  --mat-select-invalid-arrow-color: rgba(244, 67, 54, 0.87)
+  --mat-select-invalid-arrow-color: rgba(244, 67, 54, 0.87) --mat-datepicker-calendar-date-selected-state-text-color: white;
+
+  /* Date picker*/
+  --mat-datepicker-calendar-date-selected-state-background-color: #7b1fa2;
+  --mat-datepicker-calendar-date-selected-disabled-state-background-color: rgba(123, 31, 162, 0.4);
+  --mat-datepicker-calendar-date-today-selected-state-outline-color: white;
+  --mat-datepicker-calendar-date-focus-state-background-color: rgba(123, 31, 162, 0.3);
+  --mat-datepicker-calendar-date-hover-state-background-color: rgba(123, 31, 162, 0.3);
+  --mat-datepicker-toggle-active-state-icon-color: #7b1fa2;
+  --mat-datepicker-calendar-date-in-range-state-background-color: rgba(123, 31, 162, 0.2);
+  --mat-datepicker-calendar-date-in-comparison-range-state-background-color: rgba(249, 171, 0, 0.2);
+  --mat-datepicker-calendar-date-in-overlap-range-state-background-color: #a8dab5;
+  --mat-datepicker-calendar-date-in-overlap-range-selected-state-background-color: #46a35e;
+  --mat-datepicker-toggle-icon-color: white;
+  --mat-datepicker-calendar-body-label-text-color: rgba(255, 255, 255, 0.7);
+  --mat-datepicker-calendar-period-button-icon-color: white;
+  --mat-datepicker-calendar-navigation-button-icon-color: white;
+  --mat-datepicker-calendar-header-divider-color: rgba(255, 255, 255, 0.12);
+  --mat-datepicker-calendar-header-text-color: rgba(255, 255, 255, 0.7);
+  --mat-datepicker-calendar-date-today-outline-color: rgba(255, 255, 255, 0.5);
+  --mat-datepicker-calendar-date-today-disabled-state-outline-color: rgba(255, 255, 255, 0.3);
+  --mat-datepicker-calendar-date-text-color: white;
+  --mat-datepicker-calendar-date-outline-color: transparent;
+  --mat-datepicker-calendar-date-disabled-state-text-color: rgba(255, 255, 255, 0.5);
+  --mat-datepicker-calendar-date-preview-state-outline-color: rgba(255, 255, 255, 0.24);
+  --mat-datepicker-range-input-separator-color: white;
+  --mat-datepicker-range-input-disabled-state-separator-color: rgba(255, 255, 255, 0.5);
+  --mat-datepicker-range-input-disabled-state-text-color: rgba(255, 255, 255, 0.5);
+  --mat-datepicker-calendar-container-background-color: #424242;
+  --mat-datepicker-calendar-container-text-color: white;
+}
+
+.dark-theme .mat-mdc-button.mat-unthemed {
+  --mdc-text-button-label-text-color: white;
 }
 
 .dark-theme .mat-mdc-slider.mat-primary {
@@ -76,7 +108,7 @@
   background-color: rgba(105, 102, 102, 0.87)
 }
 
-.dark-theme  .mat-pseudo-checkbox-full {
+.dark-theme .mat-pseudo-checkbox-full {
   color: white;
 }
 
@@ -311,11 +343,11 @@
   color: var(--base-dark-text-color);
 }
 
-.dark-theme ol{
+.dark-theme ol {
   color: var(--base-dark-text-color);
 }
 
-.dark-theme .stack-trace{
+.dark-theme .stack-trace {
   background-color: rgb(26, 23, 27) !important;
 }
 
@@ -330,21 +362,29 @@
 }
 
 .dark-theme .mat-mdc-progress-spinner {
-  --mdc-circular-progress-active-indicator-color:  var(--base-dark-main-color);
+  --mdc-circular-progress-active-indicator-color: var(--base-dark-main-color);
 }
 
 .dark-theme .view-stars {
-  i{
+  i {
     color: var(--base-dark-main-color) !important;
   }
 }
 
 /* Auth */
-.dark-theme .nav-bar-toggle{
+.dark-theme .nav-bar-toggle {
   color: var(--base-dark-text-color) !important;
 }
 
-.dark-theme  .input-form-custom input:focus{
+.dark-theme .input-form-custom input:focus {
   box-shadow: 0 0 0 0.15rem var(--base-dark-main-color);
   border: none;
+}
+
+// .dark-theme .form-control {
+//   background-color: #1d1d1d;
+//   color: white;
+// }
+.custom .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  background-color: white;
 }

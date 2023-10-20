@@ -1,1 +1,44 @@
-<p>register works!</p>
+<section class="vh-80">
+  <div class="container py-5 h-100">
+    <div class="row d-flex align-items-center justify-content-center h-100">
+      <div class="col-md-8 col-lg-7 col-xl-6">
+        <img *ngIf="darkmodeService.isLightTheme()" src="/assets/images/account_orange.svg" class="img-fluid"
+          alt="Phone image">
+        <img *ngIf="!darkmodeService.isLightTheme()" src="/assets/images/account_dark.svg" class="img-fluid"
+          alt="Phone image">
+      </div>
+      <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+        <form class="input-form-custom" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+
+          <h2 class="mt-3">It's time to register ( ͡❛ ⏥ ͡❛)</h2>
+
+          <app-text-input [formControl]="registerForm.controls['email']" [label]="'Email'"></app-text-input>
+          <app-text-input [formControl]="registerForm.controls['username']" [label]="'Username'"></app-text-input>
+          <mat-form-field class="custom full-filed">
+            <mat-label>Choose your date of birth</mat-label>
+            <input [formControl]="registerForm.controls['dateOfBirth']"  matInput [matDatepicker]="picker">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker touchUi #picker></mat-datepicker>
+          </mat-form-field>
+
+          <app-text-input [formControl]="registerForm.controls['password']" [type]="'password'" [label]="'Password'"></app-text-input>
+          <app-text-input [formControl]="registerForm.controls['confirmPassword']" [type]="'password'" [label]="'Confirm Password'"></app-text-input>
+
+          <ul class="text-danger list-unstyled" *ngIf="errors">
+            <li *ngFor="let error of errors">
+              {{error}}
+            </li>
+          </ul>
+
+          <div class="d-flex justify-content-around align-items-center mb-4">
+            <a class="a_btns" routerLink="/account/register">Alredy have an account? -> Login</a>
+          </div>
+
+          <!-- Submit button -->
+          <button [disabled]="registerForm.invalid" type="submit" class="button account-btn g_button mr-2 mb-1">Register</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

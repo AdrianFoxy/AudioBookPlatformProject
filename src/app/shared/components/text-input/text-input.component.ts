@@ -1,5 +1,5 @@
 import { Component, Input, Self } from '@angular/core';
-import { ControlValueAccessor, FormControl, NgControl } from '@angular/forms';
+import { AbstractControl, ControlValueAccessor, FormControl, NgControl } from '@angular/forms';
 
 @Component({
   selector: 'app-text-input',
@@ -24,4 +24,17 @@ export class TextInputComponent implements ControlValueAccessor {
   get control():FormControl{
     return this.controlDir.control as FormControl
   }
+
+  getControlErrors(control: AbstractControl): string[] {
+    const errors: string[] = [];
+    if (control.errors) {
+      for (const errorKey of Object.keys(control.errors)) {
+        errors.push(control.errors[errorKey]);
+      }
+    }
+    return errors;
+  }
+
+
+
 }
