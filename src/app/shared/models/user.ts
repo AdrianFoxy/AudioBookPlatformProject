@@ -1,7 +1,7 @@
 export interface User {
   token: string;
   fullName: string;
-  username: string;
+  userName: string;
   email: string;
   dateOfBirth: string;
 }
