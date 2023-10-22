@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Pagination } from '../shared/models/pagination';
 import { AudioBook } from '../shared/models/audiobook';
@@ -106,7 +106,9 @@ export class LibraryService {
   }
 
   getAudioBook(id: number){
-    return this.http.get<SingleAudioBook>(this.baseUrl + 'AudioBook/' + id);
+    const header = new HttpHeaders().set('Content-type', 'application/json');
+
+    return this.http.get<SingleAudioBook>(this.baseUrl + 'AudioBook/' + id, { headers: header, withCredentials: true });
   }
 
   getGenresForFilter() {
