@@ -71,13 +71,7 @@ export class AccountService {
 
   revokeToken(): Observable<any> {
     const header = new HttpHeaders().set('Content-type', 'application/json');
-    return this.currentUser$.pipe(
-      take(1),
-      switchMap(currentUser => {
-        const username = currentUser?.userName || '';
-        return this.http.delete(this.baseUrl + "Auth/revokeToken?username=" + username, { headers: header, withCredentials: true });
-      })
-    );
+    return this.http.delete(this.baseUrl + "Auth/revokeToken", { headers: header, withCredentials: true });
   }
 
 }

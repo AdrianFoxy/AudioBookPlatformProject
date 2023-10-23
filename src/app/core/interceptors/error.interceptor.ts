@@ -50,7 +50,6 @@ export class ErrorInterceptor implements HttpInterceptor {
               this.ctr = 0
               this.toastr.error(error.error.message, error.status.toString())
             }
-
           }
           if(error.status === 404) {
             this.router.navigateByUrl('/not-found');

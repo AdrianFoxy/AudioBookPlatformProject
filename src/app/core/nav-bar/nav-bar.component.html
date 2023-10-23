@@ -52,7 +52,7 @@
         <ng-container *ngIf="accountService.currentUser$ | async as user">
           <div class="dropdown my-2 my-lg-0" style="cursor: pointer;" dropdown>
             <a dropdownToggle class="nav-bar-toggle dropdown-toggle">
-              <strong>Welcome {{user.fullName}}</strong>
+              <strong>Welcome {{user.userName}}</strong>
             </a>
             <ul *dropdownMenu class="dropdown-menu dropdown-menu-right">
               <li class="py-1">
