@@ -10,11 +10,11 @@
   >
   <div *ngIf="control.status === 'PENDING'" class="fa fa-spinner fa-spin loader"></div>
   <label for="floatingInput">{{label}}</label>
-  <div *ngIf="control.errors?.['required']" class="invalid-feedback">Please enter {{label}}</div>
-  <div *ngIf="control.errors?.['email']" class="invalid-feedback">Invalid email adress</div>
-  <div *ngIf="control.errors?.['pattern']" class="invalid-feedback">Password must have 1 Uppercase, 1 Lowercase, 1 number, 1 non alphanumeric and at least 6 characters</div>
-  <div *ngIf="control.errors?.['emailExists']" class="invalid-feedback">Email adress is taken</div>
-  <div *ngIf="control.errors?.['usernameExists']" class="invalid-feedback">Username is taken</div>
-  <div *ngIf="control.errors?.['passwordMismatch']" class="invalid-feedback">Passwords do not match</div>
-  <div *ngIf="control.errors?.['maxlength']" class="invalid-feedback">Value is too long, max lenth is 200</div>
+  <div *ngIf="control.errors?.['required']" class="invalid-feedback">{{ 'validation-please-enter' | translate }} {{label}}</div>
+  <div *ngIf="control.errors?.['email']" class="invalid-feedback">{{ 'validation-invalid-email' | translate }}</div>
+  <div *ngIf="control.errors?.['pattern']" class="invalid-feedback">{{ 'validation-password-req' | translate }}</div>
+  <div *ngIf="control.errors?.['emailExists']" class="invalid-feedback">{{ 'validation-email-taken' | translate }}</div>
+  <div *ngIf="control.errors?.['usernameExists']" class="invalid-feedback">{{ 'validation-username-taken' | translate }}</div>
+  <div *ngIf="control.errors?.['passwordMismatch']" class="invalid-feedback">{{ 'validation-passwordMismatch' | translate }}</div>
+  <div *ngIf="control.errors?.['maxlength']" class="invalid-feedback">{{ 'validation-maxlenght-auth' | translate }}</div>
 </div>

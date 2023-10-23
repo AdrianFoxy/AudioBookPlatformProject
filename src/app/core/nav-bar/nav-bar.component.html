@@ -45,7 +45,7 @@
         </ul>
         <ng-container *ngIf="(accountService.currentUser$ | async) === null">
           <div class="my-2 my-lg-0">
-            <button routerLink="/account/login" class="button g_button mr-2 mb-1">{{ 'Log In' | translate }}</button>
+            <button routerLink="/account/login" class="button g_button mr-2 mb-1">{{ 'Sign-in' | translate }}</button>
             <button routerLink="/account/register" class="button g_button">{{ 'Create Account' | translate }}</button>
           </div>
         </ng-container>
@@ -73,7 +73,7 @@
               <div class="dropdown-divider"></div>
               <li class="py-1">
                 <a (click)="accountService.logout()" class="dropdown-item">
-                  <i class="fa fa-sign-out me-3"></i>Log Out
+                  <i class="fa fa-sign-out me-3"></i>{{ 'log-out' | translate }}
                 </a>
               </li>
             </ul>
@@ -117,7 +117,7 @@
             </div>
             <ng-container *ngIf="(accountService.currentUser$ | async) === null">
               <div class="modal-item" data-bs-dismiss="modal">
-                <a routerLink="/account/login">{{ 'Log In' | translate }}</a>
+                <a routerLink="/account/login">{{ 'Sign-in' | translate }}</a>
               </div>
               <div class="modal-item" data-bs-dismiss="modal">
                 <a routerLink="/account/register">{{ 'Create Account' | translate }}</a>
@@ -125,7 +125,7 @@
             </ng-container>
             <ng-container *ngIf="(accountService.currentUser$ | async) != null">
               <div class="modal-item" data-bs-dismiss="modal">
-                <a routerLink="/" (click)="accountService.logout()">Log Out</a>
+                <a routerLink="/" (click)="accountService.logout()">{{ 'log-out' | translate }}</a>
               </div>
             </ng-container>
           </div>
