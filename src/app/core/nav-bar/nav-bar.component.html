@@ -45,14 +45,14 @@
         </ul>
         <ng-container *ngIf="(accountService.currentUser$ | async) === null">
           <div class="my-2 my-lg-0">
-            <button routerLink="/account/login" class="button g_button mr-2 mb-1">{{ 'Log In' | translate }}</button>
+            <button routerLink="/account/login" class="button g_button mr-2 mb-1">{{ 'Sign-in' | translate }}</button>
             <button routerLink="/account/register" class="button g_button">{{ 'Create Account' | translate }}</button>
           </div>
         </ng-container>
         <ng-container *ngIf="accountService.currentUser$ | async as user">
           <div class="dropdown my-2 my-lg-0" style="cursor: pointer;" dropdown>
             <a dropdownToggle class="nav-bar-toggle dropdown-toggle">
-              <strong>Welcome {{user.fullName}}</strong>
+              <strong>Welcome {{user.userName}}</strong>
             </a>
             <ul *dropdownMenu class="dropdown-menu dropdown-menu-right">
               <li class="py-1">
@@ -73,7 +73,7 @@
               <div class="dropdown-divider"></div>
               <li class="py-1">
                 <a (click)="accountService.logout()" class="dropdown-item">
-                  <i class="fa fa-sign-out me-3"></i>Log Out
+                  <i class="fa fa-sign-out me-3"></i>{{ 'log-out' | translate }}
                 </a>
               </li>
             </ul>
@@ -115,12 +115,19 @@
             <div class="modal-item" data-bs-dismiss="modal">
               <a routerLink="/selection">{{ 'Selections' | translate }}</a>
             </div>
-            <div class="modal-item" data-bs-dismiss="modal">
-              <a href="#">{{ 'Log In' | translate }}</a>
-            </div>
-            <div class="modal-item" data-bs-dismiss="modal">
-              <a href="#">{{ 'Create Account' | translate }}</a>
-            </div>
+            <ng-container *ngIf="(accountService.currentUser$ | async) === null">
+              <div class="modal-item" data-bs-dismiss="modal">
+                <a routerLink="/account/login">{{ 'Sign-in' | translate }}</a>
+              </div>
+              <div class="modal-item" data-bs-dismiss="modal">
+                <a routerLink="/account/register">{{ 'Create Account' | translate }}</a>
+              </div>
+            </ng-container>
+            <ng-container *ngIf="(accountService.currentUser$ | async) != null">
+              <div class="modal-item" data-bs-dismiss="modal">
+                <a routerLink="/" (click)="accountService.logout()">{{ 'log-out' | translate }}</a>
+              </div>
+            </ng-container>
           </div>
 
           <div class="social mt-5">

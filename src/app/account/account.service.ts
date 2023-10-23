@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, map } from 'rxjs';
+import { BehaviorSubject, Observable, map, switchMap, take } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { User } from '../shared/models/user';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -16,39 +16,44 @@ export class AccountService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  loadCurrentUser(token: string){
-    let headers = new HttpHeaders();
-    headers = headers.set('Authorization', `Bearer ${token}`);
-    return this.http.get<User>(this.baseUrl + 'Auth/get-current-user', {headers}).pipe(
+  loadCurrentUser(){
+    const header = new HttpHeaders().set('Content-type', 'application/json');
+
+    return this.http.get<User>(this.baseUrl + 'Auth/get-current-user',  { headers: header, withCredentials: true }).pipe(
       map(user => {
-        localStorage.setItem('token', user.token);
         this.currentUserSource.next(user);
       })
     )
   }
 
   login(values: any) {
-    return this.http.post<User>(this.baseUrl + 'Auth/login', values).pipe(
+    const header = new HttpHeaders().set('Content-type', 'application/json');
+    return this.http.post<User>(this.baseUrl + 'Auth/login', values, { headers: header, withCredentials: true }).pipe(
       map(user => {
-        localStorage.setItem('token', user.token);
         this.currentUserSource.next(user);
       })
     )
   }
 
   register(values: any){
-    return this.http.post<User>(this.baseUrl + 'Auth/register', values).pipe(
+    const header = new HttpHeaders().set('Content-type', 'application/json');
+    return this.http.post<User>(this.baseUrl + 'Auth/register', values, { headers: header, withCredentials: true }).pipe(
       map(user => {
-        localStorage.setItem('token', user.token);
         this.currentUserSource.next(user);
       })
     )
   }
 
-  logout(){
-    localStorage.removeItem('token');
-    this.currentUserSource.next(null);
-    this.router.navigateByUrl('/');
+  logout() {
+    const header = new HttpHeaders().set('Content-type', 'application/json');
+
+    this.revokeToken().subscribe(() => {
+      this.http.delete(this.baseUrl + 'Auth/logout', { headers: header, withCredentials: true })
+        .subscribe(() => {
+          this.currentUserSource.next(null);
+          this.router.navigateByUrl('/');
+        });
+    });
   }
 
   checkEmailExists(email: string){
@@ -57,5 +62,21 @@ export class AccountService {
 
   checkUserNameExists(username: string){
     return this.http.get<boolean>(this.baseUrl + 'Auth/usernameexists?username=' + username);
+  }
+
+  refreshToken(): Observable<any> {
+    const header = new HttpHeaders().set('Content-type', 'application/json');
+    return this.http.get(this.baseUrl + "Auth/refreshToken", { headers: header, withCredentials: true });
+  }
+
+  revokeToken(): Observable<any> {
+    const header = new HttpHeaders().set('Content-type', 'application/json');
+    return this.currentUser$.pipe(
+      take(1),
+      switchMap(currentUser => {
+        const username = currentUser?.userName || '';
+        return this.http.delete(this.baseUrl + "Auth/revokeToken?username=" + username, { headers: header, withCredentials: true });
+      })
+    );
   }
 }

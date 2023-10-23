@@ -9,11 +9,14 @@ import {
 import { Observable, catchError, throwError } from 'rxjs';
 import { NavigationExtras, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { AccountService } from 'src/app/account/account.service';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
 
-  constructor(private router: Router, private toastr: ToastrService) {}
+  constructor(private router: Router, private toastr: ToastrService,
+              private accountService: AccountService) {}
+  ctr = 0;
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     return next.handle(request).pipe(
@@ -27,7 +30,26 @@ export class ErrorInterceptor implements HttpInterceptor {
             }
           }
           if(error.status === 401){
-            this.toastr.error(error.error.message, error.status.toString())
+            if(this.ctr != 1){
+              this.ctr++;
+              this.accountService.refreshToken().subscribe({
+                next: (x: any) =>{
+                  this.toastr.error("Token refreshed, try again", error.status.toString());
+                },
+                error: (err: any) =>{
+                  this.accountService.revokeToken().subscribe({
+                    next: (x: any) => {
+                      this.router.navigateByUrl('/account/login');
+                      this.toastr.error("Try to re-login", error.status.toString());
+                    }
+                  })
+                }
+              })
+            }
+            else{
+              this.ctr = 0
+              this.toastr.error(error.error.message, error.status.toString())
+            }
           }
           if(error.status === 404) {
             this.router.navigateByUrl('/not-found');
