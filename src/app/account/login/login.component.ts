@@ -19,8 +19,6 @@ export class LoginComponent implements OnInit {
   private clientId = environment.clientId
 
   ngOnInit() {
-    console.log('hello');
-
     // @ts-ignore
     google.accounts.id.initialize({
       client_id: this.clientId,
