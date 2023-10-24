@@ -21,7 +21,6 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     console.log('hello');
 
-    // Вызывайте код непосредственно здесь, чтобы он выполнялся при каждом переходе на страницу
     // @ts-ignore
     google.accounts.id.initialize({
       client_id: this.clientId,
