@@ -9,3 +9,14 @@ background: #eee;
 .a_btns:hover {
   text-decoration: underline;
 }
+
+#buttonDivGoogle{
+  border: 2px solid var(--base-light-border-color);
+  border-bottom: 6px solid var(--base-light-border-color);
+  border-radius: 10px;
+  padding: 10px 20px;
+  background-color: #1a73e8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
