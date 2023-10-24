@@ -382,10 +382,11 @@
   border: none;
 }
 
-// .dark-theme .form-control {
-//   background-color: #1d1d1d;
-//   color: white;
-// }
 .custom .mdc-text-field--filled:not(.mdc-text-field--disabled) {
   background-color: white;
+}
+
+.dark-theme #buttonDiv{
+  border: 2px solid var(--base-dark-border-color) !important;
+  border-bottom: 6px solid var(--base-dark-border-color) !important;
 }
