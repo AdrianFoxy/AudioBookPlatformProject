@@ -13,6 +13,7 @@ export class BookDetailsComponent implements OnInit {
 
   truncatedText: string = '';
   isExpanded: boolean = false;
+  isToggled: boolean = false;
 
   audiobook?: SingleAudioBook;
 
@@ -58,6 +59,7 @@ export class BookDetailsComponent implements OnInit {
       this.truncatedText = description;
     } else {
       this.truncatedText = description.slice(0, maxLength) + '...';
+      this.isToggled = true;
     }
   }
 

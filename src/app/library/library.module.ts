@@ -17,13 +17,15 @@ import { AudiobookItemComponent } from './audiobook-item/audiobook-item.componen
 import { BookDetailsComponent } from './book-details/book-details.component';
 
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { AuthorDetailsComponent } from './author-details/author-details.component';
 
 @NgModule({
   declarations: [
     LibraryComponent,
     FilterPipe,
     AudiobookItemComponent,
-    BookDetailsComponent
+    BookDetailsComponent,
+    AuthorDetailsComponent
   ],
   imports: [
     CommonModule,
