@@ -105,6 +105,17 @@ export class LibraryService {
     return this.http.get<Pagination<AudioBook[]>>(this.baseUrl + 'AudioBook', { params });
   }
 
+  getAudioBooksOfAuthor(id: number,
+    sortingAndPaginationParams: sortingAndPaginationParams)
+  {
+    let params = new HttpParams();
+    params = params.append('PageIndex', sortingAndPaginationParams.pageNumber);
+    params = params.append('PageSize', sortingAndPaginationParams.pageSize);
+    params = params.append('Id', id);
+
+    return this.http.get<Pagination<AudioBook[]>>(this.baseUrl + 'Author/author-books', { params });
+
+  }
   getAudioBook(id: number){
     const header = new HttpHeaders().set('Content-type', 'application/json');
 
@@ -138,4 +149,7 @@ export class LibraryService {
     return this.http.put(url, null);
   }
 
+  getAuthorById(id: number){
+    return this.http.get<Author>(this.baseUrl+ 'Author/' + id);
+  }
 }

@@ -1,0 +1,53 @@
+.poster_block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.poster_img{
+  margin-top: 10px;
+  border-radius: 20px;
+  width: 90%;
+  height: auto;
+  outline: none;
+  border: 2px solid var(--base-light-border-color);
+  border-bottom: 6px solid var(--base-light-border-color);
+}
+
+@media(max-width:1200px){
+  .poster_img{
+    height: 350px;
+  }
+}
+
+@media(max-width:992px){
+  .poster_img{
+    height: 250px;
+  }
+}
+
+@media(max-width:768px){
+  .poster_img{
+    height: 100%;
+  }
+  .author-name{
+    text-align: center;
+  }
+}
+
+.a_btns:hover {
+  text-decoration: underline;
+}
+.secondary_txt{
+  color: gray;
+}
+.attb_span{
+  color: black;
+}
+.show-more{
+  cursor: pointer;
+  color: var(--base-orange-color) !important;
+}
+.description{
+  text-align: justify;
+}

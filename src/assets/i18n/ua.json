@@ -74,5 +74,6 @@
   "req-confirm-password": "Підтвердіть пароль",
   "alredy-have-account": "Вже є аккаунт? -> Увійти",
   "sign-up": "Зареєструватись",
-  "log-out": "Вийти"
+  "log-out": "Вийти",
+  "author-books": "Книги автора"
 }
