@@ -14,10 +14,6 @@ import { sortingAndPaginationParams } from 'src/app/shared/models/audioBooksPara
 })
 export class AuthorDetailsComponent implements OnInit {
 
-  truncatedText: string = '';
-  isExpanded: boolean = false;
-  isToggled: boolean = false;
-
   author?: Author;
   audioBooks: AudioBook[] = [];
   sortingAndPaginationParams = new sortingAndPaginationParams();
@@ -30,6 +26,7 @@ export class AuthorDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.getAuthor();
     this.getAudioBooksOfAuthorComponent();
+    console.log(this.author);
   }
 
   getAuthor() {
@@ -38,9 +35,6 @@ export class AuthorDetailsComponent implements OnInit {
       this.libraryService.getAuthorById(+id).subscribe({
         next: response => {
           this.author = response;
-          if (this.author?.description) {
-            this.truncateText(this.author.description);
-          }
         },
         error: error => console.log(error)
       })
@@ -67,25 +61,6 @@ export class AuthorDetailsComponent implements OnInit {
     if(this.sortingAndPaginationParams.pageNumber !== event) {
       this.sortingAndPaginationParams.pageNumber = event;
       this.getAudioBooksOfAuthorComponent();
-    }
-  }
-
-  toggleText(description: string) {
-    this.isExpanded = !this.isExpanded;
-    if (this.isExpanded) {
-      this.truncatedText = description;
-    } else {
-      this.truncateText(description);
-    }
-  }
-
-  truncateText(description: string) {
-    const maxLength = 900;
-    if (description.length <= maxLength) {
-      this.truncatedText = description;
-    } else {
-      this.truncatedText = description.slice(0, maxLength) + '...';
-      this.isToggled = true;
     }
   }
 }

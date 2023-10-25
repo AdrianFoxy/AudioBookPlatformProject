@@ -5,19 +5,16 @@
     </div>
     <div class="col-md-8">
       <div class="title">
-        <h1 class="author-name">{{author.name}}</h1>
+        <h1 class="author-name">{{langService.whatCurrentLang() === 'en' ? author.enName : author.name}}</h1>
       </div>
       <hr>
       <div>
-        <p class="description" [innerHTML]="isExpanded ? author.description : truncatedText"></p>
-        <a *ngIf="isToggled" class="show-more" (click)="toggleText(author.description)">
-          {{ isExpanded ? ('Less-Desc' | translate) : ('More-Desc' | translate) }}
-        </a>
+        <p class="description">{{langService.whatCurrentLang() === 'en' ? author.enDescription : author.description}}</p>
       </div>
       <hr>
     </div>
   </div>
-  <h1 class="mb-4">Книги автора:</h1>
+  <h1 class="mb-4">{{ 'author-books' | translate }}:</h1>
   <div class="row row-cols-xl-5 row-cols-lg-4 row-cols-md-4 row-cols-sm-3 row-cols-2 mt-2">
 
     <div *ngIf="totalCount == 0">
