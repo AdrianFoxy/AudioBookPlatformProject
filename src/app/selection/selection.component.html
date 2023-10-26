@@ -5,41 +5,8 @@
   </p>
   <hr>
   <div class="row row-cols-xl-2 row-cols-1">
-    <div class="col selection-container">
-      <img class="img-selection" src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/0f4c0856-2593-4772-b023-19d72c0ed226/d9vbxv1-bc74db3b-577a-4aa1-b7f4-a443680418b7.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzBmNGMwODU2LTI1OTMtNDc3Mi1iMDIzLTE5ZDcyYzBlZDIyNlwvZDl2Ynh2MS1iYzc0ZGIzYi01NzdhLTRhYTEtYjdmNC1hNDQzNjgwNDE4YjcuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.dGl2VhRazeNBjXjxc7bVlgkrCtH5hpjM6NJBaqDyS8o" alt="">
-      <div class="top-left"><span>Fantasy selection</span></div>
-      <div class="bottom-right">
-        <span>
-           <i class="fa fa-eye" aria-hidden="true"></i> 10
-        </span>
-      </div>
-    </div>
-    <div class="col selection-container">
-      <img class="img-selection" src="https://i.pinimg.com/originals/09/00/ef/0900ef7bc8e3e1ec8e42f24544e5a791.png" alt="">
-      <div class="top-left"><span>Movivation selection</span></div>
-      <div class="bottom-right">
-        <span>
-           <i class="fa fa-eye" aria-hidden="true"></i> 10
-        </span>
-      </div>
-    </div>
-    <div class="col selection-container">
-      <img class="img-selection" src="https://media.istockphoto.com/id/913475802/vector/man-harvesting-moons-on-the-sea.jpg?s=612x612&w=0&k=20&c=azsgV5HKuXlytEXlyswo5A-i8eq4JpxnIueBxFVziaA=" alt="">
-      <div class="top-left"><span>Another selection</span></div>
-      <div class="bottom-right">
-        <span>
-           <i class="fa fa-eye" aria-hidden="true"></i> 10
-        </span>
-      </div>
-    </div>
-    <div class="col selection-container">
-      <img class="img-selection" src="https://s3.amazonaws.com/thumbnails.venngage.com/template/1216a39a-5e4f-4154-a853-0b0139f2b6b6.png" alt="">
-      <div class="top-left"><span>Business selection</span></div>
-      <div class="bottom-right">
-        <span>
-           <i class="fa fa-eye" aria-hidden="true"></i> 10
-        </span>
-      </div>
+    <div class="col" *ngFor="let selection of selections">
+      <app-selection-item [selection]="selection"></app-selection-item>
     </div>
   </div>
 </div>

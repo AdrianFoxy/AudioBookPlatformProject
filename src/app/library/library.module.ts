@@ -41,6 +41,7 @@ import { AuthorDetailsComponent } from './author-details/author-details.componen
     MatInputModule,
     FormsModule,
     SharedModule
-  ]
+  ],
+  exports:[AudiobookItemComponent]
 })
 export class LibraryModule { }
