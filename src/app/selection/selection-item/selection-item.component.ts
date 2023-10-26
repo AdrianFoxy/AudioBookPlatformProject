@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { LanguageService } from 'src/app/core/services/language-service/language.service';
 import { Selection } from 'src/app/shared/models/selection';
 
 @Component({
@@ -7,6 +8,10 @@ import { Selection } from 'src/app/shared/models/selection';
   styleUrls: ['./selection-item.component.scss']
 })
 export class SelectionItemComponent {
+
+  constructor(public langService: LanguageService){
+
+  }
 
   @Input() selection?: Selection;
 }

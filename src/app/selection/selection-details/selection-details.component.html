@@ -6,9 +6,9 @@
     <img class="overlapping-img" src="{{selection.imageUrl}}" alt="">
   </div>
   <div class="selection-content container">
-    <h1 class="selection-title">{{selection.name}}</h1>
-    <p class="mt-3" [innerHTML]="formatDescription(selection.description)"></p>
-    <h2 class="mt-3">Книги добірки</h2>
+    <h1 class="selection-title">{{ langService.whatCurrentLang() === 'en' ? selection.enName : selection.name }}</h1>
+    <p class="selection-desription mt-3" [innerHTML]="formatDescription(langService.whatCurrentLang() === 'en' ? selection.enDescription : selection.description)"></p>
+    <h2 class="mt-3">{{ 'selection-books' | translate }}</h2>
     <div class="row row-cols-xl-5 row-cols-lg-4 row-cols-md-4 row-cols-sm-3 row-cols-2 mt-3">
       <div *ngIf="totalCount == 0">
         <div *ngIf="loaderService.isLoading | async" class="loader-container">

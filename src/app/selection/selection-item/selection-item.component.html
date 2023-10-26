@@ -1,6 +1,6 @@
 <div class="selection-container" *ngIf="selection">
   <img class="img-selection" routerLink="/selection/{{selection.id}}" src="{{selection.imageUrl}}" alt="selection.imageUrl">
-  <div class="top-left"><span>{{selection.name}}</span></div>
+  <div class="top-left"><span>{{ langService.whatCurrentLang() === 'en' ? selection.enName : selection.name }}</span></div>
   <div class="bottom-right">
     <span>
        <i class="fa fa-eye" aria-hidden="true"></i> {{selection.viewCount}}
