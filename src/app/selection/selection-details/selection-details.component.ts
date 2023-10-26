@@ -1,50 +1,52 @@
-import { Component, OnInit } from '@angular/core';
-import { Author } from 'src/app/shared/models/author';
-import { LibraryService } from '../library.service';
+import { Component } from '@angular/core';
+import { Selection } from 'src/app/shared/models/selection';
+import { SelectionService } from '../selection.service';
 import { ActivatedRoute } from '@angular/router';
 import { LanguageService } from 'src/app/core/services/language-service/language.service';
-import { LoaderService } from 'src/app/core/services/loader-service/loader.service';
 import { AudioBook } from 'src/app/shared/models/audiobook';
 import { sortingAndPaginationParams } from 'src/app/shared/models/audioBooksParams/sortingAndPaginationParams';
+import { LoaderService } from 'src/app/core/services/loader-service/loader.service';
 
 @Component({
-  selector: 'app-author-details',
-  templateUrl: './author-details.component.html',
-  styleUrls: ['./author-details.component.scss']
+  selector: 'app-selection-details',
+  templateUrl: './selection-details.component.html',
+  styleUrls: ['./selection-details.component.scss']
 })
-export class AuthorDetailsComponent implements OnInit {
+export class SelectionDetailsComponent {
 
-  author?: Author;
+  selection?: Selection;
   audioBooks: AudioBook[] = [];
   sortingAndPaginationParams = new sortingAndPaginationParams();
 
   totalCount = 0;
 
-  constructor(private libraryService: LibraryService, private activatedRoute: ActivatedRoute,
+
+  constructor(private selectionService: SelectionService, private activatedRoute: ActivatedRoute,
     public langService: LanguageService, public loaderService:LoaderService) {
   }
-  ngOnInit(): void {
-    this.getAuthor();
-    this.getAudioBooksOfAuthorComponent();
+
+  async ngOnInit(): Promise<void> {
+    await this.loadSingleAudioBook();
+    this.getAudioBooksOfSelection();
   }
 
-  getAuthor() {
+  async loadSingleAudioBook() {
     const id = this.activatedRoute.snapshot.paramMap.get('id')
     if (id) {
-      this.libraryService.getAuthorById(+id).subscribe({
-        next: response => {
-          this.author = response;
-        },
-        error: error => console.log(error)
-      })
+      const selection = await this.selectionService.getSingleSelection(+id).toPromise();
+      this.selection = selection;
     }
   }
 
-  getAudioBooksOfAuthorComponent() {
+  formatDescription(description: string): string {
+    return description.replace(/\r\n\r\n/g, '<br><br>');
+  }
+
+  getAudioBooksOfSelection() {
     const id = this.activatedRoute.snapshot.paramMap.get('id');
 
     if (id !== null) {
-      this.libraryService.getAudioBooksOfAuthor(+id, this.sortingAndPaginationParams).subscribe({
+      this.selectionService.getAudioBooksOfSelection(+id, this.sortingAndPaginationParams).subscribe({
         next: response => {
           this.audioBooks = response.data;
           this.sortingAndPaginationParams.pageNumber = response.pageIndex;
@@ -59,7 +61,8 @@ export class AuthorDetailsComponent implements OnInit {
   onPageChanged(event: any){
     if(this.sortingAndPaginationParams.pageNumber !== event) {
       this.sortingAndPaginationParams.pageNumber = event;
-      this.getAudioBooksOfAuthorComponent();
+      this.getAudioBooksOfSelection();
     }
   }
+
 }
