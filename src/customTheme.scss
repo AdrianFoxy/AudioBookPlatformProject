@@ -390,3 +390,20 @@
   border: 2px solid var(--base-dark-border-color) !important;
   border-bottom: 6px solid var(--base-dark-border-color) !important;
 }
+
+.dark-theme .text-muted{
+  color: rgb(207, 200, 200) !important;
+}
+
+.dark-theme .card{
+  border-color: grey;
+}
+.dark-theme .gradient-custom {
+  background: #574ccf !important;
+  background: -webkit-linear-gradient(to right bottom, #574ccf, #4235d1) !important;
+  background: linear-gradient(to right bottom, #574ccf, #4739df) !important;
+}
+
+.dark-theme .profile-avatar-text{
+  color: var(--base-dark-text-color) !important;
+}

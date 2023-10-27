@@ -214,3 +214,11 @@ input:checked~.toggle {
   width: 100%;
   z-index: 99;
 }
+
+.dd-a{
+  color: black;
+}
+
+.dropdown-item.dd-a:active {
+  background-color: var(--base-orange-color);
+}
