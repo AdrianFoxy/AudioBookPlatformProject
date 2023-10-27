@@ -14,6 +14,7 @@ const routes: Routes = [
   {path: 'library', loadChildren: () => import('./library/library.module').then(m => m.LibraryModule)},
   {path: 'account', loadChildren: () => import('./account/account.module').then(m => m.AccountModule)},
   {path: 'selection', loadChildren: () => import('./selection/selection.module').then(m => m.SelectionModule)},
+  {path: 'user-profile', loadChildren: () => import('./user-profile/user-profile.module').then(m => m.UserProfileModule)},
   {path: 'about', component: AboutComponent},
   {path: '**', redirectTo: '', pathMatch: 'full'}
 ];

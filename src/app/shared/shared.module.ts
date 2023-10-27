@@ -18,6 +18,11 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatNativeDateModule} from '@angular/material/core';
 
+import {MatSelectModule} from '@angular/material/select';
+import {MatSliderModule} from '@angular/material/slider';
+import {MatChipsModule} from '@angular/material/chips';
+import {MatIconModule} from '@angular/material/icon';
+
 @NgModule({
   declarations: [
     RecomentdationsComponent,
@@ -46,7 +51,14 @@ import {MatNativeDateModule} from '@angular/material/core';
     ReactiveFormsModule,
     BsDropdownModule,
     TextInputComponent,
-    MatFormFieldModule, MatInputModule, MatDatepickerModule, MatNativeDateModule
+    MatFormFieldModule, MatInputModule, MatDatepickerModule, MatNativeDateModule,
+
+    MatFormFieldModule,
+    MatSelectModule,
+    MatSliderModule,
+    MatChipsModule,
+    MatIconModule,
+
   ]
 })
 export class SharedModule { }

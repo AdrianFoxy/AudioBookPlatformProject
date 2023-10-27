@@ -30,11 +30,6 @@ import { AuthorDetailsComponent } from './author-details/author-details.componen
   imports: [
     CommonModule,
     LibraryRoutingModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatSliderModule,
-    MatChipsModule,
-    MatIconModule,
     ReactiveFormsModule,
     NgxMatSelectSearchModule,
     MatProgressSpinnerModule,

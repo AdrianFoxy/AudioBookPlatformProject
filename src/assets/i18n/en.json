@@ -76,5 +76,14 @@
   "sign-up": "Sign Up",
   "log-out": "Log out",
   "author-books": "Author's books",
-  "selection-books": "Books included in the selection"
+  "selection-books": "Books included in the selection",
+  "welcome-selections": "Welcome to our carefully curated world of literature! In this section, we invite you to embark on a literary journey through our thoughtfully chosen book selections. Whether you're a passionate bibliophile, a casual reader, or someone seeking the perfect book gift, our collection has something for everyone.",
+  "Info": "Information",
+  "Email-profile": "Email",
+  "DateOfBirth-profile": "Date of birth",
+  "AboutMe-profile": "About me",
+  "AboutMe-text-profile": "I really want to tell something about myself, but the owner of the profile doesn't do it :( That's why this text is here. It's sad though.",
+  "MyLibrary-profile": "My library",
+  "User-status-1": "An avid reader",
+  "Bookstatus-profile": "Book status"
 }
