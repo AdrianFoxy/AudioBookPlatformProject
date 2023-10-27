@@ -92,6 +92,10 @@
           </div>
 
           <div class="modal-body">
+            <div class="modal-item" *ngIf="accountService.currentUser$ | async as user" data-bs-dismiss="modal">
+              <img routerLink="/user-profile/{{user.userName}}" [src]="darkmodeService.isLightTheme() ? '/assets/images/light_user.svg' : '/assets/images/dark_user.svg'" alt="Avatar" class="img-fluid" style="width: 80px;" />
+              <p class="mt-2" routerLink="/user-profile/{{user.userName}}">{{user.userName}}<p>
+            </div>
             <div class="modal-item" data-bs-dismiss="modal">
               <a routerLink="/" routerLinkActive="active">
                 {{ 'Home' | translate }}

@@ -6,8 +6,8 @@
           <div class="col-md-4 gradient-custom text-center text-white"
             style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
             <img [src]="darkmodeService.isLightTheme() ? '/assets/images/light_user.svg' : '/assets/images/dark_user.svg'" alt="Avatar" class="img-fluid my-5" style="width: 80px;" />
-            <h5 class="profile-avatar-text">{{user.userName}}</h5>
-            <p class="profile-avatar-text">{{ 'User-status-1' | translate }}</p>
+            <h5 class="profile-avatar-text"><strong>{{user.userName}}</strong></h5>
+            <p class="profile-avatar-text"><strong>{{ 'User-status-1' | translate }}</strong></p>
             <i class="fa fa-edit mb-5 profile-avatar-text"></i>
           </div>
           <div class="col-md-8">
