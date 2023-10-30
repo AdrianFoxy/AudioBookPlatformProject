@@ -13,6 +13,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HomeModule } from './home/home.module';
 import { LoadingInterceptor } from './core/interceptors/loading.interceptor';
 import { ErrorInterceptor } from './core/interceptors/error.interceptor';
+import { AboutModule } from './about/about.module';
 
 export function HttpLoaderFactory(http: HttpClient){
   return new TranslateHttpLoader(http);
@@ -29,6 +30,7 @@ export function HttpLoaderFactory(http: HttpClient){
     HttpClientModule,
     HomeModule,
     CoreModule,
+    AboutModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
