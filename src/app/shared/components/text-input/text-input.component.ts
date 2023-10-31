@@ -9,9 +9,16 @@ import { AbstractControl, ControlValueAccessor, FormControl, NgControl } from '@
 export class TextInputComponent implements ControlValueAccessor {
   @Input() type = 'text';
   @Input() label = '';
+  @Input() defaultValue?: string;
 
   constructor(@Self() public controlDir: NgControl){
     this.controlDir.valueAccessor = this;
+  }
+
+  ngOnInit() {
+    if (this.defaultValue !== undefined) {
+      this.control.setValue(this.defaultValue);
+    }
   }
 
   writeValue(obj: any): void {

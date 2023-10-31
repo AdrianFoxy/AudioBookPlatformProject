@@ -1,0 +1,16 @@
+<div class="container p-5" *ngIf="accountService.currentUser$ | async as user">
+  <h1>Edit Profile</h1>
+  <form class="user-profile-form" [formGroup]="profileForm" (ngSubmit)="editUser()">
+    <app-text-input [formControl]="profileForm.controls['email']" [label]="'reg-email' | translate" [defaultValue]="user.email"></app-text-input>
+    <app-text-input [formControl]="profileForm.controls['username']" [label]="'username' | translate" [defaultValue]="user.userName"></app-text-input>
+
+    <mat-form-field class="custom full-filed">
+      <mat-label>{{ 'reg-choose-date-of-birth' | translate }}</mat-label>
+      <input [formControl]="profileForm.controls['dateOfBirth']"  matInput [matDatepicker]="picker" [value]="user.userName">
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker touchUi #picker></mat-datepicker>
+    </mat-form-field>
+
+    <button [disabled]="profileForm.invalid" type="submit" class="button account-btn g_button mr-2 mb-1" (click)="onNoClick()">Edit</button>
+  </form>
+</div>

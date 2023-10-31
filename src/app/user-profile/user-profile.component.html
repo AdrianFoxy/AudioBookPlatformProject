@@ -8,11 +8,12 @@
             <img [src]="darkmodeService.isLightTheme() ? '/assets/images/light_user.svg' : '/assets/images/dark_user.svg'" alt="Avatar" class="img-fluid my-5" style="width: 80px;" />
             <h5 class="profile-avatar-text"><strong>{{user.userName}}</strong></h5>
             <p class="profile-avatar-text"><strong>{{ 'User-status-1' | translate }}</strong></p>
-            <i class="fa fa-edit mb-5 profile-avatar-text"></i>
+            <i (click)="openDialog()" class="fa fa-edit mb-5 profile-avatar-text"></i>
           </div>
           <div class="col-md-8">
             <div class="card-body p-4">
               <h6>{{ 'Info' | translate }}</h6>
+              <p>test: {{user.id}}, {{user.role}}</p>
               <hr class="mt-0 mb-4">
               <div class="row pt-1">
                 <div class="col-6 mb-3">

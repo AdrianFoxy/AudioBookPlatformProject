@@ -3,6 +3,8 @@ import { DarkModeService } from '../core/services/dark-mode-service/dark-mode.se
 import { LanguageService } from '../core/services/language-service/language.service';
 import { AccountService } from '../account/account.service';
 import { LoaderService } from '../core/services/loader-service/loader.service';
+import { MatDialog } from '@angular/material/dialog';
+import { EditUserComponent } from './edit-user/edit-user.component';
 
 @Component({
   selector: 'app-user-profile',
@@ -19,12 +21,17 @@ export class UserProfileComponent {
   ];
 
   constructor(public darkmodeService: DarkModeService, public langService: LanguageService,
-    public loaderService: LoaderService, public accountService: AccountService) {
+    public loaderService: LoaderService, public accountService: AccountService,
+    private dialogRef : MatDialog) {
   }
 
   getFormattedDate(apiDate: string): string {
     const date = new Date(apiDate);
     return date.toISOString().slice(0, 10);
+  }
+
+  openDialog(){
+    this.dialogRef.open(EditUserComponent);
   }
 
 }

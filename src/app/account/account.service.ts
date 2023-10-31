@@ -46,7 +46,6 @@ export class AccountService {
 
   LoginWithGoogle(credentials: string): Observable<any> {
     const header = new HttpHeaders().set('Content-type', 'application/json');
-    debugger
     return this.http.post<User>(this.baseUrl + "Auth/loginWithGoogle", JSON.stringify(credentials), { headers: header, withCredentials: true }).pipe(
       map(user => {
         this.currentUserSource.next(user);

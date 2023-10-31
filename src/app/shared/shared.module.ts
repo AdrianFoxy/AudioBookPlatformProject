@@ -22,6 +22,8 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatSliderModule} from '@angular/material/slider';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule } from '@angular/material/button';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,8 @@ import {MatIconModule} from '@angular/material/icon';
     PaginationModule.forRoot(),
     TranslateModule.forChild(),
     ReactiveFormsModule,
-    MatFormFieldModule, MatInputModule, MatDatepickerModule, MatNativeDateModule
+    MatFormFieldModule, MatInputModule, MatDatepickerModule, MatNativeDateModule,
+    MatButtonModule, MatDialogModule
   ],
   exports:[
     RecomentdationsComponent,
