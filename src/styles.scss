@@ -234,3 +234,8 @@ hr {
   box-shadow: 0 0 0 0.15rem var(--base-orange-color);
   border: none;
 }
+
+.mat-mdc-dialog-container {
+  --mdc-dialog-container-color: var(--base-light-bg-color)
+}
+

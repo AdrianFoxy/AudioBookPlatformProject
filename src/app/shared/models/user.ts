@@ -4,4 +4,6 @@ export interface User {
   email: string;
   dateOfBirth: string;
   role: string;
+  about: string;
+  socialAuth: boolean;
 }

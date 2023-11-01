@@ -7,7 +7,7 @@
   class="form-control"
   autocomplete="{{ label }}"
   [ngClass]="(control.touched) ? (control.invalid ? 'is-invalid' : 'is-valid') : null"
-  [value]="defaultValue || ''"
+  [readOnly]="isDisabled"
 >
 <div *ngIf="control.status === 'PENDING' && control.value !== defaultValue" class="fa fa-spinner fa-spin loader"></div>
   <label for="floatingInput">{{label}}</label>

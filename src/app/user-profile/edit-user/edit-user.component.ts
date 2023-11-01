@@ -1,7 +1,6 @@
-import { formatDate } from '@angular/common';
-import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AbstractControl, AsyncValidatorFn, FormBuilder, FormControl, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef } from '@angular/material/dialog';
 import { debounceTime, finalize, map, switchMap, take } from 'rxjs';
 import { AccountService } from 'src/app/account/account.service';
 import { User } from 'src/app/shared/models/user';
@@ -14,12 +13,15 @@ import { UserProfileService } from '../user-profile.service';
 })
 export class EditUserComponent implements OnInit {
 
+
+  // REWORK ME LATER, PLS
   constructor(public dialogRef: MatDialogRef<EditUserComponent>, public accountService: AccountService,
     private fb: FormBuilder, private userProfileService: UserProfileService) {
 
   }
 
   currentUser: User | null = null;
+  errors: string[] | null = null;
 
   ngOnInit(): void {
     this.accountService.currentUser$.subscribe((user: User | null) => {
@@ -33,6 +35,15 @@ export class EditUserComponent implements OnInit {
     });
   }
 
+  profileForm = this.fb.group({
+    email: ['', [Validators.required, Validators.email, Validators.maxLength(200)], [this.validateEmailNotTaken()]],
+    username: ['', [Validators.required, Validators.maxLength(200)], [this.validateUserNameNotTaken()]],
+    about: ['', [Validators.required, Validators.maxLength(256)]],
+    dateOfBirth: new FormControl(new Date(), [Validators.required]),
+  }
+  );
+
+
   editUser() {
     const dateOfBirth = this.profileForm.value.dateOfBirth;
 
@@ -45,6 +56,7 @@ export class EditUserComponent implements OnInit {
       const email = this.profileForm.value.email;
       const userName = this.profileForm.value.username;
       const dateOfBirth = this.profileForm.value.dateOfBirth;
+      const about = this.profileForm.value.about;
 
       if (typeof email === 'string') {
         this.currentUser.email = email;
@@ -55,11 +67,17 @@ export class EditUserComponent implements OnInit {
       if (dateOfBirth instanceof Date) {
         this.currentUser.dateOfBirth = this.transformDate(dateOfBirth);
       }
+      if(typeof about === 'string'){
+        this.currentUser.about = about
+      }
 
       console.log(this.currentUser);
 
       if (this.currentUser) {
-        this.userProfileService.editUser(this.currentUser).subscribe();
+        this.userProfileService.editUser(this.currentUser).subscribe({
+          next: () => this.onNoClick(),
+          error: error => this.errors = error.errors
+        })
       }
     }
   }
@@ -68,13 +86,6 @@ export class EditUserComponent implements OnInit {
   onNoClick(): void {
     this.dialogRef.close();
   }
-
-  profileForm = this.fb.group({
-    email: ['', [Validators.required, Validators.email, Validators.maxLength(200)], [this.validateEmailNotTaken()]],
-    username: ['', [Validators.required, Validators.maxLength(200)], [this.validateUserNameNotTaken()]],
-    dateOfBirth: new FormControl(new Date(), [Validators.required]),
-  }
-  );
 
   validateEmailNotTaken(): AsyncValidatorFn {
     return (control: AbstractControl) => {
