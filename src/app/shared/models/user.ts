@@ -1,7 +1,9 @@
 export interface User {
-  token: string;
-  fullName: string;
+  id: number;
   userName: string;
   email: string;
   dateOfBirth: string;
+  role: string;
+  about: string;
+  socialAuth: boolean;
 }

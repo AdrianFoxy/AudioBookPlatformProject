@@ -8,7 +8,7 @@
             <img [src]="darkmodeService.isLightTheme() ? '/assets/images/light_user.svg' : '/assets/images/dark_user.svg'" alt="Avatar" class="img-fluid my-5" style="width: 80px;" />
             <h5 class="profile-avatar-text"><strong>{{user.userName}}</strong></h5>
             <p class="profile-avatar-text"><strong>{{ 'User-status-1' | translate }}</strong></p>
-            <i class="fa fa-edit mb-5 profile-avatar-text"></i>
+            <i (click)="openDialog()" class="fa fa-edit mb-5 profile-avatar-text"></i>
           </div>
           <div class="col-md-8">
             <div class="card-body p-4">
@@ -21,14 +21,16 @@
                 </div>
                 <div class="col-6 mb-3">
                   <h6>{{ 'DateOfBirth-profile' | translate }}</h6>
-                  <p class="text-muted">{{getFormattedDate(user.dateOfBirth)}}</p>
+                  <p class="text-muted">
+                    {{ formatDate(user.dateOfBirth) === '1899-12-31' ? 'Pls enter you birth day date :)' : formatDate(user.dateOfBirth) }}
+                  </p>
                 </div>
               </div>
               <hr class="mt-0 mb-4">
               <div class="row pt-1">
                 <div class="col mb-3">
                   <h6>{{ 'AboutMe-profile' | translate }}</h6>
-                  <p class="text-muted">{{ 'AboutMe-text-profile' | translate }}</p>
+                  <p class="text-muted">{{user.about || ('AboutMe-text-profile' | translate)}}</p>
                 </div>
               </div>
             </div>

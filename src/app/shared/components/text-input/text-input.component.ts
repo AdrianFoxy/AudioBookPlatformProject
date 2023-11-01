@@ -9,9 +9,17 @@ import { AbstractControl, ControlValueAccessor, FormControl, NgControl } from '@
 export class TextInputComponent implements ControlValueAccessor {
   @Input() type = 'text';
   @Input() label = '';
+  @Input() defaultValue = '';
+  @Input() isDisabled: boolean = false;
 
-  constructor(@Self() public controlDir: NgControl){
+  constructor(@Self() public controlDir: NgControl) {
     this.controlDir.valueAccessor = this;
+  }
+
+  ngOnInit() {
+    if (this.defaultValue !== undefined) {
+      this.control.setValue(this.defaultValue);
+    }
   }
 
   writeValue(obj: any): void {
@@ -21,8 +29,8 @@ export class TextInputComponent implements ControlValueAccessor {
   registerOnTouched(fn: any): void {
   }
 
-  get control():FormControl{
-    return this.controlDir.control as FormControl
+  get control(): FormControl {
+    return this.controlDir.control as FormControl;
   }
 
   getControlErrors(control: AbstractControl): string[] {
@@ -34,7 +42,4 @@ export class TextInputComponent implements ControlValueAccessor {
     }
     return errors;
   }
-
-
-
 }
