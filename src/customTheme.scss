@@ -408,5 +408,5 @@
   color: var(--base-dark-text-color) !important;
 }
 .dark-theme .mat-mdc-dialog-container {
-  --mdc-dialog-container-color: var(--base-dark-border-color)
+  --mdc-dialog-container-color: var(--dark-mode-bg);
 }

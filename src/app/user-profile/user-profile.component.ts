@@ -6,6 +6,9 @@ import { LoaderService } from '../core/services/loader-service/loader.service';
 import { MatDialog } from '@angular/material/dialog';
 import { EditUserComponent } from './edit-user/edit-user.component';
 import * as moment from 'moment';
+import { User } from '../shared/models/user';
+import { ActivatedRoute } from '@angular/router';
+import { UserProfileService } from './user-profile.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -13,6 +16,8 @@ import * as moment from 'moment';
   styleUrls: ['./user-profile.component.scss']
 })
 export class UserProfileComponent {
+
+  userData?: User;
 
   sortOptions = [
     { name: 'Всі', engName: 'All', value: 'all' },
@@ -23,8 +28,24 @@ export class UserProfileComponent {
 
   constructor(public darkmodeService: DarkModeService, public langService: LanguageService,
     public loaderService: LoaderService, public accountService: AccountService,
-    private dialogRef : MatDialog) {
+    private dialogRef : MatDialog, private activatedRoute: ActivatedRoute,
+    private userProfileService: UserProfileService) {
   }
+
+  ngOnInit(): void {
+    this.loadUser();
+  }
+
+  loadUser() {
+    const username = this.activatedRoute.snapshot.paramMap.get('username');
+    if (username) this.userProfileService.getUser(username).subscribe({
+      next: userData => {
+        this.userData = userData;
+      },
+      error: error => console.log(error)
+    })
+  }
+
 
   formatDate(dateString: string): string {
     const date = moment(dateString);
@@ -33,7 +54,9 @@ export class UserProfileComponent {
 
 
   openDialog(){
-    this.dialogRef.open(EditUserComponent);
+    this.dialogRef.open(EditUserComponent, {
+      data: this.userData
+    });
   }
 
 }
