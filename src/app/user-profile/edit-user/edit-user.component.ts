@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, AsyncValidatorFn, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { AbstractControl, AsyncValidatorFn, FormBuilder, FormControl, ValidatorFn, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { debounceTime, finalize, map, switchMap, take } from 'rxjs';
 import { AccountService } from 'src/app/account/account.service';
@@ -36,8 +36,8 @@ export class EditUserComponent implements OnInit {
   }
 
   profileForm = this.fb.group({
-    email: ['', [Validators.required, Validators.email, Validators.maxLength(200)], [this.validateEmailNotTaken()]],
-    username: ['', [Validators.required, Validators.maxLength(200)], [this.validateUserNameNotTaken()]],
+    email: ['', [Validators.required, Validators.email, Validators.maxLength(200)]],
+    username: ['', [Validators.required, Validators.maxLength(200)]],
     about: ['', [Validators.required, Validators.maxLength(256)]],
     dateOfBirth: new FormControl(new Date(), [Validators.required]),
   }
@@ -85,36 +85,6 @@ export class EditUserComponent implements OnInit {
 
   onNoClick(): void {
     this.dialogRef.close();
-  }
-
-  validateEmailNotTaken(): AsyncValidatorFn {
-    return (control: AbstractControl) => {
-      return control.valueChanges.pipe(
-        debounceTime(1000),
-        take(1),
-        switchMap(() => {
-          return this.accountService.checkEmailExists(control.value).pipe(
-            map(result => result ? { emailExists: true } : null),
-            finalize(() => control.markAsTouched())
-          )
-        })
-      )
-    }
-  }
-
-  validateUserNameNotTaken(): AsyncValidatorFn {
-    return (control: AbstractControl) => {
-      return control.valueChanges.pipe(
-        debounceTime(1000),
-        take(1),
-        switchMap(() => {
-          return this.accountService.checkUserNameExists(control.value).pipe(
-            map(result => result ? { usernameExists: true } : null),
-            finalize(() => control.markAsTouched())
-          )
-        })
-      )
-    }
   }
 
   transformDate(value: Date): string {

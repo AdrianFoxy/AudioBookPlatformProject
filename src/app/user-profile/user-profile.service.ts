@@ -22,4 +22,9 @@ export class UserProfileService {
       switchMap(() => this.accountService.loadCurrentUser())
     );
   }
+
+  getUser(username: string){
+    const header = new HttpHeaders().set('Content-type', 'application/json');
+    return this.http.get<User>(this.baseUrl + 'UserProfile/' + username, { headers: header, withCredentials: true });
+  }
 }
