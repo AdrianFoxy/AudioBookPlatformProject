@@ -1,13 +1,13 @@
 <div class="container p-5" *ngIf="userData">
-  <h1>Edit Profile {{userData.userName}} </h1>
+  <h1> {{ 'Edit profile' | translate }} </h1>
   <form class="user-profile-form" [formGroup]="profileForm" (ngSubmit)="editUser()">
     <app-text-input [formControl]="profileForm.controls['email']" [defaultValue]="userData.email" [isDisabled]="userData.socialAuth" [label]="'reg-email' | translate"></app-text-input>
     <app-text-input [formControl]="profileForm.controls['username']" [defaultValue]="userData.userName" [label]="'username' | translate"></app-text-input>
-    <app-text-input [formControl]="profileForm.controls['about']" [defaultValue]="userData.about" [label]="'about' | translate"></app-text-input>
+    <app-text-input [formControl]="profileForm.controls['about']" [defaultValue]="userData.about" [label]="'AboutMe-profile' | translate"></app-text-input>
 
     <mat-form-field class="custom full-filed">
       <mat-label>{{ 'reg-choose-date-of-birth' | translate }}</mat-label>
-      <input [formControl]="profileForm.controls['dateOfBirth']"  matInput [matDatepicker]="picker" [value]="userData.userName">
+      <input [formControl]="profileForm.controls['dateOfBirth']"  matInput [matDatepicker]="picker">
       <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker touchUi #picker></mat-datepicker>
     </mat-form-field>
@@ -16,6 +16,6 @@
         {{error}}
       </li>
     </ul>
-    <button [disabled]="profileForm.invalid" type="submit" class="button account-btn g_button mr-2 mb-1">Edit</button>
+    <button [disabled]="profileForm.invalid" type="submit" class="button account-btn g_button mr-2 mb-1">{{ 'Edit' | translate }} </button>
   </form>
 </div>
