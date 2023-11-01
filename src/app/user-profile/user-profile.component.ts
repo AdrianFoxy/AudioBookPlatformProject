@@ -54,7 +54,9 @@ export class UserProfileComponent {
 
 
   openDialog(){
-    this.dialogRef.open(EditUserComponent);
+    this.dialogRef.open(EditUserComponent, {
+      data: this.userData
+    });
   }
 
 }
