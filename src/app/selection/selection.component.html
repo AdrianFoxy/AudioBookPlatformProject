@@ -4,6 +4,9 @@
     {{ 'welcome-selections' | translate }}
   </p>
   <hr>
+  <div *ngIf="loaderService.isLoading | async" class="container loader-container">
+    <mat-spinner class=""></mat-spinner>
+  </div>
   <div class="row row-cols-xl-2 row-cols-1">
     <div class="col" *ngFor="let selection of selections">
       <app-selection-item [selection]="selection"></app-selection-item>

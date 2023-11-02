@@ -10,7 +10,6 @@ import { Selection } from 'src/app/shared/models/selection';
 export class SelectionItemComponent {
 
   constructor(public langService: LanguageService){
-
   }
 
   @Input() selection?: Selection;
