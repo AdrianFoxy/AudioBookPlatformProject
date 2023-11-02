@@ -1,4 +1,5 @@
 <div class="container p-5" *ngIf="userData">
+  <button class="close-button" (click)="onNoClick()">&times;</button>
   <h1> {{ 'Edit profile' | translate }} </h1>
   <form class="user-profile-form" [formGroup]="profileForm" (ngSubmit)="editUser()">
     <app-text-input [formControl]="profileForm.controls['email']" [defaultValue]="userData.email" [isDisabled]="userData.socialAuth" [label]="'reg-email' | translate"></app-text-input>

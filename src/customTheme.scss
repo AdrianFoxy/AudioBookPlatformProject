@@ -252,6 +252,11 @@
   }
 }
 
+.dark-theme .close-button {
+  color: var(--base-dark-secondary-color) !important;
+  background: none !important;
+}
+
 .dark-theme .buttons-manager-row-1 .btn-mng-row-1:active {
   background-color: var(--base-dark-main-color) !important;
 }
