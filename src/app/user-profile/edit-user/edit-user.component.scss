@@ -4,9 +4,17 @@
   width: 100%;
 }
 
-.example-full-width {
-  width: 100%;
-}
 .full-filed{
   width: 100%;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #31312F;
 }
