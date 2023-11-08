@@ -178,10 +178,10 @@
           </mat-form-field>
 
           <p class="filtering-label">{{ 'Rating' | translate }}</p>
-          <mat-slider min="0" max="10" step="1" showTickMarks discrete [displayWith]="formatLabel"
+          <mat-slider min="0" max="5" step="1" showTickMarks discrete [displayWith]="formatLabel"
             (input)="onSliderChange($event)">
             <input value="0" matSliderStartThumb>
-            <input value="10" matSliderEndThumb>
+            <input value="5" matSliderEndThumb>
           </mat-slider>
 
           <p class="filtering-label">{{ 'Duration' | translate }}</p>
