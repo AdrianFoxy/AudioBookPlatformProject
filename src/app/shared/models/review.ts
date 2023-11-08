@@ -4,6 +4,7 @@ export interface Review {
   rating: number;
   audioBookId: number;
   userId: number;
+  username: string;
   createdAt: string;
   updatedAt: string;
 }

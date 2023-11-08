@@ -1,9 +1,11 @@
 <div class="review mb-3" *ngIf="review">
   <div class="title">
-    <p class="user-name"><b>Taras</b></p>
+    <p class="user-name"><b>{{review.username}}</b></p>
     <span class="raiting float-end">
-      <a><i class="fa fa-trash" aria-hidden="true"></i></a>
-      <a><i class="fa fa-edit"></i></a>
+      <ng-container *ngIf="accountService.currentUser$ | async as user">
+        <a *ngIf="review.userId === user.id"><i class="fa fa-trash" aria-hidden="true"></i></a>
+        <a *ngIf="review.userId === user.id"><i class="fa fa-edit"></i></a>
+      </ng-container>
       <i class="fa fa-star" style="color: #ffbc57;" aria-hidden="true"></i>
       {{ review.rating }}
     </span>

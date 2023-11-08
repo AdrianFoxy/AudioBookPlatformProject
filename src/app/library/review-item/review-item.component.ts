@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import * as moment from 'moment';
+import { AccountService } from 'src/app/account/account.service';
 import { Review } from 'src/app/shared/models/review';
 
 @Component({
@@ -10,6 +11,10 @@ import { Review } from 'src/app/shared/models/review';
 export class ReviewItemComponent {
 
   @Input() review?: Review;
+
+  constructor(public accountService: AccountService){
+
+  }
 
   formatDate(date: string){
     return moment(date).format("YYYY-MM-DD");
