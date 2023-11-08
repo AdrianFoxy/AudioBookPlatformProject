@@ -53,15 +53,15 @@
     <form class="rf-bg mb-3">
       <div class="form-content">
         <mat-form-field class="review-form">
-          <mat-label>Leave a review</mat-label>
-          <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
+          <mat-label>{{ 'Leave a review here' | translate }}</mat-label>
+          <textarea matInput [placeholder]="'Review-input-default' | translate"></textarea>
         </mat-form-field>
         <button class="send-review-btn"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
       </div>
     </form>
     <hr>
     <div class="overlay" *ngIf="!(accountService.currentUser$ | async)">
-      <p>You have to sign in to write your review ᗜ˰ᗜ</p>
+      <p>{{ 'Sign-in-to-write-review' | translate }}</p>
     </div>
   </div>
   <div class="row reviews">
@@ -77,10 +77,10 @@
       <ng-template #emptyFeedback>
         <div class="review mb-3">
           <div class="title">
-            <p class="user-name"><b>Oh... It looks like we don't have any reviews here...</b></p>
+            <p class="user-name"><b>{{ 'Empty-reviews' | translate }}</b></p>
           </div>
           <p class="review_text">
-            But you can fix it, right? ( ๑‾̀◡‾́)
+            {{ 'Fix-empty-review' | translate }}
           </p>
         </div>
       </ng-template>
