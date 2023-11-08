@@ -56,20 +56,18 @@
 .description{
   text-align: justify;
 }
-.view-stars {
+.book-stat {
   margin-top: 10px;
   width: 80%;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-
   i{
+    margin-left: 10px;
     color: var(--base-orange-color);
   }
-}
-
-.view-stars p {
-  margin: 0;
+  p{
+    font-size: 24px;
+  }
 }
 
 .review-form {

@@ -2,14 +2,12 @@
   <div *ngIf="audiobook" class="book_details row mt-4 mb-4">
     <div class="poster_block col-md-4 mb-3">
       <img class="poster_img" src="{{audiobook.pictureUrl}}" alt="book-picture">
-      <div class="view-stars">
+      <div class="book-stat">
         <p>
-          {{ 'Favor' | translate }}
-          <i class="fa fa-heart" aria-hidden="true"></i>
+          <i class="fa fa-bookmark" aria-hidden="true"></i>
           123
         </p>
         <p>
-           {{ 'Views' | translate }}
           <i class="fa fa-eye" aria-hidden="true"></i>
           {{audiobook.viewCount}}
         </p>
