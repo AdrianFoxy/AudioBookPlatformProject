@@ -2,14 +2,12 @@
   <div *ngIf="audiobook" class="book_details row mt-4 mb-4">
     <div class="poster_block col-md-4 mb-3">
       <img class="poster_img" src="{{audiobook.pictureUrl}}" alt="book-picture">
-      <div class="view-stars">
+      <div class="book-stat">
         <p>
-          {{ 'Favor' | translate }}
-          <i class="fa fa-heart" aria-hidden="true"></i>
+          <i class="fa fa-bookmark" aria-hidden="true"></i>
           123
         </p>
         <p>
-           {{ 'Views' | translate }}
           <i class="fa fa-eye" aria-hidden="true"></i>
           {{audiobook.viewCount}}
         </p>
@@ -20,7 +18,7 @@
         <h1>{{audiobook.name}}</h1>
         <span class="raiting float-end">
           <i class="fa fa-star" style="color: #ffbc57;" aria-hidden="true"></i>
-          {{audiobook.rating}}, <span class="secondary_txt">0 оцінок</span>
+          {{audiobook.rating}}
         </span>
       </div>
       <hr>
@@ -48,47 +46,42 @@
   <hr>
   <h2>{{ 'This-is-usually-listened-too' | translate }}:</h2>
   <app-recomentdations></app-recomentdations>
-  <hr>
-
+  <div class="container input-review-container">
+    <hr>
+    <form class="rf-bg mb-3">
+      <div class="form-content">
+        <mat-form-field class="review-form">
+          <mat-label>{{ 'Leave a review here' | translate }}</mat-label>
+          <textarea matInput [placeholder]="'Review-input-default' | translate"></textarea>
+        </mat-form-field>
+        <button class="send-review-btn"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+      </div>
+    </form>
+    <hr>
+    <div class="overlay" *ngIf="!(accountService.currentUser$ | async)">
+      <p>{{ 'Sign-in-to-write-review' | translate }}</p>
+    </div>
+  </div>
   <div class="row reviews">
     <div class="col-md-2 mb-3">
       <h2>{{ 'Feedback' | translate }}</h2>
     </div>
     <div class="col-md-10">
-      <div class="review mb-3">
-        <div class="title">
-          <p class="user-name"><b>Taras</b></p>
-          <span class="raiting float-end">
-            <i class="fa fa-star" style="color: #ffbc57;" aria-hidden="true"></i>
-            5.0
-          </span>
+      <div *ngIf="reviews.length > 0; else emptyFeedback">
+        <div *ngFor="let review of reviews">
+          <app-review-item [review]="review"></app-review-item>
         </div>
-        <p class="review_text">«Аліса в Задзеркаллі» - це продовження книги "Аліса в країні див", англійського письменника Льюїса Керолла.
-          Люди по різному ставляться до Льюїса Керролла та до його творів. Хтось обожнює його твори, а хтось не розуміє
-          і не любить. Окрім того, що Льюїс Керролл був письменником, він ще був і математиком, може саме через це не
-          всі й розуміють його твори. Його закручені сюжети ламають голови дорослим, а багато дітей просто шаленіє від
-          фантастичної історії про дівчинку Алісу, яка вже побувала в країні див.
-        </p>
-        <p class="date">26 травня 2023</p>
       </div>
-      <div class="review mb-3">
-        <div class="title">
-          <p class="user-name"><b>Alice Fan</b></p>
-          <span class="raiting float-end">
-            <i class="fa fa-star" style="color: #ffbc57;" aria-hidden="true"></i>
-            5.0
-          </span>
+      <ng-template #emptyFeedback>
+        <div class="review mb-3">
+          <div class="title">
+            <p class="user-name"><b>{{ 'Empty-reviews' | translate }}</b></p>
+          </div>
+          <p class="review_text">
+            {{ 'Fix-empty-review' | translate }}
+          </p>
         </div>
-        <p class="review_text">Нова пригода Аліси
-          Якщо вам, або вашій дитині сподобалась перша книга видавництва «Ранок» про пригоди чарівної та дотепної Аліси,
-          то ви, просто зобов’язані, придбати її продовження. В новій книзі, Аліса потрапляє до світу Задзеркалля, і
-          якщо ви думали, що після Країни Див, вас уже нічим не здивуєш, то скоріш за все – ви помилялися. Хоча
-          більшість, і вважає, саме першу книгу еталоном творчості Керрола, та, як на мене, продовження вийшло нічим не
-          гірше. В ньому з’являються нові, такі ж, незвичайні, дивакуваті та кумедні персонажі, яких, міг вигадати лише
-          Керрол. Чого лише вартий – Шалтай-Болтай.
-        </p>
-        <p class="date">26 травня 2023</p>
-      </div>
+      </ng-template>
     </div>
-  </div>
+
 </div>

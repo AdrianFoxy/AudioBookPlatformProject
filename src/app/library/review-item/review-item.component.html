@@ -1,0 +1,17 @@
+<div class="review mb-3" *ngIf="review">
+  <div class="title">
+    <p class="user-name"><b>{{review.username}}</b></p>
+    <span class="raiting float-end">
+      <ng-container *ngIf="accountService.currentUser$ | async as user">
+        <a *ngIf="review.userId === user.id"><i class="fa fa-trash" aria-hidden="true"></i></a>
+        <a *ngIf="review.userId === user.id"><i class="fa fa-edit"></i></a>
+      </ng-container>
+      <i class="fa fa-star" style="color: #ffbc57;" aria-hidden="true"></i>
+      {{ review.rating }}
+    </span>
+  </div>
+  <p class="review_text">
+    {{ review.reviewText }}
+  </p>
+  <p class="date">{{ formatDate(review.createdAt) }}</p>
+</div>

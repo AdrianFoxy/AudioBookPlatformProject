@@ -199,6 +199,9 @@
 .dark-theme .overlay {
   background-color: rgb(87, 76, 208, 0.6) !important;
 }
+.dark-theme .overlay p {
+  color: var(--base-dark-text-color) !important;
+}
 
 .dark-theme .seek_slider::-webkit-slider-thumb {
   background: var(--base-dark-seek-color) !important;
@@ -371,7 +374,7 @@
   --mdc-circular-progress-active-indicator-color: var(--base-dark-main-color);
 }
 
-.dark-theme .view-stars {
+.dark-theme .book-stat {
   i {
     color: var(--base-dark-main-color) !important;
   }
@@ -415,3 +418,8 @@
 .dark-theme .mat-mdc-dialog-container {
   --mdc-dialog-container-color: var(--dark-mode-bg);
 }
+
+.dark-theme .send-review-btn {
+  background-color: var(--base-dark-main-color) !important;
+}
+

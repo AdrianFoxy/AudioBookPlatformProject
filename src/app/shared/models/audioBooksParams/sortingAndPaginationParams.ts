@@ -5,7 +5,7 @@ export class sortingAndPaginationParams {
   search = '';
 
   lowerRating = 0;
-  highRating = 0;
+  highRating = 5;
 
   lowerDuration = 0;
   highDuration = 0;
