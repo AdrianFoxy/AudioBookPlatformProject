@@ -11,6 +11,7 @@ import { BookLanguage } from '../shared/models/bookLanguage';
 import { sortingAndPaginationParams } from '../shared/models/audioBooksParams/sortingAndPaginationParams';
 import { SingleAudioBook } from '../shared/models/singleAudioBook';
 import { environment } from 'src/environments/environment';
+import { Review } from '../shared/models/review';
 
 
 @Injectable({
@@ -103,6 +104,17 @@ export class LibraryService {
 
 
     return this.http.get<Pagination<AudioBook[]>>(this.baseUrl + 'AudioBook', { params });
+  }
+
+  getReviewForAudioBook(id: number,
+    sortingAndPaginationParams: sortingAndPaginationParams){
+
+      let params = new HttpParams();
+      params = params.append('PageIndex', sortingAndPaginationParams.pageNumber);
+      params = params.append('PageSize', sortingAndPaginationParams.pageSize);
+      params = params.append('Id', id);
+
+      return this.http.get<Pagination<Review[]>>(this.baseUrl + 'Review', { params });
   }
 
   getAudioBooksOfAuthor(id: number,

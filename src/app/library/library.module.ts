@@ -18,6 +18,7 @@ import { BookDetailsComponent } from './book-details/book-details.component';
 
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { AuthorDetailsComponent } from './author-details/author-details.component';
+import { ReviewItemComponent } from './review-item/review-item.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { AuthorDetailsComponent } from './author-details/author-details.componen
     FilterPipe,
     AudiobookItemComponent,
     BookDetailsComponent,
-    AuthorDetailsComponent
+    AuthorDetailsComponent,
+    ReviewItemComponent
   ],
   imports: [
     CommonModule,

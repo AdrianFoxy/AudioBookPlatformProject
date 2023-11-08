@@ -1,0 +1,13 @@
+<div class="review mb-3" *ngIf="review">
+  <div class="title">
+    <p class="user-name"><b>Taras</b></p>
+    <span class="raiting float-end">
+      <i class="fa fa-star" style="color: #ffbc57;" aria-hidden="true"></i>
+      {{review.rating}}
+    </span>
+  </div>
+  <p class="review_text">
+    {{review.reviewText}}
+  </p>
+  <p class="date">{{review.createdAt}}</p>
+</div>

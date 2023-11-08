@@ -3,6 +3,8 @@ import { SingleAudioBook } from 'src/app/shared/models/singleAudioBook';
 import { LibraryService } from '../library.service';
 import { ActivatedRoute } from '@angular/router';
 import { LanguageService } from 'src/app/core/services/language-service/language.service';
+import { Review } from 'src/app/shared/models/review';
+import { sortingAndPaginationParams } from 'src/app/shared/models/audioBooksParams/sortingAndPaginationParams';
 
 @Component({
   selector: 'app-book-details',
@@ -16,6 +18,11 @@ export class BookDetailsComponent implements OnInit {
   isToggled: boolean = false;
 
   audiobook?: SingleAudioBook;
+  reviews: Review[] = [];
+
+  sortingAndPaginationParams = new sortingAndPaginationParams();
+  totalCount = 0;
+
 
   constructor(private libraryService: LibraryService, private activatedRoute: ActivatedRoute,
     public langService: LanguageService) {
@@ -24,6 +31,22 @@ export class BookDetailsComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     await this.incrementViewCount();
     await this.loadSingleAudioBook();
+    this.getReviewOfAudioBook();
+  }
+
+  getReviewOfAudioBook() {
+    const id = this.activatedRoute.snapshot.paramMap.get('id');
+    if (id !== null) {
+      this.libraryService.getReviewForAudioBook(+id, this.sortingAndPaginationParams).subscribe({
+        next: response => {
+          this.reviews = response.data;
+          this.sortingAndPaginationParams.pageNumber = response.pageIndex;
+          this.sortingAndPaginationParams.pageSize = response.pageSize;
+          this.totalCount = response.count;
+        },
+        error: error => console.log(error)
+      });
+    }
   }
 
   async incrementViewCount() {
