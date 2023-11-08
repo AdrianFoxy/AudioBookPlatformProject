@@ -2,12 +2,14 @@
   <div class="title">
     <p class="user-name"><b>Taras</b></p>
     <span class="raiting float-end">
+      <a><i class="fa fa-trash" aria-hidden="true"></i></a>
+      <a><i class="fa fa-edit"></i></a>
       <i class="fa fa-star" style="color: #ffbc57;" aria-hidden="true"></i>
-      {{review.rating}}
+      {{ review.rating }}
     </span>
   </div>
   <p class="review_text">
-    {{review.reviewText}}
+    {{ review.reviewText }}
   </p>
-  <p class="date">{{review.createdAt}}</p>
+  <p class="date">{{ formatDate(review.createdAt) }}</p>
 </div>

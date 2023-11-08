@@ -48,16 +48,42 @@
   <hr>
   <h2>{{ 'This-is-usually-listened-too' | translate }}:</h2>
   <app-recomentdations></app-recomentdations>
-  <hr>
-
+  <div class="container input-review-container">
+    <hr>
+    <form class="rf-bg mb-3">
+      <div class="form-content">
+        <mat-form-field class="review-form">
+          <mat-label>Leave a review</mat-label>
+          <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
+        </mat-form-field>
+        <button class="send-review-btn"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+      </div>
+    </form>
+    <hr>
+    <div class="overlay" *ngIf="!(accountService.currentUser$ | async)">
+      <p>You have to sign in to write your review ᗜ˰ᗜ</p>
+    </div>
+  </div>
   <div class="row reviews">
     <div class="col-md-2 mb-3">
       <h2>{{ 'Feedback' | translate }}</h2>
     </div>
     <div class="col-md-10">
-      <div *ngFor="let review of reviews">
-        <app-review-item [review]="review"></app-review-item>
+      <div *ngIf="reviews.length > 0; else emptyFeedback">
+        <div *ngFor="let review of reviews">
+          <app-review-item [review]="review"></app-review-item>
+        </div>
       </div>
+      <ng-template #emptyFeedback>
+        <div class="review mb-3">
+          <div class="title">
+            <p class="user-name"><b>Oh... It looks like we don't have any reviews here...</b></p>
+          </div>
+          <p class="review_text">
+            But you can fix it, right? ( ๑‾̀◡‾́)
+          </p>
+        </div>
+      </ng-template>
     </div>
-  </div>
+
 </div>

@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import * as moment from 'moment';
 import { Review } from 'src/app/shared/models/review';
 
 @Component({
@@ -10,4 +11,7 @@ export class ReviewItemComponent {
 
   @Input() review?: Review;
 
+  formatDate(date: string){
+    return moment(date).format("YYYY-MM-DD");
+  }
 }

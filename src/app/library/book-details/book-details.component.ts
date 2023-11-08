@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { LanguageService } from 'src/app/core/services/language-service/language.service';
 import { Review } from 'src/app/shared/models/review';
 import { sortingAndPaginationParams } from 'src/app/shared/models/audioBooksParams/sortingAndPaginationParams';
+import { AccountService } from 'src/app/account/account.service';
 
 @Component({
   selector: 'app-book-details',
@@ -25,7 +26,7 @@ export class BookDetailsComponent implements OnInit {
 
 
   constructor(private libraryService: LibraryService, private activatedRoute: ActivatedRoute,
-    public langService: LanguageService) {
+    public langService: LanguageService, public accountService: AccountService) {
   }
 
   async ngOnInit(): Promise<void> {
