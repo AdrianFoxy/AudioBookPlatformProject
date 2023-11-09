@@ -11,7 +11,8 @@ import { BookLanguage } from '../shared/models/bookLanguage';
 import { sortingAndPaginationParams } from '../shared/models/audioBooksParams/sortingAndPaginationParams';
 import { SingleAudioBook } from '../shared/models/singleAudioBook';
 import { environment } from 'src/environments/environment';
-import { Review } from '../shared/models/review';
+import { Review } from '../shared/models/review/review';
+import { ReviewDto } from '../shared/models/review/reviewDto';
 
 
 @Injectable({
@@ -163,5 +164,10 @@ export class LibraryService {
 
   getAuthorById(id: number){
     return this.http.get<Author>(this.baseUrl+ 'Author/' + id);
+  }
+
+  postNewReview(review: ReviewDto){
+    const header = new HttpHeaders().set('Content-type', 'application/json');
+    return this.http.post<Review>(this.baseUrl + 'Review', review, { headers: header, withCredentials: true });
   }
 }

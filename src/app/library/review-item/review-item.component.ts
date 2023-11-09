@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import * as moment from 'moment';
 import { AccountService } from 'src/app/account/account.service';
-import { Review } from 'src/app/shared/models/review';
+import { Review } from 'src/app/shared/models/review/review';
 
 @Component({
   selector: 'app-review-item',

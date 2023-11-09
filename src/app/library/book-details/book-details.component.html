@@ -48,13 +48,41 @@
   <app-recomentdations></app-recomentdations>
   <div class="container input-review-container">
     <hr>
-    <form class="rf-bg mb-3">
+    <form [formGroup]="reviewForm" class="rf-bg mb-3" (ngSubmit)="onSubmitReview()">
       <div class="form-content">
-        <mat-form-field class="review-form">
-          <mat-label>{{ 'Leave a review here' | translate }}</mat-label>
-          <textarea matInput [placeholder]="'Review-input-default' | translate"></textarea>
-        </mat-form-field>
-        <button class="send-review-btn"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+        <div class="review-form">
+          <mat-form-field class="review-form">
+            <mat-label>{{ 'Leave a review here' | translate }}</mat-label>
+            <textarea matInput formControlName="reviewText" [placeholder]="'Review-input-default' | translate"></textarea>
+          </mat-form-field>
+          <mat-form-field class="review-form">
+            <mat-label>
+              Оберіть рейтинг
+              <i class="fa fa-star" style="color: #ffbc57;" aria-hidden="true"></i>
+            </mat-label>
+            <mat-select formControlName="rating">
+              <mat-option value="0">
+                0 <i class="fa fa-star" style="color: #ffbc57;" aria-hidden="true"></i>
+              </mat-option>
+              <mat-option value="1">
+                1 <i class="fa fa-star" style="color: #ffbc57;" aria-hidden="true"></i>
+              </mat-option>
+              <mat-option value="2">
+                2 <i class="fa fa-star" style="color: #ffbc57;" aria-hidden="true"></i>
+              </mat-option>
+              <mat-option value="3">
+                3 <i class="fa fa-star" style="color: #ffbc57;" aria-hidden="true"></i>
+              </mat-option>
+              <mat-option value="4">
+                4 <i class="fa fa-star" style="color: #ffbc57;" aria-hidden="true"></i>
+              </mat-option>
+              <mat-option value="5">
+                5 <i class="fa fa-star" style="color: #ffbc57;" aria-hidden="true"></i>
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <button [disabled]="reviewForm.invalid" class="send-review-btn" type="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
       </div>
     </form>
     <hr>

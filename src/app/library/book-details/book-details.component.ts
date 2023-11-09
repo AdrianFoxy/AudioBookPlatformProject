@@ -3,9 +3,11 @@ import { SingleAudioBook } from 'src/app/shared/models/singleAudioBook';
 import { LibraryService } from '../library.service';
 import { ActivatedRoute } from '@angular/router';
 import { LanguageService } from 'src/app/core/services/language-service/language.service';
-import { Review } from 'src/app/shared/models/review';
+import { Review } from 'src/app/shared/models/review/review';
 import { sortingAndPaginationParams } from 'src/app/shared/models/audioBooksParams/sortingAndPaginationParams';
 import { AccountService } from 'src/app/account/account.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ReviewDto } from 'src/app/shared/models/review/reviewDto';
 
 @Component({
   selector: 'app-book-details',
@@ -24,6 +26,7 @@ export class BookDetailsComponent implements OnInit {
   sortingAndPaginationParams = new sortingAndPaginationParams();
   totalCount = 0;
 
+  review?: ReviewDto;
 
   constructor(private libraryService: LibraryService, private activatedRoute: ActivatedRoute,
     public langService: LanguageService, public accountService: AccountService) {
@@ -33,6 +36,28 @@ export class BookDetailsComponent implements OnInit {
     await this.incrementViewCount();
     await this.loadSingleAudioBook();
     this.getReviewOfAudioBook();
+  }
+
+  reviewForm = new FormGroup ({
+    reviewText: new FormControl('', Validators.required),
+    rating: new FormControl('', Validators.required)
+  })
+
+  onSubmitReview() {
+    if(this.reviewForm.valid){
+      this.accountService.currentUser$.subscribe(currentUser =>{
+        if(currentUser){
+          const review_submit: ReviewDto = {
+            reviewText: this.reviewForm.value.reviewText || '',
+            rating: Number(this.reviewForm.value.rating),
+            audioBookId: +(this.activatedRoute.snapshot.paramMap.get('id') ?? 0),
+            userId: currentUser.id
+          };
+          this.libraryService.postNewReview(review_submit).subscribe()
+          this.getReviewOfAudioBook();
+        }
+      })
+    }
   }
 
   getReviewOfAudioBook() {
