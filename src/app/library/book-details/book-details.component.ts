@@ -3,9 +3,11 @@ import { SingleAudioBook } from 'src/app/shared/models/singleAudioBook';
 import { LibraryService } from '../library.service';
 import { ActivatedRoute } from '@angular/router';
 import { LanguageService } from 'src/app/core/services/language-service/language.service';
-import { Review } from 'src/app/shared/models/review';
+import { Review } from 'src/app/shared/models/review/review';
 import { sortingAndPaginationParams } from 'src/app/shared/models/audioBooksParams/sortingAndPaginationParams';
 import { AccountService } from 'src/app/account/account.service';
+import { ReviewDto } from 'src/app/shared/models/review/reviewDto';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-book-details',
@@ -24,6 +26,7 @@ export class BookDetailsComponent implements OnInit {
   sortingAndPaginationParams = new sortingAndPaginationParams();
   totalCount = 0;
 
+  review?: ReviewDto;
 
   constructor(private libraryService: LibraryService, private activatedRoute: ActivatedRoute,
     public langService: LanguageService, public accountService: AccountService) {
@@ -33,6 +36,40 @@ export class BookDetailsComponent implements OnInit {
     await this.incrementViewCount();
     await this.loadSingleAudioBook();
     this.getReviewOfAudioBook();
+  }
+
+  formatDate(date: string){
+    return moment(date).format("YYYY-MM-DD");
+  }
+
+  onReviewAdded(newReview: Review) {
+    const existingReviewIndex = this.reviews.findIndex(review => review.id === newReview.id);
+
+    if (existingReviewIndex !== -1) {
+      this.reviews[existingReviewIndex] = newReview;
+    } else {
+      this.reviews.push(newReview);
+    }
+  }
+
+  deleteReview(id: number) {
+    this.libraryService.deleteReview(id).subscribe({
+      next: res => {
+        const deletedReviewIndex = this.reviews.findIndex(review => review.id === id);
+        if (deletedReviewIndex !== -1) {
+          this.reviews.splice(deletedReviewIndex, 1);
+        }
+        console.log(res);
+      },
+      error: err => {
+        console.log(err);
+      }
+    });
+  }
+
+
+  editReview(selectedReview: Review){
+    this.libraryService.formData = Object.assign({}, selectedReview);
   }
 
   getReviewOfAudioBook() {
@@ -87,4 +124,10 @@ export class BookDetailsComponent implements OnInit {
     }
   }
 
+  onPageChanged(event: any){
+    if(this.sortingAndPaginationParams.pageNumber !== event) {
+      this.sortingAndPaginationParams.pageNumber = event;
+      this.getReviewOfAudioBook();
+    }
+  }
 }

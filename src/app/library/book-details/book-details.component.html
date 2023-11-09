@@ -48,15 +48,7 @@
   <app-recomentdations></app-recomentdations>
   <div class="container input-review-container">
     <hr>
-    <form class="rf-bg mb-3">
-      <div class="form-content">
-        <mat-form-field class="review-form">
-          <mat-label>{{ 'Leave a review here' | translate }}</mat-label>
-          <textarea matInput [placeholder]="'Review-input-default' | translate"></textarea>
-        </mat-form-field>
-        <button class="send-review-btn"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
-      </div>
-    </form>
+    <app-review-form (reviewAdded)="onReviewAdded($event)"></app-review-form>
     <hr>
     <div class="overlay" *ngIf="!(accountService.currentUser$ | async)">
       <p>{{ 'Sign-in-to-write-review' | translate }}</p>
@@ -69,7 +61,26 @@
     <div class="col-md-10">
       <div *ngIf="reviews.length > 0; else emptyFeedback">
         <div *ngFor="let review of reviews">
-          <app-review-item [review]="review"></app-review-item>
+          <div class="review mb-3" *ngIf="review">
+            <div class="title">
+              <p class="user-name"><b>{{review.username}}</b></p>
+              <span class="raiting float-end">
+                <ng-container *ngIf="accountService.currentUser$ | async as user">
+                  <a (click)="deleteReview(review.id)" *ngIf="review.userId === user.id"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                  <a (click)="editReview(review)" *ngIf="review.userId === user.id"><i class="fa fa-edit"></i></a>
+                </ng-container>
+                <i class="fa fa-star" style="color: #ffbc57;" aria-hidden="true"></i>
+                {{ review.rating }}
+              </span>
+            </div>
+            <p class="review_text">
+              {{ review.reviewText }}
+            </p>
+            <p class="date">{{ formatDate(review.createdAt) }}</p>
+          </div>        </div>
+        <div class="d-flex justify-content-center mt-3" *ngIf="totalCount > 0">
+          <app-pager [totalCount]="totalCount" [pageSize]="sortingAndPaginationParams.pageSize"
+            (pageChanged)="onPageChanged($event)"></app-pager>
         </div>
       </div>
       <ng-template #emptyFeedback>

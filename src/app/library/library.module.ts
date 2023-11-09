@@ -6,19 +6,14 @@ import { LibraryRoutingModule } from './library-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatSelectModule} from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input';
-import {MatSliderModule} from '@angular/material/slider';
-import {MatChipsModule} from '@angular/material/chips';
-import {MatIconModule} from '@angular/material/icon';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { AudiobookItemComponent } from './audiobook-item/audiobook-item.component';
 import { BookDetailsComponent } from './book-details/book-details.component';
 
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { AuthorDetailsComponent } from './author-details/author-details.component';
-import { ReviewItemComponent } from './review-item/review-item.component';
+import { ReviewFormComponent } from './book-details/review-form/review-form.component';
 
 @NgModule({
   declarations: [
@@ -27,8 +22,8 @@ import { ReviewItemComponent } from './review-item/review-item.component';
     AudiobookItemComponent,
     BookDetailsComponent,
     AuthorDetailsComponent,
-    ReviewItemComponent
-  ],
+    ReviewFormComponent
+ ],
   imports: [
     CommonModule,
     LibraryRoutingModule,

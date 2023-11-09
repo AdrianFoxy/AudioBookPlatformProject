@@ -11,7 +11,8 @@ import { BookLanguage } from '../shared/models/bookLanguage';
 import { sortingAndPaginationParams } from '../shared/models/audioBooksParams/sortingAndPaginationParams';
 import { SingleAudioBook } from '../shared/models/singleAudioBook';
 import { environment } from 'src/environments/environment';
-import { Review } from '../shared/models/review';
+import { Review } from '../shared/models/review/review';
+import { ReviewDto } from '../shared/models/review/reviewDto';
 
 
 @Injectable({
@@ -19,9 +20,8 @@ import { Review } from '../shared/models/review';
 })
 export class LibraryService {
 
-  //baseUrl = 'https://localhost:7088/api/';
   private baseUrl = environment.apiUrl
-  // private baseUrl = environment.apiUrl;
+  formData: ReviewDto = new ReviewDto();
 
   constructor(private http: HttpClient) { }
 
@@ -163,5 +163,19 @@ export class LibraryService {
 
   getAuthorById(id: number){
     return this.http.get<Author>(this.baseUrl+ 'Author/' + id);
+  }
+
+  postReview(){
+    const header = new HttpHeaders().set('Content-type', 'application/json');
+    return this.http.post<Review>(this.baseUrl + 'Review', this.formData, { headers: header, withCredentials: true });
+  }
+
+  putReview(){
+    return this.http.put<Review>(this.baseUrl + 'Review/id?id=' + this.formData.id, this.formData);
+  }
+
+  deleteReview(id: number){
+    const header = new HttpHeaders().set('Content-type', 'application/json');
+    return this.http.delete<Review>(this.baseUrl + 'Review/id?id=' + id, { headers: header, withCredentials: true });
   }
 }
