@@ -53,6 +53,10 @@
   align-items: center;
 }
 
+.raiting a {
+  margin-right: 10px;
+}
+
 .description{
   text-align: justify;
 }
@@ -97,8 +101,13 @@
   font-size: 20px;
 }
 
+.date{
+  font-size: 15px;
+  color: gray;
+}
+
 .input-review-container {
-  position: relative; /* Чтобы ограничить оверлей внутри контейнера */
+  position: relative;
 }
 
 .overlay {

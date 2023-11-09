@@ -170,4 +170,9 @@ export class LibraryService {
     const header = new HttpHeaders().set('Content-type', 'application/json');
     return this.http.post<Review>(this.baseUrl + 'Review', review, { headers: header, withCredentials: true });
   }
+
+  deleteReview(id: number){
+    const header = new HttpHeaders().set('Content-type', 'application/json');
+    return this.http.delete<Review>(this.baseUrl + 'Review/' + id, { headers: header, withCredentials: true });
+  }
 }

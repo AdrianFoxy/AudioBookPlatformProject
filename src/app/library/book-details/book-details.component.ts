@@ -6,8 +6,8 @@ import { LanguageService } from 'src/app/core/services/language-service/language
 import { Review } from 'src/app/shared/models/review/review';
 import { sortingAndPaginationParams } from 'src/app/shared/models/audioBooksParams/sortingAndPaginationParams';
 import { AccountService } from 'src/app/account/account.service';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ReviewDto } from 'src/app/shared/models/review/reviewDto';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-book-details',
@@ -38,27 +38,14 @@ export class BookDetailsComponent implements OnInit {
     this.getReviewOfAudioBook();
   }
 
-  reviewForm = new FormGroup ({
-    reviewText: new FormControl('', Validators.required),
-    rating: new FormControl('', Validators.required)
-  })
-
-  onSubmitReview() {
-    if(this.reviewForm.valid){
-      this.accountService.currentUser$.subscribe(currentUser =>{
-        if(currentUser){
-          const review_submit: ReviewDto = {
-            reviewText: this.reviewForm.value.reviewText || '',
-            rating: Number(this.reviewForm.value.rating),
-            audioBookId: +(this.activatedRoute.snapshot.paramMap.get('id') ?? 0),
-            userId: currentUser.id
-          };
-          this.libraryService.postNewReview(review_submit).subscribe()
-          this.getReviewOfAudioBook();
-        }
-      })
-    }
+  formatDate(date: string){
+    return moment(date).format("YYYY-MM-DD");
   }
+
+  onReviewAdded(newReview: Review) {
+    this.reviews.push(newReview);
+  }
+
 
   getReviewOfAudioBook() {
     const id = this.activatedRoute.snapshot.paramMap.get('id');
@@ -112,4 +99,10 @@ export class BookDetailsComponent implements OnInit {
     }
   }
 
+  onPageChanged(event: any){
+    if(this.sortingAndPaginationParams.pageNumber !== event) {
+      this.sortingAndPaginationParams.pageNumber = event;
+      this.getReviewOfAudioBook();
+    }
+  }
 }
