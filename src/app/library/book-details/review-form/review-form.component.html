@@ -1,11 +1,12 @@
 <form class="rf-bg mb-3" #form="ngForm" (submit)="onSubmit(form)">
   <div class="form-content">
     <div class="review-form">
+      <input type="hidden" name="id" [value]="libraryService.formData.id">
       <mat-form-field class="review-form">
         <mat-label>{{ 'Leave a review here' | translate }}</mat-label>
         <textarea matInput
         #reviewText="ngModel" name="reviewText"
-        [(ngModel)]="formData.reviewText"
+        [(ngModel)]="this.libraryService.formData.reviewText"
         required
         [placeholder]="'Review-input-default' | translate"></textarea>
       </mat-form-field>
@@ -16,23 +17,23 @@
         </mat-label>
         <mat-select [required]="true"
           #rating="ngModel" name="rating"
-          [(ngModel)]="formData.rating" min="0">
-          <mat-option value="0">
+          [(ngModel)]="this.libraryService.formData.rating" min="0">
+          <mat-option [value]="0">
             0 <i class="fa fa-star" style="color: #ffbc57;" aria-hidden="true"></i>
           </mat-option>
-          <mat-option value="1">
+          <mat-option [value]="1">
             1 <i class="fa fa-star" style="color: #ffbc57;" aria-hidden="true"></i>
           </mat-option>
-          <mat-option value="2">
+          <mat-option [value]="2">
             2 <i class="fa fa-star" style="color: #ffbc57;" aria-hidden="true"></i>
           </mat-option>
-          <mat-option value="3">
+          <mat-option [value]="3">
             3 <i class="fa fa-star" style="color: #ffbc57;" aria-hidden="true"></i>
           </mat-option>
-          <mat-option value="4">
+          <mat-option [value]="4">
             4 <i class="fa fa-star" style="color: #ffbc57;" aria-hidden="true"></i>
           </mat-option>
-          <mat-option value="5">
+          <mat-option [value]="5">
             5 <i class="fa fa-star" style="color: #ffbc57;" aria-hidden="true"></i>
           </mat-option>
         </mat-select>

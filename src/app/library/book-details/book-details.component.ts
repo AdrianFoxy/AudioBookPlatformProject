@@ -43,9 +43,34 @@ export class BookDetailsComponent implements OnInit {
   }
 
   onReviewAdded(newReview: Review) {
-    this.reviews.push(newReview);
+    const existingReviewIndex = this.reviews.findIndex(review => review.id === newReview.id);
+
+    if (existingReviewIndex !== -1) {
+      this.reviews[existingReviewIndex] = newReview;
+    } else {
+      this.reviews.push(newReview);
+    }
   }
 
+  deleteReview(id: number) {
+    this.libraryService.deleteReview(id).subscribe({
+      next: res => {
+        const deletedReviewIndex = this.reviews.findIndex(review => review.id === id);
+        if (deletedReviewIndex !== -1) {
+          this.reviews.splice(deletedReviewIndex, 1);
+        }
+        console.log(res);
+      },
+      error: err => {
+        console.log(err);
+      }
+    });
+  }
+
+
+  editReview(selectedReview: Review){
+    this.libraryService.formData = Object.assign({}, selectedReview);
+  }
 
   getReviewOfAudioBook() {
     const id = this.activatedRoute.snapshot.paramMap.get('id');

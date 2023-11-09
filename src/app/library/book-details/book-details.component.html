@@ -66,8 +66,8 @@
               <p class="user-name"><b>{{review.username}}</b></p>
               <span class="raiting float-end">
                 <ng-container *ngIf="accountService.currentUser$ | async as user">
-                  <a *ngIf="review.userId === user.id"><i class="fa fa-trash" aria-hidden="true"></i></a>
-                  <a *ngIf="review.userId === user.id"><i class="fa fa-edit"></i></a>
+                  <a (click)="deleteReview(review.id)" *ngIf="review.userId === user.id"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                  <a (click)="editReview(review)" *ngIf="review.userId === user.id"><i class="fa fa-edit"></i></a>
                 </ng-container>
                 <i class="fa fa-star" style="color: #ffbc57;" aria-hidden="true"></i>
                 {{ review.rating }}
