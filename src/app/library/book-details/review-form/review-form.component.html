@@ -1,5 +1,4 @@
 <form class="rf-bg mb-3" #form="ngForm" (submit)="onSubmit(form)">
-  <input type="hidden" name="id" [value]="formData.id">
   <div class="form-content">
     <div class="review-form">
       <mat-form-field class="review-form">
@@ -7,6 +6,7 @@
         <textarea matInput
         #reviewText="ngModel" name="reviewText"
         [(ngModel)]="formData.reviewText"
+        required
         [placeholder]="'Review-input-default' | translate"></textarea>
       </mat-form-field>
       <mat-form-field class="review-form">
@@ -14,9 +14,9 @@
           Оберіть рейтинг
           <i class="fa fa-star" style="color: #ffbc57;" aria-hidden="true"></i>
         </mat-label>
-        <mat-select
+        <mat-select [required]="true"
           #rating="ngModel" name="rating"
-          [(ngModel)]="formData.rating">
+          [(ngModel)]="formData.rating" min="0">
           <mat-option value="0">
             0 <i class="fa fa-star" style="color: #ffbc57;" aria-hidden="true"></i>
           </mat-option>
@@ -38,6 +38,6 @@
         </mat-select>
       </mat-form-field>
     </div>
-    <button class="send-review-btn" type="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+    <button [disabled]="!form.valid" class="send-review-btn" type="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
   </div>
 </form>
