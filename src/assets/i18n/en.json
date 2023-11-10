@@ -86,7 +86,7 @@
   "MyLibrary-profile": "My library",
   "User-status-1": "An avid reader",
   "Bookstatus-profile": "Book status",
-  "About-us-part1": "Hello! I'm the only developer Adrian and this is my pet-project FoxWithBook. The goal of my project is to create a platform with audiobooks that I would like to use myself, so that I would not be ashamed to show them to my friends :)",
+  "About-us-part1": "Hello! I'm the only developer Adrian and this is my pet-project FoxWithBook. The goal of my project is to create a platform with audiobooks that I would like to use myself :)",
   "About-us-part2": "This is an educational and non-commercial project.",
   "About-us-part3": "A detailed list of site functionality can be found in the README.txt file in the project repository",
   "CLICK": ">>CLICK<<",
@@ -106,5 +106,6 @@
   "Successfully-Insert": "Successfully inserted",
   "Successfully-Delete": "Successfully deleted",
   "Confirm-Delete": "Are you sure to delete this review?",
-  "Choose-rating": "Choose rating"
+  "Choose-rating": "Choose rating",
+  "Footer-materialsl-info":"All materials are taken from publicly available sources and are provided free of charge, used for use and expansion of the readership."
 }

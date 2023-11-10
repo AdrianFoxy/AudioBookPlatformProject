@@ -2,7 +2,7 @@
   <div class="form-content">
     <div class="review-form">
       <input type="hidden" name="id" [value]="libraryService.formData.id">
-      <mat-form-field class="review-form">
+      <mat-form-field class="review-input review-form">
         <mat-label>{{ 'Leave a review here' | translate }}</mat-label>
         <textarea matInput
         #reviewText="ngModel" name="reviewText"
