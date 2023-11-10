@@ -423,3 +423,6 @@
   background-color: var(--base-dark-main-color) !important;
 }
 
+.dark-theme .review-input .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-text-field__input{
+  color: var(--base-dark-text-color) !important;
+}

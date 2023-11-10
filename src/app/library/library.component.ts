@@ -33,10 +33,11 @@ export class LibraryComponent implements OnInit {
 
   sortOptions = [
     { name: 'За алфавітом', engName: 'Alphabetically', value: 'name' },
+    { name: 'Популярність', engName: 'Popularity', value: 'popularity' },
     { name: 'Рейтинг: від низького до високого', engName: 'Rating: from low to high', value: 'rateAsc' },
     { name: 'Рейтинг: від високого до низького', engName: 'Rating: from high to low', value: 'rateDesc' },
     { name: 'Час програвання: від низького до високого ', engName: 'Duration: from low to high', value: 'durAsc' },
-    { name: 'Час програвання: від високого до низького', engName: 'Duration: from high to low', value: 'durDesc' }
+    { name: 'Час програвання: від високого до низького', engName: 'Duration: from high to low', value: 'durDesc' },
   ];
 
   selectedChips: any[] = [];

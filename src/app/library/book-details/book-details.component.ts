@@ -8,6 +8,7 @@ import { sortingAndPaginationParams } from 'src/app/shared/models/audioBooksPara
 import { AccountService } from 'src/app/account/account.service';
 import { ReviewDto } from 'src/app/shared/models/review/reviewDto';
 import * as moment from 'moment';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-book-details',
@@ -29,7 +30,7 @@ export class BookDetailsComponent implements OnInit {
   review?: ReviewDto;
 
   constructor(private libraryService: LibraryService, private activatedRoute: ActivatedRoute,
-    public langService: LanguageService, public accountService: AccountService) {
+    public langService: LanguageService, public accountService: AccountService, private toastr: ToastrService) {
   }
 
   async ngOnInit(): Promise<void> {
@@ -53,18 +54,30 @@ export class BookDetailsComponent implements OnInit {
   }
 
   deleteReview(id: number) {
-    this.libraryService.deleteReview(id).subscribe({
-      next: res => {
-        const deletedReviewIndex = this.reviews.findIndex(review => review.id === id);
-        if (deletedReviewIndex !== -1) {
-          this.reviews.splice(deletedReviewIndex, 1);
-        }
-        console.log(res);
-      },
-      error: err => {
-        console.log(err);
+    this.libraryService.formData = new ReviewDto();
+
+    const translationKeys = ['User-Review', 'Successfully-Delete', 'Confirm-Delete'];
+    this.langService.getTranslatedMessages(translationKeys).subscribe((translations: Record<string, string>) => {
+      const translatedMessage2 = translations['User-Review'];
+      const translatedMessage1 = translations['Successfully-Delete'];
+      const translatedMessage3 = translations['Confirm-Delete'];
+
+      if(confirm(translatedMessage3)){
+        this.libraryService.deleteReview(id).subscribe({
+          next: res => {
+            const deletedReviewIndex = this.reviews.findIndex(review => review.id === id);
+            if (deletedReviewIndex !== -1) {
+              this.reviews.splice(deletedReviewIndex, 1);
+            }
+            this.toastr.error(`${translatedMessage1}`, `${translatedMessage2}`);
+          },
+          error: err => {
+            console.log(err);
+          }
+        });
       }
     });
+
   }
 
 

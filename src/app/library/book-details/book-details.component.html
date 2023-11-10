@@ -4,12 +4,12 @@
       <img class="poster_img" src="{{audiobook.pictureUrl}}" alt="book-picture">
       <div class="book-stat">
         <p>
-          <i class="fa fa-bookmark" aria-hidden="true"></i>
-          123
+          {{ 'Favor' | translate }}
+          <i class="fa fa-bookmark" aria-hidden="true"> 100</i>
         </p>
         <p>
-          <i class="fa fa-eye" aria-hidden="true"></i>
-          {{audiobook.viewCount}}
+           {{ 'Views' | translate }}
+          <i class="fa fa-eye" aria-hidden="true"> {{audiobook.viewCount}}</i>
         </p>
       </div>
     </div>

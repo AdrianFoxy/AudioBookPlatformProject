@@ -51,7 +51,7 @@
   "AudioFiles": "Audio files",
   "Now-playing": "Now playing",
   "Choose-Audio": "Choose audio from playlist",
-  "Favor": "In libraries",
+  "Favor": "Bookmarks",
   "Views": "Views",
   "404msg": "Ooooops, looks like we lost this page. Saaaaad ( ´•︵•` )",
   "username": "Username",
@@ -86,7 +86,7 @@
   "MyLibrary-profile": "My library",
   "User-status-1": "An avid reader",
   "Bookstatus-profile": "Book status",
-  "About-us-part1": "Hello! I'm the only developer Adrian and this is my pet-project FoxWithBook. The goal of my project is to create a platform with audiobooks that I would like to use myself, so that I would not be ashamed to show them to my friends :)",
+  "About-us-part1": "Hello! I'm the only developer Adrian and this is my pet-project FoxWithBook. The goal of my project is to create a platform with audiobooks that I would like to use myself :)",
   "About-us-part2": "This is an educational and non-commercial project.",
   "About-us-part3": "A detailed list of site functionality can be found in the README.txt file in the project repository",
   "CLICK": ">>CLICK<<",
@@ -100,5 +100,12 @@
   "Sign-in-to-write-review": "You have to sign in to write your review ᗜ˰ᗜ",
   "Review-input-default": "Ex. It makes me feel...",
   "Empty-reviews": "Oh... It looks like we don't have any reviews here...",
-  "Fix-empty-review": "But you can fix it, right? ( ๑‾̀◡‾́)"
+  "Fix-empty-review": "But you can fix it, right? ( ๑‾̀◡‾́)",
+  "User-Review": "User review",
+  "Successfully-Update": "Successfully updated",
+  "Successfully-Insert": "Successfully inserted",
+  "Successfully-Delete": "Successfully deleted",
+  "Confirm-Delete": "Are you sure to delete this review?",
+  "Choose-rating": "Choose rating",
+  "Footer-materialsl-info":"All materials are taken from publicly available sources and are provided free of charge, used for use and expansion of the readership."
 }

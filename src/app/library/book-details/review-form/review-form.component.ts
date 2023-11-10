@@ -5,6 +5,8 @@ import { ActivatedRoute } from '@angular/router';
 import { AccountService } from 'src/app/account/account.service';
 import { Review } from 'src/app/shared/models/review/review';
 import { ReviewDto } from 'src/app/shared/models/review/reviewDto';
+import { ToastrService } from 'ngx-toastr';
+import { LanguageService } from 'src/app/core/services/language-service/language.service';
 
 @Component({
   selector: 'app-review-form',
@@ -14,7 +16,7 @@ import { ReviewDto } from 'src/app/shared/models/review/reviewDto';
 export class ReviewFormComponent {
 
   constructor(public libraryService: LibraryService, private activatedRoute: ActivatedRoute,
-    private accountService: AccountService){
+    private accountService: AccountService, private toastr: ToastrService, public langService: LanguageService){
   }
 
   @Output() reviewAdded: EventEmitter<Review> = new EventEmitter();
@@ -26,6 +28,13 @@ export class ReviewFormComponent {
         this.reviewAdded.emit(res);
         form.resetForm();
         this.libraryService.formData = new ReviewDto();
+
+        const translationKeys = ['User-Review', 'Successfully-Insert'];
+        this.langService.getTranslatedMessages(translationKeys).subscribe((translations: Record<string, string>) => {
+          const translatedMessage2 = translations['User-Review'];
+          const translatedMessage1 = translations['Successfully-Insert'];
+          this.toastr.success(`${translatedMessage1}`, `${translatedMessage2}`);
+        });
       },
       error: err => {
         console.log(err);
@@ -34,14 +43,20 @@ export class ReviewFormComponent {
   }
 
   updateReview(form: NgForm){
-    console.log("put time");
     this.libraryService.putReview().subscribe({
       next: res => {
-        console.log(res);
         this.reviewAdded.emit(res);
         form.resetForm();
         this.libraryService.formData = new ReviewDto();
-      },
+
+        const translationKeys = ['User-Review', 'Successfully-Update'];
+        this.langService.getTranslatedMessages(translationKeys).subscribe((translations: Record<string, string>) => {
+          const translatedMessage2 = translations['User-Review'];
+          const translatedMessage1 = translations['Successfully-Update'];
+          this.toastr.info(`${translatedMessage1}`, `${translatedMessage2}`);
+        });
+
+        },
       error: err => {
         console.log(err);
       }
