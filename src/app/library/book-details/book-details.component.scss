@@ -65,12 +65,13 @@
   width: 80%;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   i{
-    margin-left: 10px;
+    margin-left: 4px;
     color: var(--base-orange-color);
   }
   p{
-    font-size: 24px;
+    font-size: 16px;
   }
 }
 
