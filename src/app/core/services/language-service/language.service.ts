@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -26,4 +27,12 @@ export class LanguageService {
   whatCurrentLang() {
     return localStorage.getItem('lang');
   }
+
+  getTranslatedMessage(key: string): Observable<string> {
+    return this.translate.get(key);
+  }
+  getTranslatedMessages(keys: string[]): Observable<Record<string, string>> {
+    return this.translate.get(keys);
+  }
+
 }

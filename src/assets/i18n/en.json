@@ -100,5 +100,11 @@
   "Sign-in-to-write-review": "You have to sign in to write your review ᗜ˰ᗜ",
   "Review-input-default": "Ex. It makes me feel...",
   "Empty-reviews": "Oh... It looks like we don't have any reviews here...",
-  "Fix-empty-review": "But you can fix it, right? ( ๑‾̀◡‾́)"
+  "Fix-empty-review": "But you can fix it, right? ( ๑‾̀◡‾́)",
+  "User-Review": "User review",
+  "Successfully-Update": "Successfully updated",
+  "Successfully-Insert": "Successfully inserted",
+  "Successfully-Delete": "Successfully deleted",
+  "Confirm-Delete": "Are you sure to delete this review?",
+  "Choose-rating": "Choose rating"
 }
