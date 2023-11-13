@@ -9,7 +9,7 @@
       </div>
       <hr>
       <div>
-        <p class="description">{{langService.whatCurrentLang() === 'en' ? author.enDescription : author.description}}</p>
+        <p class="description" [innerHTML]="langService.whatCurrentLang() === 'en' ? formatDescription(author.enDescription) : formatDescription(author.description)"></p>
       </div>
       <hr>
     </div>

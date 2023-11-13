@@ -113,6 +113,7 @@ export class BookDetailsComponent implements OnInit {
       const audiobook = await this.libraryService.getAudioBook(+id).toPromise();
       this.audiobook = audiobook;
       if (this.audiobook?.description) {
+        this.audiobook.description = this.audiobook.description.replace(/\r\n/g, '<br>');
         this.truncateText(this.audiobook.description);
       }
     }
