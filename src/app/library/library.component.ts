@@ -50,7 +50,7 @@ export class LibraryComponent implements OnInit {
     {min: 1, max: 2, selected: false},
     {min: 2, max: 5, selected: false},
     {min: 5, max: 10, selected: false},
-    {min: 10, max: 50, selected: false},
+    {min: 10, max: 15, selected: false},
     {min: 15, max: 20, selected: false},
     {min: 20, max: 25, selected: false},
     {min: 25, max: 30, selected: false},

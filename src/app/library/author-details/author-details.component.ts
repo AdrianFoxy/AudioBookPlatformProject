@@ -28,6 +28,10 @@ export class AuthorDetailsComponent implements OnInit {
     this.getAudioBooksOfAuthorComponent();
   }
 
+  formatDescription(text: string): string {
+    return text ? text.replace(/\r\n/g, '<br>') : '';
+  }
+
   getAuthor() {
     const id = this.activatedRoute.snapshot.paramMap.get('id')
     if (id) {
