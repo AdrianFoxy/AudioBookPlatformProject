@@ -87,18 +87,27 @@ export class BookDetailsComponent implements OnInit {
 
   getReviewOfAudioBook() {
     const id = this.activatedRoute.snapshot.paramMap.get('id');
+    this.sortingAndPaginationParams.pageSize = 4;
     if (id !== null) {
       this.libraryService.getReviewForAudioBook(+id, this.sortingAndPaginationParams).subscribe({
-        next: response => {
-          this.reviews = response.data;
-          this.sortingAndPaginationParams.pageNumber = response.pageIndex;
-          this.sortingAndPaginationParams.pageSize = response.pageSize;
-          this.totalCount = response.count;
-        },
-        error: error => console.log(error)
+      next: response => {
+        this.reviews = response.data;
+
+        this.reviews.forEach(review => {
+          if (review.reviewText) {
+            review.reviewText = review.reviewText.replace(/\r\n/g, '<br>');
+          }
+        });
+
+        this.sortingAndPaginationParams.pageNumber = response.pageIndex;
+        this.sortingAndPaginationParams.pageSize = response.pageSize;
+        this.totalCount = response.count;
+      },
+      error: error => console.log(error)
       });
     }
   }
+
 
   async incrementViewCount() {
     const id = this.activatedRoute.snapshot.paramMap.get('id');

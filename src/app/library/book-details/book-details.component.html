@@ -73,9 +73,8 @@
                 {{ review.rating }}
               </span>
             </div>
-            <p class="review_text">
-              {{ review.reviewText }}
-            </p>
+            <p class="review_text" [innerHTML]="review.reviewText"></p>
+
             <p class="date">{{ formatDate(review.createdAt) }}</p>
           </div>        </div>
         <div class="d-flex justify-content-center mt-3" *ngIf="totalCount > 0">

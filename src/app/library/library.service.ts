@@ -171,7 +171,8 @@ export class LibraryService {
   }
 
   putReview(){
-    return this.http.put<Review>(this.baseUrl + 'Review/id?id=' + this.formData.id, this.formData);
+    const header = new HttpHeaders().set('Content-type', 'application/json');
+    return this.http.put<Review>(this.baseUrl + 'Review/id?id=' + this.formData.id, this.formData, { headers: header, withCredentials: true });
   }
 
   deleteReview(id: number){
