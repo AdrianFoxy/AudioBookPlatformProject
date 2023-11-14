@@ -168,12 +168,19 @@ export class LibraryComponent implements OnInit {
 
     this.sortingAndPaginationParams.sort = 'name';
 
+    this.chipsDurationOptions.forEach(chip => chip.selected = false);
+    this.selectedChips = [];
+    this.sortingAndPaginationParams.lowerDuration = 0;
+    this.sortingAndPaginationParams.highDuration = 0;
+    this.sortingAndPaginationParams.lowerRating = 0;
+    this.sortingAndPaginationParams.highRating = 5;
+    this.sliderStartValue = 0;
+    this.sliderEndValue = 5;
+
     this.getAudioBooksForLibrary();
   }
 
   onSortSelected(event: any){
-    console.log('asdasd');
-
     this.sortingAndPaginationParams.sort = event.value;
     console.log(this.sortingAndPaginationParams.sort);
 
@@ -181,7 +188,7 @@ export class LibraryComponent implements OnInit {
   }
 
   sliderStartValue = 0;
-  sliderEndValue = 10;
+  sliderEndValue = 5;
 
   onSliderChange(event: Event): void {
     const sliderValue = (event.target as HTMLInputElement).value;
