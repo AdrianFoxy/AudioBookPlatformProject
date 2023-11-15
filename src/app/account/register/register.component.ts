@@ -25,7 +25,7 @@ export class RegisterComponent {
       }
     }
 
-  complexPassword = "(?=^.{6,10}$)(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&amp;*()_+}{&quot;:;'?/&gt;.&lt;,])(?!.*\s).*$"
+  complexPassword = "(?=^.{6,10}$)(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+}{\":;'?/>,.<,])(?!.*\\s).*$"
 
   registerForm = this.fb.group({
     email: ['', [Validators.required, Validators.email, Validators.maxLength(200)], [this.validateEmailNotTaken()]],

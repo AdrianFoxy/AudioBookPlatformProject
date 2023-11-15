@@ -49,7 +49,7 @@ export class BookDetailsComponent implements OnInit {
     if (existingReviewIndex !== -1) {
       this.reviews[existingReviewIndex] = newReview;
     } else {
-      this.reviews.push(newReview);
+      this.reviews.unshift(newReview); // используем unshift для добавления в начало массива
     }
   }
 
@@ -94,7 +94,7 @@ export class BookDetailsComponent implements OnInit {
         this.reviews = response.data;
 
         this.reviews.forEach(review => {
-          if (review.reviewText) {
+          if (this.review?.reviewText) {
             review.reviewText = review.reviewText.replace(/\r\n/g, '<br>');
           }
         });
