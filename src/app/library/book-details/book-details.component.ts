@@ -9,6 +9,8 @@ import { AccountService } from 'src/app/account/account.service';
 import { ReviewDto } from 'src/app/shared/models/review/reviewDto';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
+import { bookMarkForm } from 'src/app/shared/models/bookMarkform';
+
 
 @Component({
   selector: 'app-book-details',
@@ -17,9 +19,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class BookDetailsComponent implements OnInit {
 
-  truncatedText: string = '';
-  isExpanded: boolean = false;
-  isToggled: boolean = false;
+  isExpandedMap: { [key: number]: boolean } = {};
 
   audiobook?: SingleAudioBook;
   reviews: Review[] = [];
@@ -28,6 +28,17 @@ export class BookDetailsComponent implements OnInit {
   totalCount = 0;
 
   review?: ReviewDto;
+  audioBookId: number = 0;
+  userId: number = 0;
+
+  userLibraryOptions = [
+    { name: 'Читаю 📖', engName: 'Reading 📖', value: 1 },
+    { name: 'Прочитав 📗', engName: 'Read 📗', value: 2 },
+    { name: 'Планую 📝', engName: 'Plan 📝', value: 3 },
+    { name: 'Видали 🔴', engName: 'Remove 🔴', value: 4 },
+  ];
+
+  userLibraryOpt: number = 0;
 
   constructor(private libraryService: LibraryService, private activatedRoute: ActivatedRoute,
     public langService: LanguageService, public accountService: AccountService, private toastr: ToastrService) {
@@ -39,17 +50,58 @@ export class BookDetailsComponent implements OnInit {
     this.getReviewOfAudioBook();
   }
 
-  formatDate(date: string){
-    return moment(date).format("YYYY-MM-DD");
+  async incrementViewCount() {
+    const id = this.activatedRoute.snapshot.paramMap.get('id');
+    if (id !== null) {
+      await this.libraryService.incrementViewCount(+id).toPromise();
+    }
   }
 
+  async loadSingleAudioBook() {
+    const id = this.activatedRoute.snapshot.paramMap.get('id')
+    if (id) {
+      const audiobook = await this.libraryService.getAudioBook(+id).toPromise();
+      this.audiobook = audiobook;
+      if (this.audiobook) {
+        this.audiobook.description = this.audiobook.description.replace(/\r\n/g, '<br>');
+        this.audioBookId = this.audiobook.id;
+        this.userLibraryOpt = this.audiobook.libraryStatusId;
+        this.accountService.currentUser$.subscribe(currentUser => {
+          this.userId = currentUser?.id || 0;
+        })
+      }
+    }
+  }
+
+  toggleExpand(reviewId: number) {
+    this.isExpandedMap[reviewId] = !this.isExpandedMap[reviewId];
+  }
+
+  // BookMarks methods
+  onSortSelected(event: any){
+    this.userLibraryOpt = event.value;
+    if (event.value === 4) {
+      this.userLibraryOpt = 0;
+    }
+    this.manageBookMark(this.userLibraryOpt);
+  }
+
+  manageBookMark(markStatus: number){
+    const bookmark: bookMarkForm = {
+      userId: this.userId,
+      audioBookId: this.audioBookId,
+      libraryStatusId: markStatus,
+    };
+    this.libraryService.postBookMark(bookmark).subscribe();
+  }
+
+  // Review methods
   onReviewAdded(newReview: Review) {
     const existingReviewIndex = this.reviews.findIndex(review => review.id === newReview.id);
-
     if (existingReviewIndex !== -1) {
       this.reviews[existingReviewIndex] = newReview;
     } else {
-      this.reviews.push(newReview);
+      this.reviews.unshift(newReview);
     }
   }
 
@@ -80,7 +132,6 @@ export class BookDetailsComponent implements OnInit {
 
   }
 
-
   editReview(selectedReview: Review){
     this.libraryService.formData = Object.assign({}, selectedReview);
   }
@@ -94,7 +145,7 @@ export class BookDetailsComponent implements OnInit {
         this.reviews = response.data;
 
         this.reviews.forEach(review => {
-          if (review.reviewText) {
+          if (this.review?.reviewText) {
             review.reviewText = review.reviewText.replace(/\r\n/g, '<br>');
           }
         });
@@ -108,49 +159,14 @@ export class BookDetailsComponent implements OnInit {
     }
   }
 
-
-  async incrementViewCount() {
-    const id = this.activatedRoute.snapshot.paramMap.get('id');
-    if (id !== null) {
-      await this.libraryService.incrementViewCount(+id).toPromise();
-    }
-  }
-
-  async loadSingleAudioBook() {
-    const id = this.activatedRoute.snapshot.paramMap.get('id')
-    if (id) {
-      const audiobook = await this.libraryService.getAudioBook(+id).toPromise();
-      this.audiobook = audiobook;
-      if (this.audiobook?.description) {
-        this.audiobook.description = this.audiobook.description.replace(/\r\n/g, '<br>');
-        this.truncateText(this.audiobook.description);
-      }
-    }
-  }
-
-  toggleText(description: string) {
-    this.isExpanded = !this.isExpanded;
-    if (this.isExpanded) {
-      this.truncatedText = description;
-    } else {
-      this.truncateText(description);
-    }
-  }
-
-  truncateText(description: string) {
-    const maxLength = 300;
-    if (description.length <= maxLength) {
-      this.truncatedText = description;
-    } else {
-      this.truncatedText = description.slice(0, maxLength) + '...';
-      this.isToggled = true;
-    }
-  }
-
   onPageChanged(event: any){
     if(this.sortingAndPaginationParams.pageNumber !== event) {
       this.sortingAndPaginationParams.pageNumber = event;
       this.getReviewOfAudioBook();
     }
+  }
+
+  formatDate(date: string){
+    return moment(date).format("YYYY-MM-DD");
   }
 }

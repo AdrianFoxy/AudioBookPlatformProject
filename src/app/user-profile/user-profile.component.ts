@@ -9,6 +9,8 @@ import * as moment from 'moment';
 import { User } from '../shared/models/user';
 import { ActivatedRoute } from '@angular/router';
 import { UserProfileService } from './user-profile.service';
+import { AudioBook } from '../shared/models/audiobook';
+import { userLibraryParams } from '../shared/models/audioBooksParams/userLibraryParams';
 
 @Component({
   selector: 'app-user-profile',
@@ -19,11 +21,15 @@ export class UserProfileComponent {
 
   userData?: User;
 
+  audioBooks: AudioBook[] = [];
+  userLibraryParams = new userLibraryParams();
+  totalCount = 0;
+
   sortOptions = [
-    { name: 'Всі', engName: 'All', value: 'all' },
-    { name: 'Читаю', engName: 'Reading', value: 'reading' },
-    { name: 'Прочитав', engName: 'Read', value: 'Rread' },
-    { name: 'Планую', engName: 'Plan', value: 'plan' },
+    { name: 'Всі', engName: 'All', value: 0 },
+    { name: 'Читаю', engName: 'Reading', value: 1 },
+    { name: 'Прочитав', engName: 'Read', value: 2 },
+    { name: 'Планую', engName: 'Plan', value: 3 },
   ];
 
   constructor(public darkmodeService: DarkModeService, public langService: LanguageService,
@@ -36,11 +42,45 @@ export class UserProfileComponent {
     this.loadUser();
   }
 
+  getUserLibarary(){
+    if(this.userData)
+    this.userLibraryParams.userId = this.userData?.id
+    console.log(this.userLibraryParams.userId);
+    console.log(this.userLibraryParams);
+
+    this.userProfileService.getUserLibrary(this.userLibraryParams).subscribe({
+      next: response => {
+        this.audioBooks = response.data;
+        this.userLibraryParams.pageNumber = response.pageIndex;
+        this.userLibraryParams.pageSize = response.pageSize;
+        this.totalCount = response.count;
+        console.log(this.audioBooks);
+      },
+      error: error => console.log(error)
+    })
+
+  }
+
+  onSortSelected(event: any){
+    this.userLibraryParams.statusId = event.value;
+    console.log(this.userLibraryParams.statusId);
+    this.getUserLibarary();
+  }
+
+
+  onPageChanged(event: any){
+    if(this.userLibraryParams.pageNumber !== event) {
+      this.userLibraryParams.pageNumber = event;
+      this.getUserLibarary();
+    }
+  }
+
   loadUser() {
     const username = this.activatedRoute.snapshot.paramMap.get('username');
     if (username) this.userProfileService.getUser(username).subscribe({
       next: userData => {
         this.userData = userData;
+        this.getUserLibarary();
       },
       error: error => console.log(error)
     })
@@ -52,11 +92,9 @@ export class UserProfileComponent {
     return date.format('YYYY-MM-DD');
   }
 
-
   openDialog(){
     this.dialogRef.open(EditUserComponent, {
       data: this.userData
     });
   }
-
 }

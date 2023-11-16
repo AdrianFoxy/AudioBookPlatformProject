@@ -12,6 +12,7 @@ export interface SingleAudioBook {
   rating: number;
   bookDuration: string;
   viewCount: number,
+  bookMarksCount: number,
   genre: Genre[];
   author: Author[];
   bookAudioFile: BookAudioFile[];
@@ -19,4 +20,5 @@ export interface SingleAudioBook {
   narrator: Narrator;
   bookSeries: Genre;
   orderInSeries: number;
+  libraryStatusId: number;
 }

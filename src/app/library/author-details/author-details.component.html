@@ -9,14 +9,21 @@
       </div>
       <hr>
       <div>
-        <p class="description" [innerHTML]="langService.whatCurrentLang() === 'en' ? formatDescription(author.enDescription) : formatDescription(author.description)"></p>
+        <p class="description mb-0" [innerHTML]="langService.whatCurrentLang() === 'en' ?
+          (isExpandedMap[author.id] ? formatDescription(author.enDescription) : (formatDescription(author.enDescription) | slice:0:900) +
+          (isExpandedMap[author.id] || formatDescription(author.enDescription).length <= 900 ? '' : '...')) :
+          (isExpandedMap[author.id] ? formatDescription(author.description) : (formatDescription(author.description) | slice:0:900) +
+          (isExpandedMap[author.id] || formatDescription(author.description).length <= 900 ? '' : '...'))">
+        </p>
+        <a class="show-more mt-0" *ngIf="langService.whatCurrentLang() === 'en' ? formatDescription(author.enDescription).length > 900 : formatDescription(author.description).length > 900" (click)="toggleExpand(author.id)">
+          {{ isExpandedMap[author.id] ? ('Less-Desc' | translate) : ('More-Desc' | translate) }}
+        </a>
       </div>
       <hr>
     </div>
   </div>
   <h1 class="mb-4">{{ 'author-books' | translate }}:</h1>
   <div class="row row-cols-xl-5 row-cols-lg-4 row-cols-md-4 row-cols-sm-3 row-cols-2 mt-2">
-
     <div *ngIf="totalCount == 0">
       <div *ngIf="loaderService.isLoading | async" class="loader-container">
         <mat-spinner class=""></mat-spinner>
