@@ -17,6 +17,7 @@ export class AuthorDetailsComponent implements OnInit {
   author?: Author;
   audioBooks: AudioBook[] = [];
   sortingAndPaginationParams = new sortingAndPaginationParams();
+  isExpandedMap: { [key: number]: boolean } = {};
 
   totalCount = 0;
 
@@ -30,6 +31,10 @@ export class AuthorDetailsComponent implements OnInit {
 
   formatDescription(text: string): string {
     return text ? text.replace(/\r\n/g, '<br>') : '';
+  }
+
+  toggleExpand(reviewId: number) {
+    this.isExpandedMap[reviewId] = !this.isExpandedMap[reviewId];
   }
 
   getAuthor() {

@@ -19,9 +19,7 @@ import { bookMarkForm } from 'src/app/shared/models/bookMarkform';
 })
 export class BookDetailsComponent implements OnInit {
 
-  truncatedText: string = '';
-  isExpanded: boolean = false;
-  isToggled: boolean = false;
+  isExpandedMap: { [key: number]: boolean } = {};
 
   audiobook?: SingleAudioBook;
   reviews: Review[] = [];
@@ -66,8 +64,6 @@ export class BookDetailsComponent implements OnInit {
       this.audiobook = audiobook;
       if (this.audiobook) {
         this.audiobook.description = this.audiobook.description.replace(/\r\n/g, '<br>');
-        this.truncateText(this.audiobook.description);
-
         this.audioBookId = this.audiobook.id;
         this.userLibraryOpt = this.audiobook.libraryStatusId;
         this.accountService.currentUser$.subscribe(currentUser => {
@@ -75,6 +71,10 @@ export class BookDetailsComponent implements OnInit {
         })
       }
     }
+  }
+
+  toggleExpand(reviewId: number) {
+    this.isExpandedMap[reviewId] = !this.isExpandedMap[reviewId];
   }
 
   // BookMarks methods
@@ -166,28 +166,7 @@ export class BookDetailsComponent implements OnInit {
     }
   }
 
-  // Helpers methods
-
   formatDate(date: string){
     return moment(date).format("YYYY-MM-DD");
-  }
-
-  toggleText(description: string) {
-    this.isExpanded = !this.isExpanded;
-    if (this.isExpanded) {
-      this.truncatedText = description;
-    } else {
-      this.truncateText(description);
-    }
-  }
-
-  truncateText(description: string) {
-    const maxLength = 300;
-    if (description.length <= maxLength) {
-      this.truncatedText = description;
-    } else {
-      this.truncatedText = description.slice(0, maxLength) + '...';
-      this.isToggled = true;
-    }
   }
 }

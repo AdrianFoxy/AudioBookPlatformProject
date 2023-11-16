@@ -58,27 +58,29 @@ export class AudioPlayerComponent implements OnDestroy, OnInit {
 
   openFile(file: BookAudioFile, index: any) {
 
-    // Save old volume for new audio
-    var volumeBefore = this.currentFile.currentVolume !== undefined ? this.currentFile.currentVolume : 1;
+    if (index != this.activeItemIndex) {
+      // Save old volume for new audio
+      var volumeBefore = this.currentFile.currentVolume !== undefined ? this.currentFile.currentVolume : 1;
 
-    var playbackRateBefore = this.currentFile.playbackRate !== undefined ? this.currentFile.playbackRate : 1;
+      var playbackRateBefore = this.currentFile.playbackRate !== undefined ? this.currentFile.playbackRate : 1;
 
-    this.currentFile = { index, file };
-    this.currentFile.name = file.name;
+      this.currentFile = { index, file };
+      this.currentFile.name = file.name;
 
-    this.audioService.stop();
-    this.playStream(file.audioFileUrl);
+      this.audioService.stop();
+      this.playStream(file.audioFileUrl);
 
-    // UpdatePlaybackRate
-    this.currentFile.playbackRate = playbackRateBefore;
-    if (this.currentFile.playbackRate) {
-      this.changePlaybackRate(this.currentFile.playbackRate);
-    }
+      // UpdatePlaybackRate
+      this.currentFile.playbackRate = playbackRateBefore;
+      if (this.currentFile.playbackRate) {
+        this.changePlaybackRate(this.currentFile.playbackRate);
+      }
 
-    // Set old volume for new song
-    this.currentFile.currentVolume = volumeBefore;
-    if (this.currentFile.currentVolume) {
-      this.changeVolume(this.currentFile.currentVolume);
+      // Set old volume for new song
+      this.currentFile.currentVolume = volumeBefore;
+      if (this.currentFile.currentVolume) {
+        this.changeVolume(this.currentFile.currentVolume);
+      }
     }
   }
 
