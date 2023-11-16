@@ -12,6 +12,18 @@
           <i class="fa fa-eye" aria-hidden="true"> {{audiobook.viewCount}}</i>
         </p>
       </div>
+      <mat-form-field class="userlib-select" *ngIf="accountService.currentUser$ | async as user">
+        <mat-label>{{ 'Bookmarks' | translate }}📚</mat-label>
+        <mat-select (selectionChange)="onSortSelected($event)" [(ngModel)]="userLibraryOpt">
+          <ng-container *ngFor="let userLibraryOption of userLibraryOptions">
+            <mat-option *ngIf="userLibraryOpt !== 0 || userLibraryOption.value !== 4" [value]="userLibraryOption.value">
+              {{ langService.whatCurrentLang() === 'en' ? userLibraryOption.engName : userLibraryOption.name }}
+            </mat-option>
+          </ng-container>
+        </mat-select>
+      </mat-form-field>
+
+
     </div>
     <div class="col-md-8">
       <div class="title">

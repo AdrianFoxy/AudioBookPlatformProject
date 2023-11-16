@@ -9,6 +9,8 @@ import { AccountService } from 'src/app/account/account.service';
 import { ReviewDto } from 'src/app/shared/models/review/reviewDto';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
+import { bookMarkForm } from 'src/app/shared/models/bookMarkform';
+
 
 @Component({
   selector: 'app-book-details',
@@ -28,6 +30,17 @@ export class BookDetailsComponent implements OnInit {
   totalCount = 0;
 
   review?: ReviewDto;
+  audioBookId: number = 0;
+  userId: number = 0;
+
+  userLibraryOptions = [
+    { name: 'Читаю 📖', engName: 'Reading 📖', value: 1 },
+    { name: 'Прочитав 📗', engName: 'Read 📗', value: 2 },
+    { name: 'Планую 📝', engName: 'Plan 📝', value: 3 },
+    { name: 'Видали 🔴', engName: 'Remove 🔴', value: 4 },
+  ];
+
+  userLibraryOpt: number = 0;
 
   constructor(private libraryService: LibraryService, private activatedRoute: ActivatedRoute,
     public langService: LanguageService, public accountService: AccountService, private toastr: ToastrService) {
@@ -39,17 +52,56 @@ export class BookDetailsComponent implements OnInit {
     this.getReviewOfAudioBook();
   }
 
-  formatDate(date: string){
-    return moment(date).format("YYYY-MM-DD");
+  async incrementViewCount() {
+    const id = this.activatedRoute.snapshot.paramMap.get('id');
+    if (id !== null) {
+      await this.libraryService.incrementViewCount(+id).toPromise();
+    }
   }
 
+  async loadSingleAudioBook() {
+    const id = this.activatedRoute.snapshot.paramMap.get('id')
+    if (id) {
+      const audiobook = await this.libraryService.getAudioBook(+id).toPromise();
+      this.audiobook = audiobook;
+      if (this.audiobook) {
+        this.audiobook.description = this.audiobook.description.replace(/\r\n/g, '<br>');
+        this.truncateText(this.audiobook.description);
+
+        this.audioBookId = this.audiobook.id;
+        this.userLibraryOpt = this.audiobook.libraryStatusId;
+        this.accountService.currentUser$.subscribe(currentUser => {
+          this.userId = currentUser?.id || 0;
+        })
+      }
+    }
+  }
+
+  // BookMarks methods
+  onSortSelected(event: any){
+    this.userLibraryOpt = event.value;
+    if (event.value === 4) {
+      this.userLibraryOpt = 0;
+    }
+    this.manageBookMark(this.userLibraryOpt);
+  }
+
+  manageBookMark(markStatus: number){
+    const bookmark: bookMarkForm = {
+      userId: this.userId,
+      audioBookId: this.audioBookId,
+      libraryStatusId: markStatus,
+    };
+    this.libraryService.postBookMark(bookmark).subscribe();
+  }
+
+  // Review methods
   onReviewAdded(newReview: Review) {
     const existingReviewIndex = this.reviews.findIndex(review => review.id === newReview.id);
-
     if (existingReviewIndex !== -1) {
       this.reviews[existingReviewIndex] = newReview;
     } else {
-      this.reviews.unshift(newReview); // используем unshift для добавления в начало массива
+      this.reviews.unshift(newReview);
     }
   }
 
@@ -80,7 +132,6 @@ export class BookDetailsComponent implements OnInit {
 
   }
 
-
   editReview(selectedReview: Review){
     this.libraryService.formData = Object.assign({}, selectedReview);
   }
@@ -108,24 +159,17 @@ export class BookDetailsComponent implements OnInit {
     }
   }
 
-
-  async incrementViewCount() {
-    const id = this.activatedRoute.snapshot.paramMap.get('id');
-    if (id !== null) {
-      await this.libraryService.incrementViewCount(+id).toPromise();
+  onPageChanged(event: any){
+    if(this.sortingAndPaginationParams.pageNumber !== event) {
+      this.sortingAndPaginationParams.pageNumber = event;
+      this.getReviewOfAudioBook();
     }
   }
 
-  async loadSingleAudioBook() {
-    const id = this.activatedRoute.snapshot.paramMap.get('id')
-    if (id) {
-      const audiobook = await this.libraryService.getAudioBook(+id).toPromise();
-      this.audiobook = audiobook;
-      if (this.audiobook?.description) {
-        this.audiobook.description = this.audiobook.description.replace(/\r\n/g, '<br>');
-        this.truncateText(this.audiobook.description);
-      }
-    }
+  // Helpers methods
+
+  formatDate(date: string){
+    return moment(date).format("YYYY-MM-DD");
   }
 
   toggleText(description: string) {
@@ -144,13 +188,6 @@ export class BookDetailsComponent implements OnInit {
     } else {
       this.truncatedText = description.slice(0, maxLength) + '...';
       this.isToggled = true;
-    }
-  }
-
-  onPageChanged(event: any){
-    if(this.sortingAndPaginationParams.pageNumber !== event) {
-      this.sortingAndPaginationParams.pageNumber = event;
-      this.getReviewOfAudioBook();
     }
   }
 }

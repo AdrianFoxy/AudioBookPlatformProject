@@ -13,6 +13,7 @@ import { SingleAudioBook } from '../shared/models/singleAudioBook';
 import { environment } from 'src/environments/environment';
 import { Review } from '../shared/models/review/review';
 import { ReviewDto } from '../shared/models/review/reviewDto';
+import { bookMarkForm } from '../shared/models/bookMarkform';
 
 
 @Injectable({
@@ -178,5 +179,10 @@ export class LibraryService {
   deleteReview(id: number){
     const header = new HttpHeaders().set('Content-type', 'application/json');
     return this.http.delete<Review>(this.baseUrl + 'Review/id?id=' + id, { headers: header, withCredentials: true });
+  }
+
+  postBookMark(bookMark: bookMarkForm){
+    const header = new HttpHeaders().set('Content-type', 'application/json');
+    return this.http.post(this.baseUrl + 'UserLibrary', bookMark, { headers: header, withCredentials: true });
   }
 }

@@ -19,4 +19,5 @@ export interface SingleAudioBook {
   narrator: Narrator;
   bookSeries: Genre;
   orderInSeries: number;
+  libraryStatusId: number;
 }
