@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RecomentdationsComponent } from './recomentdations/recomentdations.component';
+import { RecommendationsComponent } from './recommendations/recommendations.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { RouterModule } from '@angular/router';
@@ -27,7 +27,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
-    RecomentdationsComponent,
+    RecommendationsComponent,
     PagingHeaderComponent,
     PagerComponent,
     AudioPlayerComponent,
@@ -45,7 +45,7 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatButtonModule, MatDialogModule
   ],
   exports:[
-    RecomentdationsComponent,
+    RecommendationsComponent,
     PagingHeaderComponent,
     PaginationModule,
     PagerComponent,

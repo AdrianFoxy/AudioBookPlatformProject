@@ -16,7 +16,7 @@
       <h3 class="audio-player-h3">{{ 'PlayList' | translate }}</h3>
       <ul class="list-group list-group-border">
         <li class="list-group-item list-group-item-border" [class.active]="i === activeItemIndex" [class.played]="isSongPlayed(audio.id)"
-          *ngFor="let audio of audiobook.bookAudioFile; let i = index" (click)="setActiveItem(i); openFile(audio, i)" >
+          *ngFor="let audio of audiobook.bookAudioFile; let i = index" (click)="openFile(audio, i); setActiveItem(i)" >
           {{audio.name}}</li>
       </ul>
     </div>

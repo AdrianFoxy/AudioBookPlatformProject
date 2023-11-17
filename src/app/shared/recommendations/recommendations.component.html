@@ -1,0 +1,35 @@
+<ng-container *ngIf="!(loaderService.isLoading | async)">
+  <h2 class="mb-3" *ngIf="useTitle">{{ recommendationTitle | translate }}:</h2>
+  <div class="container">
+    <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
+      <div ngxSlickItem *ngFor="let audiobook of audioBooks" class="slide">
+        <div class="card">
+          <div class="img-container">
+            <a class="img_a">
+              <div class="card-img-container">
+                <img routerLink="/library/{{audiobook.id}}" style="cursor: pointer;" class="card-img"
+                  src="{{audiobook.pictureUrl}}">
+              </div>
+            </a>
+          </div>
+          <div class="card-body">
+            <a routerLink="/library/{{audiobook.id}}" class="book_name">
+              <h5 class="card-title">
+                {{ audiobook.name.length > 25 ? audiobook.name.slice(0, 25) + '...' : audiobook.name }}
+              </h5>
+            </a>
+            <p class="card-text">
+              <span class="card-author-title" style="cursor: pointer;" routerLink="/library/author/{{author.id}}"
+                *ngFor="let author of audiobook.author">{{ langService.whatCurrentLang() === 'en' ? author.enName :
+                author.name }}</span>
+              <span class="float-end">
+                <i class="fa fa-star" style="color: #ffbc57;" aria-hidden="true"></i>
+                {{ audiobook.rating }}
+              </span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </ngx-slick-carousel>
+  </div>
+</ng-container>

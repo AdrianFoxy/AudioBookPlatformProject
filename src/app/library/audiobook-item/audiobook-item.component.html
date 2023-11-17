@@ -11,7 +11,9 @@
       </span>
     </p>
     <a routerLink="/library/{{audiobook.id}}" class="book_name">
-      <p class="card-title">{{truncateName(audiobook.name)}}</p>
+      <p class="card-title">
+        {{ audiobook.name.length > 35 ? audiobook.name.slice(0, 35) + '...' : audiobook.name }}
+      </p>
     </a>
   </div>
 </div>
