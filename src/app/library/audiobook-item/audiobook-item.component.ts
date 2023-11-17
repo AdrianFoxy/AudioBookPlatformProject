@@ -12,16 +12,4 @@ export class AudiobookItemComponent {
   constructor(public langService: LanguageService) {}
 
   @Input() audiobook?: AudioBook;
-
-  truncateName(name: string): string {
-    const length = name.length;
-    if (length > 35) {
-      const truncated = name.substring(0, 35);
-      return truncated.trim() + "...";
-    } else {
-      return name;
-    }
-  }
-
-
 }

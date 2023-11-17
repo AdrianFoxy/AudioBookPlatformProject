@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SingleAudioBook } from 'src/app/shared/models/singleAudioBook';
 import { LibraryService } from '../library.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { LanguageService } from 'src/app/core/services/language-service/language.service';
 import { Review } from 'src/app/shared/models/review/review';
 import { sortingAndPaginationParams } from 'src/app/shared/models/audioBooksParams/sortingAndPaginationParams';
@@ -9,7 +9,8 @@ import { AccountService } from 'src/app/account/account.service';
 import { ReviewDto } from 'src/app/shared/models/review/reviewDto';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
-import { bookMarkForm } from 'src/app/shared/models/bookMarkform';
+import { bookMarkForm } from 'src/app/shared/models/bookMarkForm';
+import { filter } from 'rxjs';
 
 
 @Component({
@@ -41,13 +42,25 @@ export class BookDetailsComponent implements OnInit {
   userLibraryOpt: number = 0;
 
   constructor(private libraryService: LibraryService, private activatedRoute: ActivatedRoute,
-    public langService: LanguageService, public accountService: AccountService, private toastr: ToastrService) {
+    public langService: LanguageService, public accountService: AccountService, private toastr: ToastrService,
+    private router: Router) {
   }
 
   async ngOnInit(): Promise<void> {
     await this.incrementViewCount();
     await this.loadSingleAudioBook();
     this.getReviewOfAudioBook();
+
+    this.router.events.pipe(
+      filter((event) => event instanceof NavigationEnd && this.isBookDetailsRoute())
+    ).subscribe(() => {
+      location.reload();
+    });
+  }
+
+  private isBookDetailsRoute(): boolean {
+    const currentUrl = this.router.routerState.snapshot.url;
+    return currentUrl.startsWith('/library/');
   }
 
   async incrementViewCount() {

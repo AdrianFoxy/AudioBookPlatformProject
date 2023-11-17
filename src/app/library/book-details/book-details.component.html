@@ -54,10 +54,10 @@
   <app-audio-player *ngIf="audiobook" [audiobook]="audiobook"></app-audio-player>
   <hr>
   <h2>{{ 'Similar-books' | translate }}:</h2>
-  <app-recomentdations></app-recomentdations>
+  <app-recommendations [recommedantionType]="'popularity'"></app-recommendations>
   <hr>
   <h2>{{ 'This-is-usually-listened-too' | translate }}:</h2>
-  <app-recomentdations></app-recomentdations>
+  <app-recommendations [recommedantionType]="'rating'"></app-recommendations>
   <div class="container input-review-container">
     <hr>
     <app-review-form (reviewAdded)="onReviewAdded($event)"></app-review-form>
