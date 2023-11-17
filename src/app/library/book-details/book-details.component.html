@@ -61,7 +61,7 @@
       </div>
     </div>
   </div>
-  <div *ngIf="!(loaderService.isLoading | async)" class="audio-player">
+  <div class="audio-player">
     <hr>
     <app-audio-player *ngIf="audiobook" [audiobook]="audiobook"></app-audio-player>
     <hr>
@@ -71,7 +71,7 @@
     <hr>
     <app-recommendations [recommedantionType]="'rating'" [useTitle]="true"></app-recommendations>
   </div>
-  <div *ngIf="!(loaderService.isLoading | async)" class="container input-review-container">
+  <div class="container input-review-container">
     <hr>
     <app-review-form (reviewAdded)="onReviewAdded($event)"></app-review-form>
     <hr>
