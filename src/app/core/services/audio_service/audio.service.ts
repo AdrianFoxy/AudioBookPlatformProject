@@ -184,7 +184,6 @@ export class AudioService {
       case "ended":
         this.state.ended = true;
         break;
-
     }
 
     this.stateChange.next(this.state);

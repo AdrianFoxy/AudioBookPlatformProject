@@ -48,6 +48,7 @@ export class AudioPlayerComponent implements OnDestroy, OnInit {
     this.restorePlayerState();
     this.nextAudioAfterEnded();
     this.saveAudioDataBeforeF5();
+    this.saveAfterPause();
   }
 
   // Basic player methods
@@ -89,21 +90,6 @@ export class AudioPlayerComponent implements OnDestroy, OnInit {
 
       this.audioService.pause();
       clearInterval(this.countdownInterval);
-
-      if (this.state.currentTime !== undefined) {
-        const existingDataString = localStorage.getItem(this.currentAudioKey);
-        let existingData = existingDataString ? JSON.parse(existingDataString) : {};
-
-        existingData = {
-          ...existingData,
-          audioBookId: this.audiobook?.id,
-          currentFile: this.currentFile,
-          currentTime: this.state.currentTime,
-          currentVolume: this.audioService.getVolume(),
-          playbackRate: this.currentFile.playbackRate
-        };
-        localStorage.setItem(this.currentAudioKey, JSON.stringify(existingData));
-      }
     }
   }
 
@@ -143,8 +129,8 @@ export class AudioPlayerComponent implements OnDestroy, OnInit {
       const index = this.currentFile.index + 1;
       const file = this.audiobook?.bookAudioFile[index];
       if (file) {
-        this.setActiveItem(index);
         this.openFile(file, index);
+        this.setActiveItem(index);
       }
     }
   }
@@ -154,8 +140,8 @@ export class AudioPlayerComponent implements OnDestroy, OnInit {
     const file = this.audiobook?.bookAudioFile[index];
 
     if (file) {
-      this.setActiveItem(index);
       this.openFile(file, index);
+      this.setActiveItem(index);
     }
   }
 
@@ -195,7 +181,6 @@ export class AudioPlayerComponent implements OnDestroy, OnInit {
   }
 
   // SETTING METHODS, LIKE VOLUME AND PLAYBACK RATE
-
   changeVolume(ev: any) {
     this.audioService.setVolume(ev);
     this.currentFile.currentVolume = this.audioService.getVolume();
@@ -293,7 +278,6 @@ export class AudioPlayerComponent implements OnDestroy, OnInit {
   }
 
   // Secondary methods, data converting, restore data, method for OnInit and etc
-
   convertToPercentage(value: number): string {
     if (value < 0) {
       value = 0;
@@ -325,6 +309,28 @@ export class AudioPlayerComponent implements OnDestroy, OnInit {
       }
     });
   }
+
+  saveAfterPause() {
+    this.audioService.audioObj.addEventListener('pause', () => {
+      if (this.state && this.state.playing === true) {
+        if (this.state.currentTime !== undefined) {
+          const existingDataString = localStorage.getItem(this.currentAudioKey);
+          let existingData = existingDataString ? JSON.parse(existingDataString) : {};
+
+          existingData = {
+            ...existingData,
+            audioBookId: this.audiobook?.id,
+            currentFile: this.currentFile,
+            currentTime: this.state.currentTime,
+            currentVolume: this.audioService.getVolume(),
+            playbackRate: this.currentFile.playbackRate
+          };
+          localStorage.setItem(this.currentAudioKey, JSON.stringify(existingData));
+        }
+      }
+    });
+  }
+
 
   restorePlayerState() {
     const savedSong = localStorage.getItem(this.currentAudioKey);
