@@ -27,7 +27,7 @@ export class RecommendationsComponent implements OnInit{
 
   loadRecommendations() {
     if (this.recommedantionType === 'popularity') {
-      if(this.useTitle = true) this.recommendationTitle = 'PopularityRecommedantion'
+      if(this.useTitle === true) this.recommendationTitle = 'PopularityRecommedantion'
       this.recommedantionService.getRecommedationsByPopularity().subscribe(
         (data: AudioBook[]) => {
           this.audioBooks = data;
@@ -37,7 +37,7 @@ export class RecommendationsComponent implements OnInit{
         }
       );
     } else if (this.recommedantionType === 'rating') {
-      if(this.useTitle = true) this.recommendationTitle = 'RatingRecommedantion'
+      if(this.useTitle === true) this.recommendationTitle = 'RatingRecommedantion'
       this.recommedantionService.getRecommedationsByRating().subscribe(
         (data: AudioBook[]) => {
           this.audioBooks = data;
