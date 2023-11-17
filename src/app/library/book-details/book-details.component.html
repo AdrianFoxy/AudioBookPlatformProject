@@ -1,4 +1,9 @@
 <div class="container">
+  <ng-container *ngIf="loaderService.isLoading | async">
+    <div [ngClass]="{'loader-overlay': audiobook, 'loader-container': !audiobook}">
+      <mat-spinner class=""></mat-spinner>
+    </div>
+  </ng-container>
   <div *ngIf="audiobook" class="book_details row mt-4 mb-4">
     <div class="poster_block col-md-4 mb-3">
       <img class="poster_img" src="{{audiobook.pictureUrl}}" alt="book-picture">
@@ -8,7 +13,7 @@
           <i class="fa fa-bookmark" aria-hidden="true"> {{audiobook.bookMarksCount}}</i>
         </p>
         <p>
-           {{ 'Views' | translate }}
+          {{ 'Views' | translate }}
           <i class="fa fa-eye" aria-hidden="true"> {{audiobook.viewCount}}</i>
         </p>
       </div>
@@ -22,8 +27,6 @@
           </ng-container>
         </mat-select>
       </mat-form-field>
-
-
     </div>
     <div class="col-md-8">
       <div class="title">
@@ -34,31 +37,41 @@
         </span>
       </div>
       <hr>
-      <p class="secondary_txt">{{ 'Authors' | translate }}: <a class="a_btns" routerLink="/library/author/{{author.id}}" *ngFor="let author of audiobook.author">{{ langService.whatCurrentLang() === 'en' ? author.enName : author.name }}</a></p>
-      <p class="secondary_txt">{{ 'Narrators' | translate }}: <a class="a_btns" href="{{audiobook.narrator.mediaUrl}}">{{ audiobook.narrator.name }}</a></p>
-      <p class="secondary_txt">{{ 'Genres' | translate }}: <a class="a_btns" href="" *ngFor="let genre of audiobook.genre; let last = last">{{ langService.whatCurrentLang() === 'en' ? genre.enName : genre.name }}{{ last ? '' : ', ' }}</a></p>
-      <p class="secondary_txt">{{ 'Language' | translate }}: <span class="attb_span">{{ langService.whatCurrentLang() === 'en' ? audiobook.bookLanguage.enName : audiobook.bookLanguage.name }}</span></p>
-      <p class="secondary_txt">{{ 'S-Duration' | translate }}: <span class="attb_span">{{audiobook.bookDuration}}</span></p>
+      <p class="secondary_txt">{{ 'Authors' | translate }}: <a class="a_btns" routerLink="/library/author/{{author.id}}"
+          *ngFor="let author of audiobook.author">{{ langService.whatCurrentLang() === 'en' ? author.enName :
+          author.name }}</a></p>
+      <p class="secondary_txt">{{ 'Narrators' | translate }}: <a class="a_btns"
+          href="{{audiobook.narrator.mediaUrl}}">{{ audiobook.narrator.name }}</a></p>
+      <p class="secondary_txt">{{ 'Genres' | translate }}: <a class="a_btns" href=""
+          *ngFor="let genre of audiobook.genre; let last = last">{{ langService.whatCurrentLang() === 'en' ?
+          genre.enName : genre.name }}{{ last ? '' : ', ' }}</a></p>
+      <p class="secondary_txt">{{ 'Language' | translate }}: <span class="attb_span">{{ langService.whatCurrentLang()
+          === 'en' ? audiobook.bookLanguage.enName : audiobook.bookLanguage.name }}</span></p>
+      <p class="secondary_txt">{{ 'S-Duration' | translate }}: <span class="attb_span">{{audiobook.bookDuration}}</span>
+      </p>
       <hr>
       <h2>{{ 'About-Book' | translate }}:</h2>
       <div>
-        <p class="description mb-0" [innerHTML]="isExpandedMap[audiobook.id] ? audiobook.description : (audiobook.description | slice:0:300) + (isExpandedMap[audiobook.id] || audiobook.description.length <= 300 ? '' : '...')"></p>
+        <p class="description mb-0"
+          [innerHTML]="isExpandedMap[audiobook.id] ? audiobook.description : (audiobook.description | slice:0:300) + (isExpandedMap[audiobook.id] || audiobook.description.length <= 300 ? '' : '...')">
+        </p>
         <a *ngIf="audiobook.description.length > 300" class="show-more" (click)="toggleExpand(audiobook.id)">
           {{ isExpandedMap[audiobook.id] ? ('Less-Desc' | translate) : ('More-Desc' | translate) }}
         </a>
       </div>
     </div>
   </div>
-
-  <hr>
-  <app-audio-player *ngIf="audiobook" [audiobook]="audiobook"></app-audio-player>
-  <hr>
-  <h2>{{ 'Similar-books' | translate }}:</h2>
-  <app-recommendations [recommedantionType]="'popularity'"></app-recommendations>
-  <hr>
-  <h2>{{ 'This-is-usually-listened-too' | translate }}:</h2>
-  <app-recommendations [recommedantionType]="'rating'"></app-recommendations>
-  <div class="container input-review-container">
+  <div *ngIf="!(loaderService.isLoading | async)" class="audio-player">
+    <hr>
+    <app-audio-player *ngIf="audiobook" [audiobook]="audiobook"></app-audio-player>
+    <hr>
+  </div>
+  <div class="recommendations">
+    <app-recommendations [recommedantionType]="'popularity'" [useTitle]="true"></app-recommendations>
+    <hr>
+    <app-recommendations [recommedantionType]="'rating'" [useTitle]="true"></app-recommendations>
+  </div>
+  <div *ngIf="!(loaderService.isLoading | async)" class="container input-review-container">
     <hr>
     <app-review-form (reviewAdded)="onReviewAdded($event)"></app-review-form>
     <hr>
@@ -78,17 +91,20 @@
               <p class="user-name"><b>{{review.username}}</b></p>
               <span class="raiting float-end">
                 <ng-container *ngIf="accountService.currentUser$ | async as user">
-                  <a (click)="deleteReview(review.id)" *ngIf="review.userId === user.id"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                  <a (click)="deleteReview(review.id)" *ngIf="review.userId === user.id"><i class="fa fa-trash"
+                      aria-hidden="true"></i></a>
                   <a (click)="editReview(review)" *ngIf="review.userId === user.id"><i class="fa fa-edit"></i></a>
                 </ng-container>
                 <i class="fa fa-star" style="color: #ffbc57;" aria-hidden="true"></i>
                 {{ review.rating }}
               </span>
             </div>
-            <p class="mb-0" [innerHTML]="isExpandedMap[review.id] ? review.reviewText : (review.reviewText | slice:0:300) + (isExpandedMap[review.id] || review.reviewText.length <= 300 ? '' : '...')"></p>
-              <a class="show-more-review"  *ngIf="review.reviewText.length > 300" (click)="toggleExpand(review.id)">
-                {{ isExpandedMap[review.id] ? ('Less-Desc' | translate) : ('More-Desc' | translate) }}
-              </a>
+            <p class="mb-0"
+              [innerHTML]="isExpandedMap[review.id] ? review.reviewText : (review.reviewText | slice:0:300) + (isExpandedMap[review.id] || review.reviewText.length <= 300 ? '' : '...')">
+            </p>
+            <a class="show-more-review" *ngIf="review.reviewText.length > 300" (click)="toggleExpand(review.id)">
+              {{ isExpandedMap[review.id] ? ('Less-Desc' | translate) : ('More-Desc' | translate) }}
+            </a>
             <p class="date mt-2">{{ formatDate(review.createdAt) }}</p>
           </div>
         </div>
@@ -108,4 +124,4 @@
         </div>
       </ng-template>
     </div>
-</div>
+  </div>

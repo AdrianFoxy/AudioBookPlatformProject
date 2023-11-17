@@ -11,6 +11,7 @@ import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { bookMarkForm } from 'src/app/shared/models/bookMarkForm';
 import { filter } from 'rxjs';
+import { LoaderService } from 'src/app/core/services/loader-service/loader.service';
 
 
 @Component({
@@ -43,7 +44,7 @@ export class BookDetailsComponent implements OnInit {
 
   constructor(private libraryService: LibraryService, private activatedRoute: ActivatedRoute,
     public langService: LanguageService, public accountService: AccountService, private toastr: ToastrService,
-    private router: Router) {
+    private router: Router, public loaderService:LoaderService) {
   }
 
   async ngOnInit(): Promise<void> {
@@ -130,11 +131,8 @@ export class BookDetailsComponent implements OnInit {
       if(confirm(translatedMessage3)){
         this.libraryService.deleteReview(id).subscribe({
           next: res => {
-            const deletedReviewIndex = this.reviews.findIndex(review => review.id === id);
-            if (deletedReviewIndex !== -1) {
-              this.reviews.splice(deletedReviewIndex, 1);
-            }
             this.toastr.error(`${translatedMessage1}`, `${translatedMessage2}`);
+            this.getReviewOfAudioBook();
           },
           error: err => {
             console.log(err);
