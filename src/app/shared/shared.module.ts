@@ -25,6 +25,8 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule } from '@angular/material/button';
 import {MatDialogModule} from '@angular/material/dialog';
 
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+
 @NgModule({
   declarations: [
     RecommendationsComponent,
@@ -42,7 +44,8 @@ import {MatDialogModule} from '@angular/material/dialog';
     TranslateModule.forChild(),
     ReactiveFormsModule,
     MatFormFieldModule, MatInputModule, MatDatepickerModule, MatNativeDateModule,
-    MatButtonModule, MatDialogModule
+    MatButtonModule, MatDialogModule,
+    NgxSkeletonLoaderModule
   ],
   exports:[
     RecommendationsComponent,
