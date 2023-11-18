@@ -29,6 +29,7 @@
     "moment": "^2.29.4",
     "ngx-bootstrap": "^11.0.2",
     "ngx-mat-select-search": "^7.0.4",
+    "ngx-skeleton-loader": "^8.1.0",
     "ngx-slick-carousel": "^15.0.0",
     "ngx-toastr": "^17.0.2",
     "rxjs": "~7.8.0",

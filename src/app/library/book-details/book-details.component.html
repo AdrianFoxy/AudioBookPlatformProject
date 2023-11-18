@@ -18,7 +18,7 @@
         </p>
       </div>
       <mat-form-field class="userlib-select" *ngIf="accountService.currentUser$ | async as user">
-        <mat-label>{{ 'Bookmarks' | translate }}📚</mat-label>
+        <mat-label>{{ 'Bookmarks' | translate }}</mat-label>
         <mat-select (selectionChange)="onSortSelected($event)" [(ngModel)]="userLibraryOpt">
           <ng-container *ngFor="let userLibraryOption of userLibraryOptions">
             <mat-option *ngIf="userLibraryOpt !== 0 || userLibraryOption.value !== 4" [value]="userLibraryOption.value">
@@ -61,9 +61,9 @@
       </div>
     </div>
   </div>
-  <div class="audio-player">
+  <div class="audio-player" *ngIf="audiobook">
     <hr>
-    <app-audio-player *ngIf="audiobook" [audiobook]="audiobook"></app-audio-player>
+    <app-audio-player [audiobook]="audiobook"></app-audio-player>
     <hr>
   </div>
   <div class="recommendations">
