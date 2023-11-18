@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { StreamState } from '../models/stream-state';
 import { AudioService } from 'src/app/core/services/audio_service/audio.service';
 import { DarkModeService } from 'src/app/core/services/dark-mode-service/dark-mode.service';
@@ -12,7 +12,7 @@ import { LanguageService } from 'src/app/core/services/language-service/language
   templateUrl: './audio-player.component.html',
   styleUrls: ['./audio-player.component.scss']
 })
-export class AudioPlayerComponent implements OnDestroy, OnInit {
+export class AudioPlayerComponent implements OnChanges, OnDestroy, OnInit {
 
   @Input() audiobook?: SingleAudioBook
 
@@ -40,16 +40,31 @@ export class AudioPlayerComponent implements OnDestroy, OnInit {
       .subscribe(state => {
         this.state = state;
       });
-
   }
 
   ngOnInit() {
+    this.currentAudioBookId = this.activatedRoute.snapshot.paramMap.get('id');
+    this.currentAudioKey = 'AudioBook_' + this.currentAudioBookId;
+
     this.setDefaultAudioValumeAndPlayBackRate();
     this.restorePlayerState();
     this.nextAudioAfterEnded();
     this.saveAudioDataBeforeF5();
     this.saveAfterPause();
   }
+
+
+  ngOnChanges(changes: SimpleChanges): void {
+
+    const test = this.audiobook?.id?.toString();
+    if (this.currentAudioBookId !== test) {
+      // console.log('Restarting the component');
+      this.ngOnInit();
+      // console.log('Restarting Done');
+    }
+  }
+
+
 
   // Basic player methods
   playStream(url: string) {
@@ -339,7 +354,7 @@ export class AudioPlayerComponent implements OnDestroy, OnInit {
     if (savedSong) {
       const parsedData = JSON.parse(savedSong);
       const id = this.currentAudioBookId;
-      console.log(parsedData.audioBookId + ' ' + id);
+      // console.log(parsedData.audioBookId + ' ' + id);
 
       if (parsedData && parsedData.currentFile && parsedData.audioBookId == id) {
 

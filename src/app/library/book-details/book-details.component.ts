@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { SingleAudioBook } from 'src/app/shared/models/singleAudioBook';
 import { LibraryService } from '../library.service';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
@@ -10,8 +10,8 @@ import { ReviewDto } from 'src/app/shared/models/review/reviewDto';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { bookMarkForm } from 'src/app/shared/models/bookMarkForm';
-import { filter } from 'rxjs';
 import { LoaderService } from 'src/app/core/services/loader-service/loader.service';
+import { filter } from 'rxjs';
 
 
 @Component({
@@ -34,34 +34,29 @@ export class BookDetailsComponent implements OnInit {
   userId: number = 0;
 
   userLibraryOptions = [
-    { name: 'Читаю 📖', engName: 'Reading 📖', value: 1 },
-    { name: 'Прочитав 📗', engName: 'Read 📗', value: 2 },
-    { name: 'Планую 📝', engName: 'Plan 📝', value: 3 },
-    { name: 'Видали 🔴', engName: 'Remove 🔴', value: 4 },
+    { name: 'Читаю', engName: 'Reading', value: 1 },
+    { name: 'Прочитав', engName: 'Read', value: 2 },
+    { name: 'Планую', engName: 'Plan', value: 3 },
+    { name: 'Видалити', engName: 'Remove', value: 4 },
   ];
 
   userLibraryOpt: number = 0;
 
   constructor(private libraryService: LibraryService, private activatedRoute: ActivatedRoute,
     public langService: LanguageService, public accountService: AccountService, private toastr: ToastrService,
-    private router: Router, public loaderService:LoaderService) {
+    private router: Router, public loaderService:LoaderService, private cdr: ChangeDetectorRef) {
+
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe(() => {
+      this.ngOnInit();
+    });
   }
 
   async ngOnInit(): Promise<void> {
     await this.incrementViewCount();
     await this.loadSingleAudioBook();
     this.getReviewOfAudioBook();
-
-    this.router.events.pipe(
-      filter((event) => event instanceof NavigationEnd && this.isBookDetailsRoute())
-    ).subscribe(() => {
-      location.reload();
-    });
-  }
-
-  private isBookDetailsRoute(): boolean {
-    const currentUrl = this.router.routerState.snapshot.url;
-    return currentUrl.startsWith('/library/');
   }
 
   async incrementViewCount() {
