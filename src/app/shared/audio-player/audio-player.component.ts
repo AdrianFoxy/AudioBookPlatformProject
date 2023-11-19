@@ -55,16 +55,19 @@ export class AudioPlayerComponent implements OnChanges, OnDestroy, OnInit {
 
 
   ngOnChanges(changes: SimpleChanges): void {
-
+    console.log('On changes');
     const test = this.audiobook?.id?.toString();
     if (this.currentAudioBookId !== test) {
-      // console.log('Restarting the component');
+      this.resetCurrentFile();
       this.ngOnInit();
-      // console.log('Restarting Done');
     }
   }
 
 
+  resetCurrentFile() {
+    this.currentFile = {};
+    this.activeItemIndex = -1;
+  }
 
   // Basic player methods
   playStream(url: string) {
@@ -382,6 +385,10 @@ export class AudioPlayerComponent implements OnChanges, OnDestroy, OnInit {
           }
         }
       }
+    } else {
+      const overlay = document.querySelector('.overlay');
+      if (overlay)
+      overlay.classList.add('hidden');
     }
   }
 
@@ -433,7 +440,7 @@ export class AudioPlayerComponent implements OnChanges, OnDestroy, OnInit {
       const overlay = document.querySelector('.overlay');
       if (overlay) {
         overlay.classList.add('hidden');
-        // console.log('Hidden overlay added');
+        console.log('Hidden overlay added');
       }
     }
   }
@@ -444,4 +451,3 @@ export class AudioPlayerComponent implements OnChanges, OnDestroy, OnInit {
     // console.log("On Destroy works");
   }
 }
-
