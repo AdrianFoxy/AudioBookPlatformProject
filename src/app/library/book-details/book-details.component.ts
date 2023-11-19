@@ -1,7 +1,7 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { SingleAudioBook } from 'src/app/shared/models/singleAudioBook';
 import { LibraryService } from '../library.service';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { LanguageService } from 'src/app/core/services/language-service/language.service';
 import { Review } from 'src/app/shared/models/review/review';
 import { sortingAndPaginationParams } from 'src/app/shared/models/audioBooksParams/sortingAndPaginationParams';
@@ -11,7 +11,7 @@ import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { bookMarkForm } from 'src/app/shared/models/bookMarkForm';
 import { LoaderService } from 'src/app/core/services/loader-service/loader.service';
-import { filter } from 'rxjs';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -41,44 +41,43 @@ export class BookDetailsComponent implements OnInit {
   ];
 
   userLibraryOpt: number = 0;
+  private routeParamsSubscription: Subscription = new Subscription();
 
   constructor(private libraryService: LibraryService, private activatedRoute: ActivatedRoute,
     public langService: LanguageService, public accountService: AccountService, private toastr: ToastrService,
-    private router: Router, public loaderService:LoaderService, private cdr: ChangeDetectorRef) {
+    public loaderService:LoaderService) {
+  }
 
-    this.router.events.pipe(
-      filter(event => event instanceof NavigationEnd)
-    ).subscribe(() => {
-      this.ngOnInit();
+  ngOnInit() {
+    this.routeParamsSubscription = this.activatedRoute.params.subscribe(params => {
+      this.loadSingleAudioBook();
+      this.getReviewOfAudioBook();
     });
   }
 
-  async ngOnInit(): Promise<void> {
-    await this.incrementViewCount();
-    await this.loadSingleAudioBook();
-    this.getReviewOfAudioBook();
-  }
-
-  async incrementViewCount() {
+  loadSingleAudioBook() {
+    this.incrementViewCount();
     const id = this.activatedRoute.snapshot.paramMap.get('id');
-    if (id !== null) {
-      await this.libraryService.incrementViewCount(+id).toPromise();
+    if (id) {
+      this.libraryService.getAudioBook(+id).subscribe(audiobook => {
+        this.audiobook = audiobook;
+        if (this.audiobook) {
+          this.audiobook.description = this.audiobook.description.replace(/\r\n/g, '<br>');
+          this.audioBookId = this.audiobook.id;
+
+          this.accountService.currentUser$.subscribe(currentUser => {
+            this.userId = currentUser?.id || 0;
+          });
+        }
+      });
     }
   }
 
-  async loadSingleAudioBook() {
-    const id = this.activatedRoute.snapshot.paramMap.get('id')
-    if (id) {
-      const audiobook = await this.libraryService.getAudioBook(+id).toPromise();
-      this.audiobook = audiobook;
-      if (this.audiobook) {
-        this.audiobook.description = this.audiobook.description.replace(/\r\n/g, '<br>');
-        this.audioBookId = this.audiobook.id;
-        this.userLibraryOpt = this.audiobook.libraryStatusId;
-        this.accountService.currentUser$.subscribe(currentUser => {
-          this.userId = currentUser?.id || 0;
-        })
-      }
+  incrementViewCount() {
+    const id = this.activatedRoute.snapshot.paramMap.get('id');
+    if (id !== null) {
+      this.libraryService.incrementViewCount(+id).subscribe(() => {
+      });
     }
   }
 
