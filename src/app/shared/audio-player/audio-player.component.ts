@@ -55,14 +55,12 @@ export class AudioPlayerComponent implements OnChanges, OnDestroy, OnInit {
 
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log('On changes');
     const test = this.audiobook?.id?.toString();
     if (this.currentAudioBookId !== test) {
       this.resetCurrentFile();
       this.ngOnInit();
     }
   }
-
 
   resetCurrentFile() {
     this.currentFile = {};

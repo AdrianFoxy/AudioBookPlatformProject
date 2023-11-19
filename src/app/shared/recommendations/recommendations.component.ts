@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { AudioBook } from '../models/audiobook';
 import { LanguageService } from 'src/app/core/services/language-service/language.service';
 import { RecommendationsService } from './recommendations.service';
@@ -16,6 +16,9 @@ export class RecommendationsComponent implements OnInit{
 
   @Input() recommedantionType?: string;
   @Input() useTitle?: boolean = false;
+
+  widthImg = 200;
+  heightImg = 300;
 
   constructor(public langService: LanguageService, public recommedantionService: RecommendationsService,
     public loaderService:LoaderService){
@@ -49,8 +52,24 @@ export class RecommendationsComponent implements OnInit{
     } else {
       console.error('Invalid recommendation type:', this.recommedantionType);
     }
+    this.adjustImageSize(window.innerWidth);
   }
 
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.adjustImageSize(window.innerWidth);
+  }
+
+
+  adjustImageSize(screenWidth: number) {
+    if (screenWidth <= 992) {
+      this.widthImg = 150;
+      this.heightImg = 230;
+    } else {
+      this.widthImg = 200;
+      this.heightImg = 300;
+    }
+  }
 
   slideConfig = {
     "slidesToShow": 4,
