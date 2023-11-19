@@ -43,28 +43,45 @@ export class AudioPlayerComponent implements OnChanges, OnDestroy, OnInit {
   }
 
   ngOnInit() {
+    this.initPlayer();
+    this.addEvents();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    // console.log('Change');
+    const test = this.audiobook?.id?.toString();
+    if (this.currentAudioBookId !== test) {
+      this.resetCurrentFile();
+      this.initPlayer();
+    }
+  }
+
+  initPlayer(){
     this.currentAudioBookId = this.activatedRoute.snapshot.paramMap.get('id');
     this.currentAudioKey = 'AudioBook_' + this.currentAudioBookId;
-
     this.setDefaultAudioValumeAndPlayBackRate();
     this.restorePlayerState();
+  }
+
+  addEvents(){
+    this.removeEvents();
     this.nextAudioAfterEnded();
     this.saveAudioDataBeforeF5();
     this.saveAfterPause();
   }
 
-
-  ngOnChanges(changes: SimpleChanges): void {
-    const test = this.audiobook?.id?.toString();
-    if (this.currentAudioBookId !== test) {
-      this.resetCurrentFile();
-      this.ngOnInit();
-    }
+  removeEvents() {
+    this.audioService.audioObj.removeEventListener('ended', this.nextAudioAfterEnded);
+    this.audioService.audioObj.removeEventListener('pause', this.saveAfterPause);
+    window.removeEventListener('beforeunload', this.saveAudioDataBeforeF5);
   }
 
   resetCurrentFile() {
     this.currentFile = {};
-    this.activeItemIndex = -1;
+    // console.log(this.currentFile);
+    // console.log(this.currentFile.index);
+
+    this.activeItemIndex = 0;
   }
 
   // Basic player methods
@@ -320,7 +337,6 @@ export class AudioPlayerComponent implements OnChanges, OnDestroy, OnInit {
         this.addToLocalStorage(this.currentFile.file.id);
 
       if (!this.isLastPlaying()) {
-        console.log(this.currentFile);
         this.next();
       }
     });
@@ -433,7 +449,7 @@ export class AudioPlayerComponent implements OnChanges, OnDestroy, OnInit {
       const overlay = document.querySelector('.overlay');
       if (overlay) {
         overlay.classList.add('hidden');
-        console.log('Hidden overlay added');
+        // console.log('Hidden overlay added');
       }
     }
   }
