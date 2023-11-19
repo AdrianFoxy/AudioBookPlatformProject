@@ -387,18 +387,13 @@ export class AudioPlayerComponent implements OnChanges, OnDestroy, OnInit {
       }
     } else {
       const overlay = document.querySelector('.overlay');
-      if (overlay)
-      overlay.classList.add('hidden');
+      if (overlay) overlay.classList.add('hidden');
     }
   }
 
-  setDefaultAudioValumeAndPlayBackRate() {
-    if (!this.currentFile.currentVolume) {
-      this.currentFile.currentVolume = 1;
-    }
-    if (!this.currentFile.playbackRate) {
-      this.currentFile.playbackRate = 1;
-    }
+  private setDefaultAudioValumeAndPlayBackRate() {
+    this.currentFile.currentVolume = this.currentFile.currentVolume || 1;
+    this.currentFile.playbackRate = this.currentFile.playbackRate || 1;
   }
 
   // SCCS METHOD
