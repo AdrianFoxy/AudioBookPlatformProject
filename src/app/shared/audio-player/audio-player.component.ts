@@ -81,7 +81,7 @@ export class AudioPlayerComponent implements OnChanges, OnDestroy, OnInit {
     // console.log(this.currentFile);
     // console.log(this.currentFile.index);
 
-    this.activeItemIndex = 0;
+    this.activeItemIndex = -1;
   }
 
   // Basic player methods
