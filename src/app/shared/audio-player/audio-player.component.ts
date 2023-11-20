@@ -3,9 +3,10 @@ import { StreamState } from '../models/stream-state';
 import { AudioService } from 'src/app/core/services/audio_service/audio.service';
 import { DarkModeService } from 'src/app/core/services/dark-mode-service/dark-mode.service';
 import { SingleAudioBook } from '../models/singleAudioBook';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, NavigationStart, Router } from '@angular/router';
 import { BookAudioFile } from '../models/bookAudioFile';
 import { LanguageService } from 'src/app/core/services/language-service/language.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-audio-player',
@@ -30,16 +31,25 @@ export class AudioPlayerComponent implements OnChanges, OnDestroy, OnInit {
   currentAudioBookId = this.activatedRoute.snapshot.paramMap.get('id');
   currentAudioKey = 'AudioBook_' + this.currentAudioBookId;
 
+  routerSubscription: Subscription | undefined; // Add this line
 
   constructor(public darkmodeService: DarkModeService, private audioService: AudioService,
     private cdr: ChangeDetectorRef, private activatedRoute: ActivatedRoute,
-    public langService: LanguageService) {
+    public langService: LanguageService, private router: Router) {
 
     // listen to stream state
     this.audioService.getState()
       .subscribe(state => {
         this.state = state;
       });
+
+    this.routerSubscription = router.events.subscribe(event => {
+      if (event instanceof NavigationStart) {
+        // Check if the component is being destroyed during navigation
+        this.pause();
+        // console.log('NavigationStart event:', event);
+      }
+    });
   }
 
   ngOnInit() {
@@ -78,9 +88,6 @@ export class AudioPlayerComponent implements OnChanges, OnDestroy, OnInit {
 
   resetCurrentFile() {
     this.currentFile = {};
-    // console.log(this.currentFile);
-    // console.log(this.currentFile.index);
-
     this.activeItemIndex = -1;
   }
 
@@ -456,6 +463,9 @@ export class AudioPlayerComponent implements OnChanges, OnDestroy, OnInit {
 
   // ON DESTROY
   ngOnDestroy() {
+    if (this.routerSubscription) {
+      this.routerSubscription.unsubscribe();
+    }
     this.pause();
     // console.log("On Destroy works");
   }

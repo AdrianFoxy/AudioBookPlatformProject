@@ -156,8 +156,7 @@ export class LibraryService {
 
   incrementViewCount(id: number) {
     const url = `${this.baseUrl}AudioBook/increment-viewcount/${id}`;
-    console.log(url);
-
+    // console.log(url);
     return this.http.put(url, null);
   }
 
