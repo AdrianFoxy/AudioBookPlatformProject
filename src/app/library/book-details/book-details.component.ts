@@ -56,7 +56,6 @@ export class BookDetailsComponent implements OnInit {
   }
 
   loadSingleAudioBook() {
-    this.incrementViewCount();
     const id = this.activatedRoute.snapshot.paramMap.get('id');
     if (id) {
       this.libraryService.getAudioBook(+id).subscribe(audiobook => {
@@ -64,6 +63,8 @@ export class BookDetailsComponent implements OnInit {
         if (this.audiobook) {
           this.audiobook.description = this.audiobook.description.replace(/\r\n/g, '<br>');
           this.audioBookId = this.audiobook.id;
+          this.userLibraryOpt = this.audiobook.libraryStatusId;
+          this.audiobook.viewCount++;
 
           this.accountService.currentUser$.subscribe(currentUser => {
             this.userId = currentUser?.id || 0;
@@ -71,6 +72,7 @@ export class BookDetailsComponent implements OnInit {
         }
       });
     }
+    this.incrementViewCount();
   }
 
   incrementViewCount() {
