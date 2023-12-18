@@ -34,7 +34,6 @@ export class AudioService {
     error: false,
     ended: false
   };
-  currentFile: any;
 
   constructor() { }
 
@@ -109,8 +108,35 @@ export class AudioService {
     this.audioObj.play();
   }
 
-  pause() {
+  pause(audiobookId?: string, currentAudioKey?: string, currentFile?: any) {
+    if (this.audioObj.paused) {
+      console.log('Audio is alredy paused');
+      return;
+    }
+
     this.audioObj.pause();
+    console.log('Audio is paused');
+
+    if (currentAudioKey) {
+      const existingDataString = localStorage.getItem(currentAudioKey);
+      let existingData = existingDataString ? JSON.parse(existingDataString) : {};
+      // console.log(this.state);
+      // console.log(currentFile);
+
+      currentFile!.currentTime = this.state.currentTime;
+      existingData = {
+        ...existingData,
+        audioBookId: audiobookId,
+        currentFile: currentFile,
+        currentVolume: this.getVolume(),
+        playbackRate: this.getPlayBackRate(),
+      };
+
+      // console.log(`CurrentAudioKey: ${currentAudioKey}`);
+
+      localStorage.setItem(currentAudioKey, JSON.stringify(existingData));
+    }
+
   }
 
   stop() {
@@ -145,7 +171,7 @@ export class AudioService {
   }
 
   getPlayBackRate(){
-    return this.audioObj.volume;
+    return this.audioObj.playbackRate;
   }
 
   formatTime(time: number, format: string = 'HH:mm:ss') {

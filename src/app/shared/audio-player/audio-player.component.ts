@@ -21,6 +21,7 @@ export class AudioPlayerComponent implements OnChanges, OnDestroy, OnInit {
   state: StreamState | undefined;
 
   currentFile: any = {};
+
   activeItemIndex: number = -1;
 
   sleepMinutes: number = 0;
@@ -31,7 +32,7 @@ export class AudioPlayerComponent implements OnChanges, OnDestroy, OnInit {
   currentAudioBookId = this.activatedRoute.snapshot.paramMap.get('id');
   currentAudioKey = 'AudioBook_' + this.currentAudioBookId;
 
-  routerSubscription: Subscription | undefined; // Add this line
+  routerSubscription: Subscription | undefined;
 
   constructor(public darkmodeService: DarkModeService, private audioService: AudioService,
     private cdr: ChangeDetectorRef, private activatedRoute: ActivatedRoute,
@@ -46,6 +47,7 @@ export class AudioPlayerComponent implements OnChanges, OnDestroy, OnInit {
     this.routerSubscription = router.events.subscribe(event => {
       if (event instanceof NavigationStart) {
         // Check if the component is being destroyed during navigation
+        // console.log('pause works in router subs');
         this.pause();
         // console.log('NavigationStart event:', event);
       }
@@ -53,12 +55,13 @@ export class AudioPlayerComponent implements OnChanges, OnDestroy, OnInit {
   }
 
   ngOnInit() {
+    // console.log('ngOnInit');
     this.initPlayer();
     this.addEvents();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    // console.log('Change');
+    // console.log('ngOnChanges');
     const test = this.audiobook?.id?.toString();
     if (this.currentAudioBookId !== test) {
       this.resetCurrentFile();
@@ -66,7 +69,14 @@ export class AudioPlayerComponent implements OnChanges, OnDestroy, OnInit {
     }
   }
 
+  ngOnDestroy() {
+    if (this.routerSubscription) {
+      this.routerSubscription.unsubscribe();
+    }
+  }
+
   initPlayer(){
+    // console.log('initPlayer');
     this.currentAudioBookId = this.activatedRoute.snapshot.paramMap.get('id');
     this.currentAudioKey = 'AudioBook_' + this.currentAudioBookId;
     this.setDefaultAudioValumeAndPlayBackRate();
@@ -74,15 +84,15 @@ export class AudioPlayerComponent implements OnChanges, OnDestroy, OnInit {
   }
 
   addEvents(){
+    // console.log('addEvents');
     this.removeEvents();
     this.nextAudioAfterEnded();
     this.saveAudioDataBeforeF5();
-    this.saveAfterPause();
   }
 
   removeEvents() {
+    // console.log('removeEvents');
     this.audioService.audioObj.removeEventListener('ended', this.nextAudioAfterEnded);
-    this.audioService.audioObj.removeEventListener('pause', this.saveAfterPause);
     window.removeEventListener('beforeunload', this.saveAudioDataBeforeF5);
   }
 
@@ -105,8 +115,8 @@ export class AudioPlayerComponent implements OnChanges, OnDestroy, OnInit {
 
       var playbackRateBefore = this.currentFile.playbackRate !== undefined ? this.currentFile.playbackRate : 1;
 
+      // this.currentFileMain = {index, file}
       this.currentFile = { index, file };
-      this.currentFile.name = file.name;
 
       this.audioService.stop();
       this.playStream(file.audioFileUrl);
@@ -127,12 +137,16 @@ export class AudioPlayerComponent implements OnChanges, OnDestroy, OnInit {
 
   pause() {
     if (this.state && this.state.playing === true) {
+      console.log(this.currentAudioKey + '| pause works |' + this.currentFile.name);
 
-      this.audioService.pause();
+      this.audioService.pause(
+        this.currentAudioBookId || undefined,
+        this.currentAudioKey,
+        this.currentFile
+      );
       clearInterval(this.countdownInterval);
     }
   }
-
 
   play() {
     const currentAudioFileUrl = this.currentFile.file?.audioFileUrl;
@@ -349,28 +363,6 @@ export class AudioPlayerComponent implements OnChanges, OnDestroy, OnInit {
     });
   }
 
-  saveAfterPause() {
-    this.audioService.audioObj.addEventListener('pause', () => {
-      if (this.state && this.state.playing === true) {
-        if (this.state.currentTime !== undefined) {
-          const existingDataString = localStorage.getItem(this.currentAudioKey);
-          let existingData = existingDataString ? JSON.parse(existingDataString) : {};
-
-          existingData = {
-            ...existingData,
-            audioBookId: this.audiobook?.id,
-            currentFile: this.currentFile,
-            currentTime: this.state.currentTime,
-            currentVolume: this.audioService.getVolume(),
-            playbackRate: this.currentFile.playbackRate
-          };
-          localStorage.setItem(this.currentAudioKey, JSON.stringify(existingData));
-        }
-      }
-    });
-  }
-
-
   restorePlayerState() {
     const savedSong = localStorage.getItem(this.currentAudioKey);
     // console.log("Restore up");
@@ -385,7 +377,7 @@ export class AudioPlayerComponent implements OnChanges, OnDestroy, OnInit {
         this.currentFile = parsedData.currentFile;
 
         this.activeItemIndex = this.currentFile.index;
-        this.currentFile.currentTime = parsedData.currentTime;
+        this.currentFile.currentTime = parsedData.currentFile.currentTime;
         this.currentFile.playbackRate = parsedData.playbackRate;
 
         this.changeVolume(parsedData.currentVolume);
@@ -393,7 +385,7 @@ export class AudioPlayerComponent implements OnChanges, OnDestroy, OnInit {
 
         const sliderElement = document.querySelector('.seek_slider') as HTMLInputElement;
         if (sliderElement) {
-          sliderElement.value = String(parsedData.currentTime);
+          sliderElement.value = String(parsedData.currentFile.currentTime);
         }
         if (this.currentFile.currentTime) {
           // console.log("Restore current file");
@@ -459,14 +451,5 @@ export class AudioPlayerComponent implements OnChanges, OnDestroy, OnInit {
         // console.log('Hidden overlay added');
       }
     }
-  }
-
-  // ON DESTROY
-  ngOnDestroy() {
-    if (this.routerSubscription) {
-      this.routerSubscription.unsubscribe();
-    }
-    this.pause();
-    // console.log("On Destroy works");
   }
 }
