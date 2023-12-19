@@ -110,5 +110,7 @@
   "Footer-materialsl-info":"Всі матеріали взято з публічно доступних джерел та надаються безкоштовно, виключно з метою ознайомлення та розширення читацької аудиторії.",
   "Bookmarks": "Закладки",
   "PopularityRecommedantion": "Найбільш популярне",
-  "RatingRecommedantion": "Найвищий рейтинг"
+  "RatingRecommedantion": "Найвищий рейтинг",
+  "PlsEnterBirthday": "Будь ласка, введіть дату свого народження :)",
+  "FilteringnoEntriesFoundLabel": "Нічого не знайдено"
 }

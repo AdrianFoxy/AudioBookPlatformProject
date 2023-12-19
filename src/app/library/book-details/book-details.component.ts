@@ -88,11 +88,20 @@ export class BookDetailsComponent implements OnInit {
   }
 
   // BookMarks methods
-  onSortSelected(event: any){
+  onSortSelected(event: any) {
+    const previousUserLibraryOpt = this.audiobook?.libraryStatusId;
     this.userLibraryOpt = event.value;
-    if (event.value === 4) {
-      this.userLibraryOpt = 0;
+
+    if(this.audiobook){
+      if (event.value === 4 && this.userLibraryOpt != 0) {
+        this.userLibraryOpt = 0;
+        this.audiobook.bookMarksCount--;
+      } else if(previousUserLibraryOpt === 0) {
+          this.audiobook.bookMarksCount++;
+      }
+      this.audiobook.libraryStatusId = this.userLibraryOpt
     }
+
     this.manageBookMark(this.userLibraryOpt);
   }
 
@@ -102,7 +111,7 @@ export class BookDetailsComponent implements OnInit {
       audioBookId: this.audioBookId,
       libraryStatusId: markStatus,
     };
-    this.libraryService.postBookMark(bookmark).subscribe();
+  this.libraryService.postBookMark(bookmark).subscribe();
   }
 
   // Review methods

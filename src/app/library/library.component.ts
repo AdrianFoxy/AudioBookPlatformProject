@@ -152,6 +152,7 @@ export class LibraryComponent implements OnInit {
   onReset(){
 
     if(this.searchTerm) this.searchTerm.nativeElement.value = '';
+    this.sortingAndPaginationParams.search = this.searchTerm?.nativeElement.value;
 
     this.filretingParams = new filtreingParams();
     this.selectedIdGenres = new FormControl();
