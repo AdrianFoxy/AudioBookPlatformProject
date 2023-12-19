@@ -29,10 +29,10 @@ export class EditUserComponent implements OnInit {
   profileForm = this.fb.group({
     email: ['', [Validators.required, Validators.email, Validators.maxLength(200)]],
     username: ['', [Validators.required, Validators.maxLength(200)]],
-    about: ['', [Validators.required, Validators.maxLength(256)]],
+    about: ['', Validators.maxLength(256)],
     dateOfBirth: new FormControl(new Date(), [Validators.required]),
-  }
-  );
+  });
+
 
   editUser() {
     if (!this.userData)

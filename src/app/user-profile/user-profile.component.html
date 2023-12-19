@@ -22,7 +22,7 @@
                 <div class="col-6 mb-3">
                   <h6>{{ 'DateOfBirth-profile' | translate }}</h6>
                   <p class="text-muted">
-                    {{ formatDate(userData.dateOfBirth) === '1900-01-01' ? 'Pls enter you birth day date :)' : formatDate(userData.dateOfBirth) }}
+                    {{ formatDate(userData.dateOfBirth) === '1900-01-01' ? ('PlsEnterBirthday' | translate) : formatDate(userData.dateOfBirth) }}
                   </p>
                 </div>
               </div>
