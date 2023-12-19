@@ -111,5 +111,6 @@
   "Bookmarks": "Bookmarks",
   "PopularityRecommedantion": "The most popular",
   "RatingRecommedantion": "Highest rating",
-  "PlsEnterBirthday": "Pls enter you birth day date :)"
+  "PlsEnterBirthday": "Pls enter you birth day date :)",
+  "FilteringnoEntriesFoundLabel": "Nothing found"
 }

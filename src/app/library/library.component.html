@@ -46,7 +46,6 @@
         </a>
       </p>
 
-
       <div class="collapse d-lg-block" id="collapseExample">
         <div class="filters mt-2">
           <mat-form-field class="single-element">
@@ -72,7 +71,11 @@
                 </mat-chip-listbox>
               </mat-select-trigger>
               <mat-option>
-                <ngx-mat-select-search [formControl]="searchCtrl" placeholderLabel="Пошук"></ngx-mat-select-search>
+                <ngx-mat-select-search
+                  [formControl]="searchCtrl"
+                  placeholderLabel="{{ 'Search' | translate }}"
+                  noEntriesFoundLabel="{{ 'FilteringnoEntriesFoundLabel' | translate }}"
+                ></ngx-mat-select-search>
               </mat-option>
               <mat-option
                 *ngFor="let genre of genres | filter: searchCtrl.value: (langService.whatCurrentLang() === 'en' ? 'enName' : 'name')"
@@ -81,7 +84,6 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
-
 
           <mat-form-field class="full-width">
             <mat-label>{{ 'Authors' | translate }}</mat-label>
@@ -97,7 +99,11 @@
                 </mat-chip-listbox>
               </mat-select-trigger>
               <mat-option>
-                <ngx-mat-select-search [formControl]="searchCtrl" placeholderLabel="Пошук"></ngx-mat-select-search>
+                <ngx-mat-select-search
+                  [formControl]="searchCtrl"
+                  placeholderLabel="{{ 'Search' | translate }}"
+                  noEntriesFoundLabel="{{ 'FilteringnoEntriesFoundLabel' | translate }}"
+                ></ngx-mat-select-search>
               </mat-option>
               <mat-option
                 *ngFor="let author of authors | filter: searchCtrl.value: (langService.whatCurrentLang() === 'en' ? 'enName' : 'name')"
@@ -121,7 +127,11 @@
                 </mat-chip-listbox>
               </mat-select-trigger>
               <mat-option>
-                <ngx-mat-select-search [formControl]="searchCtrl" placeholderLabel="Пошук"></ngx-mat-select-search>
+                <ngx-mat-select-search
+                  [formControl]="searchCtrl"
+                  placeholderLabel="{{ 'Search' | translate }}"
+                  noEntriesFoundLabel="{{ 'FilteringnoEntriesFoundLabel' | translate }}"
+                ></ngx-mat-select-search>
               </mat-option>
               <mat-option *ngFor="let narrator of narrators | filter: searchCtrl.value: 'name'" [value]="narrator.id">
                 {{ narrator.name }}
@@ -143,7 +153,11 @@
                 </mat-chip-listbox>
               </mat-select-trigger>
               <mat-option>
-                <ngx-mat-select-search [formControl]="searchCtrl" placeholderLabel="Пошук"></ngx-mat-select-search>
+                <ngx-mat-select-search
+                  [formControl]="searchCtrl"
+                  placeholderLabel="{{ 'Search' | translate }}"
+                  noEntriesFoundLabel="{{ 'FilteringnoEntriesFoundLabel' | translate }}"
+                ></ngx-mat-select-search>
               </mat-option>
               <mat-option
                 *ngFor="let bookSerie of bookSeries | filter: searchCtrl.value: (langService.whatCurrentLang() === 'en' ? 'enName' : 'name')"
@@ -167,7 +181,11 @@
                 </mat-chip-listbox>
               </mat-select-trigger>
               <mat-option>
-                <ngx-mat-select-search [formControl]="searchCtrl" placeholderLabel="Пошук"></ngx-mat-select-search>
+                <ngx-mat-select-search
+                  [formControl]="searchCtrl"
+                  placeholderLabel="{{ 'Search' | translate }}"
+                  noEntriesFoundLabel="{{ 'FilteringnoEntriesFoundLabel' | translate }}"
+                ></ngx-mat-select-search>
               </mat-option>
               <mat-option
                 *ngFor="let bookLanguage of bookLanguages | filter: searchCtrl.value: (langService.whatCurrentLang() === 'en' ? 'enName' : 'name')"
@@ -192,8 +210,6 @@
             </mat-chip-option>
           </mat-chip-listbox>
 
-
-
           <p class="filtering-label mt-3">{{ 'Exceptions' | translate }}</p>
           <mat-form-field class="full-width">
             <mat-label>{{ 'Genres' | translate }}</mat-label>
@@ -209,7 +225,11 @@
                 </mat-chip-listbox>
               </mat-select-trigger>
               <mat-option>
-                <ngx-mat-select-search [formControl]="searchCtrl" placeholderLabel="Пошук"></ngx-mat-select-search>
+                <ngx-mat-select-search
+                  [formControl]="searchCtrl"
+                  placeholderLabel="{{ 'Search' | translate }}"
+                  noEntriesFoundLabel="{{ 'FilteringnoEntriesFoundLabel' | translate }}"
+                ></ngx-mat-select-search>
               </mat-option>
               <mat-option
                 *ngFor="let genre of genres | filter: searchCtrl.value: (langService.whatCurrentLang() === 'en' ? 'enName' : 'name')"
@@ -233,7 +253,11 @@
                 </mat-chip-listbox>
               </mat-select-trigger>
               <mat-option>
-                <ngx-mat-select-search [formControl]="searchCtrl" placeholderLabel="Пошук"></ngx-mat-select-search>
+                <ngx-mat-select-search
+                  [formControl]="searchCtrl"
+                  placeholderLabel="{{ 'Search' | translate }}"
+                  noEntriesFoundLabel="{{ 'FilteringnoEntriesFoundLabel' | translate }}"
+                ></ngx-mat-select-search>
               </mat-option>
               <mat-option
                 *ngFor="let author of authors | filter: searchCtrl.value: (langService.whatCurrentLang() === 'en' ? 'enName' : 'name')"
@@ -257,7 +281,11 @@
                 </mat-chip-listbox>
               </mat-select-trigger>
               <mat-option>
-                <ngx-mat-select-search [formControl]="searchCtrl" placeholderLabel="Пошук"></ngx-mat-select-search>
+                <ngx-mat-select-search
+                  [formControl]="searchCtrl"
+                  placeholderLabel="{{ 'Search' | translate }}"
+                  noEntriesFoundLabel="{{ 'FilteringnoEntriesFoundLabel' | translate }}"
+                ></ngx-mat-select-search>
               </mat-option>
               <mat-option *ngFor="let narrator of narrators | filter: searchCtrl.value: 'name'" [value]="narrator.id">
                 {{ narrator.name }}
@@ -279,7 +307,11 @@
                 </mat-chip-listbox>
               </mat-select-trigger>
               <mat-option>
-                <ngx-mat-select-search [formControl]="searchCtrl" placeholderLabel="Пошук"></ngx-mat-select-search>
+                <ngx-mat-select-search
+                  [formControl]="searchCtrl"
+                  placeholderLabel="{{ 'Search' | translate }}"
+                  noEntriesFoundLabel="{{ 'FilteringnoEntriesFoundLabel' | translate }}"
+                ></ngx-mat-select-search>
               </mat-option>
               <mat-option
                 *ngFor="let bookSerie of bookSeries | filter: searchCtrl.value: (langService.whatCurrentLang() === 'en' ? 'enName' : 'name')"
@@ -303,7 +335,11 @@
                 </mat-chip-listbox>
               </mat-select-trigger>
               <mat-option>
-                <ngx-mat-select-search [formControl]="searchCtrl" placeholderLabel="Пошук"></ngx-mat-select-search>
+                <ngx-mat-select-search
+                  [formControl]="searchCtrl"
+                  placeholderLabel="{{ 'Search' | translate }}"
+                  noEntriesFoundLabel="{{ 'FilteringnoEntriesFoundLabel' | translate }}"
+                ></ngx-mat-select-search>
               </mat-option>
               <mat-option
                 *ngFor="let bookLanguage of bookLanguages | filter: searchCtrl.value: (langService.whatCurrentLang() === 'en' ? 'enName' : 'name')"
@@ -314,9 +350,6 @@
           </mat-form-field>
         </div>
       </div>
-
-
-
     </section>
   </div>
 </div>

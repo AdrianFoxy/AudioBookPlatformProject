@@ -111,5 +111,6 @@
   "Bookmarks": "Закладки",
   "PopularityRecommedantion": "Найбільш популярне",
   "RatingRecommedantion": "Найвищий рейтинг",
-  "PlsEnterBirthday": "Будь ласка, введіть дату свого народження :)"
+  "PlsEnterBirthday": "Будь ласка, введіть дату свого народження :)",
+  "FilteringnoEntriesFoundLabel": "Нічого не знайдено"
 }
