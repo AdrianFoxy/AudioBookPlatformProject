@@ -21,6 +21,7 @@ export class AppComponent implements OnInit{
   }
 
   loadCurrentUser(){
+    console.log('User load try in component');
     this.accountService.loadCurrentUser().subscribe();
   }
 }

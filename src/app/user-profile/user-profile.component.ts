@@ -46,16 +46,12 @@ export class UserProfileComponent {
   getUserLibarary(){
     if(this.userData)
     this.userLibraryParams.userId = this.userData?.id
-    console.log(this.userLibraryParams.userId);
-    console.log(this.userLibraryParams);
-
     this.userProfileService.getUserLibrary(this.userLibraryParams).subscribe({
       next: response => {
         this.audioBooks = response.data;
         this.userLibraryParams.pageNumber = response.pageIndex;
         this.userLibraryParams.pageSize = response.pageSize;
         this.totalCount = response.count;
-        console.log(this.audioBooks);
       },
       error: error => console.log(error)
     })

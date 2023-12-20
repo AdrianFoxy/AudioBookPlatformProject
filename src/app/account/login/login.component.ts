@@ -2,7 +2,7 @@ import { Component, ElementRef, NgZone, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DarkModeService } from 'src/app/core/services/dark-mode-service/dark-mode.service';
 import { AccountService } from '../account.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CredentialResponse, PromptMomentNotification } from 'google-one-tap';
 import { delay } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -13,9 +13,13 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+
+  returnUrl: string;
+
   constructor(public darkmodeService: DarkModeService, private accountService: AccountService,
-    private router: Router, private _ngZone: NgZone, private el: ElementRef) {
-  }
+    private router: Router, private activatedRoute: ActivatedRoute, private _ngZone: NgZone, private el: ElementRef) {
+      this.returnUrl = this.activatedRoute.snapshot.queryParamMap.get('returnUrl') || '/library';
+    }
   private clientId = environment.clientId
 
   ngOnInit() {
@@ -42,7 +46,7 @@ export class LoginComponent implements OnInit {
     await this.accountService.LoginWithGoogle(response.credential).subscribe(
       (x: any) => {
         this._ngZone.run(() => {
-          this.router.navigate(['/library']);
+          this.router.navigateByUrl(this.returnUrl)
         })
       },
       (error: any) => {
@@ -59,7 +63,7 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     this.accountService.login(this.loginForm.value).subscribe({
-      next: user => this.router.navigateByUrl('library')
+      next: user => this.router.navigateByUrl(this.returnUrl)
     })
   }
 }

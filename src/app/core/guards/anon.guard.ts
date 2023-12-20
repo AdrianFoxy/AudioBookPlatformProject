@@ -7,6 +7,8 @@ export const anonGuard = () => {
   const accountService = inject(AccountService);
   const router = inject(Router);
 
+  accountService.loadCurrentUser().subscribe();
+
   return accountService.currentUser$.pipe(
     map(auth => {
       if (auth) {
