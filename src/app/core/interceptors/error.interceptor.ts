@@ -51,6 +51,11 @@ export class ErrorInterceptor implements HttpInterceptor {
               this.toastr.error(error.error.message, error.status.toString())
             }
           }
+          if(error.status === 403){
+            console.log('403');
+
+            this.toastr.error(error.error.message, error.status.toString())
+          }
           if(error.status === 404) {
             this.router.navigateByUrl('/not-found');
           }

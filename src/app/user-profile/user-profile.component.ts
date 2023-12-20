@@ -24,6 +24,7 @@ export class UserProfileComponent {
   audioBooks: AudioBook[] = [];
   userLibraryParams = new userLibraryParams();
   totalCount = 0;
+  isUserMatched: boolean = false; // Add this property
 
   sortOptions = [
     { name: 'Всі', engName: 'All', value: 0 },
@@ -81,6 +82,9 @@ export class UserProfileComponent {
       next: userData => {
         this.userData = userData;
         this.getUserLibarary();
+        this.accountService.currentUser$.subscribe(currentUser => {
+          this.isUserMatched = currentUser?.userName === userData.userName;
+        });
       },
       error: error => console.log(error)
     })
