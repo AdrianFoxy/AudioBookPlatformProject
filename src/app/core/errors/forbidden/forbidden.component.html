@@ -1,3 +1,11 @@
 <div class="container">
-  <p>403 error</p>
+  <div class="error-container">
+    <p class="error-text">403 - ACCES DENIED</p>
+    <p class="error-text-second">
+      {{ '403secondText' | translate }}
+      <a routerLink="/">
+        <b>{{ 'home' | translate }}</b>
+      </a>
+    </p>
+  </div>
 </div>

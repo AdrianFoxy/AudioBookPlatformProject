@@ -112,5 +112,7 @@
   "PopularityRecommedantion": "The most popular",
   "RatingRecommedantion": "Highest rating",
   "PlsEnterBirthday": "Pls enter you birth day date :)",
-  "FilteringnoEntriesFoundLabel": "Nothing found"
+  "FilteringnoEntriesFoundLabel": "Nothing found",
+  "403secondText": "Oops, you are not allowed to enter here. Go",
+  "home": "home"
 }
