@@ -1,20 +1,35 @@
-import {inject} from '@angular/core';
-import { Router } from '@angular/router';
-import { map } from 'rxjs';
-
+import { Injectable } from '@angular/core';
+import {
+  ActivatedRouteSnapshot,
+  CanActivateFn,
+  Router,
+  RouterStateSnapshot,
+  UrlTree,
+} from '@angular/router';
+import { map, Observable } from 'rxjs';
 import { AccountService } from 'src/app/account/account.service';
 
-export const authGuard = () => {
-  const accountService = inject(AccountService);
-  const router = inject(Router);
+@Injectable({
+  providedIn: 'root',
+})
+export class AuthGuard {
+  constructor(private accountService: AccountService, private router: Router) {}
 
-  return accountService.currentUser$.pipe(
-    map(auth => {
-      if (auth) return true;
-      else {
-        router.navigate(['/account/login'], {queryParams: {returnUrl: router.url}});
-        return false
-      }
-    })
-  );
-};
+  canActivate: CanActivateFn = (
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): Observable<boolean | UrlTree> => {
+    return this.accountService.currentUser$.pipe(
+      map((auth) => {
+        if (auth) {
+          return true; // Allow navigation if user is authenticated
+        } else {
+          // Redirect to login if not authenticated
+          return this.router.createUrlTree(['/account/login'], {
+            queryParams: { returnUrl: state.url },
+          });
+        }
+      })
+    );
+  };
+}

@@ -12,6 +12,7 @@ import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
 
 import { ToastrModule } from 'ngx-toastr';
+import { ForbiddenComponent } from './errors/forbidden/forbidden.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { ToastrModule } from 'ngx-toastr';
     FooterComponent,
     TestErrorComponent,
     NotFoundComponent,
-    ServerErrorComponent
+    ServerErrorComponent,
+    ForbiddenComponent
   ],
   imports: [
     CommonModule,

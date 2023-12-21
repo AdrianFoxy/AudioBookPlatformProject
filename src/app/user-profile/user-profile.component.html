@@ -11,7 +11,7 @@
                 alt="Avatar" class="img-fluid my-5" style="width: 80px;" />
               <h5 class="profile-avatar-text"><strong>{{userData.userName}}</strong></h5>
               <p class="profile-avatar-text"><strong>{{ 'User-status-1' | translate }}</strong></p>
-              <i (click)="openDialog()" class="fa fa-edit mb-5 profile-avatar-text"></i>
+              <i *ngIf="isUserMatched" (click)="openDialog()" class="fa fa-edit mb-5 profile-avatar-text"></i>
             </div>
             <div class="col-md-8">
               <div class="card-body p-4">

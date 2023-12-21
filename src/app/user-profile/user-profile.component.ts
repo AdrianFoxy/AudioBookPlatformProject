@@ -24,6 +24,7 @@ export class UserProfileComponent {
   audioBooks: AudioBook[] = [];
   userLibraryParams = new userLibraryParams();
   totalCount = 0;
+  isUserMatched: boolean = false; // Add this property
 
   sortOptions = [
     { name: 'Всі', engName: 'All', value: 0 },
@@ -45,16 +46,12 @@ export class UserProfileComponent {
   getUserLibarary(){
     if(this.userData)
     this.userLibraryParams.userId = this.userData?.id
-    console.log(this.userLibraryParams.userId);
-    console.log(this.userLibraryParams);
-
     this.userProfileService.getUserLibrary(this.userLibraryParams).subscribe({
       next: response => {
         this.audioBooks = response.data;
         this.userLibraryParams.pageNumber = response.pageIndex;
         this.userLibraryParams.pageSize = response.pageSize;
         this.totalCount = response.count;
-        console.log(this.audioBooks);
       },
       error: error => console.log(error)
     })
@@ -81,6 +78,9 @@ export class UserProfileComponent {
       next: userData => {
         this.userData = userData;
         this.getUserLibarary();
+        this.accountService.currentUser$.subscribe(currentUser => {
+          this.isUserMatched = currentUser?.userName === userData.userName;
+        });
       },
       error: error => console.log(error)
     })
