@@ -59,6 +59,9 @@
                 <a routerLink="/user-profile/{{user.userName}}" class="dropdown-item dd-a">
                   {{ 'Profile' | translate }}
                 </a>
+                <a *ngIf="user.role === 'Admin'" routerLink="/admin" class="dropdown-item dd-a">
+                  Admin-panel
+                </a>
               </li>
               <div class="dropdown-divider"></div>
               <li class="py-1 dd-a">
