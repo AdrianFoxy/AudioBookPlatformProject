@@ -24,7 +24,7 @@ export class ReviewFormComponent {
   inserReview(form: NgForm){
     this.libraryService.postReview().subscribe({
       next: res => {
-        console.log(res);
+        // console.log(res);
         this.reviewAdded.emit(res);
         form.resetForm();
         this.libraryService.formData = new ReviewDto();
@@ -79,7 +79,7 @@ export class ReviewFormComponent {
       else
         this.updateReview(form)
 
-      console.log(this.libraryService.formData);
+      // console.log(this.libraryService.formData);
     }
   }
 

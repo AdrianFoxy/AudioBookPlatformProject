@@ -91,7 +91,7 @@
               <p class="user-name"><b>{{review.username}}</b></p>
               <span class="raiting float-end">
                 <ng-container *ngIf="accountService.currentUser$ | async as user">
-                  <a (click)="deleteReview(review.id)" *ngIf="review.userId === user.id"><i class="fa fa-trash"
+                  <a (click)="deleteReview(review.id)" *ngIf="review.userId === user.id || user.role === 'Admin'"><i class="fa fa-trash"
                       aria-hidden="true"></i></a>
                   <a (click)="editReview(review)" *ngIf="review.userId === user.id"><i class="fa fa-edit"></i></a>
                 </ng-container>

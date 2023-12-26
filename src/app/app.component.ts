@@ -16,12 +16,12 @@ export class AppComponent implements OnInit{
 
   }
   ngOnInit(): void {
-    console.log('HELLO WORLD' + this.baseUrl);
+    // console.log('HELLO WORLD' + this.baseUrl);
     this.loadCurrentUser();
   }
 
   loadCurrentUser(){
-    console.log('User load try in component');
+    // console.log('User load try in component');
     this.accountService.loadCurrentUser().subscribe();
   }
 }

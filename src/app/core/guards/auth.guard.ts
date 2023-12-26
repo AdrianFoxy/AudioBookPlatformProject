@@ -6,7 +6,8 @@ import {
   RouterStateSnapshot,
   UrlTree,
 } from '@angular/router';
-import { map, Observable } from 'rxjs';
+import { switchMap, map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { AccountService } from 'src/app/account/account.service';
 
 @Injectable({
@@ -19,16 +20,21 @@ export class AuthGuard {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean | UrlTree> => {
-    return this.accountService.currentUser$.pipe(
-      map((auth) => {
-        if (auth) {
-          return true; // Allow navigation if user is authenticated
-        } else {
-          // Redirect to login if not authenticated
-          return this.router.createUrlTree(['/account/login'], {
-            queryParams: { returnUrl: state.url },
-          });
-        }
+    // Call loadCurrentUser() and switch to the observable it returns
+    return this.accountService.loadCurrentUser().pipe(
+      switchMap(() => {
+        // Now that currentUser$ should have a value, proceed with the authentication check
+        return this.accountService.currentUser$.pipe(
+          map((auth) => {
+            if (auth !== null) {
+              return true;
+            } else {
+              return this.router.createUrlTree(['/account/login'], {
+                queryParams: { returnUrl: state.url },
+              });
+            }
+          })
+        );
       })
     );
   };

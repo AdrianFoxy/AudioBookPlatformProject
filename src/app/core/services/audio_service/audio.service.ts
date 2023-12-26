@@ -110,12 +110,12 @@ export class AudioService {
 
   pause(audiobookId?: string, currentAudioKey?: string, currentFile?: any) {
     if (this.audioObj.paused) {
-      console.log('Audio is alredy paused');
+      // console.log('Audio is alredy paused');
       return;
     }
 
     this.audioObj.pause();
-    console.log('Audio is paused');
+    // console.log('Audio is paused');
 
     if (currentAudioKey) {
       const existingDataString = localStorage.getItem(currentAudioKey);

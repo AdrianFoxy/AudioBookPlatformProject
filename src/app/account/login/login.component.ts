@@ -42,7 +42,6 @@ export class LoginComponent implements OnInit {
 
 
   async handleCredentialResponse(response: CredentialResponse) {
-    debugger
     await this.accountService.LoginWithGoogle(response.credential).subscribe(
       (x: any) => {
         this._ngZone.run(() => {
