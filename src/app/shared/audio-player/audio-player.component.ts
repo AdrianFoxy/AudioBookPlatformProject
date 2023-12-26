@@ -137,7 +137,7 @@ export class AudioPlayerComponent implements OnChanges, OnDestroy, OnInit {
 
   pause() {
     if (this.state && this.state.playing === true) {
-      console.log(this.currentAudioKey + '| pause works |' + this.currentFile.name);
+      // console.log(this.currentAudioKey + '| pause works |' + this.currentFile.name);
 
       this.audioService.pause(
         this.currentAudioBookId || undefined,
