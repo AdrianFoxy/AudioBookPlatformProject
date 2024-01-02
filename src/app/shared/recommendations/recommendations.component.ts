@@ -3,6 +3,7 @@ import { AudioBook } from '../models/audiobook';
 import { LanguageService } from 'src/app/core/services/language-service/language.service';
 import { RecommendationsService } from './recommendations.service';
 import { LoaderService } from 'src/app/core/services/loader-service/loader.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-recommendations',
@@ -29,29 +30,37 @@ export class RecommendationsComponent implements OnInit{
   }
 
   loadRecommendations() {
+    let requestObservable: any = undefined;
+
+    const handleRecommendation = (title: string, observable: Observable<AudioBook[]>) => {
+      if (this.useTitle === true) {
+        this.recommendationTitle = title;
+      }
+      requestObservable = observable;
+    };
+
     if (this.recommedantionType === 'popularity') {
-      if(this.useTitle === true) this.recommendationTitle = 'PopularityRecommedantion'
-      this.recommedantionService.getRecommedationsByPopularity().subscribe(
-        (data: AudioBook[]) => {
-          this.audioBooks = data;
-        },
-        (error) => {
-          console.error('Error loading recommendations by popularity:', error);
-        }
-      );
+      handleRecommendation('PopularityRecommedantion', this.recommedantionService.getRecommedationsByPopularity());
     } else if (this.recommedantionType === 'rating') {
-      if(this.useTitle === true) this.recommendationTitle = 'RatingRecommedantion'
-      this.recommedantionService.getRecommedationsByRating().subscribe(
-        (data: AudioBook[]) => {
-          this.audioBooks = data;
-        },
-        (error) => {
-          console.error('Error loading recommendations by rating:', error);
-        }
-      );
+      handleRecommendation('RatingRecommedantion', this.recommedantionService.getRecommedationsByRating());
+    } else if (this.recommedantionType === 'recently') {
+      handleRecommendation('RecentlyWatched', this.recommedantionService.getRecentlyWatched());
     } else {
       console.error('Invalid recommendation type:', this.recommedantionType);
+      return;
     }
+
+    if (requestObservable) {
+      requestObservable.subscribe(
+        (data: AudioBook[]) => {
+          this.audioBooks = data;
+        },
+        (error: any) => {
+          console.error(`Error loading recommendations by ${this.recommedantionType}:`, error);
+        }
+      );
+    }
+
     this.adjustImageSize(window.innerWidth);
   }
 
@@ -59,7 +68,6 @@ export class RecommendationsComponent implements OnInit{
   onResize(event: any) {
     this.adjustImageSize(window.innerWidth);
   }
-
 
   adjustImageSize(screenWidth: number) {
     if (screenWidth <= 992) {
