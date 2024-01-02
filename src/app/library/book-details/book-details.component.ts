@@ -69,6 +69,8 @@ export class BookDetailsComponent implements OnInit {
           this.accountService.currentUser$.subscribe(currentUser => {
             this.userId = currentUser?.id || 0;
           });
+
+          this.addRecentBook(this.audioBookId);
         }
       });
     }
@@ -185,4 +187,19 @@ export class BookDetailsComponent implements OnInit {
   formatDate(date: string){
     return moment(date).format("YYYY-MM-DD");
   }
+
+  private readonly maxRecentBooks = 5;
+  private readonly recentBooksKey = 'recentBooks';
+
+  getRecentBooks(): number[] {
+    const recentBooks = JSON.parse(localStorage.getItem(this.recentBooksKey) || '[]') as number[];
+    return recentBooks.slice(0, this.maxRecentBooks);
+  }
+
+  addRecentBook(bookId: number): void {
+    const recentBooks = this.getRecentBooks();
+    const updatedBooks = [bookId, ...recentBooks.filter(id => id !== bookId)].slice(0, this.maxRecentBooks);
+    localStorage.setItem(this.recentBooksKey, JSON.stringify(updatedBooks));
+  }
+
 }
