@@ -6,13 +6,19 @@ import { FooterComponent } from './footer/footer.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { RouterModule } from '@angular/router';
 
-import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { MatProgressBarModule} from '@angular/material/progress-bar';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { TestErrorComponent } from './errors/test-error/test-error.component';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
 
 import { ToastrModule } from 'ngx-toastr';
 import { ForbiddenComponent } from './errors/forbidden/forbidden.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +27,8 @@ import { ForbiddenComponent } from './errors/forbidden/forbidden.component';
     TestErrorComponent,
     NotFoundComponent,
     ServerErrorComponent,
-    ForbiddenComponent
+    ForbiddenComponent,
+    SidebarComponent,
   ],
   imports: [
     CommonModule,
@@ -32,10 +39,16 @@ import { ForbiddenComponent } from './errors/forbidden/forbidden.component';
       positionClass: 'toast-bottom-right',
       preventDuplicates: true
     }),
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatIconModule,
+    MatListModule
   ], exports: [
     NavBarComponent,
-    FooterComponent
+    FooterComponent,
+    SidebarComponent
   ]
 })
 export class CoreModule { }

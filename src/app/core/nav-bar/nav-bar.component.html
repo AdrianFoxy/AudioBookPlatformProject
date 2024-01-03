@@ -112,6 +112,13 @@
             <div class="modal-item" data-bs-dismiss="modal">
               <a routerLink="/selection">{{ 'Selections' | translate }}</a>
             </div>
+            <ng-container *ngIf="accountService.currentUser$ | async as user">
+              <div *ngIf="user.role === 'Admin'" class="modal-item" data-bs-dismiss="modal">
+                <a routerLink="/admin">
+                  {{ 'Admin-panel' | translate }}
+                </a>
+              </div>
+            </ng-container>
             <ng-container *ngIf="(accountService.currentUser$ | async) === null">
               <div class="modal-item" data-bs-dismiss="modal">
                 <a routerLink="/account/login">{{ 'Sign-in' | translate }}</a>
