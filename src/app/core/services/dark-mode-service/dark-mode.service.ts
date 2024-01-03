@@ -21,12 +21,12 @@ export class DarkModeService {
     const body = document.getElementsByTagName('body')[0];
     if (body.classList.contains('dark-theme')){
       body.classList.remove('dark-theme');
-      console.log('Dark removed');
+      // console.log('Dark removed');
       localStorage.setItem('theme', 'light');
 
     } else {
       body.classList.add('dark-theme');
-      console.log('Dark added');
+      // console.log('Dark added');
       localStorage.setItem('theme', 'dark');
     }
     return true

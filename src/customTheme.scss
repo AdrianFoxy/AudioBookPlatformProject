@@ -430,3 +430,24 @@
 .dark-theme .review-input .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-text-field__input{
   color: var(--base-dark-text-color) !important;
 }
+
+.dark-theme mat-toolbar{
+  background-color: var(--base-dark-main-color) !important;
+  span, mat-icon{
+    color: var(--base-dark-text-color) !important;
+  }
+}
+
+.dark-theme .mat-drawer-container{
+  background-color: var(--dark-mode-bg) !important;
+}
+.dark-theme mat-sidenav{
+  background-color: var(--base-dark-main-color) !important;
+  color: var(--base-dark-text-color) !important;
+}
+
+.dark-theme .menu-button {
+  span, mat-icon{
+    color: var(--base-dark-text-color) !important;
+  }
+}

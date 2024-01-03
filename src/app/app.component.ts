@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { AccountService } from './account/account.service';
@@ -14,7 +14,7 @@ export class AppComponent implements OnInit {
   isAdminUrl: boolean = true;
   isContentLoaded: boolean = false;
 
-  constructor(private accountService: AccountService, private router: Router) {}
+  constructor(private accountService: AccountService, private router: Router, private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     this.loadCurrentUser();
@@ -31,8 +31,10 @@ export class AppComponent implements OnInit {
         const urlWithoutParams = this.router.url.split('?')[0];
         this.isAdminUrl = !urlWithoutParams.includes('admin');
         this.isContentLoaded = true;
+
+        // Manually trigger change detection
+        this.cdr.detectChanges();
       }
     });
   }
-
 }

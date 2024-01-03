@@ -7,6 +7,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { RouterModule } from '@angular/router';
 
 import { MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { TestErrorComponent } from './errors/test-error/test-error.component';
@@ -44,7 +45,8 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     MatToolbarModule,
     MatButtonModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
+    MatSlideToggleModule
   ], exports: [
     NavBarComponent,
     FooterComponent,
