@@ -53,17 +53,15 @@ mat-sidenav-container{
 }
 
 .content{
-  height: calc(100vh - 98px);
+  height: 100%;
   margin: 16px;
   margin-left: 32px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  // display: flex;
+  // justify-content: center;
+  // align-items: center;
   font-size: 2rem;
   border-radius: 10px;
   color: black;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-
 }
 
 

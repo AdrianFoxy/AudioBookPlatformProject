@@ -4,6 +4,7 @@ import { HomeComponent } from './home.component';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { TranslateModule } from '@ngx-translate/core';
+import { NgChartsModule } from 'ng2-charts';
 
 
 
@@ -16,6 +17,7 @@ import { TranslateModule } from '@ngx-translate/core';
     RouterModule,
     SharedModule,
     TranslateModule.forChild(),
+    NgChartsModule
   ],
   exports: [
     HomeComponent

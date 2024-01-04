@@ -451,3 +451,12 @@
     color: var(--base-dark-text-color) !important;
   }
 }
+
+.dark-theme .card-dashboard {
+  background-color: var(--base-dark-main-color) !important;
+  border: 1px solid var(--base-dark-text-color) !important;
+}
+
+.dark-theme .card-chart {
+  border: 1px solid var(--base-dark-text-color) !important;
+}

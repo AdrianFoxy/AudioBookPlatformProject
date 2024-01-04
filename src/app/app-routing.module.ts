@@ -5,10 +5,10 @@ import { AboutComponent } from './about/about.component';
 import { TestErrorComponent } from './core/errors/test-error/test-error.component';
 import { NotFoundComponent } from './core/errors/not-found/not-found.component';
 import { ServerErrorComponent } from './core/errors/server-error/server-error.component';
-import { AdminComponent } from './admin/admin.component';
 import { adminGuard } from './core/guards/admin.guard';
 import { ForbiddenComponent } from './core/errors/forbidden/forbidden.component';
 import { AuthGuard } from './core/guards/auth.guard';
+import { AdminComponent } from './admin/admin.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent },
@@ -20,7 +20,7 @@ const routes: Routes = [
   {path: 'account', loadChildren: () => import('./account/account.module').then(m => m.AccountModule)},
   {path: 'selection', loadChildren: () => import('./selection/selection.module').then(m => m.SelectionModule)},
   {path: 'user-profile', loadChildren: () => import('./user-profile/user-profile.module').then(m => m.UserProfileModule)},
-  {path: 'admin', component: AdminComponent, canActivate: [AuthGuard, adminGuard]},
+  {path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)},
   {path: 'about', component: AboutComponent},
   {path: '**', redirectTo: '', pathMatch: 'full'}
 ];
