@@ -115,5 +115,10 @@
   "FilteringnoEntriesFoundLabel": "Nothing found",
   "403secondText": "Oops, you are not allowed to enter here. Go",
   "home": "home",
-  "RecentlyWatched": "Recently Watched"
+  "RecentlyWatched": "Recently Watched",
+  "Dashboard": "Dashboard",
+  "Audiobooks": "Audiobooks",
+  "Mail": "Mail",
+  "Back-to-site": "Back to site",
+  "Admin-panel-exit": "Exit"
 }

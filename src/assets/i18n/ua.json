@@ -115,5 +115,10 @@
   "FilteringnoEntriesFoundLabel": "Нічого не знайдено",
   "403secondText": "Йой, а вам сюди не можна. Йди до",
   "home": "дому",
-  "RecentlyWatched": "Нещодавно дивились"
+  "RecentlyWatched": "Нещодавно дивились",
+  "Dashboard": "Дошка",
+  "Audiobooks": "Аудіокниги",
+  "Mail": "Пошта",
+  "Back-to-site": "На сайт",
+  "Admin-panel-exit": "Вихід"
 }

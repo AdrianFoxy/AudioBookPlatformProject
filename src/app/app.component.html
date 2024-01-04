@@ -1,3 +1,6 @@
-<app-nav-bar></app-nav-bar>
-<router-outlet></router-outlet>
-<app-footer></app-footer>
+<ng-container *ngIf="isContentLoaded">
+  <app-nav-bar *ngIf="isAdminUrl"></app-nav-bar>
+  <app-sidebar *ngIf="!isAdminUrl"></app-sidebar>
+  <router-outlet *ngIf="isAdminUrl"></router-outlet>
+  <app-footer *ngIf="isAdminUrl"></app-footer>
+</ng-container>

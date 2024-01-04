@@ -1,0 +1,68 @@
+<mat-toolbar>
+  <button mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()">
+    <mat-icon *ngIf="!sidenav.opened">menu</mat-icon>
+    <mat-icon *ngIf="sidenav.opened">close</mat-icon>
+  </button>
+  <span>Foxwithbook</span>
+</mat-toolbar>
+
+<mat-sidenav-container>
+  <mat-sidenav #sidenav="matSidenav">
+
+    <div class="sidenav-menu-header">
+      <a class="navbar-brand" href="#">
+        <img class="logo" src="/assets/images/new_logo.png" alt="Logo">
+      </a>
+
+      <div class="dark_mode_toggle">
+        <label class="d_mode_label">
+          <input type="checkbox" id="darkmode_toggle_box" class="d_mode_input"
+            [checked]="!darkmodeService.isLightTheme()" (change)="darkmodeService.changeThemeColor()">
+          <i class="fa fa-sun-o sun" aria-hidden="true"></i>
+          <i class="fa fa-moon-o moon" aria-hidden="true"></i>
+          <span class="toggle"></span>
+        </label>
+      </div>
+
+    </div>
+
+
+    <button mat-button class="menu-button" routerLink="/admin">
+      <mat-icon>dashboard</mat-icon>
+      <span>{{ 'Dashboard' | translate }}</span>
+    </button>
+
+    <button mat-button class="menu-button">
+      <mat-icon>headset</mat-icon>
+      <span>{{ 'Audiobooks' | translate }}</span>
+    </button>
+
+    <button mat-button class="menu-button">
+      <mat-icon>mail</mat-icon>
+      <span>{{ 'Mail' | translate }}</span>
+    </button>
+
+    <button mat-button class="menu-button" routerLink="/">
+      <mat-icon>arrow_back</mat-icon>
+      <span>{{ 'Back-to-site' | translate }}</span>
+    </button>
+
+    <button mat-button class="menu-button">
+      <mat-icon>exit_to_app</mat-icon>
+      <span>{{ 'Admin-panel-exit' | translate }}</span>
+    </button>
+
+    <div class="mt-4">
+      <a style="cursor: pointer;" (click)="langService.switchLanguage('en')"><img class="lang-img"
+          src="/assets/icons/united-kingdom.png" alt="en"></a>
+      <a style="cursor: pointer;" (click)="langService.switchLanguage('ua')"><img class="lang-img"
+          src="/assets/icons/ukraine.png" alt="ua"></a>
+    </div>
+
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
