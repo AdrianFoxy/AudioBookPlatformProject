@@ -1,13 +1,13 @@
-<div class="admin-container">
+<div class="admin-container" *ngIf="accountService.currentUser$ | async as user">
   <div class="welcome-section">
-    <p class="ml-2">Welcome back, admin username!</p>
+    <p class="ml-2">Welcome back, {{user.userName}}!</p>
   </div>
   <div class="info-section">
 
     <div class="card-dashboard">
       <p class="stat-p">
         <mat-icon>supervised_user_circle</mat-icon>
-        <b> 10</b>
+        <b> {{userCount}}</b>
       </p>
       <p class="stat-p">Users</p>
     </div>
@@ -15,7 +15,7 @@
     <div class="card-dashboard">
       <p class="stat-p">
         <mat-icon>headset</mat-icon>
-        <b> 1023</b>
+        <b> {{audioBookCount}}</b>
       </p>
       <p class="stat-p">Audiobooks</p>
     </div>
@@ -23,18 +23,20 @@
     <div class="card-dashboard">
       <p class="stat-p">
         <mat-icon> rate_review</mat-icon>
-        <b> 1032</b>
+        <b> {{reviewCount}}</b>
       </p>
       <p class="stat-p">Reviews</p>
     </div>
 
   </div>
   <div class="chart-section">
+
     <div class="card-chart">
-      <canvas baseChart type="line" width="500px" [options]="lineChartOption1" [data]="lineChartData"></canvas>
-    </div>
-    <div class="card-chart">
-      <canvas baseChart type="line" width="500px" [options]="lineChartOption2" [data]="lineChartData"></canvas>
+      <canvas baseChart type="bar"
+      [data]="barChartData"
+      height="100"
+      ></canvas>
+
     </div>
   </div>
 </div>

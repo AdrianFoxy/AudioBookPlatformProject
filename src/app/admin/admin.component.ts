@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { AdminService } from './admin.service';
+import { AccountService } from '../account/account.service';
 
 @Component({
   selector: 'app-admin',
@@ -7,65 +9,66 @@ import { Component } from '@angular/core';
 })
 export class AdminComponent {
 
-  lineChartData = {
-    labels: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
-    datasets: [
-      {
-        data: [89, 34, 43, 54, 28, 74, 93],
-        label: 'Book1',
-        fill: true,
-        backgroundColor: 'rgba(25, 46, 236, 0.3)',
-        borderColor: 'black',
-        tension: 0.5,
-        fontColor: 'white'
+  userCount: number = 0;
+  reviewCount: number = 0;
+  audioBookCount: number = 0;
+  newUsersCount: number[] = [];
+  barChartData: any;
+
+  constructor(private adminService: AdminService, public accountService: AccountService) { }
+
+  ngOnInit() {
+    this.loadUserCount();
+  }
+
+  loadUserCount() {
+    this.adminService.getReviewCount().subscribe({
+      next: (reviewCount: number) => {
+        this.reviewCount = reviewCount;
       },
-      {
-        data: [39, 14, 23, 34, 18, 24, 33],
-        label: 'Book2',
-        fill: true,
-        backgroundColor: 'rgba(30, 46, 236, 0.3)',
-        borderColor: 'black',
-        tension: 0.5,
-        fontColor: 'white'
-      },
-      {
-        data: [23, 34, 33, 65, 58, 24, 73],
-        label: 'Book3',
-        fill: true,
-        backgroundColor: 'rgba(30, 46, 236, 0.3)',
-        borderColor: 'black',
-        tension: 0.5,
-        fontColor: 'white'
-      },
-      {
-        data: [35, 11, 63, 34, 48, 24, 63],
-        label: 'Book4',
-        fill: true,
-        backgroundColor: 'rgba(30, 46, 236, 0.3)',
-        borderColor: 'black',
-        tension: 0.5,
-        fontColor: 'white'
+      error: (error) => {
+        console.error('Error loading review count', error);
       }
-    ]
-  }
-  lineChartOption1 = {
-    responsive: true,
-    plugins: {
-      title: {
-        display: true,
-        text: 'The highest rating of audiobooks'
-      },
-    },
-  }
+    });
 
-  lineChartOption2 = {
-    responsive: true,
-    plugins: {
-      title: {
-        display: true,
-        text: 'The highest views of audiobooks'
+    this.adminService.getAudioBookCount().subscribe({
+      next: (audioBookCount: number) => {
+        this.audioBookCount = audioBookCount;
       },
-    },
-  }
+      error: (error) => {
+        console.error('Error loading audiobook count', error);
+      }
+    });
 
+    this.adminService.getUserCount().subscribe({
+      next: (userCount: number) => {
+        this.userCount = userCount;
+      },
+      error: (error) => {
+        console.error('Error loading user count', error);
+      }
+    });
+
+    this.adminService.getNewUsersCount().subscribe({
+      next: (newUsersCount: number[]) => {
+        this.newUsersCount = newUsersCount;
+
+        this.barChartData = {
+          labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+          datasets: [
+            {
+              data: this.newUsersCount,
+              label: 'Number of new users',
+              backgroundColor: 'rgba(54, 162, 235, 0.2)',
+              borderColor: 'rgb(54, 162, 235)',
+              borderWidth: 1
+            }
+          ]
+        };
+      },
+      error: (error) => {
+        console.error('Error loading chart data count', error);
+      }
+    });
+  }
 }
