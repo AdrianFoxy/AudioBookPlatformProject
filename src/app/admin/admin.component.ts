@@ -7,65 +7,16 @@ import { Component } from '@angular/core';
 })
 export class AdminComponent {
 
-  lineChartData = {
-    labels: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+  barChartData = {
+    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
     datasets: [
       {
-        data: [89, 34, 43, 54, 28, 74, 93],
-        label: 'Book1',
-        fill: true,
-        backgroundColor: 'rgba(25, 46, 236, 0.3)',
-        borderColor: 'black',
-        tension: 0.5,
-        fontColor: 'white'
-      },
-      {
-        data: [39, 14, 23, 34, 18, 24, 33],
-        label: 'Book2',
-        fill: true,
-        backgroundColor: 'rgba(30, 46, 236, 0.3)',
-        borderColor: 'black',
-        tension: 0.5,
-        fontColor: 'white'
-      },
-      {
-        data: [23, 34, 33, 65, 58, 24, 73],
-        label: 'Book3',
-        fill: true,
-        backgroundColor: 'rgba(30, 46, 236, 0.3)',
-        borderColor: 'black',
-        tension: 0.5,
-        fontColor: 'white'
-      },
-      {
-        data: [35, 11, 63, 34, 48, 24, 63],
-        label: 'Book4',
-        fill: true,
-        backgroundColor: 'rgba(30, 46, 236, 0.3)',
-        borderColor: 'black',
-        tension: 0.5,
-        fontColor: 'white'
+        data: [89, 34, 43, 54, 28, 74, 93, 43, 54, 28, 74, 2],
+        label: 'Number of new users',
+        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+        borderColor: 'rgb(75, 192, 192)',
+        borderWidth: 1
       }
     ]
   }
-  lineChartOption1 = {
-    responsive: true,
-    plugins: {
-      title: {
-        display: true,
-        text: 'The highest rating of audiobooks'
-      },
-    },
-  }
-
-  lineChartOption2 = {
-    responsive: true,
-    plugins: {
-      title: {
-        display: true,
-        text: 'The highest views of audiobooks'
-      },
-    },
-  }
-
 }

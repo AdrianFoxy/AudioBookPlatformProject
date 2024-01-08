@@ -30,11 +30,14 @@
 
   </div>
   <div class="chart-section">
+
     <div class="card-chart">
-      <canvas baseChart type="line" width="500px" [options]="lineChartOption1" [data]="lineChartData"></canvas>
-    </div>
-    <div class="card-chart">
-      <canvas baseChart type="line" width="500px" [options]="lineChartOption2" [data]="lineChartData"></canvas>
+      <canvas
+      baseChart
+      type="bar"
+      [data]="barChartData"
+    ></canvas>
+
     </div>
   </div>
 </div>

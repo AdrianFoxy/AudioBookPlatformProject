@@ -21,33 +21,16 @@
   border-radius: 10px;
 }
 
-.info-section {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.chart-section {
+.info-section, .chart-section {
   display: flex;
   flex-wrap: wrap;
 }
 
 .card-chart {
   flex: 1;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin: 0 10px 20px 10px;
-  border: 1px solid var(--base-light-border-color);
-  border-radius: 10px;
-  box-sizing: border-box;
   display: flex;
-  flex-direction: column;
-  max-height: 400px;
+  border: 1px solid var(--base-light-border-color);
+  margin: 0 10px 20px 10px;
+  border-radius: 10px;
+  width: 100%;
 }
-
-@media (max-width: 1300px) {
-  .card-chart {
-    width: 100%;
-  }
-}
-
