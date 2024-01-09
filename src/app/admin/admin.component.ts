@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AdminService } from './admin.service';
 import { AccountService } from '../account/account.service';
+import { LanguageService } from '../core/services/language-service/language.service';
 
 @Component({
   selector: 'app-admin',
@@ -15,7 +16,8 @@ export class AdminComponent {
   newUsersCount: number[] = [];
   barChartData: any;
 
-  constructor(private adminService: AdminService, public accountService: AccountService) { }
+  constructor(private adminService: AdminService, public accountService: AccountService,
+    public langService: LanguageService) { }
 
   ngOnInit() {
     this.loadUserCount();

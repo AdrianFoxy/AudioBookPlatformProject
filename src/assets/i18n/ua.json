@@ -27,7 +27,7 @@
   "Sorting": "Сортування",
   "Genres": "Жанри",
   "Authors": "Автори",
-  "Narrators": "Читає",
+  "Narrators": "Оповідач",
   "Book Series": "Серія книг",
   "Language": "Мова",
   "Rating" : "Рейтинг",
@@ -120,5 +120,9 @@
   "Audiobooks": "Аудіокниги",
   "Mail": "Пошта",
   "Back-to-site": "На сайт",
-  "Admin-panel-exit": "Вихід"
+  "Admin-panel-exit": "Вихід",
+  "Audiofiles": "Аудіо-файли",
+  "Users": "Користувачі",
+  "Reviews": "Відгуки",
+  "Welcome-back": "Вітаємо вдома"
 }

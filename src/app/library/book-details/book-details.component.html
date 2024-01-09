@@ -42,9 +42,9 @@
           author.name }}</a></p>
       <p class="secondary_txt">{{ 'Narrators' | translate }}: <a class="a_btns"
           href="{{audiobook.narrator.mediaUrl}}">{{ audiobook.narrator.name }}</a></p>
-      <p class="secondary_txt">{{ 'Genres' | translate }}: <a class="a_btns" href=""
+      <p class="secondary_txt">{{ 'Genres' | translate }}: <span class="attb_span"
           *ngFor="let genre of audiobook.genre; let last = last">{{ langService.whatCurrentLang() === 'en' ?
-          genre.enName : genre.name }}{{ last ? '' : ', ' }}</a></p>
+          genre.enName : genre.name }}{{ last ? '' : ', ' }}</span></p>
       <p class="secondary_txt">{{ 'Language' | translate }}: <span class="attb_span">{{ langService.whatCurrentLang()
           === 'en' ? audiobook.bookLanguage.enName : audiobook.bookLanguage.name }}</span></p>
       <p class="secondary_txt">{{ 'S-Duration' | translate }}: <span class="attb_span">{{audiobook.bookDuration}}</span>
