@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 
@@ -12,18 +12,22 @@ export class AdminService {
   constructor(private http: HttpClient) { }
 
   getUserCount() {
-    return this.http.get<number>(this.baseUrl + 'AdminDashboard/user-count');
+    const header = new HttpHeaders().set('Content-type', 'application/json');
+    return this.http.get<number>(this.baseUrl + 'AdminDashboard/user-count', { headers: header, withCredentials: true });
   }
 
   getReviewCount() {
-    return this.http.get<number>(this.baseUrl + 'AdminDashboard/review-count');
+    const header = new HttpHeaders().set('Content-type', 'application/json');
+    return this.http.get<number>(this.baseUrl + 'AdminDashboard/review-count', { headers: header, withCredentials: true });
   }
 
   getAudioBookCount() {
-    return this.http.get<number>(this.baseUrl + 'AdminDashboard/audiobook-count');
+    const header = new HttpHeaders().set('Content-type', 'application/json');
+    return this.http.get<number>(this.baseUrl + 'AdminDashboard/audiobook-count', { headers: header, withCredentials: true });
   }
 
   getNewUsersCount() {
-    return this.http.get<number[]>(this.baseUrl + 'AdminDashboard/user-count-chart');
+    const header = new HttpHeaders().set('Content-type', 'application/json');
+    return this.http.get<number[]>(this.baseUrl + 'AdminDashboard/user-count-chart', { headers: header, withCredentials: true });
   }
 }

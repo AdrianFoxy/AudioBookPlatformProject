@@ -3,6 +3,7 @@ import { MatSidenav } from '@angular/material/sidenav';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { DarkModeService } from '../services/dark-mode-service/dark-mode.service';
 import { LanguageService } from '../services/language-service/language.service';
+import { AccountService } from 'src/app/account/account.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -13,7 +14,8 @@ export class SidebarComponent implements AfterViewInit {
   @ViewChild(MatSidenav) sidenav!: MatSidenav;
 
   constructor(private observer: BreakpointObserver, private cdr: ChangeDetectorRef,
-    public darkmodeService: DarkModeService, public langService: LanguageService) {
+    public darkmodeService: DarkModeService, public langService: LanguageService,
+    public accountService: AccountService) {
       this.langService.setCurrentLang();
   }
 

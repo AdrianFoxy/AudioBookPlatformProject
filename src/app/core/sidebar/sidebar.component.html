@@ -3,14 +3,17 @@
     <mat-icon *ngIf="!sidenav.opened">menu</mat-icon>
     <mat-icon *ngIf="sidenav.opened">close</mat-icon>
   </button>
-  <span>Foxwithbook</span>
+  <div class="company-name" routerLink="/">
+    <img class="logo" src="/assets/images/new_logo.png" alt="Logo">
+    <span>Foxwithbook</span>
+  </div>
 </mat-toolbar>
 
 <mat-sidenav-container>
   <mat-sidenav #sidenav="matSidenav">
 
     <div class="sidenav-menu-header">
-      <a class="navbar-brand" href="#">
+      <a class="navbar-brand" routerLink="/">
         <img class="logo" src="/assets/images/new_logo.png" alt="Logo">
       </a>
 
@@ -26,6 +29,7 @@
 
     </div>
 
+    <mat-divider></mat-divider>
 
     <button mat-button class="menu-button" routerLink="/admin">
       <mat-icon>dashboard</mat-icon>
@@ -33,24 +37,60 @@
     </button>
 
     <button mat-button class="menu-button">
+      <mat-icon>mail</mat-icon>
+      <span>{{ 'Mail' | translate }}</span>
+    </button>
+
+    <mat-divider></mat-divider>
+
+    <button mat-button class="menu-button">
       <mat-icon>headset</mat-icon>
       <span>{{ 'Audiobooks' | translate }}</span>
     </button>
 
     <button mat-button class="menu-button">
-      <mat-icon>mail</mat-icon>
-      <span>{{ 'Mail' | translate }}</span>
+      <mat-icon>audiotrack</mat-icon>
+      <span>{{ 'Audiofiles' | translate }}</span>
     </button>
+
+    <button mat-button class="menu-button">
+      <mat-icon>edit</mat-icon>
+      <span>{{ 'Authors' | translate }}</span>
+    </button>
+
+    <button mat-button class="menu-button">
+      <mat-icon>event_note</mat-icon>
+      <span>{{ 'Genres' | translate }}</span>
+    </button>
+
+    <button mat-button class="menu-button">
+      <mat-icon>record_voice_over</mat-icon>
+      <span>{{ 'Narrators' | translate }}</span>
+    </button>
+
+    <button mat-button class="menu-button">
+      <mat-icon>folder_open</mat-icon>
+      <span>{{ 'Book Series' | translate }}</span>
+    </button>
+
+    <button mat-button class="menu-button">
+      <mat-icon>language</mat-icon>
+      <span>{{ 'Language' | translate }}</span>
+    </button>
+
+    <mat-divider></mat-divider>
 
     <button mat-button class="menu-button" routerLink="/">
       <mat-icon>arrow_back</mat-icon>
       <span>{{ 'Back-to-site' | translate }}</span>
     </button>
 
-    <button mat-button class="menu-button">
+    <button mat-button class="menu-button" routerLink="/" (click)="accountService.logout()">
       <mat-icon>exit_to_app</mat-icon>
       <span>{{ 'Admin-panel-exit' | translate }}</span>
     </button>
+
+    <mat-divider></mat-divider>
 
     <div class="mt-4">
       <a style="cursor: pointer;" (click)="langService.switchLanguage('en')"><img class="lang-img"

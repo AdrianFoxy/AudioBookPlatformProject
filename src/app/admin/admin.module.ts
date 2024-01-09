@@ -4,8 +4,9 @@ import { AdminComponent } from './admin.component';
 
 import { NgChartsModule } from 'ng2-charts';
 import { AdminRoutingModule } from './admin-routing.module';
-import {MatCardModule} from '@angular/material/card';
+import { MatCardModule} from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { MatIconModule } from '@angular/material/icon';
     AdminRoutingModule,
     NgChartsModule,
     MatCardModule,
-    MatIconModule
+    MatIconModule,
+    SharedModule
   ]
 })
 export class AdminModule { }
