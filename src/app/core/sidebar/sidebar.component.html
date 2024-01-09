@@ -3,14 +3,17 @@
     <mat-icon *ngIf="!sidenav.opened">menu</mat-icon>
     <mat-icon *ngIf="sidenav.opened">close</mat-icon>
   </button>
-  <span>Foxwithbook</span>
+  <div class="company-name" routerLink="/">
+    <img class="logo" src="/assets/images/new_logo.png" alt="Logo">
+    <span>Foxwithbook</span>
+  </div>
 </mat-toolbar>
 
 <mat-sidenav-container>
   <mat-sidenav #sidenav="matSidenav">
 
     <div class="sidenav-menu-header">
-      <a class="navbar-brand" href="#">
+      <a class="navbar-brand" routerLink="/">
         <img class="logo" src="/assets/images/new_logo.png" alt="Logo">
       </a>
 
