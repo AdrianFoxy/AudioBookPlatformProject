@@ -1,14 +1,14 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { AudioBook } from '../shared/models/audiobook';
+import { AudioBook } from '../shared/models/libraryModels/audiobook';
 import { LibraryService } from './library.service';
-import { Genre } from '../shared/models/genre';
+import { Genre } from '../shared/models/libraryModels/genre';
 import { FormControl } from '@angular/forms';
-import { filtreingParams } from '../shared/models/audioBooksParams/filtreingParams';
-import { Author } from '../shared/models/author';
-import { Narrator } from '../shared/models/narrator';
-import { BookSeries } from '../shared/models/bookSeries';
-import { BookLanguage } from '../shared/models/bookLanguage';
-import { sortingAndPaginationParams } from '../shared/models/audioBooksParams/sortingAndPaginationParams';
+import { filtreingParams } from '../shared/models/paramsModels/filtreingParams';
+import { Author } from '../shared/models/libraryModels/author';
+import { Narrator } from '../shared/models/libraryModels/narrator';
+import { BookSeries } from '../shared/models/libraryModels/bookSeries';
+import { BookLanguage } from '../shared/models/libraryModels/bookLanguage';
+import { sortingAndPaginationParams } from '../shared/models/paramsModels/sortingAndPaginationParams';
 import { LanguageService } from '../core/services/language-service/language.service';
 import { LoaderService } from '../core/services/loader-service/loader.service';
 

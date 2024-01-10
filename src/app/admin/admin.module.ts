@@ -7,11 +7,13 @@ import { AdminRoutingModule } from './admin-routing.module';
 import { MatCardModule} from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { SharedModule } from '../shared/shared.module';
+import { GenreComponent } from './genre/genre.component';
 
 
 @NgModule({
   declarations: [
     AdminComponent,
+    GenreComponent,
   ],
   imports: [
     CommonModule,

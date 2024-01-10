@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { AudioBook } from '../models/audiobook';
+import { AudioBook } from '../models/libraryModels/audiobook';
 
 @Injectable({
   providedIn: 'root'

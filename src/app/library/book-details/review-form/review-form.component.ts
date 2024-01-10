@@ -3,8 +3,8 @@ import { LibraryService } from '../../library.service';
 import { NgForm } from "@angular/forms"
 import { ActivatedRoute } from '@angular/router';
 import { AccountService } from 'src/app/account/account.service';
-import { Review } from 'src/app/shared/models/review/review';
-import { ReviewDto } from 'src/app/shared/models/review/reviewDto';
+import { Review } from 'src/app/shared/models/libraryModels/review/review';
+import { ReviewDto } from 'src/app/shared/models/libraryModels/review/reviewDto';
 import { ToastrService } from 'ngx-toastr';
 import { LanguageService } from 'src/app/core/services/language-service/language.service';
 

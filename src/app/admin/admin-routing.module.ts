@@ -3,9 +3,11 @@ import { AdminComponent } from './admin.component';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../core/guards/auth.guard';
 import { adminGuard } from '../core/guards/admin.guard';
+import { GenreComponent } from './genre/genre.component';
 
 const routes: Routes = [
-  {path: '', component: AdminComponent, canActivate: [AuthGuard, adminGuard]}
+  {path: '', component: AdminComponent, canActivate: [AuthGuard, adminGuard]},
+  {path: 'genre', component: GenreComponent, canActivate: [AuthGuard, adminGuard]}
 ]
 
 @NgModule({

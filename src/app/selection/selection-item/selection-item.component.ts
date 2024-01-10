@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { LanguageService } from 'src/app/core/services/language-service/language.service';
-import { Selection } from 'src/app/shared/models/selection';
+import { Selection } from 'src/app/shared/models/libraryModels/selection';
 
 @Component({
   selector: 'app-selection-item',

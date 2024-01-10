@@ -1,10 +1,10 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { Selection } from '../shared/models/selection';
-import { sortingAndPaginationParams } from '../shared/models/audioBooksParams/sortingAndPaginationParams';
+import { Selection } from '../shared/models/libraryModels/selection';
+import { sortingAndPaginationParams } from '../shared/models/paramsModels/sortingAndPaginationParams';
 import { Pagination } from '../shared/models/pagination';
-import { AudioBook } from '../shared/models/audiobook';
+import { AudioBook } from '../shared/models/libraryModels/audiobook';
 
 @Injectable({
   providedIn: 'root'

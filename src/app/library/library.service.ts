@@ -1,19 +1,19 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Pagination } from '../shared/models/pagination';
-import { AudioBook } from '../shared/models/audiobook';
-import { Genre } from '../shared/models/genre';
-import { filtreingParams } from '../shared/models/audioBooksParams/filtreingParams';
-import { Author } from '../shared/models/author';
-import { Narrator } from '../shared/models/narrator';
-import { BookSeries } from '../shared/models/bookSeries';
-import { BookLanguage } from '../shared/models/bookLanguage';
-import { sortingAndPaginationParams } from '../shared/models/audioBooksParams/sortingAndPaginationParams';
-import { SingleAudioBook } from '../shared/models/singleAudioBook';
+import { AudioBook } from '../shared/models/libraryModels/audiobook';
+import { Genre } from '../shared/models/libraryModels/genre';
+import { filtreingParams } from '../shared/models/paramsModels/filtreingParams';
+import { Author } from '../shared/models/libraryModels/author';
+import { Narrator } from '../shared/models/libraryModels/narrator';
+import { BookSeries } from '../shared/models/libraryModels/bookSeries';
+import { BookLanguage } from '../shared/models/libraryModels/bookLanguage';
+import { sortingAndPaginationParams } from '../shared/models/paramsModels/sortingAndPaginationParams';
+import { SingleAudioBook } from '../shared/models/libraryModels/singleAudioBook';
 import { environment } from 'src/environments/environment';
-import { Review } from '../shared/models/review/review';
-import { ReviewDto } from '../shared/models/review/reviewDto';
-import { bookMarkForm } from '../shared/models/bookMarkForm';
+import { Review } from '../shared/models/libraryModels/review/review';
+import { ReviewDto } from '../shared/models/libraryModels/review/reviewDto';
+import { bookMarkForm } from '../shared/models/libraryModels/bookMarkForm';
 
 @Injectable({
   providedIn: 'root'

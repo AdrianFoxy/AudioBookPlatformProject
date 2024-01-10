@@ -5,8 +5,8 @@ import { environment } from 'src/environments/environment';
 import { User } from '../shared/models/user';
 import { AccountService } from '../account/account.service';
 import { switchMap } from 'rxjs';
-import { userLibraryParams } from '../shared/models/audioBooksParams/userLibraryParams';
-import { AudioBook } from '../shared/models/audiobook';
+import { userLibraryParams } from '../shared/models/paramsModels/userLibraryParams';
+import { AudioBook } from '../shared/models/libraryModels/audiobook';
 import { Pagination } from '../shared/models/pagination';
 
 @Injectable({

@@ -9,8 +9,8 @@ import * as moment from 'moment';
 import { User } from '../shared/models/user';
 import { ActivatedRoute } from '@angular/router';
 import { UserProfileService } from './user-profile.service';
-import { AudioBook } from '../shared/models/audiobook';
-import { userLibraryParams } from '../shared/models/audioBooksParams/userLibraryParams';
+import { AudioBook } from '../shared/models/libraryModels/audiobook';
+import { userLibraryParams } from '../shared/models/paramsModels/userLibraryParams';
 
 @Component({
   selector: 'app-user-profile',
