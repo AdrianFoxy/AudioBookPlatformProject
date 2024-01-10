@@ -127,3 +127,7 @@ input:checked~.sun {
 input:checked~.toggle {
   background: var(--base-dark-main-color)
 }
+
+.menu-button.active-link {
+  background-color: #e9e3d480;
+}
