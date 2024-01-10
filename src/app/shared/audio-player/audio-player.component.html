@@ -6,7 +6,7 @@
         <img src="/assets/images/fox_with_headphones.png">
       </div>
       <div class="col-md-6 mt-4">
-        <p>{{ 'YouStoppedAt' | translate }} {{currentFile.file.name}}, {{ 'Time' | translate }}: {{formatTime(currentFile.currentTime)}}</p>
+        <p *ngIf="currentFile.file">{{ 'YouStoppedAt' | translate }} {{currentFile.file.name}}, {{ 'Time' | translate }}: {{formatTime(currentFile.currentTime)}}</p>
         <button *ngIf="!state?.playing" (click)="play()">{{ 'Continue' | translate }}</button>
       </div>
     </div>
@@ -83,9 +83,9 @@
     </div>
 
     <p class="player-p" *ngFor="let author of audiobook.author">{{ langService.whatCurrentLang() === 'en' ? author.enName : author.name }} • {{ audiobook.bookAudioFile.length }} {{ 'AudioFiles' | translate }}</p>
-    <p class="player-p" *ngIf="currentFile.file.name">{{ 'Now-playing' | translate }}: {{ currentFile.file.name }}</p>
-    <p class="player-p" *ngIf="!currentFile.file.name">{{ 'Choose-Audio' | translate }}</p>
-    <div>
+    <p class="player-p" *ngIf="currentFile.file?.name">{{ 'Now-playing' | translate }}: {{ currentFile.file.name }}</p>
+    <p class="player-p" *ngIf="!currentFile.file?.name && currentFile.file?.name !== undefined">{{ 'Choose-Audio' | translate }}</p>
+        <div>
       <div class="audio_time">
         <span class="current-time"
           [hidden]="state?.error || currentFile.index === undefined">{{state?.readableCurrentTime || '00:00:00'
