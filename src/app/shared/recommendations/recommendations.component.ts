@@ -1,5 +1,5 @@
 import { Component, HostListener, Input, OnInit } from '@angular/core';
-import { AudioBook } from '../models/audiobook';
+import { AudioBook } from '../models/libraryModels/audiobook';
 import { LanguageService } from 'src/app/core/services/language-service/language.service';
 import { RecommendationsService } from './recommendations.service';
 import { LoaderService } from 'src/app/core/services/loader-service/loader.service';

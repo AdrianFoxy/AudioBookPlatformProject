@@ -1,0 +1,43 @@
+<div class="d-flex justify-content-between align-items center pb-2 mb-1">
+  <app-paging-header [totalCount]="totalCount" [pageNumber]="paginationAndSearchParams.pageNumber"
+    [pageSize]="paginationAndSearchParams.pageSize"></app-paging-header>
+
+    <form class="search form-inline" (submit)="onSearch($event)">
+      <input (keyup.enter)="onSearch($event)" id="librarySearchinput" class="form-control form-control-sm ml-3 w-75" type="text" placeholder="{{ 'Search' | translate }}"
+        aria-label="Search" #search>
+      <i (click)="onSearch($event)" class="fa fa-search ml-2 search-btn-cl" style="cursor: pointer" aria-hidden="true"></i>
+    </form>
+
+</div>
+
+
+<table class="table table-bordered table-hover rounded-3 overflow-hidden">
+  <thead lc>
+    <tr>
+      <th scope="col">id</th>
+      <th scope="col">name</th>
+      <th scope="col">enName</th>
+      <th scope="col">createdAt</th>
+      <th scope="col">updatedAt</th>
+      <th scope="col">actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let genre of genres">
+      <th scope="row">{{ genre.id }}</th>
+      <td>{{ genre.name }}</td>
+      <td>{{ genre.enName }}</td>
+      <td>{{ genre.createdAt }}</td>
+      <td>{{ genre.updatedAt }}</td>
+      <td>
+        <button class="mr-2">Edit</button>
+        <button>Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<div class="d-flex justify-content-center mt-1" *ngIf="totalCount > 0">
+  <app-pager [totalCount]="totalCount" [pageSize]="paginationAndSearchParams.pageSize"
+    (pageChanged)="onPageChanged($event)"></app-pager>
+</div>
+

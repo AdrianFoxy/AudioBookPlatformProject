@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { SingleAudioBook } from 'src/app/shared/models/singleAudioBook';
+import { SingleAudioBook } from 'src/app/shared/models/libraryModels/singleAudioBook';
 import { LibraryService } from '../library.service';
 import { ActivatedRoute } from '@angular/router';
 import { LanguageService } from 'src/app/core/services/language-service/language.service';
-import { Review } from 'src/app/shared/models/review/review';
-import { sortingAndPaginationParams } from 'src/app/shared/models/audioBooksParams/sortingAndPaginationParams';
+import { Review } from 'src/app/shared/models/libraryModels/review/review';
+import { sortingAndPaginationParams } from 'src/app/shared/models/paramsModels/sortingAndPaginationParams';
 import { AccountService } from 'src/app/account/account.service';
-import { ReviewDto } from 'src/app/shared/models/review/reviewDto';
+import { ReviewDto } from 'src/app/shared/models/libraryModels/review/reviewDto';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
-import { bookMarkForm } from 'src/app/shared/models/bookMarkForm';
+import { bookMarkForm } from 'src/app/shared/models/libraryModels/bookMarkForm';
 import { LoaderService } from 'src/app/core/services/loader-service/loader.service';
 import { Subscription } from 'rxjs';
 

@@ -13,6 +13,8 @@ body {
   --base-light-border-color: #000;
   --base-light-text-color: #000;
 
+  --table-hover-color: orange;
+
   /* Line under text */
   --mdc-filled-text-field-focus-active-indicator-color: #e97c00;
   /* label color text */
@@ -243,3 +245,4 @@ hr {
   margin-left: 0 !important;
   margin-right: 0 !important;
 }
+

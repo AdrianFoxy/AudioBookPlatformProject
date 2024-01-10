@@ -24,6 +24,7 @@ import {MatChipsModule} from '@angular/material/chips';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule } from '@angular/material/button';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatTableModule} from '@angular/material/table';
 
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
@@ -44,7 +45,7 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
     TranslateModule.forChild(),
     ReactiveFormsModule,
     MatFormFieldModule, MatInputModule, MatDatepickerModule, MatNativeDateModule,
-    MatButtonModule, MatDialogModule,
+    MatButtonModule, MatDialogModule, MatTableModule,
     NgxSkeletonLoaderModule
   ],
   exports:[
@@ -58,7 +59,7 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
     BsDropdownModule,
     TextInputComponent,
     MatFormFieldModule, MatInputModule, MatDatepickerModule, MatNativeDateModule,
-
+    MatTableModule,
     MatFormFieldModule,
     MatSelectModule,
     MatSliderModule,

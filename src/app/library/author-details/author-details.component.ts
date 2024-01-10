@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Author } from 'src/app/shared/models/author';
+import { Author } from 'src/app/shared/models/libraryModels/author';
 import { LibraryService } from '../library.service';
 import { ActivatedRoute } from '@angular/router';
 import { LanguageService } from 'src/app/core/services/language-service/language.service';
 import { LoaderService } from 'src/app/core/services/loader-service/loader.service';
-import { AudioBook } from 'src/app/shared/models/audiobook';
-import { sortingAndPaginationParams } from 'src/app/shared/models/audioBooksParams/sortingAndPaginationParams';
+import { AudioBook } from 'src/app/shared/models/libraryModels/audiobook';
+import { sortingAndPaginationParams } from 'src/app/shared/models/paramsModels/sortingAndPaginationParams';
 
 @Component({
   selector: 'app-author-details',
