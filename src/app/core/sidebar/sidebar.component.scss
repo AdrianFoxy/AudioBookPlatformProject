@@ -1,18 +1,18 @@
 mat-toolbar{
-  background-color: var(--base-orange-color);
+  background-color: var(--base-accent-color);
   span, mat-icon{
-    color: var(--base-light-text-color);
+    color: var(--base-text-color);
   }
 }
 
 .mat-drawer-container{
-  background-color: var(--base-light-bg-color);
+  background-color: var(--background-color);
 }
 mat-sidenav{
   width: 200px;
   border-right: none;
-  background-color: var(--base-orange-color);
-  color: var(--base-light-text-color);
+  background-color: var(--base-accent-color);
+  color: var(--base-text-color);
   text-align: center;
   padding: 16px;
   margin: 16px;
@@ -53,7 +53,7 @@ mat-sidenav-container{
   }
 
   span, mat-icon{
-    color: var(--base-light-text-color);
+    color: var(--base-text-color);
   }
 }
 
@@ -62,6 +62,7 @@ mat-sidenav-container{
   margin-left: 32px;
   font-size: 2rem;
   border-radius: 10px;
+  color: var(--base-text-color);
 }
 
 
@@ -124,7 +125,7 @@ input:checked~.sun {
 }
 
 input:checked~.toggle {
-  background: var(--base-dark-main-color)
+  background: var(--base-accent-color)
 }
 
 .menu-button.active-link {

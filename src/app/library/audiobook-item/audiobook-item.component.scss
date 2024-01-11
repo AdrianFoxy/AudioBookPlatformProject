@@ -17,12 +17,16 @@
     font-size: .85rem;
     font-weight: 400;
     line-height: 1.2;
+    color: var(--base-text-color);
   }
 
   .card-title:hover {
-    color: var(--base-orange-color);
+    color: var(--base-accent-color);
   }
 
+  .card-author-title{
+    color: var(--secondary-text-color);
+  }
   .book_name {
     text-decoration: none;
     color: #000;
@@ -36,7 +40,7 @@
   .card-img{
     height: 240px;
     cursor: pointer;
-    border: 2px solid var(--base-light-border-color);
+    border: 2px solid var(--base-border-color);
   }
 
   @media(max-width:576px){

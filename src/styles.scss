@@ -7,23 +7,35 @@ body {
 :root {
   --main-font: 'Exo 2', sans-serif;
 
-  --base-orange-color: orange;
-  --base-green-color: #8adeb4;
-  --base-light-bg-color: #fff;
-  --base-light-border-color: #000;
-  --base-light-text-color: #000;
+  /*Base colors*/
+  --background-color: #fff;
+
+  --base-accent-color: orange;
+  --base-secondary-color: #8adeb4;
+  --base-seek-color: #47d38d;
+
+  --base-border-color: #000;
+  --base-text-color: #000;
+  --secondary-text-color: #8a8a8a;
 
   --table-hover-color: orange;
 
-
-  --mat-sidenav-content-text-color: var(--base-light-text-color)
   /*Admin-btns colors*/
-  --main-btn-color: var(--base-orange-color);
+  --main-btn-color: var(--base-accent-color);
   --delete-btn-color: rgb(233, 95, 95);
   --neutral-btn-color: rgba(238, 231, 231, 0.788);
 
+  --player-close-btn-color: #31312F;
+
+  /*Angular materials colors*/
+  --chips-backfround: #e4e4e4b2;
+  --selected-underline-color: #000;
+
+  --progress-track-color:  rgba(162, 79, 31, 0.25);
   /* Line under text */
   --mdc-filled-text-field-focus-active-indicator-color: #e97c00;
+  /*Slider ripple*/
+  --mat-mdc-slider-hover-ripple: rgba(207, 89, 11, 0.05);
   /* label color text */
   --mdc-filled-text-field-focus-label-text-color: #1d1d1d;
   /* background color */
@@ -31,7 +43,7 @@ body {
   --mdc-filled-text-field-disabled-container-color: #464646;
   --mdc-filled-text-field-label-text-color: #6c6c6c;
   /* Selected text color */
-  --mat-select-enabled-trigger-text-color: #837e7d;
+  --mat-select-enabled-trigger-text-color: var(--base-text-color);
 
   /* options background */
   --mat-select-panel-background-color: #fff;
@@ -58,48 +70,50 @@ body {
 
   /* datepicker */
   /* Date picker*/
-  --mat-datepicker-calendar-date-selected-state-background-color: var(--base-orange-color);
+  --mat-datepicker-calendar-date-selected-state-background-color: var(--base-accent-color);
   --mat-datepicker-calendar-date-selected-disabled-state-background-color: rgba(228, 91, 0, 0.4);
-  --mat-datepicker-calendar-date-today-selected-state-outline-color: var(--base-light-text-color);
+  --mat-datepicker-calendar-date-today-selected-state-outline-color: var(--base-text-color);
   --mat-datepicker-calendar-date-focus-state-background-color: rgba(228, 91, 0, 0.4);
   --mat-datepicker-calendar-date-hover-state-background-color: rgba(228, 91, 0, 0.4);
-  --mat-datepicker-toggle-active-state-icon-color: var(--base-orange-color);
+  --mat-datepicker-toggle-active-state-icon-color: var(--base-accent-color);
   --mat-datepicker-calendar-date-in-range-state-background-color: rgba(228, 91, 0, 0.4);
   --mat-datepicker-calendar-date-in-comparison-range-state-background-color:rgba(228, 91, 0, 0.4);
   --mat-datepicker-calendar-date-in-overlap-range-state-background-color: #a8dab5;
   --mat-datepicker-calendar-date-in-overlap-range-selected-state-background-color: #46a35e;
-  --mat-datepicker-toggle-icon-color: var(--base-light-text-color);
+  --mat-datepicker-toggle-icon-color: var(--base-text-color);
   --mat-datepicker-calendar-body-label-text-color: rgba(255, 255, 255, 0.7);
-  --mat-datepicker-calendar-period-button-icon-color: var(--base-light-text-color);
-  --mat-datepicker-calendar-navigation-button-icon-color: var(--base-light-text-color);
+  --mat-datepicker-calendar-period-button-icon-color: var(--base-text-color);
+  --mat-datepicker-calendar-navigation-button-icon-color: var(--base-text-color);
   --mat-datepicker-calendar-header-divider-color: rgba(255, 255, 255, 0.12);
   --mat-datepicker-calendar-header-text-color: rgba(0, 0, 0, 0.7);
   --mat-datepicker-calendar-date-today-outline-color: rgba(255, 255, 255, 0.5);
   --mat-datepicker-calendar-date-today-disabled-state-outline-color: rgba(255, 255, 255, 0.3);
-  --mat-datepicker-calendar-date-text-color: var(--base-light-text-color);
+  --mat-datepicker-calendar-date-text-color: var(--base-text-color);
   --mat-datepicker-calendar-date-outline-color: transparent;
   --mat-datepicker-calendar-date-disabled-state-text-color: rgba(255, 255, 255, 0.5);
   --mat-datepicker-calendar-date-preview-state-outline-color: rgba(255, 255, 255, 0.24);
-  --mat-datepicker-range-input-separator-color: var(--base-light-text-color);
+  --mat-datepicker-range-input-separator-color: var(--base-text-color);
   --mat-datepicker-range-input-disabled-state-separator-color: rgba(255, 255, 255, 0.5);
   --mat-datepicker-range-input-disabled-state-text-color: rgba(255, 255, 255, 0.5);
   --mat-datepicker-calendar-container-background-color: #fff;
-  --mat-datepicker-calendar-container-text-color: var(--base-light-text-color);
-  --mat-datepicker-calendar-body-label-text-color: var(--base-light-text-color);
-  --mdc-filled-text-field-input-text-color: var(--base-light-text-color);
+  --mat-datepicker-calendar-container-text-color: var(--base-text-color);
+  --mat-datepicker-calendar-body-label-text-color: var(--base-text-color);
+  --mdc-filled-text-field-input-text-color: var(--base-text-color);
 }
 
-.mat-mdc-button.mat-unthemed {
-  --mdc-text-button-label-text-color: var(--base-light-text-color);
-}
+/*I DONT REMEMBER WHAT IS IT*/
+// .mat-mdc-button.mat-unthemed {
+//   --mdc-text-button-label-text-color: var(--base-text-color);
+// }
 
+/*Loading spiner, top of the screen*/
 .mat-mdc-progress-bar {
-  --mdc-linear-progress-active-indicator-color: var(--base-orange-color);
-  --mdc-linear-progress-track-color: rgba(162, 79, 31, 0.25)
+  --mdc-linear-progress-active-indicator-color: var(--base-accent-color);
+  --mdc-linear-progress-track-color: var(--progress-track-color);
 }
 
 .mat-mdc-progress-spinner {
-  --mdc-circular-progress-active-indicator-color: var(--base-orange-color);
+  --mdc-circular-progress-active-indicator-color: var(--base-accent-color);
 }
 
 .mat-mdc-slider.mat-primary {
@@ -108,34 +122,33 @@ body {
   --mdc-slider-hover-handle-color: var(--mdc-filled-text-field-focus-active-indicator-color);
   --mdc-slider-active-track-color: var(--mdc-filled-text-field-focus-active-indicator-color);
   --mdc-slider-inactive-track-color: var(--mdc-filled-text-field-focus-active-indicator-color);
-  --mdc-slider-with-tick-marks-active-container-color: #fff;
+  --mdc-slider-with-tick-marks-active-container-color: var(--background-color);
   --mdc-slider-with-tick-marks-inactive-container-color: var(--mdc-filled-text-field-focus-active-indicator-color);
   --mat-mdc-slider-ripple-color: var(--mdc-filled-text-field-focus-active-indicator-color);
-  --mat-mdc-slider-hover-ripple-color: rgba(207, 89, 11, 0.05);
-  --mat-mdc-slider-focus-ripple-color: rgba(207, 89, 11, 0.05);
+  --mat-mdc-slider-hover-ripple-color: var(--mat-mdc-slider-hover-ripple);
+  --mat-mdc-slider-focus-ripple-color: var(--mat-mdc-slider-hover-ripple);
 }
 
+/*Select arrow on selects*/
 .mat-mdc-select-arrow svg {
-  fill: #1d1d1d !important;
+  fill: var(--base-text-color) !important;
 }
 
 /* color of checkbox backgrounds */
 .mat-primary .mat-pseudo-checkbox-checked.mat-pseudo-checkbox-full,
 .mat-primary .mat-pseudo-checkbox-indeterminate.mat-pseudo-checkbox-full {
-  background: var(--base-orange-color);
+  background: var(--base-accent-color);
 }
 
+/*Border of checkbox*/
 .mat-pseudo-checkbox-full {
-  color: var(--base-light-border-color);
+  color: var(--base-text-color);
 }
 
+/*Color checkmark on select, for example in sorting*/
 .mat-primary .mat-pseudo-checkbox-checked.mat-pseudo-checkbox-minimal::after,
 .mat-primary .mat-pseudo-checkbox-indeterminate.mat-pseudo-checkbox-minimal::after {
-  color: #1d1d1d;
-}
-
-.mat-mdc-standard-chip {
-  --mdc-chip-label-text-font: var(--main-font);
+  color: var(--base-text-color)
 }
 
 .mat-mdc-option .mdc-list-item__primary-text {
@@ -144,22 +157,30 @@ body {
 
 /* mat-chip */
 
+/*Font of chips*/
+.mat-mdc-standard-chip {
+  --mdc-chip-label-text-font: var(--main-font);
+}
+
+/* X on chip color */
 .mat-mdc-standard-chip:not(.mdc-evolution-chip--disabled) .mdc-evolution-chip__icon--trailing {
-  color: #1d1d1d !important;
+  color: var(--base-text-color) !important;
 }
 
+/*Duration filtering chips color*/
 .mat-mdc-standard-chip:not(.mdc-evolution-chip--disabled) {
-  background-color: white !important;
+  background-color: var(--chips-backfround) !important;
 }
 
+/* Text label color on chips */
 .mat-mdc-standard-chip:not(.mdc-evolution-chip--disabled) .mdc-evolution-chip__text-label {
-  color: black !important;
+  color: var(--base-text-color) !important;
 }
 
+/*Checkmark color on chips*/
 .mat-mdc-standard-chip:not(.mdc-evolution-chip--disabled) .mdc-evolution-chip__checkmark {
-  color: black !important;
+  color: var(--base-text-color) !important;
 }
-
 
 html {
   font-family: var(--main-font) !important;
@@ -171,12 +192,12 @@ body {
 
 a {
   text-decoration: none;
-  color: black;
+  color: var(--base-text-color);
 }
 
 a:hover {
   text-decoration: none;
-  color: black;
+  color: var(--base-text-color);
 }
 
 .button {
@@ -184,26 +205,27 @@ a:hover {
   height: 60px;
   border-radius: 10px;
   outline: none;
-  border: 2px solid var(--base-light-border-color);
-  border-bottom: 6px solid var(--base-light-border-color);
+  border: 2px solid var(--base-border-color);
+  border-bottom: 6px solid var(--base-border-color);
   font-size: 18px;
   padding: 10px 20px;
-}
 
-.account-btn{
-  width: 100%;
-}
+  &.g_button {
+    background: var(--base-secondary-color);
+  }
 
-.g_button {
-  background: var(--base-green-color);
-}
+  &.o_button {
+    background: var(--base-accent-color);
+  }
+  &.w_button {
+    background: white;
+  }
 
-.o_button {
-  background: var(--base-orange-color);
-}
+  &.submit-btn{
+    background: var(--base-secondary-color);
+    width: 100%;
+  }
 
-.w_button {
-  background: var(--base-light-bg-color);
 }
 
 hr {
@@ -223,29 +245,29 @@ hr {
 
 /* Pagination */
 .my-pagination .page-item.active .page-link {
-  background-color: var(--base-orange-color);
-  color: var(--base-light-text-color);
-  border-color: var(--base-light-border-color);
+  background-color: var(--base-accent-color);
+  color: var(--base-text-color);
+  border-color: var(--base-border-color);
 }
 
 .my-pagination .page-link {
-  background-color: var(--base-light-bg-color);
-  border-color: var(--base-light-border-color);
-  color: var(--base-light-text-color);
+  background-color: var(--background-color);
+  border-color: var(--base-border-color);
+  color: var(--base-text-color);
 }
 
 .my-pagination .page-link:hover {
-  background-color: var(--base-orange-color);
-  border: 2px solid var(--base-light-border-color);
+  background-color: var(--base-accent-color);
+  border: 2px solid var(--base-border-color);
 }
 
 .input-form-custom input:focus{
-  box-shadow: 0 0 0 0.15rem var(--base-orange-color);
+  box-shadow: 0 0 0 0.15rem var(--base-accent-color);
   border: none;
 }
 
 .mat-mdc-dialog-container {
-  --mdc-dialog-container-color: var(--base-light-bg-color)
+  --mdc-dialog-container-color: var(--background-color)
 }
 
 .slick-track {
@@ -253,11 +275,7 @@ hr {
   margin-right: 0 !important;
 }
 
-/* line update input */
+/* line update input, selector in filtering, sorting of library */
 .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-line-ripple::before {
-  border-bottom-color: var(--base-dark-border-color) !important;
+  border-bottom-color: var(--selected-underline-color) !important;
 }
-
-input::placeholder {
-  color: grey !important;
- }

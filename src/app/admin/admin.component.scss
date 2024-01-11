@@ -14,8 +14,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: var(--base-orange-color);
-  border: 1px solid var(--base-light-border-color);
+  background-color: var(--base-accent-color);
+  border: 1px solid var(--base-border-color);
   padding: 50px;
   margin: 0 10px 20px 10px;
   border-radius: 10px;
@@ -29,7 +29,7 @@
 .card-chart {
   flex: 1;
   display: flex;
-  border: 1px solid var(--base-light-border-color);
+  border: 1px solid var(--base-border-color);
   margin: 0 10px 20px 10px;
   border-radius: 10px;
   width: 100%;
@@ -40,11 +40,10 @@
 
 }
 
-
 .admin-btn{
   background-color: var(--main-btn-color);
-  border: 2px solid var(--base-light-border-color);
-  border-bottom: 6px solid var(--base-light-border-color);
+  border: 2px solid var(--base-border-color);
+  border-bottom: 6px solid var(--base-border-color);
   border-radius: 20px;
   font-size: 16px;
   padding: 10px 20px;
@@ -62,3 +61,6 @@
   }
 }
 
+input::placeholder {
+  color: grey !important;
+ }

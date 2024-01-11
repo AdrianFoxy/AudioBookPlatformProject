@@ -10,8 +10,8 @@
   width: 90%;
   height: auto;
   outline: none;
-  border: 2px solid var(--base-light-border-color);
-  border-bottom: 6px solid var(--base-light-border-color);
+  border: 2px solid var(--base-border-color);
+  border-bottom: 6px solid var(--base-border-color);
 }
 
 @media(max-width:1200px){
@@ -46,7 +46,7 @@
 }
 .show-more{
   cursor: pointer;
-  color: var(--base-orange-color) !important;
+  color: var(--base-accent-color) !important;
 }
 .description{
   text-align: justify;
