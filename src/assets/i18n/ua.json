@@ -124,5 +124,14 @@
   "Audiofiles": "Аудіо-файли",
   "Users": "Користувачі",
   "Reviews": "Відгуки",
-  "Welcome-back": "Вітаємо вдома"
+  "Welcome-back": "Вітаємо вдома",
+  "Admin-panel": "Адмін панель",
+  "Delete": "Видалити",
+  "Add-new-genre": "Додати новий жанр",
+  "Genre-name": "Введіть назву жанру",
+  "Please-enter-genre-name": "Будь ласка введіть назву жанру",
+  "Genre-enName": "Введіть назву жанру англійскою",
+  "Please-enter-genre-enname": "Будь ласка введіть назву жанру англійскою",
+  "Back": "Назад",
+  "Actions": "Дії"
 }

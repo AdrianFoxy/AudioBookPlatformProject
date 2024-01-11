@@ -10,7 +10,9 @@
           aria-hidden="true"></i>
       </div>
     </form>
-    <button class="admin-btn mb-2" routerLink="/admin/genre/add-genre">Add new genre</button>
+    <button class="admin-btn mb-2" routerLink="/admin/genre/add-genre">
+      {{ 'Add-new-genre' | translate }}
+    </button>
   </div>
 </div>
 
@@ -22,7 +24,7 @@
       <th scope="col">enName</th>
       <th scope="col">createdAt</th>
       <th scope="col">updatedAt</th>
-      <th scope="col">actions</th>
+      <th scope="col">{{ 'Actions' | translate }}</th>
     </tr>
   </thead>
   <tbody>
@@ -35,11 +37,11 @@
       <td>
         <button class="admin-btn action mr-2 mb-1">
           <i class="fa fa-edit"></i>
-          Edit
+          {{ 'Edit' | translate }}
         </button>
         <button class="admin-btn action delete-btn">
           <i class="fa fa-trash"></i>
-          Delete
+          {{ 'Delete' | translate }}
         </button>
       </td>
     </tr>
