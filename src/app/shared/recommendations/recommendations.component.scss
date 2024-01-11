@@ -2,8 +2,8 @@
   border-radius: 20px;
   width: 200px;
   height: 300px;
-  border: 2px solid var(--base-light-border-color);
-  border-bottom: 6px solid var(--base-light-border-color);
+  border: 2px solid var(--base-border-color);
+  border-bottom: 6px solid var(--base-border-color);
 }
 
 .book_name{
@@ -28,10 +28,16 @@
   display: flex;
   flex-direction: column;
   border: none;
+  background: var(--background-color);
+  color: var(--base-text-color);
 }
 
 .card-title:hover{
-  color: var(--base-orange-color);
+  color: var(--base-accent-color);
+}
+
+.card-author-title {
+  color: var(--secondary-text-color);
 }
 
 .book_name_skeleton{

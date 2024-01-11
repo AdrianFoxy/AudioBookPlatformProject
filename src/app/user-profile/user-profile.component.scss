@@ -5,7 +5,7 @@
 }
 
 .profile-avatar-text{
-  color: black;
+  color: var(--base-text-color) !important;
 }
 
 .overlay-loader {
@@ -28,4 +28,9 @@
 .nothing-page{
   width: 100%;
   max-width: 500px;
+}
+
+.card-body{
+  background-color: var(--background-color);
+  color: var(--base-text-color);
 }

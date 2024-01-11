@@ -25,6 +25,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule } from '@angular/material/button';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatTableModule} from '@angular/material/table';
+import {MatDividerModule} from '@angular/material/divider';
 
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
@@ -45,7 +46,7 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
     TranslateModule.forChild(),
     ReactiveFormsModule,
     MatFormFieldModule, MatInputModule, MatDatepickerModule, MatNativeDateModule,
-    MatButtonModule, MatDialogModule, MatTableModule,
+    MatButtonModule, MatDialogModule, MatTableModule, MatDividerModule,
     NgxSkeletonLoaderModule
   ],
   exports:[
@@ -65,7 +66,7 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
     MatSliderModule,
     MatChipsModule,
     MatIconModule,
-
+    MatDividerModule
   ]
 })
 export class SharedModule { }

@@ -124,5 +124,14 @@
   "Audiofiles": "Audio-files",
   "Users": "Users",
   "Reviews": "Reviews",
-  "Welcome-back": "Welcome back"
+  "Welcome-back": "Welcome back",
+  "Admin-panel": "Admin panel",
+  "Delete": "Delete",
+  "Add-new-genre": "Add new genre",
+  "Genre-name": "Genre name",
+  "Please-enter-genre-name": "Please enter a genre name",
+  "Genre-enName": "Genre english name",
+  "Please-enter-genre-enname": "Please enter an english genre name",
+  "Back": "Back",
+  "Actions": "Actions"
 }

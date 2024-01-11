@@ -22,8 +22,12 @@ mat-slider {
 
 // SEARCH
 .search input:focus{
-  box-shadow: 0 0 0 0.15rem var(--base-orange-color);
+  box-shadow: 0 0 0 0.15rem var(--base-accent-color);
   border: none;
+}
+
+.search-btn-cl{
+  color: var(--base-text-color)
 }
 
 .audio-book-obj{

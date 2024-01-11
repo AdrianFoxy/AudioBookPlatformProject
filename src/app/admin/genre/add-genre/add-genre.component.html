@@ -1,0 +1,21 @@
+<h1>{{ 'Add-new-genre' | translate }}</h1>
+<hr>
+
+<div>
+  <mat-form-field appearance="fill">
+    <mat-label>{{ 'Genre-name' | translate }}</mat-label>
+    <input matInput placeholder="{{ 'Please-enter-genre-name' | translate }}">
+    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>{{ 'Genre-enName' | translate }}</mat-label>
+    <input matInput placeholder="{{ 'Please-enter-genre-enname' | translate }}">
+    <mat-icon matSuffix>language</mat-icon>
+  </mat-form-field>
+
+  <div class="btns-section">
+    <button class="admin-btn return-btn mr-2" routerLink="/admin/genre">{{ 'Back' | translate }}</button>
+    <button class="admin-btn">{{ 'Add-new-genre' | translate }}</button>
+  </div>
+</div>

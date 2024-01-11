@@ -1,5 +1,6 @@
 .player_bg {
-  background: var(--base-orange-color);
+  background: var(--base-accent-color);
+  color: var(--base-black-text-color);
   border-radius: 10px;
   outline: none;
   border: 3px solid black;
@@ -7,6 +8,11 @@
   font-size: 18px;
   padding: 10px 20px;
   position: relative;
+}
+
+.audio-player-h3,
+.audio-player-h4 {
+  color: var(--base-black-text-color);
 }
 
 .overlay {
@@ -21,18 +27,22 @@
   justify-content: center;
   align-items: center;
 
+  p{
+    color: var(--base-text-color);
+  }
 }
 
 .content {
   width: 50%;
   text-align: center;
   padding: 20px;
-  background-color: white;
   border-radius: 15px;
   border: 2px solid black;
   border-bottom: 4px solid black;
   align-items: center;
   position: relative;
+  background-color: var(--background-color);
+  color: var(--base-text-color);
 
   img {
     max-width: 200px;
@@ -42,7 +52,7 @@
   button {
     width: auto;
     height: 50px;
-    background: #8adeb4;
+    background: var(--base-secondary-color);
     border-radius: 10px;
     outline: none;
     border: 2px solid #31312F;
@@ -59,7 +69,8 @@
     border: none;
     font-size: 24px;
     cursor: pointer;
-    color: #31312F;
+    background: none !important;
+    color: var(--player-close-btn-color);
   }
 
   @media (max-width: 500px) {
@@ -123,15 +134,15 @@
   font-size: 30px;
   margin-left: 10px;
   margin-right: 10px;
-  background-color: var(--base-orange-color);
+  background-color: var(--base-accent-color);
 }
 
 .btn-forward-back:active{
-  color: #8adeb4;;
+  color: var(--base-secondary-color);
 }
 
 .buttons-manager-row-1 .btn-mng-row-1:active {
-  background-color: #8adeb4;
+  background-color: var(--base-secondary-color);
   box-shadow: 0 0 2px darkslategray;
   transform: translateY(2px);
 }
@@ -179,7 +190,7 @@
   width: 100%;
   height: 10px;
   appearance: none;
-  background: #47d38d;
+  background: var(--base-seek-color);
   border-radius: 15px;
   cursor: pointer;
   border: 2px solid black;
@@ -187,7 +198,7 @@
 
 .seek_slider::-webkit-slider-thumb {
   appearance: none;
-  background: #47d38d;
+  background: var(--base-seek-color);
   width: 20px;
   height: 20px;
   border-radius: 80%;
@@ -222,7 +233,7 @@ i.fa-volume-up {
       /* 6 px orange */
       black 6px 9px,
       /* 3 px black */
-      #47d38d 9px 11px,
+      var(--base-seek-color) 9px 11px,
       /* 2 px green */
       black 11px 14px,
       /* 3 px black */
@@ -233,7 +244,7 @@ i.fa-volume-up {
 }
 
 .list-group::-webkit-scrollbar-thumb {
-  background-color: #47d38d;
+  background-color: var(--base-seek-color);
   border-radius: 999px;
   border: 2px solid black;
   border-bottom: 4px solid black;
@@ -252,7 +263,7 @@ i.fa-volume-up {
 .list-group-item.active {
   border: 2px solid black;
   border-bottom: 4px solid black;
-  background-color: var(--base-orange-color);
+  background-color: var(--base-accent-color);
 }
 
 .list-group-item.played {
@@ -282,7 +293,8 @@ i.fa-volume-up {
 .dropdown-item:hover {
   border: 2px solid black;
   border-bottom: 4px solid black;
-  background-color: var(--base-orange-color);
+  background-color: var(--base-accent-color);
+  color: var(--base-text-color);
 }
 
 .current_value {
@@ -290,8 +302,8 @@ i.fa-volume-up {
   position: absolute;
   top: 58%;
   right: 32%;
-  color: #333;
-  background-color: #47d38d;
+  color: black;
+  background-color: var(--base-seek-color);
   border: 2px solid black;
   border-radius: 20px;
   padding: 2px;

@@ -9,6 +9,7 @@
   font-size: 30px;
   margin: 20px;
   cursor: pointer;
+  color: var(--base-text-color);
 }
 
 .hover-underline-animation {
@@ -24,7 +25,7 @@
   height: 2px;
   bottom: 0;
   left: 0;
-  background-color: var(--base-orange-color);
+  background-color: var(--base-accent-color);
   transform-origin: bottom right;
   transition: transform 0.25s ease-out;
 }
@@ -57,7 +58,7 @@
   border-radius: 0;
   height: 100vh;
   overflow-y: scroll;
-  background-color: var(--base-light-bg-color);
+  background-color: var(--background-color);
 }
 
 .modal-head {
@@ -68,7 +69,7 @@
 }
 
 .btn-cls {
-  color: black;
+  color: var(--base-text-color) !important;
   font-size: 30px;
 }
 
@@ -95,7 +96,7 @@
     left: 0;
     width: 0;
     height: 2px;
-    background-color: orange;
+    background-color: var(--base-accent-color);
     transition: width 0.3s ease;
   }
 
@@ -214,5 +215,9 @@ input:checked~.toggle {
 }
 
 .dropdown-item.dd-a:active {
-  background-color: var(--base-orange-color);
+  background-color: var(--base-accent-color);
+}
+
+.nav-bar-toggle {
+  color: var(--base-text-color) !important;
 }
