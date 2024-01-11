@@ -6,7 +6,7 @@ import { Genre } from 'src/app/shared/models/adminModels/genre';
 @Component({
   selector: 'app-genre',
   templateUrl: './genre.component.html',
-  styleUrls: ['./genre.component.scss']
+  styleUrls: ['./genre.component.scss', '../admin.component.scss']
 })
 export class GenreComponent {
 

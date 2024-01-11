@@ -15,12 +15,19 @@ body {
 
   --table-hover-color: orange;
 
+
+  --mat-sidenav-content-text-color: var(--base-light-text-color)
+  /*Admin-btns colors*/
+  --main-btn-color: var(--base-orange-color);
+  --delete-btn-color: rgb(233, 95, 95);
+  --neutral-btn-color: rgba(238, 231, 231, 0.788);
+
   /* Line under text */
   --mdc-filled-text-field-focus-active-indicator-color: #e97c00;
   /* label color text */
   --mdc-filled-text-field-focus-label-text-color: #1d1d1d;
   /* background color */
-  --mdc-filled-text-field-container-color: #fff;
+  --mdc-filled-text-field-container-color: #f5f5f5;
   --mdc-filled-text-field-disabled-container-color: #464646;
   --mdc-filled-text-field-label-text-color: #6c6c6c;
   /* Selected text color */
@@ -246,3 +253,11 @@ hr {
   margin-right: 0 !important;
 }
 
+/* line update input */
+.mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-line-ripple::before {
+  border-bottom-color: var(--base-dark-border-color) !important;
+}
+
+input::placeholder {
+  color: grey !important;
+ }

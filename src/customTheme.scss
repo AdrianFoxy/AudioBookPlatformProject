@@ -1,12 +1,17 @@
 .dark-theme {
   background: var(--dark-mode-bg);
   --base-dark-text-color: #fff;
+
+  --base-dark-text-color-on-white: black;
   --base-dark-border-color: #373737;
   --base-dark-main-color: #574ccf;
   --base-dark-secondary-color: #b2c0ff;
   --base-dark-seek-color: #546ace;
 
   --table-hover-color: #546ace;
+
+  /*Admin-btns colors*/
+  --main-btn-color: var(--base-dark-secondary-color);
 
   --dark-mode-bg: #121212;
   --dark-mode-secondary-elements-bg: #3c3c3c;
@@ -256,6 +261,11 @@
   }
 }
 
+.dark-theme .admin-content {
+  background-color: var(--dark-mode-bg) !important;
+  color: var(--base-dark-text-color) !important;
+}
+
 .dark-theme .close-button {
   color: var(--base-dark-secondary-color) !important;
   background: none !important;
@@ -429,7 +439,11 @@
 }
 
 .dark-theme .review-input .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-text-field__input{
-  color: var(--base-dark-text-color) !important;
+  color: var(--base-dark-text-color-on-white) !important;
+}
+
+.dark-theme .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-text-field__input {
+  color: var(--base-dark-text-color-on-white) !important;
 }
 
 .dark-theme mat-toolbar{
@@ -467,3 +481,4 @@
   color: var(--base-dark-text-color);
   background-color: var(--dark-mode-bg);
 }
+

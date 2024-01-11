@@ -8,12 +8,14 @@ import { MatCardModule} from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { SharedModule } from '../shared/shared.module';
 import { GenreComponent } from './genre/genre.component';
+import { AddGenreComponent } from './genre/add-genre/add-genre.component';
 
 
 @NgModule({
   declarations: [
     AdminComponent,
     GenreComponent,
+    AddGenreComponent,
   ],
   imports: [
     CommonModule,

@@ -10,11 +10,9 @@
           aria-hidden="true"></i>
       </div>
     </form>
-    <button class="admin-btn mb-2">Add new genre</button>
+    <button class="admin-btn mb-2" routerLink="/admin/genre/add-genre">Add new genre</button>
   </div>
 </div>
-
-
 
 <table class="table table-bordered table-hover rounded-3 overflow-hidden">
   <thead lc>
@@ -35,11 +33,11 @@
       <td>{{ genre.createdAt }}</td>
       <td>{{ genre.updatedAt }}</td>
       <td>
-        <button class="admin-action-btn mr-2 mb-1">
+        <button class="admin-btn action mr-2 mb-1">
           <i class="fa fa-edit"></i>
           Edit
         </button>
-        <button class="admin-action-btn">
+        <button class="admin-btn action delete-btn">
           <i class="fa fa-trash"></i>
           Delete
         </button>
