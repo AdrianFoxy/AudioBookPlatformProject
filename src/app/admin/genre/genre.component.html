@@ -1,16 +1,19 @@
-<div class="d-flex justify-content-between align-items-center pb-2 mb-1">
-  <app-paging-header [totalCount]="totalCount" [pageNumber]="paginationAndSearchParams.pageNumber"
-    [pageSize]="paginationAndSearchParams.pageSize"></app-paging-header>
+<div class="d-flex flex-wrap justify-content-between align-items-center pb-2 mb-1">
+  <app-paging-header [totalCount]="totalCount" [pageNumber]="paginationAndSearchParams.pageNumber" [pageSize]="paginationAndSearchParams.pageSize"></app-paging-header>
 
-  <form class="search form-inline ml-3" (submit)="onSearch($event)">
-    <div class="d-flex align-items-center">
-      <input (keyup.enter)="onSearch($event)" id="librarySearchinput" class="form-control form-control-sm" type="text"
-        placeholder="{{ 'Search' | translate }}" aria-label="Search" #search>
-      <i (click)="onSearch($event)" class="fa fa-search ml-2 search-btn-cl" style="cursor: pointer"
-        aria-hidden="true"></i>
-    </div>
-  </form>
+  <div class="d-flex flex-wrap">
+    <form class="search form-inline mr-2 mt-2 mb-2" (submit)="onSearch($event)">
+      <div class="d-flex align-items-center">
+        <input (keyup.enter)="onSearch($event)" id="librarySearchinput" class="form-control form-control-sm" type="text"
+          placeholder="{{ 'Search' | translate }}" aria-label="Search" #search>
+        <i (click)="onSearch($event)" class="fa fa-search ml-2 search-btn-cl" style="cursor: pointer"
+          aria-hidden="true"></i>
+      </div>
+    </form>
+    <button class="admin-btn mb-2">Add new genre</button>
+  </div>
 </div>
+
 
 
 <table class="table table-bordered table-hover rounded-3 overflow-hidden">
@@ -32,14 +35,20 @@
       <td>{{ genre.createdAt }}</td>
       <td>{{ genre.updatedAt }}</td>
       <td>
-        <button class="mr-2">Edit</button>
-        <button>Delete</button>
+        <button class="admin-action-btn mr-2 mb-1">
+          <i class="fa fa-edit"></i>
+          Edit
+        </button>
+        <button class="admin-action-btn">
+          <i class="fa fa-trash"></i>
+          Delete
+        </button>
       </td>
     </tr>
   </tbody>
 </table>
-<div class="d-flex justify-content-center mt-1" *ngIf="totalCount > 0">
-  <app-pager [totalCount]="totalCount" [pageSize]="paginationAndSearchParams.pageSize"
-    (pageChanged)="onPageChanged($event)"></app-pager>
+<div class="d-flex flex-wrap justify-content-center mt-1" *ngIf="totalCount > 0">
+  <app-pager [totalCount]="totalCount" [pageSize]="paginationAndSearchParams.pageSize" (pageChanged)="onPageChanged($event)"></app-pager>
 </div>
+
 

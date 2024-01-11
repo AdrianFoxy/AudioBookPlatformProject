@@ -13,13 +13,26 @@ table{
   border: none;
 }
 
-@media(max-width:315px){
-  .search{
-    font-size: 12px;
-  }
-}
-
 .search-btn-cl{
   font-size: 20px;
   color: var(--base-light-text-color)
 }
+
+.admin-btn{
+  background-color: var(--base-orange-color);
+  border: 2px solid var(--base-light-border-color);
+  border-bottom: 6px solid var(--base-light-border-color);
+  border-radius: 20px;
+  font-size: 16px;
+  padding: 10px 20px;
+}
+
+.admin-action-btn{
+  background-color: var(--base-orange-color);
+  border: 2px solid var(--base-light-border-color);
+  border-bottom: 6px solid var(--base-light-border-color);
+  border-radius: 20px;
+  font-size: 16px;
+  padding: 6px;
+}
+
