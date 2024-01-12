@@ -10,7 +10,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { AudioPlayerComponent } from './audio-player/audio-player.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TextInputComponent } from './components/text-input/text-input.component';
 
 import {MatDatepickerModule} from '@angular/material/datepicker';
@@ -47,7 +47,8 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
     ReactiveFormsModule,
     MatFormFieldModule, MatInputModule, MatDatepickerModule, MatNativeDateModule,
     MatButtonModule, MatDialogModule, MatTableModule, MatDividerModule,
-    NgxSkeletonLoaderModule
+    NgxSkeletonLoaderModule,
+    FormsModule
   ],
   exports:[
     RecommendationsComponent,
@@ -66,7 +67,8 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
     MatSliderModule,
     MatChipsModule,
     MatIconModule,
-    MatDividerModule
+    MatDividerModule,
+    FormsModule
   ]
 })
 export class SharedModule { }

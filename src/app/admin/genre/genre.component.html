@@ -36,11 +36,12 @@
         <td>{{ genre.createdAt }}</td>
         <td>{{ genre.updatedAt }}</td>
         <td>
-          <button class="admin-btn action mr-2 mb-1">
+          <button class="admin-btn action mr-2 mb-1" routerLink="/admin/genre/edit-genre/{{genre.id}}">
             <i class="fa fa-edit"></i>
             {{ 'Edit' | translate }}
           </button>
-          <button class="admin-btn action delete-btn">
+          <button class="admin-btn action delete-btn"
+          (click)="onDelete(genre.id)">
             <i class="fa fa-trash"></i>
             {{ 'Delete' | translate }}
           </button>

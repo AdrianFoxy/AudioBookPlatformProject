@@ -1,0 +1,56 @@
+<h1>Edit genre</h1>
+<hr>
+<form>
+  <mat-form-field appearance="fill">
+    <mat-label>{{ 'Genre-enName' | translate }}</mat-label>
+    <input
+      matInput placeholder="{{ 'Please-enter-genre-enname' | translate }}"
+      formControlName="id"
+      value="{{genre?.id}}"
+      [disabled]="true"
+    >
+    <mat-icon matSuffix>language</mat-icon>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>{{ 'Genre-Name' | translate }}</mat-label>
+    <input
+      matInput placeholder="{{ 'Please-enter-genre-name' | translate }}"
+      formControlName="name"
+      value="{{genre?.name}}"
+    >
+    <mat-icon matSuffix>language</mat-icon>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>{{ 'Genre-EnName' | translate }}</mat-label>
+    <input
+      matInput placeholder="{{ 'Please-enter-genre-enname' | translate }}"
+      formControlName="name"
+      value="{{genre?.enName}}"
+    >
+    <mat-icon matSuffix>language</mat-icon>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>{{ 'Genre-Name' | translate }}</mat-label>
+    <input
+      matInput placeholder="{{ 'Please-enter-genre-name' | translate }}"
+      formControlName="name"
+      value="{{genre?.createdAt}}"
+      [disabled]="true"
+    >
+    <mat-icon matSuffix>language</mat-icon>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>{{ 'Genre-Name' | translate }}</mat-label>
+    <input
+      matInput placeholder="{{ 'Please-enter-genre-name' | translate }}"
+      formControlName="name"
+      value="{{genre?.updatedAt}}"
+      [disabled]="true"
+    >
+    <mat-icon matSuffix>language</mat-icon>
+  </mat-form-field>
+</form>

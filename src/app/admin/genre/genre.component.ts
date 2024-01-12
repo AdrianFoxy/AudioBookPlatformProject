@@ -2,6 +2,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { AdminService } from '../admin.service';
 import { paginationAndSearchParams } from 'src/app/shared/models/paramsModels/paginationAndSearchParams';
 import { Genre } from 'src/app/shared/models/adminModels/genre';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-genre',
@@ -17,7 +18,7 @@ export class GenreComponent {
 
   genres: Genre[] = [];
 
-  constructor(private adminService: AdminService) { }
+  constructor(private adminService: AdminService, private toastr: ToastrService) { }
 
   ngOnInit() {
     this.getGenreList();
@@ -51,5 +52,18 @@ export class GenreComponent {
     this.getGenreList();
   }
 
+  onDelete(id: number) {
 
+    if (confirm("Are you sure about it?")) {
+      this.adminService.deleteGenre(id).subscribe({
+        next: res => {
+          this.toastr.error(`Genre deleted successfully`, `Delete operation`);
+          this.getGenreList();
+        },
+        error: err => {
+          console.log(err);
+        }
+      });
+    }
+  }
 }

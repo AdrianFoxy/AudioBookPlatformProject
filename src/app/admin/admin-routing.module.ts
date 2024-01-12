@@ -5,11 +5,13 @@ import { AuthGuard } from '../core/guards/auth.guard';
 import { adminGuard } from '../core/guards/admin.guard';
 import { GenreComponent } from './genre/genre.component';
 import { AddGenreComponent } from './genre/add-genre/add-genre.component';
+import { EditGenreComponent } from './genre/edit-genre/edit-genre.component';
 
 const routes: Routes = [
   {path: '', component: AdminComponent, canActivate: [AuthGuard, adminGuard]},
   {path: 'genre', component: GenreComponent, canActivate: [AuthGuard, adminGuard]},
-  {path: 'genre/add-genre', component: AddGenreComponent, canActivate: [AuthGuard, adminGuard]}
+  {path: 'genre/add-genre', component: AddGenreComponent, canActivate: [AuthGuard, adminGuard]},
+  {path: 'genre/edit-genre/:id', component: EditGenreComponent, canActivate: [AuthGuard, adminGuard]}
 ]
 
 @NgModule({

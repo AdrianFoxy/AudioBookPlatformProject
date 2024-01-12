@@ -1,21 +1,51 @@
 <h1>{{ 'Add-new-genre' | translate }}</h1>
 <hr>
+<form [formGroup]="addGenreForm" (ngSubmit)="onFormSubmit()">
+  <div>
+    <mat-form-field appearance="fill">
+      <mat-label>{{ 'Genre-name' | translate }}</mat-label>
+      <input matInput
+        placeholder="{{ 'Please-enter-genre-name' | translate }}"
+        formControlName="name">
+      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
 
-<div>
-  <mat-form-field appearance="fill">
-    <mat-label>{{ 'Genre-name' | translate }}</mat-label>
-    <input matInput placeholder="{{ 'Please-enter-genre-name' | translate }}">
-    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-  </mat-form-field>
+      <mat-error *ngIf="addGenreForm.get('name')?.touched && addGenreForm.get('name')?.hasError('required')">
+        Please enter name
+      </mat-error>
 
-  <mat-form-field appearance="fill">
-    <mat-label>{{ 'Genre-enName' | translate }}</mat-label>
-    <input matInput placeholder="{{ 'Please-enter-genre-enname' | translate }}">
-    <mat-icon matSuffix>language</mat-icon>
-  </mat-form-field>
+      <mat-error *ngIf="addGenreForm.get('name')?.touched && addGenreForm.get('name')?.hasError('maxlength')">
+        Name is too long
+      </mat-error>
+    </mat-form-field>
 
-  <div class="btns-section">
-    <button class="admin-btn return-btn mr-2" routerLink="/admin/genre">{{ 'Back' | translate }}</button>
-    <button class="admin-btn">{{ 'Add-new-genre' | translate }}</button>
+    <mat-form-field appearance="fill">
+      <mat-label>{{ 'Genre-enName' | translate }}</mat-label>
+      <input matInput placeholder="{{ 'Please-enter-genre-enname' | translate }}" formControlName="enName">
+      <mat-icon matSuffix>language</mat-icon>
+
+      <mat-error *ngIf="addGenreForm.get('enName')?.touched && addGenreForm.get('enName')?.hasError('required')">
+        Please enter enName
+      </mat-error>
+
+      <mat-error *ngIf="addGenreForm.get('enName')?.touched && addGenreForm.get('enName')?.hasError('maxlength')">
+        enName is too long
+      </mat-error>
+    </mat-form-field>
+
+    <div class="btns-section">
+      <button type="button" class="admin-btn return-btn mr-2" routerLink="/admin/genre">{{ 'Back' | translate }}</button>
+      <button type="submit" class="admin-btn" [disabled]="addGenreForm.invalid">{{ 'Add-new-genre' | translate }}</button>
+    </div>
   </div>
-</div>
+
+  <div class="col-4">
+    <p>Form status: {{addGenreForm.status}}</p>
+    <p>Name status: {{addGenreForm.get('name')?.status}}</p>
+    <p>Name touched: {{addGenreForm.get('name')?.touched}}</p>
+    <p>Name dirty: {{addGenreForm.get('name')?.dirty}}</p>
+    <p>enName status: {{addGenreForm.get('enName')?.status}}</p>
+    <p>enName touched: {{addGenreForm.get('enName')?.touched}}</p>
+    <p>Name dirty: {{addGenreForm.get('enName')?.dirty}}</p>
+    <pre>{{addGenreForm.value | json}}</pre>
+  </div>
+</form>
