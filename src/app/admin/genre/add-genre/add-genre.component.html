@@ -1,21 +1,26 @@
 <h1>{{ 'Add-new-genre' | translate }}</h1>
 <hr>
+<form [formGroup]="addGenreForm" (ngSubmit)="onFormSubmit()">
+  <div>
+    <app-text-input-v2
+      type="text"
+      label="{{ 'Genre-name' | translate }}"
+      placeholder="{{ 'Please-enter-genre-name' | translate }}"
+      icon="perm_media"
+      [formControl]="addGenreForm.controls['name']">
+    </app-text-input-v2>
 
-<div>
-  <mat-form-field appearance="fill">
-    <mat-label>{{ 'Genre-name' | translate }}</mat-label>
-    <input matInput placeholder="{{ 'Please-enter-genre-name' | translate }}">
-    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-  </mat-form-field>
+    <app-text-input-v2
+      type="text"
+      label="{{ 'Genre-enName' | translate }}"
+      placeholder="{{ 'Please-enter-genre-enname' | translate }}"
+      icon="language"
+      [formControl]="addGenreForm.controls['enName']">
+    </app-text-input-v2>
 
-  <mat-form-field appearance="fill">
-    <mat-label>{{ 'Genre-enName' | translate }}</mat-label>
-    <input matInput placeholder="{{ 'Please-enter-genre-enname' | translate }}">
-    <mat-icon matSuffix>language</mat-icon>
-  </mat-form-field>
-
-  <div class="btns-section">
-    <button class="admin-btn return-btn mr-2" routerLink="/admin/genre">{{ 'Back' | translate }}</button>
-    <button class="admin-btn">{{ 'Add-new-genre' | translate }}</button>
+    <div class="btns-section">
+      <button type="button" class="admin-btn return-btn mr-2" routerLink="/admin/genre">{{ 'Back' | translate }}</button>
+      <button type="submit" class="admin-btn" [disabled]="addGenreForm.invalid">{{ 'Add-new-genre' | translate }}</button>
+    </div>
   </div>
-</div>
+</form>

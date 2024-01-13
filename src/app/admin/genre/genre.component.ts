@@ -1,7 +1,9 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, ViewChild } from '@angular/core';
 import { AdminService } from '../admin.service';
 import { paginationAndSearchParams } from 'src/app/shared/models/paramsModels/paginationAndSearchParams';
 import { Genre } from 'src/app/shared/models/adminModels/genre';
+import { ToastrService } from 'ngx-toastr';
+import { LanguageService } from 'src/app/core/services/language-service/language.service';
 
 @Component({
   selector: 'app-genre',
@@ -17,7 +19,8 @@ export class GenreComponent {
 
   genres: Genre[] = [];
 
-  constructor(private adminService: AdminService) { }
+  constructor(private adminService: AdminService, private toastr: ToastrService, private cdr: ChangeDetectorRef,
+              public langService: LanguageService) { }
 
   ngOnInit() {
     this.getGenreList();
@@ -30,6 +33,9 @@ export class GenreComponent {
         this.paginationAndSearchParams.pageNumber = response.pageIndex;
         this.paginationAndSearchParams.pageSize = response.pageSize;
         this.totalCount = response.count;
+
+        // without it, getting error after delete last element on page
+        this.cdr.detectChanges();
       },
       error: error => console.log(error)
     });
@@ -51,5 +57,20 @@ export class GenreComponent {
     this.getGenreList();
   }
 
+  onDelete(id: number) {
+    const translationKeys = ['Confirm-delete-main', 'Success-delete-main'];
+
+    this.langService.getTranslatedMessages(translationKeys).subscribe(({ 'Confirm-delete-main': confirmMessage, 'Success-delete-main': successMessage }: Record<string, string>) => {
+      if (confirm(confirmMessage)) {
+        this.adminService.deleteGenre(id).subscribe({
+          next: () => {
+            this.toastr.error(successMessage);
+            this.getGenreList();
+          },
+          error: (err) => console.log(err)
+        });
+      }
+    });
+  }
 
 }

@@ -10,7 +10,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { AudioPlayerComponent } from './audio-player/audio-player.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TextInputComponent } from './components/text-input/text-input.component';
 
 import {MatDatepickerModule} from '@angular/material/datepicker';
@@ -28,6 +28,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatDividerModule} from '@angular/material/divider';
 
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { TextInputV2Component } from './components/text-input-v2/text-input-v2.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
     PagingHeaderComponent,
     PagerComponent,
     AudioPlayerComponent,
-    TextInputComponent
+    TextInputComponent,
+    TextInputV2Component
   ],
   imports: [
     CommonModule,
@@ -46,8 +48,9 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
     TranslateModule.forChild(),
     ReactiveFormsModule,
     MatFormFieldModule, MatInputModule, MatDatepickerModule, MatNativeDateModule,
-    MatButtonModule, MatDialogModule, MatTableModule, MatDividerModule,
-    NgxSkeletonLoaderModule
+    MatButtonModule, MatDialogModule, MatTableModule, MatDividerModule, MatIconModule,
+    NgxSkeletonLoaderModule,
+    FormsModule
   ],
   exports:[
     RecommendationsComponent,
@@ -66,7 +69,9 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
     MatSliderModule,
     MatChipsModule,
     MatIconModule,
-    MatDividerModule
+    MatDividerModule,
+    FormsModule,
+    TextInputV2Component
   ]
 })
 export class SharedModule { }
