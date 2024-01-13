@@ -8,11 +8,11 @@
   <mat-icon matSuffix>{{icon}}</mat-icon>
 
   <mat-error  *ngIf="control.errors?.['required']">
-    Please enter {{label}}
+    {{ 'validation-please-enter' | translate }} {{label}}
   </mat-error>
 
   <mat-error  *ngIf="control.errors?.['maxlength']">
-    {{label}} is too long
+    {{label}} {{ 'validation-maxlenght-too-long' | translate }}
   </mat-error>
 
 </mat-form-field>

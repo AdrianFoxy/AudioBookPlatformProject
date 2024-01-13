@@ -69,6 +69,7 @@
   "validation-username-taken": "Username is taken",
   "validation-passwordMismatch": "Passwords do not match",
   "validation-maxlenght-auth": "The value is too long, max length is 200",
+  "validation-maxlenght-too-long": "is too long",
   "reg-choose-date-of-birth": "Date of birth",
   "reg-email": "Email",
   "req-confirm-password": "Confirm Password",
