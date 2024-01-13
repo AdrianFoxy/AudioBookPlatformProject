@@ -1,5 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AdminService } from '../../admin.service';
 import { Subscription } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
@@ -11,30 +11,30 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class AddGenreComponent implements OnDestroy {
 
-  addGenreForm: FormGroup;
+  // addGenreForm: FormGroup;
   private addGenreSubscription?: Subscription;
 
   constructor(private adminService: AdminService, private fb: FormBuilder, private toastr: ToastrService) {
-    this.addGenreForm = this.fb.group({
-      name: ['', [Validators.required, Validators.maxLength(5)]],
-      enName: ['', [Validators.required, Validators.maxLength(5)]]
-    });
   }
+
+  addGenreForm = new FormGroup({
+    name:  new FormControl('', [Validators.required, Validators.maxLength(50)]),
+    enName: new FormControl('', [Validators.required, Validators.maxLength(50)])
+  })
 
   onFormSubmit() {
     if (this.addGenreForm.valid) {
       this.addGenreSubscription = this.adminService.addGenre(this.addGenreForm.value).subscribe({
         next: (response) => {
-          // console.log('Success!');
-          // console.log(this.addGenreForm.value);
           this.toastr.success('Genre added!')
-          this.addGenreForm.reset();
 
+          // The problem is that after resetting the field they get an error, bcs it is empty
+          this.addGenreForm.reset();
           Object.keys(this.addGenreForm.controls).forEach(controlName => {
             const control = this.addGenreForm.get(controlName);
             control?.setErrors(null);
           });
-
+          this.addGenreForm.setErrors({ 'invalid': true });
         },
         error: (error) => {
           this.toastr.error('Something went wrong...')

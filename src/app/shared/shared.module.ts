@@ -28,6 +28,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatDividerModule} from '@angular/material/divider';
 
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { TextInputV2Component } from './components/text-input-v2/text-input-v2.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
     PagingHeaderComponent,
     PagerComponent,
     AudioPlayerComponent,
-    TextInputComponent
+    TextInputComponent,
+    TextInputV2Component
   ],
   imports: [
     CommonModule,
@@ -46,7 +48,7 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
     TranslateModule.forChild(),
     ReactiveFormsModule,
     MatFormFieldModule, MatInputModule, MatDatepickerModule, MatNativeDateModule,
-    MatButtonModule, MatDialogModule, MatTableModule, MatDividerModule,
+    MatButtonModule, MatDialogModule, MatTableModule, MatDividerModule, MatIconModule,
     NgxSkeletonLoaderModule,
     FormsModule
   ],
@@ -68,7 +70,8 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
     MatChipsModule,
     MatIconModule,
     MatDividerModule,
-    FormsModule
+    FormsModule,
+    TextInputV2Component
   ]
 })
 export class SharedModule { }

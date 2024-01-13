@@ -1,56 +1,29 @@
-<h1>Edit genre</h1>
+<h1>{{ 'Edit genre' | translate }}</h1>
 <hr>
-<form>
-  <mat-form-field appearance="fill">
-    <mat-label>{{ 'Genre-enName' | translate }}</mat-label>
-    <input
-      matInput placeholder="{{ 'Please-enter-genre-enname' | translate }}"
-      formControlName="id"
-      value="{{genre?.id}}"
-      [disabled]="true"
-    >
-    <mat-icon matSuffix>language</mat-icon>
-  </mat-form-field>
+<form [formGroup]="editGenreForm" (ngSubmit)="onFormSubmit()">
 
-  <mat-form-field appearance="fill">
-    <mat-label>{{ 'Genre-Name' | translate }}</mat-label>
-    <input
-      matInput placeholder="{{ 'Please-enter-genre-name' | translate }}"
-      formControlName="name"
-      value="{{genre?.name}}"
-    >
-    <mat-icon matSuffix>language</mat-icon>
-  </mat-form-field>
+  <app-text-input-v2 type="number" label="id" icon="perm_identity" default_value="{{genre?.id}}"
+    [formControl]="editGenreForm.controls['id']">
+  </app-text-input-v2>
 
-  <mat-form-field appearance="fill">
-    <mat-label>{{ 'Genre-EnName' | translate }}</mat-label>
-    <input
-      matInput placeholder="{{ 'Please-enter-genre-enname' | translate }}"
-      formControlName="name"
-      value="{{genre?.enName}}"
-    >
-    <mat-icon matSuffix>language</mat-icon>
-  </mat-form-field>
+  <app-text-input-v2 type="text" label="name" placeholder="{{ 'Please-enter-genre-name' | translate }}" icon="perm_media"
+    default_value="{{genre?.name}}" [formControl]="editGenreForm.controls['name']">
+  </app-text-input-v2>
 
-  <mat-form-field appearance="fill">
-    <mat-label>{{ 'Genre-Name' | translate }}</mat-label>
-    <input
-      matInput placeholder="{{ 'Please-enter-genre-name' | translate }}"
-      formControlName="name"
-      value="{{genre?.createdAt}}"
-      [disabled]="true"
-    >
-    <mat-icon matSuffix>language</mat-icon>
-  </mat-form-field>
+  <app-text-input-v2 type="text" label="enName" placeholder="{{ 'Please-enter-genre-enname' | translate }}"
+    icon="language" default_value="{{genre?.enName}}" [formControl]="editGenreForm.controls['enName']">
+  </app-text-input-v2>
 
-  <mat-form-field appearance="fill">
-    <mat-label>{{ 'Genre-Name' | translate }}</mat-label>
-    <input
-      matInput placeholder="{{ 'Please-enter-genre-name' | translate }}"
-      formControlName="name"
-      value="{{genre?.updatedAt}}"
-      [disabled]="true"
-    >
-    <mat-icon matSuffix>language</mat-icon>
-  </mat-form-field>
+  <app-text-input-v2 type="text" label="createdAt" icon="language" default_value="{{genre?.createdAt}}"
+    [formControl]="editGenreForm.controls['createdAt']">
+  </app-text-input-v2>
+
+  <app-text-input-v2 type="text" label="updatedAt" icon="language" default_value="{{genre?.updatedAt}}"
+    [formControl]="editGenreForm.controls['updatedAt']">
+  </app-text-input-v2>
+
+  <div class="btns-section">
+    <button type="button" class="admin-btn return-btn mr-2" routerLink="/admin/genre">{{ 'Back' | translate }}</button>
+    <button type="submit" class="admin-btn" [disabled]="editGenreForm.invalid">{{ 'Edit' | translate }}</button>
+  </div>
 </form>

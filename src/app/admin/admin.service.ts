@@ -7,6 +7,7 @@ import { Pagination } from '../shared/models/pagination';
 
 import { Genre } from '../shared/models/adminModels/genre';
 import { Observable } from 'rxjs';
+import { UpdateGenre } from '../shared/models/adminModels/updateGenre';
 
 @Injectable({
   providedIn: 'root'
@@ -54,9 +55,14 @@ export class AdminService {
     return this.http.get<Genre>(this.baseUrl + 'AdminManagement/genre/' + id, { headers: header, withCredentials: true })
   }
 
-  addGenre(model: Genre): Observable<Genre> {
+  addGenre(model: any): Observable<Genre> {
     const header = new HttpHeaders().set('Content-type', 'application/json');
     return this.http.post<Genre>(this.baseUrl + 'AdminManagement/add-genre', model, { headers: header, withCredentials: true });
+  }
+
+  updateGenre(id: string, model: UpdateGenre): Observable<Genre>{
+    const header = new HttpHeaders().set('Content-type', 'application/json');
+    return this.http.put<Genre>(this.baseUrl + 'AdminManagement/genre/' + id, model, { headers: header, withCredentials: true });
   }
 
   deleteGenre(id: number){

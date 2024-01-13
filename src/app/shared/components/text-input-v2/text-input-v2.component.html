@@ -1,0 +1,18 @@
+<mat-form-field appearance="fill">
+  <mat-label>{{label}}</mat-label>
+  <input matInput
+    type = {{type}}
+    placeholder={{placeholder}}
+    value={{default_value}}
+    [formControl]="control">
+  <mat-icon matSuffix>{{icon}}</mat-icon>
+
+  <mat-error  *ngIf="control.errors?.['required']">
+    Please enter {{label}}
+  </mat-error>
+
+  <mat-error  *ngIf="control.errors?.['maxlength']">
+    {{label}} is too long
+  </mat-error>
+
+</mat-form-field>

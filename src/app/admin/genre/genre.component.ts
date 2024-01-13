@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, ViewChild } from '@angular/core';
 import { AdminService } from '../admin.service';
 import { paginationAndSearchParams } from 'src/app/shared/models/paramsModels/paginationAndSearchParams';
 import { Genre } from 'src/app/shared/models/adminModels/genre';
@@ -18,7 +18,7 @@ export class GenreComponent {
 
   genres: Genre[] = [];
 
-  constructor(private adminService: AdminService, private toastr: ToastrService) { }
+  constructor(private adminService: AdminService, private toastr: ToastrService, private cdr: ChangeDetectorRef) { }
 
   ngOnInit() {
     this.getGenreList();
@@ -31,6 +31,9 @@ export class GenreComponent {
         this.paginationAndSearchParams.pageNumber = response.pageIndex;
         this.paginationAndSearchParams.pageSize = response.pageSize;
         this.totalCount = response.count;
+
+        // without it, getting error after delete last element on page
+        this.cdr.detectChanges();
       },
       error: error => console.log(error)
     });
