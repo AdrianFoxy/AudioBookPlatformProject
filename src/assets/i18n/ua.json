@@ -134,5 +134,10 @@
   "Please-enter-genre-enname": "Будь ласка введіть назву жанру англійскою",
   "Back": "Назад",
   "Actions": "Дії",
-  "Edit genre": "Редагувати жанр"
+  "Edit genre": "Редагувати жанр",
+  "Confirm-delete-main": "Ви справді хочете видалити цей запис?",
+  "Success-delete-main": "Запис успішно видалено",
+  "Added-Success": "Запис успішно додано!",
+  "Something-went-wrong": "Щось пішло не так..",
+  "Updated-Success": "Запис успішно оновлено!"
 }

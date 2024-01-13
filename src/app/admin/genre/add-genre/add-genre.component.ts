@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { AdminService } from '../../admin.service';
 import { Subscription } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
+import { LanguageService } from 'src/app/core/services/language-service/language.service';
 
 @Component({
   selector: 'app-add-genre',
@@ -14,34 +15,45 @@ export class AddGenreComponent implements OnDestroy {
   // addGenreForm: FormGroup;
   private addGenreSubscription?: Subscription;
 
-  constructor(private adminService: AdminService, private fb: FormBuilder, private toastr: ToastrService) {
+  constructor(private adminService: AdminService, private fb: FormBuilder, private toastr: ToastrService,
+    public langService: LanguageService) {
   }
 
   addGenreForm = new FormGroup({
-    name:  new FormControl('', [Validators.required, Validators.maxLength(50)]),
+    name: new FormControl('', [Validators.required, Validators.maxLength(50)]),
     enName: new FormControl('', [Validators.required, Validators.maxLength(50)])
   })
 
   onFormSubmit() {
-    if (this.addGenreForm.valid) {
-      this.addGenreSubscription = this.adminService.addGenre(this.addGenreForm.value).subscribe({
-        next: (response) => {
-          this.toastr.success('Genre added!')
+    const translationKeys = ['Added-Success', 'Something-went-wrong'];
+    this.langService.getTranslatedMessages(translationKeys).subscribe((translations: Record<string, string>) => {
+      const { 'Added-Success': translatedMessage2, 'Something-went-wrong': translatedMessage1 } = translations;
 
-          // The problem is that after resetting the field they get an error, bcs it is empty
-          this.addGenreForm.reset();
-          Object.keys(this.addGenreForm.controls).forEach(controlName => {
-            const control = this.addGenreForm.get(controlName);
-            control?.setErrors(null);
-          });
-          this.addGenreForm.setErrors({ 'invalid': true });
-        },
-        error: (error) => {
-          this.toastr.error('Something went wrong...')
-        }
-      });
-    }
+      if (this.addGenreForm.valid) {
+        this.addGenreSubscription = this.adminService.addGenre(this.addGenreForm.value).subscribe({
+          next: (response) => {
+            this.toastr.success(translatedMessage2);
+            // The problem is that after resetting the field they get an error, bcs it is empty
+            this.addGenreForm.reset();
+            Object.keys(this.addGenreForm.controls).forEach(controlName => {
+              const control = this.addGenreForm.get(controlName);
+              control?.setErrors(null);
+            });
+            this.addGenreForm.setErrors({ 'invalid': true });
+          },
+          error: (error) => {
+            this.toastr.error(translatedMessage1);
+          }
+        });
+      }
+    });
   }
+
+  resetForm() {
+    this.addGenreForm.reset({});
+    this.addGenreForm.setErrors({ 'invalid': true });
+  }
+
 
   ngOnDestroy(): void {
     this.addGenreSubscription?.unsubscribe();

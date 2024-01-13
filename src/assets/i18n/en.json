@@ -134,5 +134,11 @@
   "Please-enter-genre-enname": "Please enter an english genre name",
   "Back": "Back",
   "Actions": "Actions",
-  "Edit genre": "Edit genre"
+  "Edit genre": "Edit genre",
+  "Confirm-delete-main": "Do you want to delete this entry?",
+  "Success-delete-main": "Deleted successfully",
+  "Added-Success": "Entry successfully added!",
+  "Something-went-wrong": "Something went wrong...",
+  "Updated-Success": "Entry successfully updated!"
+
 }
