@@ -36,9 +36,9 @@ export class UserProfileService {
     );
   }
 
-  getUser(username: string){
+  getUser(id: string){
     const headers = this.createHeaders();
-    return this.http.get<User>(this.baseUrl + 'UserProfile/' + username, { headers: headers, withCredentials: true });
+    return this.http.get<User>(this.baseUrl + 'UserProfile/' + id, { headers: headers, withCredentials: true });
   }
 
   getUserLibrary(userLibraryParams: userLibraryParams){
