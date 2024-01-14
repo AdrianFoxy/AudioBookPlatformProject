@@ -19,8 +19,8 @@ export class LanguageService {
     if (currentLang) {
       this.switchLanguage(currentLang);
     } else {
-      this.translate.setDefaultLang('en');
-      localStorage.setItem('lang', 'en');
+      this.translate.setDefaultLang('en-US');
+      localStorage.setItem('lang', 'en-US');
     }
   }
 

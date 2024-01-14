@@ -23,6 +23,16 @@ export class LibraryService {
   private baseUrl = environment.apiUrl
   formData: ReviewDto = new ReviewDto();
 
+  private getLang(): string {
+    return localStorage.getItem('lang') || 'en-US';
+  }
+
+  private createHeaders(): HttpHeaders {
+    return new HttpHeaders()
+      .set('Content-Type', 'application/json')
+      .set('Accept-Language', this.getLang());
+  }
+
   constructor(private http: HttpClient) { }
 
   getAudioBooksForLibrary(filretingParams: filtreingParams,
@@ -129,9 +139,7 @@ export class LibraryService {
 
   }
   getAudioBook(id: number){
-    const header = new HttpHeaders().set('Content-type', 'application/json');
-
-    return this.http.get<SingleAudioBook>(this.baseUrl + 'AudioBook/' + id, { headers: header, withCredentials: true });
+    return this.http.get<SingleAudioBook>(this.baseUrl + 'AudioBook/' + id);
   }
 
   getGenresForFilter() {
@@ -165,22 +173,22 @@ export class LibraryService {
   }
 
   postReview(){
-    const header = new HttpHeaders().set('Content-type', 'application/json');
-    return this.http.post<Review>(this.baseUrl + 'Review', this.formData, { headers: header, withCredentials: true });
+    const headers = this.createHeaders();
+    return this.http.post<Review>(this.baseUrl + 'Review', this.formData, { headers: headers, withCredentials: true });
   }
 
   putReview(){
-    const header = new HttpHeaders().set('Content-type', 'application/json');
-    return this.http.put<Review>(this.baseUrl + 'Review/id?id=' + this.formData.id, this.formData, { headers: header, withCredentials: true });
+    const headers = this.createHeaders();
+    return this.http.put<Review>(this.baseUrl + 'Review/id?id=' + this.formData.id, this.formData, { headers: headers, withCredentials: true });
   }
 
   deleteReview(id: number){
-    const header = new HttpHeaders().set('Content-type', 'application/json');
-    return this.http.delete<Review>(this.baseUrl + 'Review/id?id=' + id, { headers: header, withCredentials: true });
+    const headers = this.createHeaders();
+    return this.http.delete<Review>(this.baseUrl + 'Review/id?id=' + id, { headers: headers, withCredentials: true });
   }
 
   postBookMark(bookMark: bookMarkForm){
-    const header = new HttpHeaders().set('Content-type', 'application/json');
-    return this.http.post(this.baseUrl + 'UserLibrary', bookMark, { headers: header, withCredentials: true });
+    const headers = this.createHeaders();
+    return this.http.post(this.baseUrl + 'UserLibrary', bookMark, { headers: headers, withCredentials: true });
   }
 }

@@ -3,6 +3,8 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { User } from 'src/app/shared/models/user';
 import { UserProfileService } from '../user-profile.service';
+import { LanguageService } from 'src/app/core/services/language-service/language.service';
+import { DateAdapter } from '@angular/material/core';
 
 @Component({
   selector: 'app-edit-user',
@@ -14,7 +16,13 @@ export class EditUserComponent implements OnInit {
 
   // REWORK ME LATER, PLS
   constructor(public dialogRef: MatDialogRef<EditUserComponent>, @Inject(MAT_DIALOG_DATA) public userData: User,
-    private fb: FormBuilder, private userProfileService: UserProfileService) {
+    private fb: FormBuilder, private userProfileService: UserProfileService, public langService: LanguageService,
+    private dateAdapter: DateAdapter<Date>) {
+      if(langService.whatCurrentLang() == 'en-US'){
+        this.dateAdapter.setLocale('en-US');
+      } else {
+        this.dateAdapter.setLocale('uk-UA');
+      }
   }
 
   errors: string[] | null = null;
@@ -56,6 +64,21 @@ export class EditUserComponent implements OnInit {
     });
   }
 
+  private updateUserData(email: string, username: string, dateOfBirth: Date, about: string): void {
+    if (email)
+      this.userData.email = email;
+    if (username)
+      this.userData.userName = username;
+    if (dateOfBirth instanceof Date)
+      this.userData.dateOfBirth = this.transformDate(dateOfBirth);
+    if (about)
+      this.userData.about = about;
+
+    this.userProfileService.editUser(this.userData).subscribe({
+      next: () => this.onNoClick(),
+      error: (error) => (this.errors = error.errors)
+    });
+  }
 
   onNoClick(): void {
     this.dialogRef.close();

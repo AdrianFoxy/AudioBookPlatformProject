@@ -18,10 +18,10 @@ export class RegisterComponent {
   constructor(private fb: FormBuilder, private accountService: AccountService,
     private router: Router, public darkmodeService: DarkModeService,
     private dateAdapter: DateAdapter<Date>, public langService: LanguageService){
-      if(langService.whatCurrentLang() == 'en'){
-        this.dateAdapter.setLocale('en');
+      if(langService.whatCurrentLang() == 'en-US'){
+        this.dateAdapter.setLocale('en-US');
       } else {
-        this.dateAdapter.setLocale('uk');
+        this.dateAdapter.setLocale('uk-UA');
       }
     }
 
