@@ -36,7 +36,7 @@ export class LoadingInterceptor implements HttpInterceptor {
       loaderSubject = this.loaderService.isLoading;
     }
 
-    console.log(`Loader: ${loaderName}`);
+    // console.log(`Loader: ${loaderName}`);
 
     return this.handleRequest(request, next, loaderSubject, delayDuration);
   }
@@ -48,7 +48,7 @@ export class LoadingInterceptor implements HttpInterceptor {
       delay(delayDuration || 0),
       finalize(() => {
         loaderSubject.next(false);
-        console.log(`Loader ${loaderSubject === this.loaderService.isLoading ? 'isLoading' : 'isLoadingRecommendation'} turned off`);
+        // console.log(`Loader ${loaderSubject === this.loaderService.isLoading ? 'isLoading' : 'isLoadingRecommendation'} turned off`);
       })
     );
   }
