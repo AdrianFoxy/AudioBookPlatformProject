@@ -22,7 +22,7 @@
         <mat-select (selectionChange)="onSortSelected($event)" [(ngModel)]="userLibraryOpt">
           <ng-container *ngFor="let userLibraryOption of userLibraryOptions">
             <mat-option *ngIf="userLibraryOpt !== 0 || userLibraryOption.value !== 4" [value]="userLibraryOption.value">
-              {{ langService.whatCurrentLang() === 'en' ? userLibraryOption.engName : userLibraryOption.name }}
+              {{ langService.whatCurrentLang() === 'en-US' ? userLibraryOption.engName : userLibraryOption.name }}
             </mat-option>
           </ng-container>
         </mat-select>
@@ -38,15 +38,15 @@
       </div>
       <hr>
       <p class="secondary_txt">{{ 'Authors' | translate }}: <a class="a_btns" routerLink="/library/author/{{author.id}}"
-          *ngFor="let author of audiobook.author">{{ langService.whatCurrentLang() === 'en' ? author.enName :
+          *ngFor="let author of audiobook.author">{{ langService.whatCurrentLang() === 'en-US' ? author.enName :
           author.name }}</a></p>
       <p class="secondary_txt">{{ 'Narrators' | translate }}: <a class="a_btns"
           href="{{audiobook.narrator.mediaUrl}}">{{ audiobook.narrator.name }}</a></p>
       <p class="secondary_txt">{{ 'Genres' | translate }}: <span class="attb_span"
-          *ngFor="let genre of audiobook.genre; let last = last">{{ langService.whatCurrentLang() === 'en' ?
+          *ngFor="let genre of audiobook.genre; let last = last">{{ langService.whatCurrentLang() === 'en-US' ?
           genre.enName : genre.name }}{{ last ? '' : ', ' }}</span></p>
       <p class="secondary_txt">{{ 'Language' | translate }}: <span class="attb_span">{{ langService.whatCurrentLang()
-          === 'en' ? audiobook.bookLanguage.enName : audiobook.bookLanguage.name }}</span></p>
+          === 'en-US' ? audiobook.bookLanguage.enName : audiobook.bookLanguage.name }}</span></p>
       <p class="secondary_txt">{{ 'S-Duration' | translate }}: <span class="attb_span">{{audiobook.bookDuration}}</span>
       </p>
       <hr>

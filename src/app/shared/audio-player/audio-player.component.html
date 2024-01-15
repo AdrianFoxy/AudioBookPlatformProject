@@ -82,7 +82,7 @@
       </div>
     </div>
 
-    <p class="player-p" *ngFor="let author of audiobook.author">{{ langService.whatCurrentLang() === 'en' ? author.enName : author.name }} • {{ audiobook.bookAudioFile.length }} {{ 'AudioFiles' | translate }}</p>
+    <p class="player-p" *ngFor="let author of audiobook.author">{{ langService.whatCurrentLang() === 'en-US' ? author.enName : author.name }} • {{ audiobook.bookAudioFile.length }} {{ 'AudioFiles' | translate }}</p>
     <p class="player-p" *ngIf="currentFile.file?.name">{{ 'Now-playing' | translate }}: {{ currentFile.file.name }}</p>
     <p class="player-p" *ngIf="!currentFile.file?.name && currentFile.file?.name !== undefined">{{ 'Choose-Audio' | translate }}</p>
         <div>
