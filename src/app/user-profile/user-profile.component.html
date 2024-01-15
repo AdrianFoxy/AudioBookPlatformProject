@@ -65,7 +65,7 @@
               <div class="col audio-book-obj" *ngFor="let audiobook of audioBooks">
                 <app-audiobook-item [audiobook]="audiobook"></app-audiobook-item>
               </div>
-              <div *ngIf="loaderService.isLoading | async" class="overlay-loader">
+              <div *ngIf="loaderService.isLoadingUserLibrary | async" class="overlay-loader">
                 <mat-spinner class=""></mat-spinner>
               </div>
             </div>

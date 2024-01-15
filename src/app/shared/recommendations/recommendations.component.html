@@ -1,4 +1,4 @@
-<ng-container *ngIf="!(loaderService.isLoading | async) && audioBooks.length > 0">
+<ng-container *ngIf="!(loaderService.isLoadingRecommendation | async) && audioBooks.length > 0">
   <h2 class="mb-3" *ngIf="useTitle">{{ recommendationTitle | translate }}:</h2>
   <div class="container">
     <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
@@ -32,7 +32,7 @@
   </div>
 </ng-container>
 
-<ng-container *ngIf="loaderService.isLoading | async">
+<ng-container *ngIf="loaderService.isLoadingRecommendation | async">
   <div class="container">
     <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
       <div ngxSlickItem *ngFor="let _ of [1, 2, 3, 4, 5]" class="slide">

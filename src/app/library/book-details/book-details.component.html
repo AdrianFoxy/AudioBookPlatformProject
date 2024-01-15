@@ -1,5 +1,5 @@
 <div class="container">
-  <ng-container *ngIf="loaderService.isLoading | async">
+  <ng-container *ngIf="(loaderService.isLoading | async) || (loaderService.isLoadingUserLibrary | async)">
     <div [ngClass]="{'loader-overlay': audiobook, 'loader-container': !audiobook}">
       <mat-spinner class=""></mat-spinner>
     </div>

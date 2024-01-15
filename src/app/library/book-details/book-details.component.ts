@@ -65,6 +65,11 @@ export class BookDetailsComponent implements OnInit {
           this.audioBookId = this.audiobook.id;
           this.userLibraryOpt = this.audiobook.libraryStatusId;
           this.audiobook.viewCount++;
+          console.log(this.userLibraryOpt);
+          console.log(this.audiobook.libraryStatusId);
+          console.log(this.audiobook.id);
+          console.log(this.audiobook);
+
 
           this.accountService.currentUser$.subscribe(currentUser => {
             this.userId = currentUser?.id || 0;

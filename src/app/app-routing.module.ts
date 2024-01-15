@@ -5,10 +5,7 @@ import { AboutComponent } from './about/about.component';
 import { TestErrorComponent } from './core/errors/test-error/test-error.component';
 import { NotFoundComponent } from './core/errors/not-found/not-found.component';
 import { ServerErrorComponent } from './core/errors/server-error/server-error.component';
-import { adminGuard } from './core/guards/admin.guard';
 import { ForbiddenComponent } from './core/errors/forbidden/forbidden.component';
-import { AuthGuard } from './core/guards/auth.guard';
-import { AdminComponent } from './admin/admin.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent },
@@ -26,9 +23,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {
-    scrollPositionRestoration: 'top',
-  })],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 
