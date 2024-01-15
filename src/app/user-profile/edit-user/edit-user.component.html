@@ -2,9 +2,9 @@
   <button class="close-button" (click)="onNoClick()">&times;</button>
   <h1> {{ 'Edit profile' | translate }} </h1>
   <form class="user-profile-form" [formGroup]="profileForm" (ngSubmit)="editUser()">
-    <app-text-input [formControl]="profileForm.controls['email']" [defaultValue]="userData.email" [isDisabled]="userData.socialAuth" [label]="'reg-email' | translate"></app-text-input>
-    <app-text-input [formControl]="profileForm.controls['username']" [defaultValue]="userData.userName" [label]="'username' | translate"></app-text-input>
-    <app-text-input [formControl]="profileForm.controls['about']" [defaultValue]="userData.about" [label]="'AboutMe-profile' | translate"></app-text-input>
+    <app-text-input [formControl]="profileForm.controls['email']" [defaultValue]="userData.user.email" [isDisabled]="userData.socialAuth" [label]="'reg-email' | translate"></app-text-input>
+    <app-text-input [formControl]="profileForm.controls['username']" [defaultValue]="userData.user.userName" [label]="'username' | translate"></app-text-input>
+    <app-text-input [formControl]="profileForm.controls['about']" [defaultValue]="userData.user.about" [label]="'AboutMe-profile' | translate"></app-text-input>
 
     <mat-form-field class="custom full-filed">
       <mat-label>{{ 'reg-choose-date-of-birth' | translate }}</mat-label>
@@ -12,11 +12,6 @@
       <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker touchUi #picker></mat-datepicker>
     </mat-form-field>
-    <ul class="text-danger list-unstyled" *ngIf="errors">
-      <li *ngFor="let error of errors">
-        {{error}}
-      </li>
-    </ul>
     <button [disabled]="profileForm.invalid" type="submit" class="button submit-btn mr-2 mb-1">{{ 'Edit' | translate }} </button>
   </form>
 </div>

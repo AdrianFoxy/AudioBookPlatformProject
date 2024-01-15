@@ -31,6 +31,11 @@ body {
   --chips-backfround: #e4e4e4b2;
   --selected-underline-color: #000;
 
+  /*Disabled input background color*/
+  --mdc-filled-text-field-disabled-container-color: #e9ecef !important;
+  --mdc-filled-text-field-disabled-input-text-color: var(--base-text-color);
+  --mdc-filled-text-field-disabled-label-text-color: #91999f :
+
   --progress-track-color:  rgba(162, 79, 31, 0.25);
   /* Line under text */
   --mdc-filled-text-field-focus-active-indicator-color: #e97c00;
@@ -104,6 +109,10 @@ body {
 /*I DONT REMEMBER WHAT IS IT*/
 // .mat-mdc-button.mat-unthemed {
 //   --mdc-text-button-label-text-color: var(--base-text-color);
+// }
+
+// .mdc-text-field--filled.mdc-text-field--disabled .mdc-text-field__input {
+//   color: rgba(202, 15, 15, 0.38) !important;
 // }
 
 /*Loading spiner, top of the screen*/

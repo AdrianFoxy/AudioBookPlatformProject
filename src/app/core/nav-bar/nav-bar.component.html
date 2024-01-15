@@ -56,7 +56,7 @@
             </a>
             <ul *dropdownMenu class="dropdown-menu dropdown-menu-right">
               <li class="py-1">
-                <a routerLink="/user-profile/{{user.userName}}" class="dropdown-item dd-a">
+                <a routerLink="/user-profile/{{user.id}}" class="dropdown-item dd-a">
                   {{ 'Profile' | translate }}
                 </a>
                 <a *ngIf="user.role === 'Admin'" routerLink="/admin" class="dropdown-item dd-a">
@@ -96,8 +96,8 @@
 
           <div class="modal-body">
             <div class="modal-item" *ngIf="accountService.currentUser$ | async as user" data-bs-dismiss="modal">
-              <img routerLink="/user-profile/{{user.userName}}" [src]="darkmodeService.isLightTheme() ? '/assets/images/light_user.svg' : '/assets/images/dark_user.svg'" alt="Avatar" class="img-fluid" style="width: 80px;" />
-              <p class="mt-2" routerLink="/user-profile/{{user.userName}}">{{user.userName}}<p>
+              <img routerLink="/user-profile/{{user.id}}" [src]="darkmodeService.isLightTheme() ? '/assets/images/light_user.svg' : '/assets/images/dark_user.svg'" alt="Avatar" class="img-fluid" style="width: 80px;" />
+              <p class="mt-2" routerLink="/user-profile/{{user.id}}">{{user.userName}}<p>
             </div>
             <div class="modal-item" data-bs-dismiss="modal">
               <a routerLink="/" routerLinkActive="active">
@@ -147,8 +147,8 @@
                   </span></a></li>
             </ul>
             <div class="mt-2">
-              <a style="cursor: pointer;" (click)="langService.switchLanguage('en')"><img class="lang-img" src="/assets/icons/united-kingdom.png" alt="en"></a>
-              <a style="cursor: pointer;" (click)="langService.switchLanguage('ua')"><img class="lang-img" src="/assets/icons/ukraine.png" alt="ua"></a>
+              <a style="cursor: pointer;" (click)="langService.switchLanguage('en-US')"><img class="lang-img" src="/assets/icons/united-kingdom.png" alt="en"></a>
+              <a style="cursor: pointer;" (click)="langService.switchLanguage('uk-UA')"><img class="lang-img" src="/assets/icons/ukraine.png" alt="ua"></a>
             </div>
           </div>
         </div>

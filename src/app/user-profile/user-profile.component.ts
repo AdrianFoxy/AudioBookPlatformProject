@@ -24,7 +24,7 @@ export class UserProfileComponent {
   audioBooks: AudioBook[] = [];
   userLibraryParams = new userLibraryParams();
   totalCount = 0;
-  isUserMatched: boolean = false; // Add this property
+  isUserMatched: boolean = false;
 
   sortOptions = [
     { name: 'Всі', engName: 'All', value: 0 },
@@ -73,13 +73,13 @@ export class UserProfileComponent {
   }
 
   loadUser() {
-    const username = this.activatedRoute.snapshot.paramMap.get('username');
-    if (username) this.userProfileService.getUser(username).subscribe({
+    const userId = this.activatedRoute.snapshot.paramMap.get('id');
+    if (userId) this.userProfileService.getUser(userId).subscribe({
       next: userData => {
         this.userData = userData;
         this.getUserLibarary();
         this.accountService.currentUser$.subscribe(currentUser => {
-          this.isUserMatched = currentUser?.userName === userData.userName;
+          this.isUserMatched = currentUser?.id === userData.id;
         });
       },
       error: error => console.log(error)
@@ -92,9 +92,14 @@ export class UserProfileComponent {
     return date.format('YYYY-MM-DD');
   }
 
-  openDialog(){
-    this.dialogRef.open(EditUserComponent, {
-      data: this.userData
+  openDialog() {
+    const dialogRef = this.dialogRef.open(EditUserComponent, {
+      data: { user: this.userData, reloadCallback: this.reloadUserData }
     });
   }
+
+  reloadUserData = () => {
+    this.loadUser();
+  };
+
 }

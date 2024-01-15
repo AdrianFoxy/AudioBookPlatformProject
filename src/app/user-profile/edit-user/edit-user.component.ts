@@ -3,6 +3,9 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { User } from 'src/app/shared/models/user';
 import { UserProfileService } from '../user-profile.service';
+import { LanguageService } from 'src/app/core/services/language-service/language.service';
+import { DateAdapter } from '@angular/material/core';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-edit-user',
@@ -13,15 +16,25 @@ export class EditUserComponent implements OnInit {
 
 
   // REWORK ME LATER, PLS
-  constructor(public dialogRef: MatDialogRef<EditUserComponent>, @Inject(MAT_DIALOG_DATA) public userData: User,
-    private fb: FormBuilder, private userProfileService: UserProfileService) {
+  constructor(public dialogRef: MatDialogRef<EditUserComponent>,
+    @Inject(MAT_DIALOG_DATA) public userData: any,
+    private fb: FormBuilder, private userProfileService: UserProfileService, public langService: LanguageService,
+    private dateAdapter: DateAdapter<Date>, private toastr: ToastrService) {
+      if(langService.whatCurrentLang() == 'en-US'){
+        this.dateAdapter.setLocale('en-US');
+      } else {
+        this.dateAdapter.setLocale('uk-UA');
+      }
+
+      console.log(this.userData.user);
+
   }
 
   errors: string[] | null = null;
 
   ngOnInit(): void {
-    if (this.userData) {
-      const dateOfBirth = new Date(this.userData.dateOfBirth);
+    if (this.userData.user) {
+      const dateOfBirth = new Date(this.userData.user.dateOfBirth);
       this.profileForm.get('dateOfBirth')?.patchValue(dateOfBirth);
     }
   }
@@ -35,29 +48,41 @@ export class EditUserComponent implements OnInit {
 
 
   editUser() {
-    if (!this.userData)
+    if (!this.userData.user)
       return;
 
     const formData = this.profileForm.value;
     const { email, username, dateOfBirth, about } = formData;
 
-    if (email)
-      this.userData.email = email;
-    if (username)
-      this.userData.userName = username;
-    if (dateOfBirth instanceof Date)
-      this.userData.dateOfBirth = this.transformDate(dateOfBirth);
-    if (about)
-      this.userData.about = about;
+    const updatedUserData: User = {
+      ...this.userData.user,
+      email: email || this.userData.user.email,
+      userName: username || this.userData.user.userName,
+      dateOfBirth: dateOfBirth instanceof Date ? this.transformDate(dateOfBirth) : this.userData.user.dateOfBirth,
+      about: about || this.userData.user.about
+    };
 
-    this.userProfileService.editUser(this.userData).subscribe({
-      next: () => this.onNoClick(),
-      error: (error) => (this.errors = error.errors)
+    this.userProfileService.editUser(updatedUserData).subscribe({
+      next: () => {
+        this.onNoClick();
+      },
+      error: (error) => {
+        this.errors = error.errors;
+        this.showErrorsToast();
+      }
     });
+  }
+
+  showErrorsToast() {
+    if (this.errors && this.errors.length > 0) {
+      const errorMessage = this.errors.join('<br>');
+      this.toastr.error(errorMessage, 'Error');
+    }
   }
 
 
   onNoClick(): void {
+    this.userData.reloadCallback();
     this.dialogRef.close();
   }
 
