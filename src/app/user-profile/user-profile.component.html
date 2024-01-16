@@ -51,7 +51,7 @@
                 <mat-label>{{ 'Bookstatus-profile' | translate }}</mat-label>
                 <mat-select (selectionChange)="onSortSelected($event)" [(ngModel)]="userLibraryParams.statusId">
                   <mat-option *ngFor="let sort of sortOptions" [value]="sort.value">
-                    {{ langService.whatCurrentLang() === 'en' ? sort.engName : sort.name }}
+                    {{ langService.whatCurrentLang() === 'en-US' ? sort.engName : sort.name }}
                   </mat-option>
                 </mat-select>
               </mat-form-field>
@@ -65,7 +65,7 @@
               <div class="col audio-book-obj" *ngFor="let audiobook of audioBooks">
                 <app-audiobook-item [audiobook]="audiobook"></app-audiobook-item>
               </div>
-              <div *ngIf="loaderService.isLoading | async" class="overlay-loader">
+              <div *ngIf="loaderService.isLoadingUserLibrary | async" class="overlay-loader">
                 <mat-spinner class=""></mat-spinner>
               </div>
             </div>

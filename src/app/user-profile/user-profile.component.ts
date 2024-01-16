@@ -60,7 +60,7 @@ export class UserProfileComponent {
 
   onSortSelected(event: any){
     this.userLibraryParams.statusId = event.value;
-    console.log(this.userLibraryParams.statusId);
+    // console.log(this.userLibraryParams.statusId);
     this.getUserLibarary();
   }
 
@@ -86,6 +86,18 @@ export class UserProfileComponent {
     })
   }
 
+  updateUser() {
+    const userId = this.activatedRoute.snapshot.paramMap.get('id');
+    if (userId) this.userProfileService.getUser(userId).subscribe({
+      next: userData => {
+        this.userData = userData;
+        this.accountService.currentUser$.subscribe(currentUser => {
+          this.isUserMatched = currentUser?.id === userData.id;
+        });
+      },
+      error: error => console.log(error)
+    })
+  }
 
   formatDate(dateString: string): string {
     const date = moment(dateString);
@@ -99,7 +111,7 @@ export class UserProfileComponent {
   }
 
   reloadUserData = () => {
-    this.loadUser();
+    this.updateUser();
   };
 
 }

@@ -1,4 +1,4 @@
-<ng-container *ngIf="!(loaderService.isLoading | async) && audioBooks.length > 0">
+<ng-container *ngIf="!(loaderService.isLoadingRecommendation | async) && audioBooks.length > 0">
   <h2 class="mb-3" *ngIf="useTitle">{{ recommendationTitle | translate }}:</h2>
   <div class="container">
     <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
@@ -19,7 +19,7 @@
             </a>
             <p class="card-text">
               <span class="card-author-title" style="cursor: pointer;" routerLink="/library/author/{{author.id}}"
-                *ngFor="let author of audiobook.author">{{ langService.whatCurrentLang() === 'en' ? author.enName : author.name }}</span>
+                *ngFor="let author of audiobook.author">{{ langService.whatCurrentLang() === 'en-US' ? author.enName : author.name }}</span>
               <span class="float-end">
                 <i class="fa fa-star" style="color: #ffbc57;" aria-hidden="true"></i>
                 {{ audiobook.rating }}
@@ -32,7 +32,7 @@
   </div>
 </ng-container>
 
-<ng-container *ngIf="loaderService.isLoading | async">
+<ng-container *ngIf="loaderService.isLoadingRecommendation | async">
   <div class="container">
     <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
       <div ngxSlickItem *ngFor="let _ of [1, 2, 3, 4, 5]" class="slide">

@@ -54,7 +54,7 @@
             <mat-label>{{ 'Sorting' | translate }}</mat-label>
             <mat-select (selectionChange)="onSortSelected($event)" [(ngModel)]="sortingAndPaginationParams.sort">
               <mat-option *ngFor="let sort of sortOptions" [value]="sort.value">
-                {{ langService.whatCurrentLang() === 'en' ? sort.engName : sort.name }}
+                {{ langService.whatCurrentLang() === 'en-US' ? sort.engName : sort.name }}
               </mat-option>
             </mat-select>
           </mat-form-field>
@@ -67,7 +67,7 @@
                 <mat-chip-listbox>
                   <mat-chip *ngFor="let genre of getByIds(selectedIdGenres.value, genres)" [removable]="true"
                     (removed)="onFilterRemoved(genre.id, selectedIdGenres)">
-                    {{ langService.whatCurrentLang() === 'en' ? genre.enName : genre.name }}
+                    {{ langService.whatCurrentLang() === 'en-US' ? genre.enName : genre.name }}
                     <mat-icon matChipRemove>close</mat-icon>
                   </mat-chip>
                 </mat-chip-listbox>
@@ -82,7 +82,7 @@
               <mat-option
                 *ngFor="let genre of genres | filter: searchCtrl.value: (langService.whatCurrentLang() === 'en' ? 'enName' : 'name')"
                 [value]="genre.id">
-                {{ langService.whatCurrentLang() === 'en' ? genre.enName : genre.name }}
+                {{ langService.whatCurrentLang() === 'en-US' ? genre.enName : genre.name }}
               </mat-option>
             </mat-select>
           </mat-form-field>
@@ -95,7 +95,7 @@
                 <mat-chip-listbox>
                   <mat-chip *ngFor="let author of getByIds(selectedIdAuthors.value, authors)" [removable]="true"
                     (removed)="onFilterRemoved(author.id, selectedIdAuthors)">
-                    {{ langService.whatCurrentLang() === 'en' ? author.enName : author.name }}
+                    {{ langService.whatCurrentLang() === 'en-US' ? author.enName : author.name }}
                     <mat-icon matChipRemove>close</mat-icon>
                   </mat-chip>
                 </mat-chip-listbox>
@@ -110,7 +110,7 @@
               <mat-option
                 *ngFor="let author of authors | filter: searchCtrl.value: (langService.whatCurrentLang() === 'en' ? 'enName' : 'name')"
                 [value]="author.id">
-                {{ langService.whatCurrentLang() === 'en' ? author.enName : author.name }}
+                {{ langService.whatCurrentLang() === 'en-US' ? author.enName : author.name }}
               </mat-option>
             </mat-select>
           </mat-form-field>
@@ -149,7 +149,7 @@
                 <mat-chip-listbox>
                   <mat-chip *ngFor="let bookSerie of getByIds(selectedIdBookSeries.value, bookSeries)" [removable]="true"
                     (removed)="onFilterRemoved(bookSerie.id, selectedIdBookSeries)">
-                    {{ langService.whatCurrentLang() === 'en' ? bookSerie.enName : bookSerie.name }}
+                    {{ langService.whatCurrentLang() === 'en-US' ? bookSerie.enName : bookSerie.name }}
                     <mat-icon matChipRemove>close</mat-icon>
                   </mat-chip>
                 </mat-chip-listbox>
@@ -164,7 +164,7 @@
               <mat-option
                 *ngFor="let bookSerie of bookSeries | filter: searchCtrl.value: (langService.whatCurrentLang() === 'en' ? 'enName' : 'name')"
                 [value]="bookSerie.id">
-                {{ langService.whatCurrentLang() === 'en' ? bookSerie.enName : bookSerie.name }}
+                {{ langService.whatCurrentLang() === 'en-US' ? bookSerie.enName : bookSerie.name }}
               </mat-option>
             </mat-select>
           </mat-form-field>
@@ -177,7 +177,7 @@
                 <mat-chip-listbox>
                   <mat-chip *ngFor="let bookLanguage of getByIds(selectedIdBookLanguages.value, bookLanguages)"
                     [removable]="true" (removed)="onFilterRemoved(bookLanguage.id, selectedIdBookLanguages)">
-                    {{ langService.whatCurrentLang() === 'en' ? bookLanguage.enName : bookLanguage.name }}
+                    {{ langService.whatCurrentLang() === 'en-US' ? bookLanguage.enName : bookLanguage.name }}
                     <mat-icon matChipRemove>close</mat-icon>
                   </mat-chip>
                 </mat-chip-listbox>
@@ -192,7 +192,7 @@
               <mat-option
                 *ngFor="let bookLanguage of bookLanguages | filter: searchCtrl.value: (langService.whatCurrentLang() === 'en' ? 'enName' : 'name')"
                 [value]="bookLanguage.id">
-                {{ langService.whatCurrentLang() === 'en' ? bookLanguage.enName : bookLanguage.name }}
+                {{ langService.whatCurrentLang() === 'en-US' ? bookLanguage.enName : bookLanguage.name }}
               </mat-option>
             </mat-select>
           </mat-form-field>
@@ -221,7 +221,7 @@
                 <mat-chip-listbox>
                   <mat-chip *ngFor="let genre of getByIds(selectedIdGenresException.value, genres)" [removable]="true"
                     (removed)="onFilterRemoved(genre.id, selectedIdGenresException)">
-                    {{ langService.whatCurrentLang() === 'en' ? genre.enName : genre.name }}
+                    {{ langService.whatCurrentLang() === 'en-US' ? genre.enName : genre.name }}
                     <mat-icon matChipRemove>close</mat-icon>
                   </mat-chip>
                 </mat-chip-listbox>
@@ -236,7 +236,7 @@
               <mat-option
                 *ngFor="let genre of genres | filter: searchCtrl.value: (langService.whatCurrentLang() === 'en' ? 'enName' : 'name')"
                 [value]="genre.id">
-                {{ langService.whatCurrentLang() === 'en' ? genre.enName : genre.name }}
+                {{ langService.whatCurrentLang() === 'en-US' ? genre.enName : genre.name }}
               </mat-option>
             </mat-select>
           </mat-form-field>
@@ -249,7 +249,7 @@
                 <mat-chip-listbox>
                   <mat-chip *ngFor="let author of getByIds(selectedIdAuthorsException.value, authors)" [removable]="true"
                     (removed)="onFilterRemoved(author.id, selectedIdAuthorsException)">
-                    {{ langService.whatCurrentLang() === 'en' ? author.enName : author.name }}
+                    {{ langService.whatCurrentLang() === 'en-US' ? author.enName : author.name }}
                     <mat-icon matChipRemove>close</mat-icon>
                   </mat-chip>
                 </mat-chip-listbox>
@@ -264,7 +264,7 @@
               <mat-option
                 *ngFor="let author of authors | filter: searchCtrl.value: (langService.whatCurrentLang() === 'en' ? 'enName' : 'name')"
                 [value]="author.id">
-                {{ langService.whatCurrentLang() === 'en' ? author.enName : author.name }}
+                {{ langService.whatCurrentLang() === 'en-US' ? author.enName : author.name }}
               </mat-option>
             </mat-select>
           </mat-form-field>
@@ -303,7 +303,7 @@
                 <mat-chip-listbox>
                   <mat-chip *ngFor="let bookSerie of getByIds(selectedIdBookSeriesException.value, bookSeries)"
                     [removable]="true" (removed)="onFilterRemoved(bookSerie.id, selectedIdBookSeriesException)">
-                    {{ langService.whatCurrentLang() === 'en' ? bookSerie.enName : bookSerie.name }}
+                    {{ langService.whatCurrentLang() === 'en-US' ? bookSerie.enName : bookSerie.name }}
                     <mat-icon matChipRemove>close</mat-icon>
                   </mat-chip>
                 </mat-chip-listbox>
@@ -318,7 +318,7 @@
               <mat-option
                 *ngFor="let bookSerie of bookSeries | filter: searchCtrl.value: (langService.whatCurrentLang() === 'en' ? 'enName' : 'name')"
                 [value]="bookSerie.id">
-                {{ langService.whatCurrentLang() === 'en' ? bookSerie.enName : bookSerie.name }}
+                {{ langService.whatCurrentLang() === 'en-US' ? bookSerie.enName : bookSerie.name }}
               </mat-option>
             </mat-select>
           </mat-form-field>
@@ -331,7 +331,7 @@
                 <mat-chip-listbox>
                   <mat-chip *ngFor="let bookLanguage of getByIds(selectedIdBookLanguagesException.value, bookLanguages)"
                     [removable]="true" (removed)="onFilterRemoved(bookLanguage.id, selectedIdBookLanguagesException)">
-                    {{ langService.whatCurrentLang() === 'en' ? bookLanguage.enName : bookLanguage.name }}
+                    {{ langService.whatCurrentLang() === 'en-US' ? bookLanguage.enName : bookLanguage.name }}
                     <mat-icon matChipRemove>close</mat-icon>
                   </mat-chip>
                 </mat-chip-listbox>
@@ -346,7 +346,7 @@
               <mat-option
                 *ngFor="let bookLanguage of bookLanguages | filter: searchCtrl.value: (langService.whatCurrentLang() === 'en' ? 'enName' : 'name')"
                 [value]="bookLanguage.id">
-                {{ langService.whatCurrentLang() === 'en' ? bookLanguage.enName : bookLanguage.name }}
+                {{ langService.whatCurrentLang() === 'en-US' ? bookLanguage.enName : bookLanguage.name }}
               </mat-option>
             </mat-select>
           </mat-form-field>

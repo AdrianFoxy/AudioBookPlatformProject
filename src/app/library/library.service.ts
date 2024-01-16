@@ -139,7 +139,8 @@ export class LibraryService {
 
   }
   getAudioBook(id: number){
-    return this.http.get<SingleAudioBook>(this.baseUrl + 'AudioBook/' + id);
+    const headers = this.createHeaders();
+    return this.http.get<SingleAudioBook>(this.baseUrl + 'AudioBook/' + id, { headers: headers, withCredentials: true });
   }
 
   getGenresForFilter() {
