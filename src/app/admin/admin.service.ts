@@ -57,28 +57,28 @@ export class AdminService {
     params = params.append('PageSize', paginationAndSearchParams.pageSize);
     if (paginationAndSearchParams.search) params = params.append('search', paginationAndSearchParams.search);
 
-    return this.http.get<Pagination<Genre[]>>(this.baseUrl + 'AdminManagement/genres', { params, headers, withCredentials: true });
+    return this.http.get<Pagination<Genre[]>>(this.baseUrl + 'AdminManagementGenre', { params, headers, withCredentials: true });
   }
 
 
   getGenreById(id: string): Observable<Genre>{
     const headers = this.createHeaders();
-    return this.http.get<Genre>(this.baseUrl + 'AdminManagement/genre/' + id, { headers: headers, withCredentials: true })
+    return this.http.get<Genre>(this.baseUrl + 'AdminManagementGenre/' + id, { headers: headers, withCredentials: true })
   }
 
   addGenre(model: any): Observable<Genre> {
     const headers = this.createHeaders();
-    return this.http.post<Genre>(this.baseUrl + 'AdminManagement/add-genre', model, { headers: headers, withCredentials: true });
+    return this.http.post<Genre>(this.baseUrl + 'AdminManagementGenre/', model, { headers: headers, withCredentials: true });
   }
 
   updateGenre(id: string, model: UpdateGenre): Observable<Genre>{
     const headers = this.createHeaders();
-    return this.http.put<Genre>(this.baseUrl + 'AdminManagement/genre/' + id, model, { headers: headers, withCredentials: true });
+    return this.http.put<Genre>(this.baseUrl + 'AdminManagementGenre/' + id, model, { headers: headers, withCredentials: true });
   }
 
   deleteGenre(id: number){
     const headers = this.createHeaders();
-    return this.http.delete<Genre>(this.baseUrl + 'AdminManagement/delete-genre/' + id, { headers: headers, withCredentials: true });
+    return this.http.delete<Genre>(this.baseUrl + 'AdminManagementGenre/' + id, { headers: headers, withCredentials: true });
   }
 
 }
