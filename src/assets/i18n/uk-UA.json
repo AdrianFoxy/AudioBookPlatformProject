@@ -140,5 +140,11 @@
   "Success-delete-main": "Запис успішно видалено",
   "Added-Success": "Запис успішно додано!",
   "Something-went-wrong": "Щось пішло не так..",
-  "Updated-Success": "Запис успішно оновлено!"
+  "Updated-Success": "Запис успішно оновлено!",
+  "Add-new-narrator": "Додати нового оповідача",
+  "Narrator-name": "Ім'я оповідача",
+  "Narrator-media-url": "Посилання на медіа оповідача",
+  "Please-enter-narrator-name": "Будь ласка введіть ім'я оповідача",
+  "Please-enter-narrator-media-url":  "Будь ласка введіть посилання на медіа оповідача",
+  "Edit-narrator": "Редагувати оповідача"
 }

@@ -10,6 +10,9 @@ import { SharedModule } from '../shared/shared.module';
 import { GenreComponent } from './genre/genre.component';
 import { AddGenreComponent } from './genre/add-genre/add-genre.component';
 import { EditGenreComponent } from './genre/edit-genre/edit-genre.component';
+import { NarratorComponent } from './narrator/narrator.component';
+import { AddNarratorComponent } from './narrator/add-narrator/add-narrator.component';
+import { EditNarratorComponent } from './narrator/edit-narrator/edit-narrator.component';
 
 
 @NgModule({
@@ -18,6 +21,9 @@ import { EditGenreComponent } from './genre/edit-genre/edit-genre.component';
     GenreComponent,
     AddGenreComponent,
     EditGenreComponent,
+    NarratorComponent,
+    AddNarratorComponent,
+    EditNarratorComponent,
   ],
   imports: [
     CommonModule,

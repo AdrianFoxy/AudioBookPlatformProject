@@ -1,0 +1,26 @@
+<h1>{{ 'Add-new-narrator' | translate }}</h1>
+<hr>
+<form [formGroup]="addNarratorForm" (ngSubmit)="onFormSubmit()">
+  <div>
+    <app-text-input-v2
+      type="text"
+      label="{{ 'Narrator-name' | translate }}"
+      placeholder="{{ 'Please-enter-narrator-name' | translate }}"
+      icon="perm_media"
+      [formControl]="addNarratorForm.controls['name']">
+    </app-text-input-v2>
+
+    <app-text-input-v2
+      type="text"
+      label="{{ 'Narrator-media-url' | translate }}"
+      placeholder="{{ 'Please-enter-narrator-media-url' | translate }}"
+      icon="language"
+      [formControl]="addNarratorForm.controls['mediaUrl']">
+    </app-text-input-v2>
+
+    <div class="btns-section">
+      <button type="button" class="admin-btn return-btn mr-2" routerLink="/admin/narrator">{{ 'Back' | translate }}</button>
+      <button type="submit" class="admin-btn" [disabled]="addNarratorForm.invalid">{{ 'Add-new-narrator' | translate }}</button>
+    </div>
+  </div>
+</form>

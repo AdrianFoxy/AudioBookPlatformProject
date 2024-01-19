@@ -1,0 +1,29 @@
+<h1>{{ 'Edit-narrator' | translate }}</h1>
+<hr>
+<form [formGroup]="editNarratorForm" (ngSubmit)="onFormSubmit()">
+
+  <app-text-input-v2 type="number" label="id" icon="perm_identity" default_value="{{narrator?.id}}"
+    [formControl]="editNarratorForm.controls['id']">
+  </app-text-input-v2>
+
+  <app-text-input-v2 type="text" label="name" placeholder="{{ 'Please-enter-narrator-name' | translate }}" icon="perm_media"
+    default_value="{{narrator?.name}}" [formControl]="editNarratorForm.controls['name']">
+  </app-text-input-v2>
+
+  <app-text-input-v2 type="text" label="mediaUrl" placeholder="{{ 'Please-enter-narrator-media-url' | translate }}"
+    icon="language" default_value="{{narrator?.mediaUrl}}" [formControl]="editNarratorForm.controls['mediaUrl']">
+  </app-text-input-v2>
+
+  <app-text-input-v2 type="text" label="createdAt" icon="language" default_value="{{narrator?.createdAt}}"
+    [formControl]="editNarratorForm.controls['createdAt']">
+  </app-text-input-v2>
+
+  <app-text-input-v2 type="text" label="updatedAt" icon="language" default_value="{{narrator?.updatedAt}}"
+    [formControl]="editNarratorForm.controls['updatedAt']">
+  </app-text-input-v2>
+
+  <div class="btns-section">
+    <button type="button" class="admin-btn return-btn mr-2" routerLink="/admin/narrator">{{ 'Back' | translate }}</button>
+    <button type="submit" class="admin-btn" [disabled]="editNarratorForm.invalid">{{ 'Edit' | translate }}</button>
+  </div>
+</form>

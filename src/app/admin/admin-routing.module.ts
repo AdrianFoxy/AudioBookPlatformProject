@@ -6,12 +6,18 @@ import { adminGuard } from '../core/guards/admin.guard';
 import { GenreComponent } from './genre/genre.component';
 import { AddGenreComponent } from './genre/add-genre/add-genre.component';
 import { EditGenreComponent } from './genre/edit-genre/edit-genre.component';
+import { NarratorComponent } from './narrator/narrator.component';
+import { AddNarratorComponent } from './narrator/add-narrator/add-narrator.component';
+import { EditNarratorComponent } from './narrator/edit-narrator/edit-narrator.component';
 
 const routes: Routes = [
   {path: '', component: AdminComponent, canActivate: [AuthGuard, adminGuard]},
   {path: 'genre', component: GenreComponent, canActivate: [AuthGuard, adminGuard]},
   {path: 'genre/add-genre', component: AddGenreComponent, canActivate: [AuthGuard, adminGuard]},
-  {path: 'genre/edit-genre/:id', component: EditGenreComponent, canActivate: [AuthGuard, adminGuard]}
+  {path: 'genre/edit-genre/:id', component: EditGenreComponent, canActivate: [AuthGuard, adminGuard]},
+  {path: 'narrator', component: NarratorComponent,  canActivate: [AuthGuard, adminGuard]},
+  {path: 'narrator/add-narrator', component: AddNarratorComponent, canActivate: [AuthGuard, adminGuard]},
+  {path: 'narrator/edit-narrator/:id', component: EditNarratorComponent, canActivate: [AuthGuard, adminGuard]},
 ]
 
 @NgModule({

@@ -1,35 +1,34 @@
 import { ChangeDetectorRef, Component, ElementRef, ViewChild } from '@angular/core';
-import { AdminService } from '../admin.service';
+import { Narrator } from 'src/app/shared/models/adminModels/narrator/narrator';
 import { paginationAndSearchParams } from 'src/app/shared/models/paramsModels/paginationAndSearchParams';
-import { Genre } from 'src/app/shared/models/adminModels/genre/genre';
+import { AdminService } from '../admin.service';
 import { ToastrService } from 'ngx-toastr';
 import { LanguageService } from 'src/app/core/services/language-service/language.service';
 
 @Component({
-  selector: 'app-genre',
-  templateUrl: './genre.component.html',
-  styleUrls: ['./genre.component.scss', '../admin.component.scss']
+  selector: 'app-narrator',
+  templateUrl: './narrator.component.html',
+  styleUrls: ['./narrator.component.scss', '../admin.component.scss']
 })
-export class GenreComponent {
-
+export class NarratorComponent {
   @ViewChild('search') searchTerm?: ElementRef;
 
   paginationAndSearchParams = new paginationAndSearchParams();
   totalCount = 0;
 
-  genres: Genre[] = [];
+  narrators: Narrator[] = [];
 
   constructor(private adminService: AdminService, private toastr: ToastrService, private cdr: ChangeDetectorRef,
               public langService: LanguageService) { }
 
   ngOnInit() {
-    this.getGenreList();
+    this.getNarratorList();
   }
 
-  getGenreList() {
-    this.adminService.getGenresList(this.paginationAndSearchParams).subscribe({
+  getNarratorList() {
+    this.adminService.getNarratorsList(this.paginationAndSearchParams).subscribe({
       next: response => {
-        this.genres = response.data;
+        this.narrators = response.data;
         this.paginationAndSearchParams.pageNumber = response.pageIndex;
         this.paginationAndSearchParams.pageSize = response.pageSize;
         this.totalCount = response.count;
@@ -44,7 +43,7 @@ export class GenreComponent {
   onPageChanged(event: any) {
     if (this.paginationAndSearchParams.pageNumber !== event) {
       this.paginationAndSearchParams.pageNumber = event;
-      this.getGenreList();
+      this.getNarratorList();
     }
   }
 
@@ -54,7 +53,7 @@ export class GenreComponent {
 
     this.paginationAndSearchParams.search = this.searchTerm?.nativeElement.value;
     this.paginationAndSearchParams.pageNumber = 1;
-    this.getGenreList();
+    this.getNarratorList();
   }
 
   onDelete(id: number) {
@@ -64,15 +63,14 @@ export class GenreComponent {
     .subscribe(({ 'Confirm-delete-main': confirmMessage, 'Success-delete-main': successMessage }:
      Record<string, string>) => {
       if (confirm(confirmMessage)) {
-        this.adminService.deleteGenre(id).subscribe({
+        this.adminService.deleteNarrator(id).subscribe({
           next: () => {
             this.toastr.error(successMessage);
-            this.getGenreList();
+            this.getNarratorList();
           },
           error: (err) => console.log(err)
         });
       }
     });
   }
-
 }

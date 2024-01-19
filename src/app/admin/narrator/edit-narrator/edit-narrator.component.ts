@@ -1,33 +1,33 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { Narrator } from 'src/app/shared/models/adminModels/narrator/narrator';
 import { AdminService } from '../../admin.service';
-import { Genre } from 'src/app/shared/models/adminModels/genre/genre';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { UpdateGenre } from 'src/app/shared/models/adminModels/genre/updateGenre';
 import { ToastrService } from 'ngx-toastr';
 import { LanguageService } from 'src/app/core/services/language-service/language.service';
+import { UpdateNarrator } from 'src/app/shared/models/adminModels/narrator/updateNarrator';
 
 @Component({
-  selector: 'app-edit-genre',
-  templateUrl: './edit-genre.component.html',
-  styleUrls: ['./edit-genre.component.scss', '../../admin.component.scss']
+  selector: 'app-edit-narrator',
+  templateUrl: './edit-narrator.component.html',
+  styleUrls: ['./edit-narrator.component.scss', '../../admin.component.scss']
 })
-export class EditGenreComponent implements OnInit, OnDestroy {
+export class EditNarratorComponent implements OnInit, OnDestroy{
 
   id: string | null = null;
   paramsSubscription?: Subscription;
-  updateGenreSubscription?: Subscription;
-  genre?: Genre;
+  updateNarratorSubscription?: Subscription;
+  narrator?: Narrator;
 
   constructor(private route: ActivatedRoute, private adminService: AdminService,
     private fb: FormBuilder, private toastr: ToastrService, public langService: LanguageService) {
   }
 
-  editGenreForm = new FormGroup({
+  editNarratorForm = new FormGroup({
     id: new FormControl({ value: '', disabled: true }, [Validators.required]),
-    name: new FormControl('', [Validators.required, Validators.maxLength(50)]),
-    enName: new FormControl('', [Validators.required, Validators.maxLength(50)]),
+    name: new FormControl('', [Validators.required, Validators.maxLength(100)]),
+    mediaUrl: new FormControl('', [Validators.required, Validators.maxLength(400)]),
     updatedAt: new FormControl({ value: '', disabled: true }, [Validators.required]),
     createdAt: new FormControl({ value: '', disabled: true }, [Validators.required])
   })
@@ -39,19 +39,18 @@ export class EditGenreComponent implements OnInit, OnDestroy {
         this.id = params.get('id');
 
         if (this.id) {
-          this.adminService.getGenreById(this.id)
+          this.adminService.getNarratorById(this.id)
             .subscribe({
               next: (response) => {
-                this.genre = response;
+                this.narrator = response;
 
-                this.editGenreForm.patchValue({
-                  id: String(this.genre.id),
-                  name: this.genre.name,
-                  enName: this.genre.enName,
-                  createdAt: this.genre.createdAt,
-                  updatedAt: this.genre.updatedAt
+                this.editNarratorForm.patchValue({
+                  id: String(this.narrator.id),
+                  name: this.narrator.name,
+                  mediaUrl: this.narrator.mediaUrl,
+                  createdAt: this.narrator.createdAt,
+                  updatedAt: this.narrator.updatedAt
                 });
-                // console.log(this.editGenreForm.value);
               }
             })
         }
@@ -61,9 +60,9 @@ export class EditGenreComponent implements OnInit, OnDestroy {
 
   onFormSubmit(): void {
 
-    const updateGenreRequest: UpdateGenre = {
-      name: this.editGenreForm.value.name ?? '',
-      enName: this.editGenreForm.value.enName ?? ''
+    const updateNarratorRequest: UpdateNarrator = {
+      name: this.editNarratorForm.value.name ?? '',
+      mediaUrl: this.editNarratorForm.value.mediaUrl ?? ''
     };
 
     const translationKeys = ['Updated-Success', 'Something-went-wrong'];
@@ -71,7 +70,7 @@ export class EditGenreComponent implements OnInit, OnDestroy {
 
       const { 'Updated-Success': translatedMessage2, 'Something-went-wrong': translatedMessage1 } = translations;
       if (this.id) {
-        this.updateGenreSubscription = this.adminService.updateGenre(this.id, updateGenreRequest)
+        this.updateNarratorSubscription = this.adminService.updateNarrator(this.id, updateNarratorRequest)
           .subscribe({
             next: (response) => {
               this.toastr.success(translatedMessage2)
@@ -86,7 +85,7 @@ export class EditGenreComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.paramsSubscription?.unsubscribe();
-    this.updateGenreSubscription?.unsubscribe();
+    this.updateNarratorSubscription?.unsubscribe();
   }
 
 }

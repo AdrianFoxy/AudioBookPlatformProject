@@ -69,3 +69,24 @@ mat-form-field {
   width: 100%;
   margin-bottom: 10px;
 }
+
+/* Table and search bar for CRUD pages */
+table{
+  font-size: 16px;
+}
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+  background-color: var(--table-hover-color);
+  cursor: pointer;
+}
+
+
+.search input:focus{
+  box-shadow: 0 0 0 0.15rem var(--base-accent-color);
+  border: none;
+}
+
+.search-btn-cl{
+  font-size: 20px;
+  color: var(--base-text-color)
+}
+

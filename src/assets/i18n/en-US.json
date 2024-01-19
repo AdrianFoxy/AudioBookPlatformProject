@@ -140,6 +140,11 @@
   "Success-delete-main": "Deleted successfully",
   "Added-Success": "Record successfully added!",
   "Something-went-wrong": "Something went wrong...",
-  "Updated-Success": "Record successfully updated!"
-
+  "Updated-Success": "Record successfully updated!",
+  "Add-new-narrator": "Add new narrator",
+  "Narrator-name": "Narrator name",
+  "Narrator-media-url": "Narrator media url",
+  "Please-enter-narrator-name": "Please enter a narrator's  name",
+  "Please-enter-narrator-media-url": "Please enter a narrator's  media url",
+  "Edit-narrator": "Edit narrator"
 }
