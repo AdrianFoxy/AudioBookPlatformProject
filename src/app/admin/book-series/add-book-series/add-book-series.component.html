@@ -1,0 +1,26 @@
+<h1>{{ 'Add-new-book-series' | translate }}</h1>
+<hr>
+<form [formGroup]="addBookSeriesForm" (ngSubmit)="onFormSubmit()">
+  <div>
+    <app-text-input-v2
+      type="text"
+      label="{{ 'Book-series-name' | translate }}"
+      placeholder="{{ 'Please-enter-book-series-name' | translate }}"
+      icon="perm_media"
+      [formControl]="addBookSeriesForm.controls['name']">
+    </app-text-input-v2>
+
+    <app-text-input-v2
+      type="text"
+      label="{{ 'Book-series-enName' | translate }}"
+      placeholder="{{ 'Please-enter-book-series-enName' | translate }}"
+      icon="language"
+      [formControl]="addBookSeriesForm.controls['enName']">
+    </app-text-input-v2>
+
+    <div class="btns-section">
+      <button type="button" class="admin-btn return-btn mr-2" routerLink="/admin/book-series">{{ 'Back' | translate }}</button>
+      <button type="submit" class="admin-btn" [disabled]="addBookSeriesForm.invalid">{{ 'Add-new-book-series' | translate }}</button>
+    </div>
+  </div>
+</form>

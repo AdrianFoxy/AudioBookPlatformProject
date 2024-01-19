@@ -10,6 +10,8 @@ import { Observable } from 'rxjs';
 import { UpdateGenre } from '../shared/models/adminModels/genre/updateGenre';
 import { Narrator } from '../shared/models/adminModels/narrator/narrator';
 import { UpdateNarrator } from '../shared/models/adminModels/narrator/updateNarrator';
+import { BookSeries } from '../shared/models/adminModels/book-series/book-series';
+import { UpdateBookSeries } from '../shared/models/adminModels/book-series/updateBookSeries';
 
 @Injectable({
   providedIn: 'root'
@@ -112,5 +114,36 @@ export class AdminService {
   deleteNarrator(id: number){
     const headers = this.createHeaders();
     return this.http.delete<Narrator>(this.baseUrl + 'AdminManagementNarrator/' + id, { headers: headers, withCredentials: true });
+  }
+
+  // BookSeries section
+  getBookSeriesList(paginationAndSearchParams: paginationAndSearchParams) {
+    const headers = this.createHeaders();
+    let params = new HttpParams();
+    params = params.append('PageIndex', paginationAndSearchParams.pageNumber);
+    params = params.append('PageSize', paginationAndSearchParams.pageSize);
+    if (paginationAndSearchParams.search) params = params.append('search', paginationAndSearchParams.search);
+
+    return this.http.get<Pagination<BookSeries[]>>(this.baseUrl + 'AdminManagementBookSeries', { params, headers, withCredentials: true });
+  }
+
+  getBookSeriesById(id: string): Observable<BookSeries>{
+    const headers = this.createHeaders();
+    return this.http.get<BookSeries>(this.baseUrl + 'AdminManagementBookSeries/' + id, { headers: headers, withCredentials: true })
+  }
+
+  addBookSeries(model: any): Observable<BookSeries> {
+    const headers = this.createHeaders();
+    return this.http.post<BookSeries>(this.baseUrl + 'AdminManagementBookSeries/', model, { headers: headers, withCredentials: true });
+  }
+
+  updateBookSeries(id: string, model: UpdateBookSeries): Observable<BookSeries>{
+    const headers = this.createHeaders();
+    return this.http.put<BookSeries>(this.baseUrl + 'AdminManagementBookSeries/' + id, model, { headers: headers, withCredentials: true });
+  }
+
+  deleteBookSeries(id: number){
+    const headers = this.createHeaders();
+    return this.http.delete<BookSeries>(this.baseUrl + 'AdminManagementBookSeries/' + id, { headers: headers, withCredentials: true });
   }
 }

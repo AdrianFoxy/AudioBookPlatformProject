@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AdminService } from '../admin.service';
 import { paginationAndSearchParams } from 'src/app/shared/models/paramsModels/paginationAndSearchParams';
 import { Genre } from 'src/app/shared/models/adminModels/genre/genre';
@@ -10,7 +10,7 @@ import { LanguageService } from 'src/app/core/services/language-service/language
   templateUrl: './genre.component.html',
   styleUrls: ['./genre.component.scss', '../admin.component.scss']
 })
-export class GenreComponent {
+export class GenreComponent implements OnInit{
 
   @ViewChild('search') searchTerm?: ElementRef;
 

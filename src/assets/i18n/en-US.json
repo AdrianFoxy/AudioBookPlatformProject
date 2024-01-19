@@ -146,5 +146,12 @@
   "Narrator-media-url": "Narrator media url",
   "Please-enter-narrator-name": "Please enter a narrator's  name",
   "Please-enter-narrator-media-url": "Please enter a narrator's  media url",
-  "Edit-narrator": "Edit narrator"
+  "Edit-narrator": "Edit narrator",
+  "Add-new-book-series": "Add new book series",
+  "Book-series-name": "Book series name",
+  "Book-series-enName": "Book series english name",
+  "Please-enter-book-series-name": "Please enter a book series name",
+  "Please-enter-book-series-enName": "Please enter a book series english name",
+  "Edit-book-series": "Edit book series"
+
 }

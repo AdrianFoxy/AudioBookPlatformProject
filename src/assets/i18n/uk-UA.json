@@ -146,5 +146,11 @@
   "Narrator-media-url": "Посилання на медіа оповідача",
   "Please-enter-narrator-name": "Будь ласка введіть ім'я оповідача",
   "Please-enter-narrator-media-url":  "Будь ласка введіть посилання на медіа оповідача",
-  "Edit-narrator": "Редагувати оповідача"
+  "Edit-narrator": "Редагувати оповідача",
+  "Add-new-book-series": "Додати нову серію книг",
+  "Book-series-name": "Назва серії книг",
+  "Book-series-enName": "Назва серії книг англійською",
+  "Please-enter-book-series-name": "Будь ласка введіть назву серії книг",
+  "Please-enter-book-series-enName": "Будь ласка введіть назву серії книг англійскою",
+  "Edit-book-series": "Редагувати серію книг"
 }

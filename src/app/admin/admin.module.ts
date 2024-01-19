@@ -13,6 +13,9 @@ import { EditGenreComponent } from './genre/edit-genre/edit-genre.component';
 import { NarratorComponent } from './narrator/narrator.component';
 import { AddNarratorComponent } from './narrator/add-narrator/add-narrator.component';
 import { EditNarratorComponent } from './narrator/edit-narrator/edit-narrator.component';
+import { BookSeriesComponent } from './book-series/book-series.component';
+import { EditBookSeriesComponent } from './book-series/edit-book-series/edit-book-series.component';
+import { AddBookSeriesComponent } from './book-series/add-book-series/add-book-series.component';
 
 
 @NgModule({
@@ -24,6 +27,9 @@ import { EditNarratorComponent } from './narrator/edit-narrator/edit-narrator.co
     NarratorComponent,
     AddNarratorComponent,
     EditNarratorComponent,
+    BookSeriesComponent,
+    EditBookSeriesComponent,
+    AddBookSeriesComponent,
   ],
   imports: [
     CommonModule,
