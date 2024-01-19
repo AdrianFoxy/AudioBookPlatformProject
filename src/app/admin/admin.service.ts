@@ -12,6 +12,8 @@ import { Narrator } from '../shared/models/adminModels/narrator/narrator';
 import { UpdateNarrator } from '../shared/models/adminModels/narrator/updateNarrator';
 import { BookSeries } from '../shared/models/adminModels/book-series/book-series';
 import { UpdateBookSeries } from '../shared/models/adminModels/book-series/updateBookSeries';
+import { BookLanguage } from '../shared/models/adminModels/book-language.ts/bookLanguage';
+import { UpdateBookLanguage } from '../shared/models/adminModels/book-language.ts/updateBookLanguage';
 
 @Injectable({
   providedIn: 'root'
@@ -145,5 +147,36 @@ export class AdminService {
   deleteBookSeries(id: number){
     const headers = this.createHeaders();
     return this.http.delete<BookSeries>(this.baseUrl + 'AdminManagementBookSeries/' + id, { headers: headers, withCredentials: true });
+  }
+
+  // BookLanguage section
+  getBookLanguageList(paginationAndSearchParams: paginationAndSearchParams) {
+    const headers = this.createHeaders();
+    let params = new HttpParams();
+    params = params.append('PageIndex', paginationAndSearchParams.pageNumber);
+    params = params.append('PageSize', paginationAndSearchParams.pageSize);
+    if (paginationAndSearchParams.search) params = params.append('search', paginationAndSearchParams.search);
+
+    return this.http.get<Pagination<BookLanguage[]>>(this.baseUrl + 'AdminManagementLanguage', { params, headers, withCredentials: true });
+  }
+
+  getBookLanguageById(id: string): Observable<BookLanguage> {
+    const headers = this.createHeaders();
+    return this.http.get<BookLanguage>(this.baseUrl + 'AdminManagementLanguage/' + id, { headers: headers, withCredentials: true })
+  }
+
+  addBookLanguage(model: any): Observable<BookLanguage> {
+    const headers = this.createHeaders();
+    return this.http.post<BookLanguage>(this.baseUrl + 'AdminManagementLanguage/', model, { headers: headers, withCredentials: true });
+  }
+
+  updateBookLanguage(id: string, model: UpdateBookLanguage): Observable<BookLanguage> {
+    const headers = this.createHeaders();
+    return this.http.put<BookLanguage>(this.baseUrl + 'AdminManagementLanguage/' + id, model, { headers: headers, withCredentials: true });
+  }
+
+  deleteBookLanguage(id: number) {
+    const headers = this.createHeaders();
+    return this.http.delete<BookLanguage>(this.baseUrl + 'AdminManagementLanguage/' + id, { headers: headers, withCredentials: true });
   }
 }

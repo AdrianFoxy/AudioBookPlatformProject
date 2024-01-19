@@ -152,5 +152,11 @@
   "Book-series-enName": "Назва серії книг англійською",
   "Please-enter-book-series-name": "Будь ласка введіть назву серії книг",
   "Please-enter-book-series-enName": "Будь ласка введіть назву серії книг англійскою",
-  "Edit-book-series": "Редагувати серію книг"
+  "Edit-book-series": "Редагувати серію книг",
+  "Add-new-book-language": "Додати нову мову книг",
+  "Book-language-name": "Назва мови книг",
+  "Book-language-enName": "Назва мови книг англійскою",
+  "Please-enter-book-language-name": "Будь ласка введіть назву мови книг",
+  "Please-enter-book-language-enName": "Будь ласка введіть назву мови книг англійскою",
+  "Edit-book-language": "Редагувати мову книг"
 }

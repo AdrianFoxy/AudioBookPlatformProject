@@ -152,6 +152,12 @@
   "Book-series-enName": "Book series english name",
   "Please-enter-book-series-name": "Please enter a book series name",
   "Please-enter-book-series-enName": "Please enter a book series english name",
-  "Edit-book-series": "Edit book series"
+  "Edit-book-series": "Edit book series",
+  "Add-new-book-language": "Add new book language",
+  "Book-language-name": "Book language name",
+  "Book-language-enName": "Book language english name",
+  "Please-enter-book-language-name": "Please enter a book language name",
+  "Please-enter-book-language-enName": "Please enter a book language english name",
+  "Edit-book-language": "Edit book language"
 
 }
