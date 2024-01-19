@@ -1,0 +1,26 @@
+<h1>{{ 'Add-new-book-language' | translate }}</h1>
+<hr>
+<form [formGroup]="addBookLanguageForm" (ngSubmit)="onFormSubmit()">
+  <div>
+    <app-text-input-v2
+      type="text"
+      label="{{ 'Book-language-name' | translate }}"
+      placeholder="{{ 'Please-enter-book-language-name' | translate }}"
+      icon="perm_media"
+      [formControl]="addBookLanguageForm.controls['name']">
+    </app-text-input-v2>
+
+    <app-text-input-v2
+      type="text"
+      label="{{ 'Book-language-enName' | translate }}"
+      placeholder="{{ 'Please-enter-book-language-enName' | translate }}"
+      icon="language"
+      [formControl]="addBookLanguageForm.controls['enName']">
+    </app-text-input-v2>
+
+    <div class="btns-section">
+      <button type="button" class="admin-btn return-btn mr-2" routerLink="/admin/book-language">{{ 'Back' | translate }}</button>
+      <button type="submit" class="admin-btn" [disabled]="addBookLanguageForm.invalid">{{ 'Add-new-book-language' | translate }}</button>
+    </div>
+  </div>
+</form>

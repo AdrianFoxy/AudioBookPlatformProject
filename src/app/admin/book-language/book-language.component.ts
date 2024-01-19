@@ -1,35 +1,34 @@
 import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { AdminService } from '../admin.service';
+import { BookLanguage } from 'src/app/shared/models/adminModels/book-language.ts/bookLanguage';
 import { paginationAndSearchParams } from 'src/app/shared/models/paramsModels/paginationAndSearchParams';
-import { Genre } from 'src/app/shared/models/adminModels/genre/genre';
+import { AdminService } from '../admin.service';
 import { ToastrService } from 'ngx-toastr';
 import { LanguageService } from 'src/app/core/services/language-service/language.service';
 
 @Component({
-  selector: 'app-genre',
-  templateUrl: './genre.component.html',
-  styleUrls: ['./genre.component.scss', '../admin.component.scss']
+  selector: 'app-book-language',
+  templateUrl: './book-language.component.html',
+  styleUrls: ['./book-language.component.scss', '../admin.component.scss']
 })
-export class GenreComponent implements OnInit{
-
+export class BookLanguageComponent implements OnInit{
   @ViewChild('search') searchTerm?: ElementRef;
 
   paginationAndSearchParams = new paginationAndSearchParams();
   totalCount = 0;
 
-  genres: Genre[] = [];
+  bookLanguages: BookLanguage[] = [];
 
   constructor(private adminService: AdminService, private toastr: ToastrService, private cdr: ChangeDetectorRef,
               public langService: LanguageService) { }
 
   ngOnInit() {
-    this.getGenreList();
+    this.getBookLanguageList();
   }
 
-  getGenreList() {
-    this.adminService.getGenresList(this.paginationAndSearchParams).subscribe({
+  getBookLanguageList() {
+    this.adminService.getBookLanguageList(this.paginationAndSearchParams).subscribe({
       next: response => {
-        this.genres = response.data;
+        this.bookLanguages = response.data;
         this.paginationAndSearchParams.pageNumber = response.pageIndex;
         this.paginationAndSearchParams.pageSize = response.pageSize;
         this.totalCount = response.count;
@@ -44,7 +43,7 @@ export class GenreComponent implements OnInit{
   onPageChanged(event: any) {
     if (this.paginationAndSearchParams.pageNumber !== event) {
       this.paginationAndSearchParams.pageNumber = event;
-      this.getGenreList();
+      this.getBookLanguageList();
     }
   }
 
@@ -54,7 +53,7 @@ export class GenreComponent implements OnInit{
 
     this.paginationAndSearchParams.search = this.searchTerm?.nativeElement.value;
     this.paginationAndSearchParams.pageNumber = 1;
-    this.getGenreList();
+    this.getBookLanguageList();
   }
 
   onDelete(id: number) {
@@ -64,10 +63,10 @@ export class GenreComponent implements OnInit{
     .subscribe(({ 'Confirm-delete-main': confirmMessage, 'Success-delete-main': successMessage }:
      Record<string, string>) => {
       if (confirm(confirmMessage)) {
-        this.adminService.deleteGenre(id).subscribe({
+        this.adminService.deleteBookLanguage(id).subscribe({
           next: () => {
             this.toastr.error(successMessage);
-            this.getGenreList();
+            this.getBookLanguageList();
           },
           error: (err) => console.log(err)
         });

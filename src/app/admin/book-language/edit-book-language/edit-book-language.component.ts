@@ -1,33 +1,33 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { BookLanguage } from 'src/app/shared/models/adminModels/book-language.ts/bookLanguage';
 import { AdminService } from '../../admin.service';
-import { Genre } from 'src/app/shared/models/adminModels/genre/genre';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { UpdateGenre } from 'src/app/shared/models/adminModels/genre/updateGenre';
 import { ToastrService } from 'ngx-toastr';
 import { LanguageService } from 'src/app/core/services/language-service/language.service';
+import { UpdateBookLanguage } from 'src/app/shared/models/adminModels/book-language.ts/updateBookLanguage';
 
 @Component({
-  selector: 'app-edit-genre',
-  templateUrl: './edit-genre.component.html',
-  styleUrls: ['./edit-genre.component.scss', '../../admin.component.scss']
+  selector: 'app-edit-book-language',
+  templateUrl: './edit-book-language.component.html',
+  styleUrls: ['./edit-book-language.component.scss', '../../admin.component.scss']
 })
-export class EditGenreComponent implements OnInit, OnDestroy {
+export class EditBookLanguageComponent implements OnInit, OnDestroy{
 
   id: string | null = null;
   paramsSubscription?: Subscription;
-  updateGenreSubscription?: Subscription;
-  genre?: Genre;
+  updateBookLanguageSubscription?: Subscription;
+  bookLanguage?: BookLanguage;
 
   constructor(private route: ActivatedRoute, private adminService: AdminService,
     private fb: FormBuilder, private toastr: ToastrService, public langService: LanguageService) {
   }
 
-  editGenreForm = new FormGroup({
+  editBookLanguageForm = new FormGroup({
     id: new FormControl({ value: '', disabled: true }, [Validators.required]),
-    name: new FormControl('', [Validators.required, Validators.maxLength(50)]),
-    enName: new FormControl('', [Validators.required, Validators.maxLength(50)]),
+    name: new FormControl('', [Validators.required, Validators.maxLength(100)]),
+    enName: new FormControl('', [Validators.required, Validators.maxLength(100)]),
     updatedAt: new FormControl({ value: '', disabled: true }, [Validators.required]),
     createdAt: new FormControl({ value: '', disabled: true }, [Validators.required])
   })
@@ -37,21 +37,19 @@ export class EditGenreComponent implements OnInit, OnDestroy {
     this.paramsSubscription = this.route.paramMap.subscribe({
       next: (params) => {
         this.id = params.get('id');
-
         if (this.id) {
-          this.adminService.getGenreById(this.id)
+          this.adminService.getBookLanguageById(this.id)
             .subscribe({
               next: (response) => {
-                this.genre = response;
+                this.bookLanguage = response;
 
-                this.editGenreForm.patchValue({
-                  id: String(this.genre.id),
-                  name: this.genre.name,
-                  enName: this.genre.enName,
-                  createdAt: this.genre.createdAt,
-                  updatedAt: this.genre.updatedAt
+                this.editBookLanguageForm.patchValue({
+                  id: String(this.bookLanguage.id),
+                  name: this.bookLanguage.name,
+                  enName: this.bookLanguage.enName,
+                  createdAt: this.bookLanguage.createdAt,
+                  updatedAt: this.bookLanguage.updatedAt
                 });
-                // console.log(this.editGenreForm.value);
               }
             })
         }
@@ -61,9 +59,9 @@ export class EditGenreComponent implements OnInit, OnDestroy {
 
   onFormSubmit(): void {
 
-    const updateGenreRequest: UpdateGenre = {
-      name: this.editGenreForm.value.name ?? '',
-      enName: this.editGenreForm.value.enName ?? ''
+    const updatBookLanguageRequest: UpdateBookLanguage = {
+      name: this.editBookLanguageForm.value.name ?? '',
+      enName: this.editBookLanguageForm.value.enName ?? ''
     };
 
     const translationKeys = ['Updated-Success', 'Something-went-wrong'];
@@ -71,7 +69,7 @@ export class EditGenreComponent implements OnInit, OnDestroy {
 
       const { 'Updated-Success': translatedMessage2, 'Something-went-wrong': translatedMessage1 } = translations;
       if (this.id) {
-        this.updateGenreSubscription = this.adminService.updateGenre(this.id, updateGenreRequest)
+        this.updateBookLanguageSubscription = this.adminService.updateBookLanguage(this.id, updatBookLanguageRequest)
           .subscribe({
             next: (response) => {
               this.toastr.success(translatedMessage2)
@@ -86,7 +84,7 @@ export class EditGenreComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.paramsSubscription?.unsubscribe();
-    this.updateGenreSubscription?.unsubscribe();
+    this.updateBookLanguageSubscription?.unsubscribe();
   }
 
 }

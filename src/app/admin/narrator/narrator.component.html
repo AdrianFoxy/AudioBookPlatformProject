@@ -10,8 +10,8 @@
           aria-hidden="true"></i>
       </div>
     </form>
-    <button class="admin-btn mb-2" routerLink="/admin/genre/add-genre">
-      {{ 'Add-new-genre' | translate }}
+    <button class="admin-btn mb-2" routerLink="/admin/narrator/add-narrator">
+      {{ 'Add-new-narrator' | translate }}
     </button>
   </div>
 </div>
@@ -22,26 +22,26 @@
       <tr>
         <th scope="col">id</th>
         <th scope="col">name</th>
-        <th scope="col">enName</th>
+        <th scope="col">mediaUrl</th>
         <th scope="col">createdAt</th>
         <th scope="col">updatedAt</th>
         <th scope="col">{{ 'Actions' | translate }}</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let genre of genres">
-        <th scope="row">{{ genre.id }}</th>
-        <td>{{ genre.name }}</td>
-        <td>{{ genre.enName }}</td>
-        <td>{{ genre.createdAt }}</td>
-        <td>{{ genre.updatedAt }}</td>
+      <tr *ngFor="let narrator of narrators">
+        <th scope="row">{{ narrator.id }}</th>
+        <td> {{ narrator.name }}</td>
+        <td style="max-width: 300px; word-wrap: break-word;"> <a href="{{narrator.mediaUrl}}">{{ narrator.mediaUrl }}</a></td>
+        <td>{{ narrator.createdAt }}</td>
+        <td>{{ narrator.updatedAt }}</td>
         <td>
-          <button class="admin-btn action mr-2 mb-1" routerLink="/admin/genre/edit-genre/{{genre.id}}">
+          <button class="admin-btn action mr-2 mb-1" routerLink="/admin/narrator/edit-narrator/{{narrator.id}}">
             <i class="fa fa-edit"></i>
             {{ 'Edit' | translate }}
           </button>
           <button class="admin-btn action delete-btn"
-          (click)="onDelete(genre.id)">
+          (click)="onDelete(narrator.id)">
             <i class="fa fa-trash"></i>
             {{ 'Delete' | translate }}
           </button>

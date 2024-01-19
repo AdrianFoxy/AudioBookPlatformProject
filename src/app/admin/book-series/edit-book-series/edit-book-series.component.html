@@ -1,0 +1,29 @@
+<h1>{{ 'Edit-book-series' | translate }}</h1>
+<hr>
+<form [formGroup]="editBookSeriesForm" (ngSubmit)="onFormSubmit()">
+
+  <app-text-input-v2 type="number" label="id" icon="perm_identity" default_value="{{bookSeries?.id}}"
+    [formControl]="editBookSeriesForm.controls['id']">
+  </app-text-input-v2>
+
+  <app-text-input-v2 type="text" label="name" placeholder="{{ 'Please-enter-book-series-name' | translate }}" icon="perm_media"
+    default_value="{{bookSeries?.name}}" [formControl]="editBookSeriesForm.controls['name']">
+  </app-text-input-v2>
+
+  <app-text-input-v2 type="text" label="enName" placeholder="{{ 'Please-enter-book-series-enName' | translate }}"
+    icon="language" default_value="{{bookSeries?.enName}}" [formControl]="editBookSeriesForm.controls['enName']">
+  </app-text-input-v2>
+
+  <app-text-input-v2 type="text" label="createdAt" icon="language" default_value="{{bookSeries?.createdAt}}"
+    [formControl]="editBookSeriesForm.controls['createdAt']">
+  </app-text-input-v2>
+
+  <app-text-input-v2 type="text" label="updatedAt" icon="language" default_value="{{bookSeries?.updatedAt}}"
+    [formControl]="editBookSeriesForm.controls['updatedAt']">
+  </app-text-input-v2>
+
+  <div class="btns-section">
+    <button type="button" class="admin-btn return-btn mr-2" routerLink="/admin/book-series">{{ 'Back' | translate }}</button>
+    <button type="submit" class="admin-btn" [disabled]="editBookSeriesForm.invalid">{{ 'Edit' | translate }}</button>
+  </div>
+</form>

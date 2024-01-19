@@ -10,8 +10,8 @@
           aria-hidden="true"></i>
       </div>
     </form>
-    <button class="admin-btn mb-2" routerLink="/admin/genre/add-genre">
-      {{ 'Add-new-genre' | translate }}
+    <button class="admin-btn mb-2" routerLink="/admin/book-series/add-book-series">
+      {{ 'Add-new-book-series' | translate }}
     </button>
   </div>
 </div>
@@ -29,19 +29,19 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let genre of genres">
-        <th scope="row">{{ genre.id }}</th>
-        <td>{{ genre.name }}</td>
-        <td>{{ genre.enName }}</td>
-        <td>{{ genre.createdAt }}</td>
-        <td>{{ genre.updatedAt }}</td>
+      <tr *ngFor="let bs of bookSeries">
+        <th scope="row">{{ bs.id }}</th>
+        <td>{{ bs.name }}</td>
+        <td>{{ bs.enName }}</td>
+        <td>{{ bs.createdAt }}</td>
+        <td>{{ bs.updatedAt }}</td>
         <td>
-          <button class="admin-btn action mr-2 mb-1" routerLink="/admin/genre/edit-genre/{{genre.id}}">
+          <button class="admin-btn action mr-2 mb-1" routerLink="/admin/book-series/edit-book-series/{{bs.id}}">
             <i class="fa fa-edit"></i>
             {{ 'Edit' | translate }}
           </button>
           <button class="admin-btn action delete-btn"
-          (click)="onDelete(genre.id)">
+          (click)="onDelete(bs.id)">
             <i class="fa fa-trash"></i>
             {{ 'Delete' | translate }}
           </button>
