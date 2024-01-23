@@ -11,14 +11,14 @@
   </app-text-input-v2>
 
   <app-text-input-v2 type="text" label="mediaUrl" placeholder="{{ 'Please-enter-narrator-media-url' | translate }}"
-    icon="language" default_value="{{narrator?.mediaUrl}}" [formControl]="editNarratorForm.controls['mediaUrl']">
+    icon="launch" default_value="{{narrator?.mediaUrl}}" [formControl]="editNarratorForm.controls['mediaUrl']">
   </app-text-input-v2>
 
-  <app-text-input-v2 type="text" label="createdAt" icon="language" default_value="{{narrator?.createdAt}}"
+  <app-text-input-v2 type="text" label="createdAt" icon="calendar_today" default_value="{{narrator?.createdAt}}"
     [formControl]="editNarratorForm.controls['createdAt']">
   </app-text-input-v2>
 
-  <app-text-input-v2 type="text" label="updatedAt" icon="language" default_value="{{narrator?.updatedAt}}"
+  <app-text-input-v2 type="text" label="updatedAt" icon="calendar_today" default_value="{{narrator?.updatedAt}}"
     [formControl]="editNarratorForm.controls['updatedAt']">
   </app-text-input-v2>
 
