@@ -14,27 +14,22 @@ import { AccountService } from 'src/app/account/account.service';
   providedIn: 'root',
 })
 export class AuthGuard {
-  constructor(private accountService: AccountService, private router: Router) {}
+  constructor(private accountService: AccountService, private router: Router) { }
 
   canActivate: CanActivateFn = (
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean | UrlTree> => {
-    // Call loadCurrentUser() and switch to the observable it returns
-    return this.accountService.loadCurrentUser().pipe(
-      switchMap(() => {
-        // Now that currentUser$ should have a value, proceed with the authentication check
-        return this.accountService.currentUser$.pipe(
-          map((auth) => {
-            if (auth !== null) {
-              return true;
-            } else {
-              return this.router.createUrlTree(['/account/login'], {
-                queryParams: { returnUrl: state.url },
-              });
-            }
-          })
-        );
+
+    return this.accountService.currentUser$.pipe(
+      map((auth) => {
+        if (auth !== null) {
+          return true;
+        } else {
+          return this.router.createUrlTree(['/account/login'], {
+            queryParams: { returnUrl: state.url },
+          });
+        }
       })
     );
   };

@@ -35,6 +35,7 @@ export class ErrorInterceptor implements HttpInterceptor {
               this.accountService.refreshToken().subscribe({
                 next: (x: any) =>{
                   this.toastr.error("Token refreshed, try again", error.status.toString());
+                  window.location.reload();
                 },
                 error: (err: any) =>{
                   this.accountService.revokeToken().subscribe({
@@ -51,6 +52,8 @@ export class ErrorInterceptor implements HttpInterceptor {
               this.toastr.error(error.error.message, error.status.toString())
             }
           }
+
+
           if(error.status === 403){
             console.log('403');
             this.toastr.error(error.error.message, error.status.toString())
