@@ -52,12 +52,7 @@
       <hr>
       <h2>{{ 'About-Book' | translate }}:</h2>
       <div>
-        <p class="description mb-0"
-          [innerHTML]="isExpandedMap[audiobook.id] ? audiobook.description : (audiobook.description | slice:0:300) + (isExpandedMap[audiobook.id] || audiobook.description.length <= 300 ? '' : '...')">
-        </p>
-        <a *ngIf="audiobook.description.length > 300" class="show-more" (click)="toggleExpand(audiobook.id)">
-          {{ isExpandedMap[audiobook.id] ? ('Less-Desc' | translate) : ('More-Desc' | translate) }}
-        </a>
+        <app-moreless [text]="audiobook.description" [wordLimit]="300" [btnStyle]="'show-more-color'"></app-moreless>
       </div>
     </div>
   </div>
@@ -99,12 +94,7 @@
                 {{ review.rating }}
               </span>
             </div>
-            <p class="mb-0"
-              [innerHTML]="isExpandedMap[review.id] ? review.reviewText : (review.reviewText | slice:0:300) + (isExpandedMap[review.id] || review.reviewText.length <= 300 ? '' : '...')">
-            </p>
-            <a class="show-more-review" *ngIf="review.reviewText.length > 300" (click)="toggleExpand(review.id)">
-              {{ isExpandedMap[review.id] ? ('Less-Desc' | translate) : ('More-Desc' | translate) }}
-            </a>
+            <app-moreless [text]="review.reviewText" [wordLimit]="300" [btnStyle]="'show-more-color'"></app-moreless>
             <p class="date mt-2">{{ formatDate(review.createdAt) }}</p>
           </div>
         </div>
