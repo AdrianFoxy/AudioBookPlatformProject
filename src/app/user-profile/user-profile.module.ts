@@ -6,7 +6,6 @@ import { UserProfileRoutingModule } from './user-profile-routing.module';
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { LibraryModule } from '../library/library.module';
 import { FormsModule } from '@angular/forms';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatInputModule } from '@angular/material/input';
 
 
@@ -20,7 +19,6 @@ import { MatInputModule } from '@angular/material/input';
     CommonModule,
     SharedModule,
     UserProfileRoutingModule,
-    MatProgressSpinnerModule,
     MatInputModule,
     LibraryModule,
     FormsModule

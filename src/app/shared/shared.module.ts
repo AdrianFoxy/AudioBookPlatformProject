@@ -30,6 +30,7 @@ import {MatDividerModule} from '@angular/material/divider';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { TextInputV2Component } from './components/text-input-v2/text-input-v2.component';
 import { MorelessComponent } from './components/moreless/moreless.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { MorelessComponent } from './components/moreless/moreless.component';
     MatFormFieldModule, MatInputModule, MatDatepickerModule, MatNativeDateModule,
     MatButtonModule, MatDialogModule, MatTableModule, MatDividerModule, MatIconModule,
     NgxSkeletonLoaderModule,
-    FormsModule
+    FormsModule,
+    MatProgressSpinnerModule
   ],
   exports:[
     RecommendationsComponent,
@@ -74,7 +76,8 @@ import { MorelessComponent } from './components/moreless/moreless.component';
     MatDividerModule,
     FormsModule,
     TextInputV2Component,
-    MorelessComponent
+    MorelessComponent,
+    MatProgressSpinnerModule
   ]
 })
 export class SharedModule { }

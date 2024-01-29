@@ -11,7 +11,6 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { AudiobookItemComponent } from './audiobook-item/audiobook-item.component';
 import { BookDetailsComponent } from './book-details/book-details.component';
 
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { AuthorDetailsComponent } from './author-details/author-details.component';
 import { ReviewFormComponent } from './book-details/review-form/review-form.component';
 
@@ -29,7 +28,6 @@ import { ReviewFormComponent } from './book-details/review-form/review-form.comp
     LibraryRoutingModule,
     ReactiveFormsModule,
     NgxMatSelectSearchModule,
-    MatProgressSpinnerModule,
     MatInputModule,
     FormsModule,
     SharedModule
