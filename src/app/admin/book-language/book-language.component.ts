@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { BookLanguage } from 'src/app/shared/models/adminModels/book-language.ts/bookLanguage';
+import { BookLanguage } from 'src/app/shared/models/adminModels/book-language/bookLanguage';
 import { paginationAndSearchParams } from 'src/app/shared/models/paramsModels/paginationAndSearchParams';
 import { AdminService } from '../admin.service';
 import { ToastrService } from 'ngx-toastr';

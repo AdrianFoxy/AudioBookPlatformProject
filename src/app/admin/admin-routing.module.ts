@@ -15,6 +15,9 @@ import { EditBookSeriesComponent } from './book-series/edit-book-series/edit-boo
 import { BookLanguageComponent } from './book-language/book-language.component';
 import { AddBookLanguageComponent } from './book-language/add-book-language/add-book-language.component';
 import { EditBookLanguageComponent } from './book-language/edit-book-language/edit-book-language.component';
+import { AuthorComponent } from './author/author.component';
+import { AddAuthorComponent } from './author/add-author/add-author.component';
+import { EditAuthorComponent } from './author/edit-author/edit-author.component';
 
 const routes: Routes = [
   {path: '', component: AdminComponent, canActivate: [AuthGuard, adminGuard]},
@@ -29,7 +32,10 @@ const routes: Routes = [
   {path: 'book-series/edit-book-series/:id', component: EditBookSeriesComponent, canActivate: [AuthGuard, adminGuard]},
   {path: 'book-language', component: BookLanguageComponent,  canActivate: [AuthGuard, adminGuard]},
   {path: 'book-language/add-book-language', component: AddBookLanguageComponent, canActivate: [AuthGuard, adminGuard]},
-  {path: 'book-language/edit-book-language/:id', component: EditBookLanguageComponent, canActivate: [AuthGuard, adminGuard]}
+  {path: 'book-language/edit-book-language/:id', component: EditBookLanguageComponent, canActivate: [AuthGuard, adminGuard]},
+  {path: 'author', component: AuthorComponent,  canActivate: [AuthGuard, adminGuard]},
+  {path: 'author/add-author', component: AddAuthorComponent, canActivate: [AuthGuard, adminGuard]},
+  {path: 'author/edit-author/:id', component: EditAuthorComponent, canActivate: [AuthGuard, adminGuard]}
 ]
 
 @NgModule({

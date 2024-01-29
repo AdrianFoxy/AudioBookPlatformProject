@@ -37,7 +37,7 @@
   "S-Duration": "Тривалість",
   "About-Book": "Про книгу",
   "More-Desc": "Більше",
-  "Less-Desc": "Скрити опис",
+  "Less-Desc": "Менше",
   "PlayList": "Список відтворення",
   "Similar-books": "Схожі книги",
   "This-is-usually-listened-too": "З цим слухають",
@@ -158,5 +158,6 @@
   "Book-language-enName": "Назва мови книг англійскою",
   "Please-enter-book-language-name": "Будь ласка введіть назву мови книг",
   "Please-enter-book-language-enName": "Будь ласка введіть назву мови книг англійскою",
-  "Edit-book-language": "Редагувати мову книг"
+  "Edit-book-language": "Редагувати мову книг",
+  "Add-new-author": "Додати нового автора"
 }

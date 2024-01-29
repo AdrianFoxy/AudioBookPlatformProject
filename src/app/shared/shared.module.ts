@@ -29,6 +29,7 @@ import {MatDividerModule} from '@angular/material/divider';
 
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { TextInputV2Component } from './components/text-input-v2/text-input-v2.component';
+import { MorelessComponent } from './components/moreless/moreless.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { TextInputV2Component } from './components/text-input-v2/text-input-v2.c
     PagerComponent,
     AudioPlayerComponent,
     TextInputComponent,
-    TextInputV2Component
+    TextInputV2Component,
+    MorelessComponent
   ],
   imports: [
     CommonModule,
@@ -71,7 +73,8 @@ import { TextInputV2Component } from './components/text-input-v2/text-input-v2.c
     MatIconModule,
     MatDividerModule,
     FormsModule,
-    TextInputV2Component
+    TextInputV2Component,
+    MorelessComponent
   ]
 })
 export class SharedModule { }

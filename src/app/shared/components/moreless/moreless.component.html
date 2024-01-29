@@ -1,0 +1,17 @@
+<div>
+  <p class="text" *ngIf="text.length <= wordLimit">
+    {{ text }}
+  </p>
+
+  <ng-container *ngIf="text.length > wordLimit">
+    <p class="text" *ngIf="!showMore">
+      {{ text.substring(0, wordLimit) }}...
+    </p>
+
+    <p class="text" *ngIf="showMore">
+      {{ text }}...
+    </p>
+
+    <a class="{{btnStyle}}" (click)="showMore = !showMore"><b>{{ showMore ?  ('Less-Desc' | translate) : ('More-Desc' | translate) }}</b></a>
+  </ng-container>
+</div>

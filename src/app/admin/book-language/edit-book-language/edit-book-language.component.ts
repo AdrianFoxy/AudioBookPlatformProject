@@ -1,12 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { BookLanguage } from 'src/app/shared/models/adminModels/book-language.ts/bookLanguage';
+import { BookLanguage } from 'src/app/shared/models/adminModels/book-language/bookLanguage';
 import { AdminService } from '../../admin.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { LanguageService } from 'src/app/core/services/language-service/language.service';
-import { UpdateBookLanguage } from 'src/app/shared/models/adminModels/book-language.ts/updateBookLanguage';
+import { UpdateBookLanguage } from 'src/app/shared/models/adminModels/book-language/updateBookLanguage';
 
 @Component({
   selector: 'app-edit-book-language',
