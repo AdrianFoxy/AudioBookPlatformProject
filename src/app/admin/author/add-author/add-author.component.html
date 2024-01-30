@@ -18,21 +18,21 @@
       [formControl]="addAuthorForm.controls['enName']">
     </app-text-input-v2>
 
-    <app-text-input-v2
+    <app-textarea-input
       type="text"
       label="{{ 'description' | translate }}"
       placeholder="{{ 'Please-enter-author-description' | translate }}"
       icon="description"
       [formControl]="addAuthorForm.controls['description']">
-    </app-text-input-v2>
+    </app-textarea-input>
 
-    <app-text-input-v2
+    <app-textarea-input
       type="text"
       label="{{ 'enDescription' | translate }}"
       placeholder="{{ 'Please-enter-author-enDescription' | translate }}"
       icon="description"
       [formControl]="addAuthorForm.controls['enDescription']">
-    </app-text-input-v2>
+    </app-textarea-input>
 
     <app-image-upload [form]="addAuthorForm" [imageUrl]="url" (fileSelected)="onFileSelected($event)"></app-image-upload>
 

@@ -32,6 +32,7 @@ import { TextInputV2Component } from './components/text-input-v2/text-input-v2.c
 import { MorelessComponent } from './components/moreless/moreless.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ImageUploadComponent } from './components/image-upload/image-upload.component';
+import { TextareaInputComponent } from './components/textarea-input/textarea-input.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { ImageUploadComponent } from './components/image-upload/image-upload.com
     TextInputComponent,
     TextInputV2Component,
     MorelessComponent,
-    ImageUploadComponent
+    ImageUploadComponent,
+    TextareaInputComponent
   ],
   imports: [
     CommonModule,
@@ -80,7 +82,8 @@ import { ImageUploadComponent } from './components/image-upload/image-upload.com
     TextInputV2Component,
     MorelessComponent,
     MatProgressSpinnerModule,
-    ImageUploadComponent
+    ImageUploadComponent,
+    TextareaInputComponent
   ]
 })
 export class SharedModule { }
