@@ -159,5 +159,16 @@
   "Please-enter-book-language-name": "Будь ласка введіть назву мови книг",
   "Please-enter-book-language-enName": "Будь ласка введіть назву мови книг англійскою",
   "Edit-book-language": "Редагувати мову книг",
-  "Add-new-author": "Додати нового автора"
+  "Add-new-author": "Додати нового автора",
+  "Please-enter-author-name": "Будь ласка введіть ім'я автора",
+  "Please-enter-author-enName": "Будь ласка введіть ім'я автора англійською",
+  "Please-enter-author-description": "Будь ласка введіть опис автора",
+  "Please-enter-author-enDescription": "Будь ласка введіть опис автора англійською",
+  "name": "Ім'я",
+  "enName": "Ім'я англійскою",
+  "description": "Опис",
+  "enDescription": "Опис англійскою",
+  "validation-select-image": "Будь ласка оберіть файл",
+  "validation-invalid-extention": "Будь ласка оберіть файл з одним з наступних розширень: (.jpg, .jpeg, .png).",
+  "validation-invalid-size": "Будь ласка оберіть файл, що менше або дорівнює 2 МБ."
 }

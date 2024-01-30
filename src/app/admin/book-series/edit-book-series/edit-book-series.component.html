@@ -6,12 +6,12 @@
     [formControl]="editBookSeriesForm.controls['id']">
   </app-text-input-v2>
 
-  <app-text-input-v2 type="text" label="name" placeholder="{{ 'Please-enter-book-series-name' | translate }}" icon="perm_media"
+  <app-text-input-v2 type="text" label="name" placeholder="{{ 'Please-enter-book-series-name' | translate }}" icon="title"
     default_value="{{bookSeries?.name}}" [formControl]="editBookSeriesForm.controls['name']">
   </app-text-input-v2>
 
   <app-text-input-v2 type="text" label="enName" placeholder="{{ 'Please-enter-book-series-enName' | translate }}"
-    icon="language" default_value="{{bookSeries?.enName}}" [formControl]="editBookSeriesForm.controls['enName']">
+    icon="title" default_value="{{bookSeries?.enName}}" [formControl]="editBookSeriesForm.controls['enName']">
   </app-text-input-v2>
 
   <app-text-input-v2 type="text" label="createdAt" icon="calendar_today" default_value="{{bookSeries?.createdAt}}"

@@ -57,4 +57,22 @@ export class AuthorComponent implements OnInit{
     this.paginationAndSearchParams.pageNumber = 1;
     this.getAuthorList();
   }
+
+  onDelete(id: number) {
+    const translationKeys = ['Confirm-delete-main', 'Success-delete-main'];
+
+    this.langService.getTranslatedMessages(translationKeys)
+    .subscribe(({ 'Confirm-delete-main': confirmMessage, 'Success-delete-main': successMessage }:
+     Record<string, string>) => {
+      if (confirm(confirmMessage)) {
+        this.adminService.deleteAuthor(id).subscribe({
+          next: () => {
+            this.toastr.error(successMessage);
+            this.getAuthorList();
+          },
+          error: (err) => console.log(err)
+        });
+      }
+    });
+  }
 }

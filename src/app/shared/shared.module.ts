@@ -31,6 +31,7 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { TextInputV2Component } from './components/text-input-v2/text-input-v2.component';
 import { MorelessComponent } from './components/moreless/moreless.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ImageUploadComponent } from './components/image-upload/image-upload.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     AudioPlayerComponent,
     TextInputComponent,
     TextInputV2Component,
-    MorelessComponent
+    MorelessComponent,
+    ImageUploadComponent
   ],
   imports: [
     CommonModule,
@@ -77,7 +79,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     FormsModule,
     TextInputV2Component,
     MorelessComponent,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    ImageUploadComponent
   ]
 })
 export class SharedModule { }

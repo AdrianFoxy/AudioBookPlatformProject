@@ -191,4 +191,22 @@ export class AdminService {
 
     return this.http.get<Pagination<Author[]>>(this.baseUrl + 'AdminManagementAuthor', { params, headers, withCredentials: true });
   }
+
+  addAuthor(model: any) {
+    const headers = new HttpHeaders().set('Accept-Language', this.getLang());
+
+    const formData = new FormData();
+    formData.append("name", model.name);
+    formData.append("enName", model.enName);
+    formData.append("description", model.description);
+    formData.append("enDescription", model.enDescription);
+    formData.append("picture", model.picture);
+
+    return this.http.post(this.baseUrl + 'AdminManagementAuthor', formData, { headers, withCredentials: true });
+  }
+
+  deleteAuthor(id: number) {
+    const headers = this.createHeaders();
+    return this.http.delete<Author>(this.baseUrl + 'AdminManagementAuthor/' + id, { headers: headers, withCredentials: true });
+  }
 }

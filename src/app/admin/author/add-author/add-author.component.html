@@ -1,1 +1,44 @@
-<p>add-author works!</p>
+<h1>{{ 'Add-new-author' | translate }}</h1>
+<hr>
+<form [formGroup]="addAuthorForm" (ngSubmit)="onFormSubmit()">
+  <div>
+    <app-text-input-v2
+      type="text"
+      label="{{ 'name' | translate }}"
+      placeholder="{{ 'Please-enter-author-name' | translate }}"
+      icon="title"
+      [formControl]="addAuthorForm.controls['name']">
+    </app-text-input-v2>
+
+    <app-text-input-v2
+      type="text"
+      label="{{ 'enName' | translate }}"
+      placeholder="{{ 'Please-enter-author-enName' | translate }}"
+      icon="title"
+      [formControl]="addAuthorForm.controls['enName']">
+    </app-text-input-v2>
+
+    <app-text-input-v2
+      type="text"
+      label="{{ 'description' | translate }}"
+      placeholder="{{ 'Please-enter-author-description' | translate }}"
+      icon="description"
+      [formControl]="addAuthorForm.controls['description']">
+    </app-text-input-v2>
+
+    <app-text-input-v2
+      type="text"
+      label="{{ 'enDescription' | translate }}"
+      placeholder="{{ 'Please-enter-author-enDescription' | translate }}"
+      icon="description"
+      [formControl]="addAuthorForm.controls['enDescription']">
+    </app-text-input-v2>
+
+    <app-image-upload [form]="addAuthorForm" [imageUrl]="url" (fileSelected)="onFileSelected($event)"></app-image-upload>
+
+    <div class="btns-section mt-2">
+      <button type="button" class="admin-btn return-btn mr-2" routerLink="/admin/author">{{ 'Back' | translate }}</button>
+      <button type="submit" class="admin-btn" [disabled]="addAuthorForm.invalid">{{ 'Add-new-author' | translate }}</button>
+    </div>
+  </div>
+</form>
