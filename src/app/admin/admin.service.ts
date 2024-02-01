@@ -222,6 +222,7 @@ export class AdminService {
     formData.append("picture", model.picture);
 
     return this.http.put<Author>(this.baseUrl + 'AdminManagementAuthor/' + id, formData, { headers: headers, withCredentials: true });
+
   }
 
   deleteAuthor(id: number) {
