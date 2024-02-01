@@ -1,0 +1,41 @@
+<h1>Edit author</h1>
+<hr>
+<form [formGroup]="editAuthorForm" (ngSubmit)="onFormSubmit()">
+
+  <app-text-input-v2 type="number" label="id" icon="perm_identity" default_value="{{author?.id}}"
+    [formControl]="editAuthorForm.controls['id']">
+  </app-text-input-v2>
+
+  <app-text-input-v2 type="text" label="name" placeholder="{{ 'Please-enter-book-language-name' | translate }}" icon="title"
+    default_value="{{author?.name}}" [formControl]="editAuthorForm.controls['name']">
+  </app-text-input-v2>
+
+  <app-text-input-v2 type="text" label="enName" placeholder="{{ 'Please-enter-book-language-enName' | translate }}"
+    icon="title" default_value="{{author?.enName}}" [formControl]="editAuthorForm.controls['enName']">
+  </app-text-input-v2>
+
+  <app-textarea-input type="text" label="{{ 'description' | translate }}"
+    placeholder="{{ 'Please-enter-author-description' | translate }}" icon="description"
+    default_value="{{author?.description}}" [formControl]="editAuthorForm.controls['description']">
+  </app-textarea-input>
+
+  <app-textarea-input type="text" label="{{ 'enDescription' | translate }}"
+    placeholder="{{ 'Please-enter-author-enDescription' | translate }}" icon="description"
+    default_value="{{author?.enDescription}}" [formControl]="editAuthorForm.controls['enDescription']">
+  </app-textarea-input>
+
+  <app-text-input-v2 type="text" label="createdAt" icon="calendar_today" default_value="{{author?.createdAt}}"
+    [formControl]="editAuthorForm.controls['createdAt']">
+  </app-text-input-v2>
+
+  <app-text-input-v2 type="text" label="updatedAt" icon="calendar_today" default_value="{{author?.updatedAt}}"
+    [formControl]="editAuthorForm.controls['updatedAt']">
+  </app-text-input-v2>
+
+  <app-image-upload [form]="editAuthorForm" [defaultImgUrl]="authorDefaultUrl" [imageUrl]="url" (fileSelected)="onFileSelected($event)"></app-image-upload>
+
+  <div class="btns-section mt-2">
+    <button type="button" class="admin-btn return-btn mr-2" routerLink="/admin/author">{{ 'Back' | translate }}</button>
+    <button type="submit" class="admin-btn" [disabled]="editAuthorForm.invalid">{{ 'Edit' | translate }}</button>
+  </div>
+</form>

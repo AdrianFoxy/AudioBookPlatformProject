@@ -6,12 +6,12 @@
     [formControl]="editGenreForm.controls['id']">
   </app-text-input-v2>
 
-  <app-text-input-v2 type="text" label="name" placeholder="{{ 'Please-enter-genre-name' | translate }}" icon="perm_media"
+  <app-text-input-v2 type="text" label="name" placeholder="{{ 'Please-enter-genre-name' | translate }}" icon="title"
     default_value="{{genre?.name}}" [formControl]="editGenreForm.controls['name']">
   </app-text-input-v2>
 
   <app-text-input-v2 type="text" label="enName" placeholder="{{ 'Please-enter-genre-enname' | translate }}"
-    icon="language" default_value="{{genre?.enName}}" [formControl]="editGenreForm.controls['enName']">
+    icon="title" default_value="{{genre?.enName}}" [formControl]="editGenreForm.controls['enName']">
   </app-text-input-v2>
 
   <app-text-input-v2 type="text" label="createdAt" icon="calendar_today" default_value="{{genre?.createdAt}}"

@@ -29,6 +29,10 @@ import {MatDividerModule} from '@angular/material/divider';
 
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { TextInputV2Component } from './components/text-input-v2/text-input-v2.component';
+import { MorelessComponent } from './components/moreless/moreless.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ImageUploadComponent } from './components/image-upload/image-upload.component';
+import { TextareaInputComponent } from './components/textarea-input/textarea-input.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +41,10 @@ import { TextInputV2Component } from './components/text-input-v2/text-input-v2.c
     PagerComponent,
     AudioPlayerComponent,
     TextInputComponent,
-    TextInputV2Component
+    TextInputV2Component,
+    MorelessComponent,
+    ImageUploadComponent,
+    TextareaInputComponent
   ],
   imports: [
     CommonModule,
@@ -50,7 +57,8 @@ import { TextInputV2Component } from './components/text-input-v2/text-input-v2.c
     MatFormFieldModule, MatInputModule, MatDatepickerModule, MatNativeDateModule,
     MatButtonModule, MatDialogModule, MatTableModule, MatDividerModule, MatIconModule,
     NgxSkeletonLoaderModule,
-    FormsModule
+    FormsModule,
+    MatProgressSpinnerModule
   ],
   exports:[
     RecommendationsComponent,
@@ -71,7 +79,11 @@ import { TextInputV2Component } from './components/text-input-v2/text-input-v2.c
     MatIconModule,
     MatDividerModule,
     FormsModule,
-    TextInputV2Component
+    TextInputV2Component,
+    MorelessComponent,
+    MatProgressSpinnerModule,
+    ImageUploadComponent,
+    TextareaInputComponent
   ]
 })
 export class SharedModule { }

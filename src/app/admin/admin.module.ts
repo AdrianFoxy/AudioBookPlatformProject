@@ -19,6 +19,9 @@ import { AddBookSeriesComponent } from './book-series/add-book-series/add-book-s
 import { BookLanguageComponent } from './book-language/book-language.component';
 import { AddBookLanguageComponent } from './book-language/add-book-language/add-book-language.component';
 import { EditBookLanguageComponent } from './book-language/edit-book-language/edit-book-language.component';
+import { AuthorComponent } from './author/author.component';
+import { AddAuthorComponent } from './author/add-author/add-author.component';
+import { EditAuthorComponent } from './author/edit-author/edit-author.component';
 
 
 @NgModule({
@@ -36,6 +39,9 @@ import { EditBookLanguageComponent } from './book-language/edit-book-language/ed
     BookLanguageComponent,
     AddBookLanguageComponent,
     EditBookLanguageComponent,
+    AuthorComponent,
+    AddAuthorComponent,
+    EditAuthorComponent,
   ],
   imports: [
     CommonModule,

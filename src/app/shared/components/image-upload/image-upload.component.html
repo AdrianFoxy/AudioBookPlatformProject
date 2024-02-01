@@ -1,0 +1,18 @@
+<div class="upload-section">
+  <div class="upload-container">
+    <div class="picture-container">
+      <img
+        [src]="(imageUrl && !form.get('picture')?.hasError('invalidExtension')) ?
+        imageUrl : (defaultImgUrl || (darkmodeService.isLightTheme() ? '/assets/images/light_upload.svg' : '/assets/images/dark_upload.svg'))"
+      >
+    </div>
+  </div>
+  <div class="btns-container mt-2">
+    <input type="file" name="picture" (change)="onFileSelected($event)" />
+  </div>
+  <div class="validation-container">
+    <div *ngIf="form.get('picture')?.hasError('required')">{{ 'validation-select-image' | translate }}</div>
+    <div *ngIf="form.get('picture')?.hasError('invalidExtension')">{{ 'validation-invalid-extention' | translate }}</div>
+    <div *ngIf="form.get('picture')?.hasError('invalidSize')">{{ 'validation-invalid-size' | translate }}</div>
+  </div>
+</div>

@@ -158,6 +158,17 @@
   "Book-language-enName": "Book language english name",
   "Please-enter-book-language-name": "Please enter a book language name",
   "Please-enter-book-language-enName": "Please enter a book language english name",
-  "Edit-book-language": "Edit book language"
-
+  "Edit-book-language": "Edit book language",
+  "Add-new-author": "Add new author",
+  "Please-enter-author-name": "Please enter the author's name",
+  "Please-enter-author-enName": "Please enter the author's english name",
+  "Please-enter-author-description": "Please enter the author's description",
+  "Please-enter-author-enDescription": "Please enter the author's english description",
+  "name": "Name",
+  "enName": "English name",
+  "description": "Description",
+  "enDescription": "English description",
+  "validation-select-image": "Please select an image.",
+  "validation-invalid-extention": "Please select an image with a valid extension (.jpg, .jpeg, .png).",
+  "validation-invalid-size": "Please select an image with a valid size, less or equal 2 MB."
 }

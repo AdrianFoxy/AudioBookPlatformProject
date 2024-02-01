@@ -5,7 +5,6 @@ import { SelectionDetailsComponent } from './selection-details/selection-details
 import { SelectionRoutingModule } from './selection-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { SelectionItemComponent } from './selection-item/selection-item.component';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { LibraryModule } from '../library/library.module';
 
 
@@ -20,7 +19,6 @@ import { LibraryModule } from '../library/library.module';
     CommonModule,
     SharedModule,
     SelectionRoutingModule,
-    MatProgressSpinnerModule,
     LibraryModule
  ]
 })

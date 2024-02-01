@@ -21,8 +21,6 @@ import { Subscription } from 'rxjs';
 })
 export class BookDetailsComponent implements OnInit {
 
-  isExpandedMap: { [key: number]: boolean } = {};
-
   audiobook?: SingleAudioBook;
   reviews: Review[] = [];
 
@@ -83,10 +81,6 @@ export class BookDetailsComponent implements OnInit {
       this.libraryService.incrementViewCount(+id).subscribe(() => {
       });
     }
-  }
-
-  toggleExpand(reviewId: number) {
-    this.isExpandedMap[reviewId] = !this.isExpandedMap[reviewId];
   }
 
   // BookMarks methods

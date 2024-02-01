@@ -4,6 +4,7 @@ import { paginationAndSearchParams } from 'src/app/shared/models/paramsModels/pa
 import { AdminService } from '../admin.service';
 import { ToastrService } from 'ngx-toastr';
 import { LanguageService } from 'src/app/core/services/language-service/language.service';
+import { LoaderService } from 'src/app/core/services/loader-service/loader.service';
 
 @Component({
   selector: 'app-book-series',
@@ -19,7 +20,7 @@ export class BookSeriesComponent implements OnInit{
   bookSeries: BookSeries[] = [];
 
   constructor(private adminService: AdminService, private toastr: ToastrService, private cdr: ChangeDetectorRef,
-              public langService: LanguageService) { }
+              public langService: LanguageService, public loaderService : LoaderService) { }
 
   ngOnInit() {
     this.getBookSeriesList();

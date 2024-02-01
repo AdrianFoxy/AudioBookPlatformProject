@@ -9,15 +9,8 @@
       </div>
       <hr>
       <div>
-        <p class="description mb-0" [innerHTML]="langService.whatCurrentLang() === 'en-US' ?
-          (isExpandedMap[author.id] ? formatDescription(author.enDescription) : (formatDescription(author.enDescription) | slice:0:900) +
-          (isExpandedMap[author.id] || formatDescription(author.enDescription).length <= 900 ? '' : '...')) :
-          (isExpandedMap[author.id] ? formatDescription(author.description) : (formatDescription(author.description) | slice:0:900) +
-          (isExpandedMap[author.id] || formatDescription(author.description).length <= 900 ? '' : '...'))">
-        </p>
-        <a class="show-more mt-0" *ngIf="langService.whatCurrentLang() === 'en-US' ? formatDescription(author.enDescription).length > 900 : formatDescription(author.description).length > 900" (click)="toggleExpand(author.id)">
-          {{ isExpandedMap[author.id] ? ('Less-Desc' | translate) : ('More-Desc' | translate) }}
-        </a>
+        <app-moreless [text]="langService.whatCurrentLang() === 'en-US' ? author.enDescription : author.description"
+          [wordLimit]="900" [btnStyle]="'show-more-color'"></app-moreless>
       </div>
       <hr>
     </div>

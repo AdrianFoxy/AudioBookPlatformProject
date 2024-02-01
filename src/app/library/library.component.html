@@ -80,7 +80,7 @@
                 ></ngx-mat-select-search>
               </mat-option>
               <mat-option
-                *ngFor="let genre of genres | filter: searchCtrl.value: (langService.whatCurrentLang() === 'en' ? 'enName' : 'name')"
+                *ngFor="let genre of genres | filter: searchCtrl.value: (langService.whatCurrentLang() === 'en-US' ? 'enName' : 'name')"
                 [value]="genre.id">
                 {{ langService.whatCurrentLang() === 'en-US' ? genre.enName : genre.name }}
               </mat-option>
@@ -108,7 +108,7 @@
                 ></ngx-mat-select-search>
               </mat-option>
               <mat-option
-                *ngFor="let author of authors | filter: searchCtrl.value: (langService.whatCurrentLang() === 'en' ? 'enName' : 'name')"
+                *ngFor="let author of authors | filter: searchCtrl.value: (langService.whatCurrentLang() === 'en-US' ? 'enName' : 'name')"
                 [value]="author.id">
                 {{ langService.whatCurrentLang() === 'en-US' ? author.enName : author.name }}
               </mat-option>
@@ -162,7 +162,7 @@
                 ></ngx-mat-select-search>
               </mat-option>
               <mat-option
-                *ngFor="let bookSerie of bookSeries | filter: searchCtrl.value: (langService.whatCurrentLang() === 'en' ? 'enName' : 'name')"
+                *ngFor="let bookSerie of bookSeries | filter: searchCtrl.value: (langService.whatCurrentLang() === 'en-US' ? 'enName' : 'name')"
                 [value]="bookSerie.id">
                 {{ langService.whatCurrentLang() === 'en-US' ? bookSerie.enName : bookSerie.name }}
               </mat-option>
@@ -190,7 +190,7 @@
                 ></ngx-mat-select-search>
               </mat-option>
               <mat-option
-                *ngFor="let bookLanguage of bookLanguages | filter: searchCtrl.value: (langService.whatCurrentLang() === 'en' ? 'enName' : 'name')"
+                *ngFor="let bookLanguage of bookLanguages | filter: searchCtrl.value: (langService.whatCurrentLang() === 'en-US' ? 'enName' : 'name')"
                 [value]="bookLanguage.id">
                 {{ langService.whatCurrentLang() === 'en-US' ? bookLanguage.enName : bookLanguage.name }}
               </mat-option>
@@ -234,7 +234,7 @@
                 ></ngx-mat-select-search>
               </mat-option>
               <mat-option
-                *ngFor="let genre of genres | filter: searchCtrl.value: (langService.whatCurrentLang() === 'en' ? 'enName' : 'name')"
+                *ngFor="let genre of genres | filter: searchCtrl.value: (langService.whatCurrentLang() === 'en-US' ? 'enName' : 'name')"
                 [value]="genre.id">
                 {{ langService.whatCurrentLang() === 'en-US' ? genre.enName : genre.name }}
               </mat-option>
@@ -262,7 +262,7 @@
                 ></ngx-mat-select-search>
               </mat-option>
               <mat-option
-                *ngFor="let author of authors | filter: searchCtrl.value: (langService.whatCurrentLang() === 'en' ? 'enName' : 'name')"
+                *ngFor="let author of authors | filter: searchCtrl.value: (langService.whatCurrentLang() === 'en-US' ? 'enName' : 'name')"
                 [value]="author.id">
                 {{ langService.whatCurrentLang() === 'en-US' ? author.enName : author.name }}
               </mat-option>
@@ -316,7 +316,7 @@
                 ></ngx-mat-select-search>
               </mat-option>
               <mat-option
-                *ngFor="let bookSerie of bookSeries | filter: searchCtrl.value: (langService.whatCurrentLang() === 'en' ? 'enName' : 'name')"
+                *ngFor="let bookSerie of bookSeries | filter: searchCtrl.value: (langService.whatCurrentLang() === 'en-US' ? 'enName' : 'name')"
                 [value]="bookSerie.id">
                 {{ langService.whatCurrentLang() === 'en-US' ? bookSerie.enName : bookSerie.name }}
               </mat-option>
@@ -344,7 +344,7 @@
                 ></ngx-mat-select-search>
               </mat-option>
               <mat-option
-                *ngFor="let bookLanguage of bookLanguages | filter: searchCtrl.value: (langService.whatCurrentLang() === 'en' ? 'enName' : 'name')"
+                *ngFor="let bookLanguage of bookLanguages | filter: searchCtrl.value: (langService.whatCurrentLang() === 'en-US' ? 'enName' : 'name')"
                 [value]="bookLanguage.id">
                 {{ langService.whatCurrentLang() === 'en-US' ? bookLanguage.enName : bookLanguage.name }}
               </mat-option>

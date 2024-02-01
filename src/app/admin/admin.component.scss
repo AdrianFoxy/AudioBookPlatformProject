@@ -90,3 +90,16 @@ table{
   color: var(--base-text-color)
 }
 
+.table-image{
+  max-height: 150px;
+  max-width: 150px;
+}
+
+.loader-container {
+  height: 80vh;
+  width: 100%;
+  z-index: 99;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
