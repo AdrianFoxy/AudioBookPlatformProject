@@ -15,6 +15,7 @@ import { UpdateBookSeries } from '../shared/models/adminModels/book-series/updat
 import { BookLanguage } from '../shared/models/adminModels/book-language/bookLanguage';
 import { UpdateBookLanguage } from '../shared/models/adminModels/book-language/updateBookLanguage';
 import { Author } from '../shared/models/adminModels/author/author';
+import { updateAuthor } from '../shared/models/adminModels/author/updateAuthor';
 
 @Injectable({
   providedIn: 'root'
@@ -192,6 +193,11 @@ export class AdminService {
     return this.http.get<Pagination<Author[]>>(this.baseUrl + 'AdminManagementAuthor', { params, headers, withCredentials: true });
   }
 
+  getAuthorById(id: string): Observable<Author> {
+    const headers = this.createHeaders();
+    return this.http.get<Author>(this.baseUrl + 'AdminManagementAuthor/' + id, { headers: headers, withCredentials: true })
+  }
+
   addAuthor(model: any) {
     const headers = new HttpHeaders().set('Accept-Language', this.getLang());
 
@@ -203,6 +209,19 @@ export class AdminService {
     formData.append("picture", model.picture);
 
     return this.http.post(this.baseUrl + 'AdminManagementAuthor', formData, { headers, withCredentials: true });
+  }
+
+  updateAuthor(id: string, model: updateAuthor): Observable<Author> {
+    const headers = new HttpHeaders().set('Accept-Language', this.getLang());
+
+    const formData = new FormData();
+    formData.append("name", model.name);
+    formData.append("enName", model.enName);
+    formData.append("description", model.description);
+    formData.append("enDescription", model.enDescription);
+    formData.append("picture", model.picture);
+
+    return this.http.put<Author>(this.baseUrl + 'AdminManagementAuthor/' + id, formData, { headers: headers, withCredentials: true });
   }
 
   deleteAuthor(id: number) {

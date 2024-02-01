@@ -1,7 +1,10 @@
 <div class="upload-section">
   <div class="upload-container">
     <div class="picture-container">
-      <img [src]="(imageUrl && !form.get('picture')?.hasError('invalidExtension')) ? imageUrl : (darkmodeService.isLightTheme() ? '/assets/images/light_upload.svg' : '/assets/images/dark_upload.svg')">
+      <img
+        [src]="(imageUrl && !form.get('picture')?.hasError('invalidExtension')) ?
+        imageUrl : (defaultImgUrl || (darkmodeService.isLightTheme() ? '/assets/images/light_upload.svg' : '/assets/images/dark_upload.svg'))"
+      >
     </div>
   </div>
   <div class="btns-container mt-2">

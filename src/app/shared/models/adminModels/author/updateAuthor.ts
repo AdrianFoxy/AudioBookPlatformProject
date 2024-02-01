@@ -3,6 +3,6 @@ export interface updateAuthor {
   enName: string;
   description: string;
   enDescription: string;
-  picture: File;
+  picture: string | File;
 
 }

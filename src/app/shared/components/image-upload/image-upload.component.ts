@@ -15,6 +15,8 @@ export class ImageUploadComponent {
 
   @Input() form!: FormGroup;
   @Input() imageUrl: string = '';
+  @Input() defaultImgUrl: string = '';
+
   @Output() fileSelected = new EventEmitter<Event>();
 
   onFileSelected(event: Event): void {
