@@ -1,16 +1,17 @@
 
 <div class="form-floating mt-3 mb-3">
   <input
-  type="{{ type }}"
-  [formControl]="control"
-  placeholder="{{ label }}"
-  class="form-control"
-  autocomplete="{{ label }}"
-  [ngClass]="(control.touched) ? (control.invalid ? 'is-invalid' : 'is-valid') : null"
-  [readOnly]="isDisabled"
->
-<div *ngIf="control.status === 'PENDING' && control.value !== defaultValue" class="fa fa-spinner fa-spin loader"></div>
-  <label for="floatingInput">{{label}}</label>
+    type="{{ type }}"
+    [formControl]="control"
+    placeholder="{{ label }}"
+    class="form-control"
+    autocomplete="{{ label }}"
+    [ngClass]="(control.touched) ? (control.invalid ? 'is-invalid' : 'is-valid') : null"
+    [readOnly]="isDisabled"
+    [id]="'floatingInput_' + label"
+  >
+  <div *ngIf="control.status === 'PENDING' && control.value !== defaultValue" class="fa fa-spinner fa-spin loader"></div>
+  <label [for]="'floatingInput_' + label">{{ label }}</label>
   <div *ngIf="control.errors?.['required']" class="invalid-feedback">{{ 'validation-please-enter' | translate }} {{label}}</div>
   <div *ngIf="control.errors?.['email']" class="invalid-feedback">{{ 'validation-invalid-email' | translate }}</div>
   <div *ngIf="control.errors?.['pattern']" class="invalid-feedback">{{ 'validation-password-req' | translate }}</div>
