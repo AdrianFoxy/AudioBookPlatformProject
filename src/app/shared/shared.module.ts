@@ -33,6 +33,9 @@ import { MorelessComponent } from './components/moreless/moreless.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ImageUploadComponent } from './components/image-upload/image-upload.component';
 import { TextareaInputComponent } from './components/textarea-input/textarea-input.component';
+import { StepperComponent } from './components/stepper/stepper.component';
+import {CdkStepperModule} from '@angular/cdk/stepper';
+
 
 @NgModule({
   declarations: [
@@ -44,7 +47,8 @@ import { TextareaInputComponent } from './components/textarea-input/textarea-inp
     TextInputV2Component,
     MorelessComponent,
     ImageUploadComponent,
-    TextareaInputComponent
+    TextareaInputComponent,
+    StepperComponent
   ],
   imports: [
     CommonModule,
@@ -54,11 +58,21 @@ import { TextareaInputComponent } from './components/textarea-input/textarea-inp
     PaginationModule.forRoot(),
     TranslateModule.forChild(),
     ReactiveFormsModule,
-    MatFormFieldModule, MatInputModule, MatDatepickerModule, MatNativeDateModule,
-    MatButtonModule, MatDialogModule, MatTableModule, MatDividerModule, MatIconModule,
     NgxSkeletonLoaderModule,
     FormsModule,
-    MatProgressSpinnerModule
+    CdkStepperModule,
+
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatTableModule,
+    MatDividerModule,
+    MatIconModule,
+    MatProgressSpinnerModule,
+
   ],
   exports:[
     RecommendationsComponent,
@@ -67,10 +81,22 @@ import { TextareaInputComponent } from './components/textarea-input/textarea-inp
     PagerComponent,
     AudioPlayerComponent,
     TranslateModule,
+    TextInputV2Component,
+    MorelessComponent,
+    ImageUploadComponent,
+    TextInputComponent,
+    TextareaInputComponent,
+    StepperComponent,
+
+    CdkStepperModule,
+
     ReactiveFormsModule,
     BsDropdownModule,
-    TextInputComponent,
-    MatFormFieldModule, MatInputModule, MatDatepickerModule, MatNativeDateModule,
+    MatProgressSpinnerModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     MatTableModule,
     MatFormFieldModule,
     MatSelectModule,
@@ -78,12 +104,7 @@ import { TextareaInputComponent } from './components/textarea-input/textarea-inp
     MatChipsModule,
     MatIconModule,
     MatDividerModule,
-    FormsModule,
-    TextInputV2Component,
-    MorelessComponent,
-    MatProgressSpinnerModule,
-    ImageUploadComponent,
-    TextareaInputComponent
+    FormsModule
   ]
 })
 export class SharedModule { }
