@@ -41,6 +41,7 @@
 }
 
 .admin-btn{
+  white-space: nowrap;
   background-color: var(--main-btn-color);
   border: 2px solid var(--base-border-color);
   border-bottom: 6px solid var(--base-border-color);

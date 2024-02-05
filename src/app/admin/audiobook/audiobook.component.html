@@ -1,0 +1,90 @@
+<div class="d-flex flex-wrap justify-content-between align-items-center">
+  <app-paging-header [totalCount]="totalCount" [pageNumber]="paginationAndSearchParams.pageNumber" [pageSize]="paginationAndSearchParams.pageSize"></app-paging-header>
+
+  <div class="d-flex flex-wrap">
+    <form class="search form-inline mr-2 mt-2 mb-2" (submit)="onSearch($event)">
+      <div class="d-flex align-items-center">
+        <input (keyup.enter)="onSearch($event)" id="librarySearchinput" class="form-control form-control-sm" type="text"
+          placeholder="{{ 'Search' | translate }}" aria-label="Search" #search>
+        <i (click)="onSearch($event)" class="fa fa-search ml-2 search-btn-cl" style="cursor: pointer"
+          aria-hidden="true"></i>
+      </div>
+    </form>
+    <button class="admin-btn mb-2" routerLink="/admin/audiobook/add-audiobook">
+      {{ 'Add-new-audiobook' | translate }}
+    </button>
+  </div>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-bordered table-hover rounded-3 overflow-hidden">
+    <thead lc>
+      <tr>
+        <th scope="col">id</th>
+        <th scope="col">name</th>
+        <th scope="col">author</th>
+        <th scope="col">narrator</th>
+        <th scope="col">genres</th>
+        <th scope="col">language</th>
+        <th scope="col">bookSeries</th>
+        <th scope="col">bookDuration</th>
+        <th scope="col">rating</th>
+        <th scope="col">{{ 'Actions' | translate }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let audiobook of audiobooks">
+        <th scope="row">{{ audiobook.id }}</th>
+        <td>{{ audiobook.name }}</td>
+        <td>
+          <mat-chip *ngFor="let author of audiobook.author" class="mb-1 mr-1">
+            {{ langService.whatCurrentLang() === 'en-US' ? author.enName : author.name }}
+          </mat-chip>
+        </td>
+        <td>
+          <mat-chip class="mb-1 mr-1"> {{audiobook.narrator.name}} </mat-chip>
+        </td>
+        <td>
+          <mat-chip *ngFor="let genre of audiobook.genre" class="mb-1 mr-1">
+            {{ langService.whatCurrentLang() === 'en-US' ? genre.enName : genre.name }}
+          </mat-chip>
+        </td>
+        <td>
+          <mat-chip class="mb-1 mr-1">
+            {{ langService.whatCurrentLang() === 'en-US' ? audiobook.bookLanguage.enName : audiobook.bookLanguage.name }}
+          </mat-chip>
+        </td>
+        <td>
+          <mat-chip class="mb-1 mr-1">
+            {{ langService.whatCurrentLang() === 'en-US' ? audiobook.bookSeries.enName : audiobook.bookSeries.name }}
+          </mat-chip>
+        </td>
+        <td>{{ audiobook.bookDuration }}</td>
+        <td>{{ audiobook.rating }}</td>
+        <td class="btn-td">
+          <button class="admin-btn mr-1 action mb-1" routerLink="/admin/audiobook/details-audiobook/{{audiobook.id}}">
+            <i class="fa fa-info"></i>
+            {{ 'Details' | translate }}
+          </button>
+          <button class="admin-btn action mr-1 mb-1" routerLink="/admin/audiobook/edit-audiobook/{{audiobook.id}}">
+            <i class="fa fa-edit"></i>
+            {{ 'Edit' | translate }}
+          </button>
+          <button class="admin-btn action delete-btn">
+            <i class="fa fa-trash"></i>
+            {{ 'Delete' | translate }}
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div *ngIf="totalCount == 0">
+    <div *ngIf="loaderService.isLoading | async" class="loader-container">
+      <mat-spinner></mat-spinner>
+    </div>
+  </div>
+</div>
+
+<div class="d-flex flex-wrap justify-content-center mt-1" *ngIf="totalCount > 0">
+  <app-pager [totalCount]="totalCount" [pageSize]="paginationAndSearchParams.pageSize" (pageChanged)="onPageChanged($event)"></app-pager>
+</div>

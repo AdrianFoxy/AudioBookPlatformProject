@@ -170,5 +170,7 @@
   "enDescription": "Опис англійскою",
   "validation-select-image": "Будь ласка оберіть файл",
   "validation-invalid-extention": "Будь ласка оберіть файл з одним з наступних розширень: (.jpg, .jpeg, .png).",
-  "validation-invalid-size": "Будь ласка оберіть файл, що менше або дорівнює 2 МБ."
+  "validation-invalid-size": "Будь ласка оберіть файл, що менше або дорівнює 2 МБ.",
+  "Add-new-audiobook": "Додати нову аудіокнигу",
+  "Details": "Деталі"
 }

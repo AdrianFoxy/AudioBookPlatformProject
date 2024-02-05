@@ -16,6 +16,7 @@ import { BookLanguage } from '../shared/models/adminModels/book-language/bookLan
 import { UpdateBookLanguage } from '../shared/models/adminModels/book-language/updateBookLanguage';
 import { Author } from '../shared/models/adminModels/author/author';
 import { updateAuthor } from '../shared/models/adminModels/author/updateAuthor';
+import { AudioBookInList } from '../shared/models/adminModels/audiobook/audiobookInList';
 
 @Injectable({
   providedIn: 'root'
@@ -229,4 +230,16 @@ export class AdminService {
     const headers = this.createHeaders();
     return this.http.delete<Author>(this.baseUrl + 'AdminManagementAuthor/' + id, { headers: headers, withCredentials: true });
   }
+
+  // AudioBook Section
+  getAudioBooksList(paginationAndSearchParams: paginationAndSearchParams) {
+    const headers = this.createHeaders();
+    let params = new HttpParams();
+    params = params.append('PageIndex', paginationAndSearchParams.pageNumber);
+    params = params.append('PageSize', paginationAndSearchParams.pageSize);
+    if (paginationAndSearchParams.search) params = params.append('search', paginationAndSearchParams.search);
+
+    return this.http.get<Pagination<AudioBookInList[]>>(this.baseUrl + 'AdminManagmentAudioBook', { params, headers, withCredentials: true });
+  }
+
 }

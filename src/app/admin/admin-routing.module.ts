@@ -18,6 +18,10 @@ import { EditBookLanguageComponent } from './book-language/edit-book-language/ed
 import { AuthorComponent } from './author/author.component';
 import { AddAuthorComponent } from './author/add-author/add-author.component';
 import { EditAuthorComponent } from './author/edit-author/edit-author.component';
+import { AudiobookComponent } from './audiobook/audiobook.component';
+import { AddAudiobookComponent } from './audiobook/add-audiobook/add-audiobook.component';
+import { EditAudiobookComponent } from './audiobook/edit-audiobook/edit-audiobook.component';
+import { DetailsAudiobookComponent } from './audiobook/details-audiobook/details-audiobook.component';
 
 const routes: Routes = [
   {path: '', component: AdminComponent, canActivate: [AuthGuard, adminGuard]},
@@ -35,7 +39,11 @@ const routes: Routes = [
   {path: 'book-language/edit-book-language/:id', component: EditBookLanguageComponent, canActivate: [AuthGuard, adminGuard]},
   {path: 'author', component: AuthorComponent,  canActivate: [AuthGuard, adminGuard]},
   {path: 'author/add-author', component: AddAuthorComponent, canActivate: [AuthGuard, adminGuard]},
-  {path: 'author/edit-author/:id', component: EditAuthorComponent, canActivate: [AuthGuard, adminGuard]}
+  {path: 'author/edit-author/:id', component: EditAuthorComponent, canActivate: [AuthGuard, adminGuard]},
+  {path: 'audiobook', component: AudiobookComponent,  canActivate: [AuthGuard, adminGuard]},
+  {path: 'audiobook/add-audiobook', component: AddAudiobookComponent, canActivate: [AuthGuard, adminGuard]},
+  {path: 'audiobook/edit-audiobook/:id', component: EditAudiobookComponent, canActivate: [AuthGuard, adminGuard]},
+  {path: 'audiobook/details-audiobook/:id', component: DetailsAudiobookComponent, canActivate: [AuthGuard, adminGuard]}
 ]
 
 @NgModule({
