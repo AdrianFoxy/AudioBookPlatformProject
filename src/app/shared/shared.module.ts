@@ -26,6 +26,7 @@ import {MatButtonModule } from '@angular/material/button';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatTableModule} from '@angular/material/table';
 import {MatDividerModule} from '@angular/material/divider';
+import { MatOptionModule } from '@angular/material/core';
 
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { TextInputV2Component } from './components/text-input-v2/text-input-v2.component';
@@ -35,6 +36,7 @@ import { ImageUploadComponent } from './components/image-upload/image-upload.com
 import { TextareaInputComponent } from './components/textarea-input/textarea-input.component';
 import { StepperComponent } from './components/stepper/stepper.component';
 import {CdkStepperModule} from '@angular/cdk/stepper';
+import { SingleSelectComponent } from './components/single-select/single-select.component';
 
 
 @NgModule({
@@ -48,7 +50,8 @@ import {CdkStepperModule} from '@angular/cdk/stepper';
     MorelessComponent,
     ImageUploadComponent,
     TextareaInputComponent,
-    StepperComponent
+    StepperComponent,
+    SingleSelectComponent
   ],
   imports: [
     CommonModule,
@@ -73,6 +76,9 @@ import {CdkStepperModule} from '@angular/cdk/stepper';
     MatIconModule,
     MatProgressSpinnerModule,
 
+    MatSelectModule,
+    MatOptionModule
+
   ],
   exports:[
     RecommendationsComponent,
@@ -87,6 +93,7 @@ import {CdkStepperModule} from '@angular/cdk/stepper';
     TextInputComponent,
     TextareaInputComponent,
     StepperComponent,
+    SingleSelectComponent,
 
     CdkStepperModule,
 

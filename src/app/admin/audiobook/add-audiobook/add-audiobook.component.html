@@ -1,1 +1,37 @@
-<p>add-audiobook works!</p>
+<app-stepper [linearModeSelected]="false" #appStepper>
+  <cdk-step [label]="'AudioBook'">
+    <h1>Add new AudioBook</h1>
+    <hr>
+    <form [formGroup]="addAudioBookForm" (ngSubmit)="onFormSubmit()">
+      <div>
+        <app-text-input-v2 type="text" label="{{ 'name' | translate }}"
+          placeholder="{{ 'Please-enter-author-name' | translate }}" icon="title"
+          [formControl]="addAudioBookForm.controls['name']">
+        </app-text-input-v2>
+
+        <app-textarea-input type="text" label="{{ 'description' | translate }}"
+          placeholder="{{ 'Please-enter-author-description' | translate }}" icon="description"
+          [formControl]="addAudioBookForm.controls['description']">
+        </app-textarea-input>
+
+        <app-single-select [formControl]="addAudioBookForm.controls['bookSeriesId']" [label]="'Select your favorite food'" [selectList]="bookSeries"
+        ></app-single-select>
+
+        <app-image-upload [form]="addAudioBookForm" [imageUrl]="url"
+          (fileSelected)="onFileSelected($event)"></app-image-upload>
+
+        <div class="btns-section mt-2">
+          <button type="button" class="admin-btn return-btn mr-2" routerLink="/admin/author">{{ 'Back' | translate
+            }}</button>
+          <button type="submit" class="admin-btn" [disabled]="addAudioBookForm.invalid">{{ 'Add-new-author' | translate
+            }}</button>
+        </div>
+      </div>
+    </form>
+
+  </cdk-step>
+  <cdk-step [label]="'AudioFiles'">
+    <h1>Add new audio files</h1>
+    Step2
+  </cdk-step>
+</app-stepper>
