@@ -6,7 +6,9 @@ import { ToastrService } from 'ngx-toastr';
 import { LanguageService } from 'src/app/core/services/language-service/language.service';
 import { CustomValidators } from 'src/app/core/validators/customValidators';
 import { LibraryService } from 'src/app/library/library.service';
-import { BookSeries } from 'src/app/shared/models/libraryModels/bookSeries';
+import { BookSeries } from 'src/app/shared/models/selectModels/bookSeries';
+import { Narrator } from 'src/app/shared/models/selectModels/narrator';
+import { BookLanguage } from 'src/app/shared/models/selectModels/bookLanguage';
 
 @Component({
   selector: 'app-add-audiobook',
@@ -19,24 +21,29 @@ export class AddAudiobookComponent implements OnInit, OnDestroy{
   url = '';
 
   bookSeries: BookSeries[] = [];
+  narrators: Narrator[] = [];
+  languages: BookLanguage[] = [];
+
 
   constructor(private adminService: AdminService, private libraryService: LibraryService,
      private toastr: ToastrService, public langService: LanguageService) {
   }
   ngOnInit(): void {
     this.getBookSeriesForFilter();
+    this.getNarratorForSelect();
+    this.getLanguagesForSelect();
   }
 
   addAudioBookForm = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.maxLength(256)]),
     description: new FormControl('', [Validators.required, Validators.maxLength(800)]),
-    bookLanguageId: new FormControl (['', Validators.required]),
-    narratorId: new FormControl (['', Validators.required]),
-    bookSeriesId: new FormControl (['', Validators.required]),
-    orderInSeries: new FormControl (['', Validators.required]),
-    authorsIds: new FormControl ([[], Validators.required]),
-    genresIds: new FormControl ([[], Validators.required]),
-    bookSelectionsIds: new FormControl ([[], Validators.required]),
+    narratorId: new FormControl('', [Validators.required]),
+    bookSeriesId: new FormControl('', [Validators.required]),
+    orderInSeries: new FormControl('', [Validators.required]),
+    bookLanguageId: new FormControl('', [Validators.required]),
+    // authorsIds: new FormControl([], [Validators.required]),
+    // genresIds: new FormControl([], [Validators.required]),
+    // bookSelectionsIds: new FormControl('', [Validators.required]),
     picture: new FormControl(null as File | null, [
       Validators.required,
       CustomValidators.fileExtensionValidator(['jpg', 'jpeg', 'png']),
@@ -101,6 +108,20 @@ export class AddAudiobookComponent implements OnInit, OnDestroy{
   getBookSeriesForFilter(){
     this.libraryService.getBookSeriesForFilter().subscribe({
       next: response => this.bookSeries = response,
+      error: error => console.log(error)
+    })
+  }
+
+  getNarratorForSelect(){
+    this.libraryService.getNarratorsForFilter().subscribe({
+      next: response => this.narrators = response,
+      error: error => console.log(error)
+    })
+  }
+
+  getLanguagesForSelect(){
+    this.libraryService.getBookLanguagesForFilter().subscribe({
+      next: response => this.languages = response,
       error: error => console.log(error)
     })
   }

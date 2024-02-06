@@ -1,7 +1,7 @@
 import { Author } from "./author";
 import { BookAudioFile } from "./bookAudioFile";
-import { BookLanguage } from "./bookLanguage";
-import { Genre } from "./genre";
+import { BookLanguage } from "../selectModels/bookLanguage";
+import { Genre } from "../selectModels/genre";
 import { Narrator } from "./narrator";
 
 export interface SingleAudioBook {

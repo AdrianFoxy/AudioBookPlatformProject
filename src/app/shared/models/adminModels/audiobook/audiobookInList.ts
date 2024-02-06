@@ -1,6 +1,6 @@
 import { Author } from "../../libraryModels/author";
-import { BookLanguage } from "../../libraryModels/bookLanguage";
-import { Genre } from "../../libraryModels/genre";
+import { BookLanguage } from "../../selectModels/bookLanguage";
+import { Genre } from "../../selectModels/genre";
 import { Narrator } from "../../libraryModels/narrator";
 
 export interface AudioBookInList {

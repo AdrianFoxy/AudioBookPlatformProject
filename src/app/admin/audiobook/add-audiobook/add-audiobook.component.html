@@ -1,11 +1,10 @@
 <app-stepper [linearModeSelected]="false" #appStepper>
   <cdk-step [label]="'AudioBook'">
-    <h1>Add new AudioBook</h1>
     <hr>
     <form [formGroup]="addAudioBookForm" (ngSubmit)="onFormSubmit()">
       <div>
-        <app-text-input-v2 type="text" label="{{ 'name' | translate }}"
-          placeholder="{{ 'Please-enter-author-name' | translate }}" icon="title"
+        <app-text-input-v2 type="text" label="name"
+          placeholder="please enter audiobook name" icon="title"
           [formControl]="addAudioBookForm.controls['name']">
         </app-text-input-v2>
 
@@ -14,24 +13,46 @@
           [formControl]="addAudioBookForm.controls['description']">
         </app-textarea-input>
 
-        <app-single-select [formControl]="addAudioBookForm.controls['bookSeriesId']" [label]="'Select your favorite food'" [selectList]="bookSeries"
-        ></app-single-select>
+        <app-single-select
+          [formControl]="addAudioBookForm.controls['bookSeriesId']"
+          [label]="'book series'"
+          [selectList]="bookSeries"
+          [localization]="true">
+        </app-single-select>
 
-        <app-image-upload [form]="addAudioBookForm" [imageUrl]="url"
-          (fileSelected)="onFileSelected($event)"></app-image-upload>
+        <app-text-input-v2 type="text" label="order in series"
+          placeholder="please enter order in series" icon="title"
+          [formControl]="addAudioBookForm.controls['orderInSeries']">
+        </app-text-input-v2>
+
+        <app-single-select
+          [formControl]="addAudioBookForm.controls['narratorId']"
+          [label]="'narrator'"
+          [selectList]="narrators">
+        </app-single-select>
+
+        <app-single-select
+          [formControl]="addAudioBookForm.controls['bookLanguageId']"
+          [label]="'language'"
+          [selectList]="languages"
+          [localization]="true">
+        </app-single-select>
+
+        <app-image-upload
+          [form]="addAudioBookForm"
+          [imageUrl]="url"
+          (fileSelected)="onFileSelected($event)">
+        </app-image-upload>
 
         <div class="btns-section mt-2">
-          <button type="button" class="admin-btn return-btn mr-2" routerLink="/admin/author">{{ 'Back' | translate
-            }}</button>
-          <button type="submit" class="admin-btn" [disabled]="addAudioBookForm.invalid">{{ 'Add-new-author' | translate
-            }}</button>
+          <button type="button" class="admin-btn return-btn mr-2" routerLink="/admin/author">{{ 'Back' | translate }}</button>
+          <button type="submit" class="admin-btn" [disabled]="addAudioBookForm.invalid">{{ 'Add-new-author' | translate }}</button>
         </div>
       </div>
     </form>
 
   </cdk-step>
   <cdk-step [label]="'AudioFiles'">
-    <h1>Add new audio files</h1>
-    Step2
+    <hr>
   </cdk-step>
 </app-stepper>

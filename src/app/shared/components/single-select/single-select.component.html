@@ -1,6 +1,33 @@
 <mat-form-field>
   <mat-label>{{ label }}</mat-label>
   <mat-select [formControl]="control">
-    <mat-option *ngFor="let item of selectList" [value]="item.id">{{ item.name }}</mat-option>
+    <mat-option>
+      <ngx-mat-select-search
+        [formControl]="searchCtrl"
+        placeholderLabel="{{ 'Search' | translate }}"
+        noEntriesFoundLabel="{{ 'FilteringnoEntriesFoundLabel' | translate }}"
+      ></ngx-mat-select-search>
+    </mat-option>
+
+    <ng-container *ngIf="localization; else showName">
+      <mat-option
+        *ngFor="let item of selectList | filter: searchCtrl.value: (langService.whatCurrentLang() === 'en-US' ? 'enName' : 'name')"
+        [value]="item.id">
+        {{ langService.whatCurrentLang() === 'en-US' ? item.enName : item.name }}
+      </mat-option>
+    </ng-container>
+
+    <ng-template #showName>
+      <mat-option
+        *ngFor="let item of selectList | filter: searchCtrl.value: 'name'"
+        [value]="item.id">
+        {{ item.name }}
+      </mat-option>
+    </ng-template>
+
   </mat-select>
+
+  <mat-error  *ngIf="control.errors?.['required']">
+    {{ 'validation-please-enter' | translate }} {{label}}
+  </mat-error>
 </mat-form-field>
