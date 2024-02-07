@@ -6,9 +6,12 @@ import { ToastrService } from 'ngx-toastr';
 import { LanguageService } from 'src/app/core/services/language-service/language.service';
 import { CustomValidators } from 'src/app/core/validators/customValidators';
 import { LibraryService } from 'src/app/library/library.service';
-import { BookSeries } from 'src/app/shared/models/selectModels/bookSeries';
-import { Narrator } from 'src/app/shared/models/selectModels/narrator';
-import { BookLanguage } from 'src/app/shared/models/selectModels/bookLanguage';
+import { SelectBookSeries } from 'src/app/shared/models/selectModels/selectbookSeries';
+import { SelectGenre } from 'src/app/shared/models/selectModels/selectGenre';
+import { SelectNarrator } from 'src/app/shared/models/selectModels/selectNarrator';
+import { SelectBookLanguage } from 'src/app/shared/models/selectModels/selectBookLanguage';
+import { SelectAuthor } from 'src/app/shared/models/selectModels/selectAuthor';
+import { AddAudioFile } from 'src/app/shared/models/adminModels/audiobook/audiofile/addAudioFile';
 
 @Component({
   selector: 'app-add-audiobook',
@@ -20,18 +23,23 @@ export class AddAudiobookComponent implements OnInit, OnDestroy{
   private addAudioBookSubscription?: Subscription;
   url = '';
 
-  bookSeries: BookSeries[] = [];
-  narrators: Narrator[] = [];
-  languages: BookLanguage[] = [];
+  bookSeries: SelectBookSeries[] = [];
+  narrators: SelectNarrator[] = [];
+  languages: SelectBookLanguage[] = [];
+  genres: SelectGenre[] = [];
+  authors: SelectAuthor[] = [];
 
+  addAudioFiles: AddAudioFile[] = [];
 
   constructor(private adminService: AdminService, private libraryService: LibraryService,
      private toastr: ToastrService, public langService: LanguageService) {
   }
   ngOnInit(): void {
-    this.getBookSeriesForFilter();
+    this.getBookSeriesForSelect();
     this.getNarratorForSelect();
     this.getLanguagesForSelect();
+    this.getGenresForSelect();
+    this.getAuthorForSelect()
   }
 
   addAudioBookForm = new FormGroup({
@@ -41,9 +49,9 @@ export class AddAudiobookComponent implements OnInit, OnDestroy{
     bookSeriesId: new FormControl('', [Validators.required]),
     orderInSeries: new FormControl('', [Validators.required]),
     bookLanguageId: new FormControl('', [Validators.required]),
-    // authorsIds: new FormControl([], [Validators.required]),
-    // genresIds: new FormControl([], [Validators.required]),
-    // bookSelectionsIds: new FormControl('', [Validators.required]),
+    authorsIds: new FormControl([], [Validators.required]),
+    genresIds: new FormControl([], [Validators.required]),
+    audioFiles: new FormControl([] as AddAudioFile[]),
     picture: new FormControl(null as File | null, [
       Validators.required,
       CustomValidators.fileExtensionValidator(['jpg', 'jpeg', 'png']),
@@ -62,11 +70,8 @@ export class AddAudiobookComponent implements OnInit, OnDestroy{
         // Assign the data URL to the 'url' variable
         this.url = e.target.result;
       };
-
       // Read the image as a data URL
       reader.readAsDataURL(uploadedfile);
-
-      // Update the form control value
       this.addAudioBookForm.patchValue({
         picture: uploadedfile
       });
@@ -105,7 +110,7 @@ export class AddAudiobookComponent implements OnInit, OnDestroy{
     this.addAudioBookForm.setErrors({ 'invalid': true });
   }
 
-  getBookSeriesForFilter(){
+  getBookSeriesForSelect(){
     this.libraryService.getBookSeriesForFilter().subscribe({
       next: response => this.bookSeries = response,
       error: error => console.log(error)
@@ -125,6 +130,21 @@ export class AddAudiobookComponent implements OnInit, OnDestroy{
       error: error => console.log(error)
     })
   }
+
+  getGenresForSelect(){
+    this.libraryService.getGenresForFilter().subscribe({
+      next: response => this.genres = response,
+      error: error => console.log(error)
+    })
+  }
+
+  getAuthorForSelect(){
+    this.libraryService.getAuthorsForFilter().subscribe({
+      next: response => this.authors = response,
+      error: error => console.log(error)
+    })
+  }
+
 
   ngOnDestroy(): void {
     this.addAudioBookSubscription?.unsubscribe();

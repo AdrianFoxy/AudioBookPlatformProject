@@ -1,16 +1,17 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AudioBook } from '../shared/models/libraryModels/audiobook';
 import { LibraryService } from './library.service';
-import { Genre } from '../shared/models/selectModels/genre';
+import { SelectGenre } from '../shared/models/selectModels/selectGenre';
 import { FormControl } from '@angular/forms';
 import { filtreingParams } from '../shared/models/paramsModels/filtreingParams';
-import { Author } from '../shared/models/libraryModels/author';
-import { Narrator } from '../shared/models/libraryModels/narrator';
-import { BookSeries } from '../shared/models/selectModels/bookSeries';
-import { BookLanguage } from '../shared/models/selectModels/bookLanguage';
+import { SelectBookSeries } from '../shared/models/selectModels/selectbookSeries';
+import { SelectBookLanguage } from '../shared/models/selectModels/selectBookLanguage';
 import { sortingAndPaginationParams } from '../shared/models/paramsModels/sortingAndPaginationParams';
 import { LanguageService } from '../core/services/language-service/language.service';
 import { LoaderService } from '../core/services/loader-service/loader.service';
+
+import { SelectAuthor } from '../shared/models/selectModels/selectAuthor';
+import { SelectNarrator } from '../shared/models/selectModels/selectNarrator';
 
 @Component({
   selector: 'app-library',
@@ -25,11 +26,11 @@ export class LibraryComponent implements OnInit {
   filretingParams = new filtreingParams();
   sortingAndPaginationParams = new sortingAndPaginationParams();
 
-  genres: Genre[] = [];
-  authors: Author[] = [];
-  narrators: Narrator[] = [];
-  bookSeries: BookSeries[] = [];
-  bookLanguages: BookLanguage[] = [];
+  genres: SelectGenre[] = [];
+  authors: SelectAuthor[] = [];
+  narrators: SelectNarrator[] = [];
+  bookSeries: SelectBookSeries[] = [];
+  bookLanguages: SelectBookLanguage[] = [];
 
   sortOptions = [
     { name: 'За алфавітом', engName: 'Alphabetically', value: 'name' },

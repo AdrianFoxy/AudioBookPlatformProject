@@ -41,6 +41,7 @@ import { SingleSelectComponent } from './components/single-select/single-select.
 
 
 import { FilterPipe } from './pipes/filter.pipe';
+import { MultiSelectComponent } from './components/multi-select/multi-select.component';
 
 
 @NgModule({
@@ -56,6 +57,7 @@ import { FilterPipe } from './pipes/filter.pipe';
     TextareaInputComponent,
     StepperComponent,
     SingleSelectComponent,
+    MultiSelectComponent,
     FilterPipe
   ],
   imports: [
@@ -81,10 +83,11 @@ import { FilterPipe } from './pipes/filter.pipe';
     MatIconModule,
     MatProgressSpinnerModule,
 
+    MatChipsModule,
+
     MatSelectModule,
     MatOptionModule,
     NgxMatSelectSearchModule
-
   ],
   exports:[
     RecommendationsComponent,
@@ -100,6 +103,7 @@ import { FilterPipe } from './pipes/filter.pipe';
     TextareaInputComponent,
     StepperComponent,
     SingleSelectComponent,
+    MultiSelectComponent,
 
     CdkStepperModule,
 

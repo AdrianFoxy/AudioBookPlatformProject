@@ -1,16 +1,17 @@
 import { Author } from "../../libraryModels/author";
-import { BookLanguage } from "../../selectModels/bookLanguage";
-import { Genre } from "../../selectModels/genre";
-import { Narrator } from "../../libraryModels/narrator";
+import { SelectBookLanguage } from "../../selectModels/selectBookLanguage";
+import { SelectGenre } from "../../selectModels/selectGenre";
+import { SelectBookSeries } from "../../selectModels/selectbookSeries";
+import { SelectNarrator } from "../../selectModels/selectNarrator";
 
 export interface AudioBookInList {
   id: number;
   name: string;
   rating: number;
   bookDuration: string;
-  genre: Genre[];
+  genre: SelectGenre[];
   author: Author[];
-  bookLanguage: BookLanguage;
-  narrator: Narrator;
-  bookSeries: BookLanguage;
+  bookLanguage: SelectBookLanguage;
+  narrator: SelectNarrator;
+  bookSeries: SelectBookSeries;
 }

@@ -13,6 +13,20 @@
           [formControl]="addAudioBookForm.controls['description']">
         </app-textarea-input>
 
+        <app-multi-select
+          [formControl]="addAudioBookForm.controls['authorsIds']"
+          [label]="'authors'"
+          [selectList]="authors"
+          [localization]="true">
+        </app-multi-select>
+
+        <app-multi-select
+          [formControl]="addAudioBookForm.controls['genresIds']"
+          [label]="'genres'"
+          [selectList]="genres"
+          [localization]="true">
+        </app-multi-select>
+
         <app-single-select
           [formControl]="addAudioBookForm.controls['bookSeriesId']"
           [label]="'book series'"
@@ -21,7 +35,7 @@
         </app-single-select>
 
         <app-text-input-v2 type="text" label="order in series"
-          placeholder="please enter order in series" icon="title"
+          placeholder="please enter order in series" icon="border_color"
           [formControl]="addAudioBookForm.controls['orderInSeries']">
         </app-text-input-v2>
 
@@ -54,5 +68,11 @@
   </cdk-step>
   <cdk-step [label]="'AudioFiles'">
     <hr>
+    <div class="card">
+      <div class="card-body">
+        This is some text within a card body.
+      </div>
+    </div>
+
   </cdk-step>
 </app-stepper>

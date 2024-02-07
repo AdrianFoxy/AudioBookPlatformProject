@@ -1,3 +1,5 @@
+import { AddAudioFile } from "./audiofile/addAudioFile";
+
 interface AddAudioBook {
   name: string;
   description: string;
@@ -10,11 +12,4 @@ interface AddAudioBook {
   bookSelectionsIds: number[];
   audioFileUrls: AddAudioFile[];
   picture?: File;
-}
-
-interface AddAudioFile {
-  name: string;
-  audioFileUrl: string;
-  duration: number;
-  playbackQueue: number;
 }
