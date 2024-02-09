@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AdminService } from '../../admin.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -30,6 +30,7 @@ export class AddAudiobookComponent implements OnInit, OnDestroy{
   authors: SelectAuthor[] = [];
 
   addAudioFiles: AddAudioFile[] = [];
+  editIndex: number | null = null;
 
   constructor(private adminService: AdminService, private libraryService: LibraryService,
      private toastr: ToastrService, public langService: LanguageService) {
@@ -59,13 +60,21 @@ export class AddAudiobookComponent implements OnInit, OnDestroy{
     ])
   });
 
+  newAudioFileForm = new FormGroup({
+    name: new FormControl('', [Validators.required, Validators.maxLength(256)]),
+    audioFileUrl: new FormControl('', [Validators.required]),
+    duration: new FormControl(0, [
+      Validators.required,
+      CustomValidators.nonZeroValidator()
+    ]),
+    playbackQueue: new FormControl(0, [Validators.required])
+  });
+
+
   onFileSelected(event: any) {
     const uploadedfile: File = event.target.files[0];
-
-    // Check if a file is selected
     if (uploadedfile) {
       const reader = new FileReader();
-
       reader.onload = (e: any) => {
         // Assign the data URL to the 'url' variable
         this.url = e.target.result;
@@ -105,10 +114,73 @@ export class AddAudiobookComponent implements OnInit, OnDestroy{
     // });
   }
 
-  resetForm() {
-    this.addAudioBookForm.reset({});
-    this.addAudioBookForm.setErrors({ 'invalid': true });
+  addAudioFile() {
+    const newAudioFileValue = this.newAudioFileForm.value;
+
+    const isNameUnique = !this.addAudioFiles.some(file => file.name === newAudioFileValue.name);
+    const isPlaybackQueueUnique = !this.addAudioFiles.some(file => file.playbackQueue === newAudioFileValue.playbackQueue);
+
+    if (!isNameUnique) {
+      this.newAudioFileForm.controls['name'].setErrors({ 'uniqName': true });
+      return;
+    }
+
+    if (!isPlaybackQueueUnique) {
+      this.newAudioFileForm.controls['playbackQueue'].setErrors({ 'uniqplaybackQueue': true });
+      return;
+    }
+
+    const newAudioFile: AddAudioFile = {
+      name: newAudioFileValue.name ? newAudioFileValue.name : '',
+      audioFileUrl: newAudioFileValue.audioFileUrl ? newAudioFileValue.audioFileUrl : '',
+      duration: newAudioFileValue.duration !== undefined ? newAudioFileValue.duration : null,
+      playbackQueue: newAudioFileValue.playbackQueue !== undefined ? newAudioFileValue.playbackQueue : null
+    };
+
+    if (this.editIndex !== null) {
+      this.addAudioFiles[this.editIndex] = newAudioFile as AddAudioFile;
+      this.editIndex = null;
+    } else {
+      this.addAudioFiles.push(newAudioFile as AddAudioFile);
+    }
+
+    this.newAudioFileForm.reset();
   }
+
+
+  editAudioFile(index: number) {
+    const audioFile = this.addAudioFiles[index];
+    this.newAudioFileForm.patchValue({
+      name: audioFile.name,
+      audioFileUrl: audioFile.audioFileUrl,
+      duration: audioFile.duration,
+      playbackQueue: audioFile.playbackQueue
+    });
+    this.editIndex = index;
+  }
+
+  deleteAudioFile(index: number) {
+    this.addAudioFiles.splice(index, 1);
+  }
+
+
+  getAudioDuration(event: any) {
+    const audioUrl = event?.target?.value;
+    if (audioUrl) {
+      const audio = new Audio();
+      audio.src = audioUrl;
+      audio.onloadedmetadata = () => {
+        const duration = Math.round(audio.duration);
+        this.newAudioFileForm.patchValue({ duration: isNaN(duration) ? 0 : duration });
+      };
+      audio.onerror = () => {
+        this.newAudioFileForm.controls['audioFileUrl'].setErrors({ 'invalidUrl': true });
+      };
+    } else {
+      this.newAudioFileForm.patchValue({ duration: 0 });
+    }
+  }
+
 
   getBookSeriesForSelect(){
     this.libraryService.getBookSeriesForFilter().subscribe({

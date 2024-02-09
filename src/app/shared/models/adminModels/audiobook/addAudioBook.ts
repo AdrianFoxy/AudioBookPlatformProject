@@ -1,6 +1,6 @@
 import { AddAudioFile } from "./audiofile/addAudioFile";
 
-interface AddAudioBook {
+export interface AddAudioBook {
   name: string;
   description: string;
   bookLanguageId: number;

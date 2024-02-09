@@ -26,4 +26,15 @@ export class CustomValidators {
     };
   }
 
+  static nonZeroValidator() {
+    return (control: AbstractControl): { [key: string]: any } | null => {
+      const value = control.value;
+      if (value !== null && value <= 0) {
+        return { nonZero: true };
+      }
+      return null;
+    };
+  }
+
+
 }

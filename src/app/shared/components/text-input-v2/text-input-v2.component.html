@@ -4,7 +4,8 @@
     type = {{type}}
     placeholder={{placeholder}}
     value={{default_value}}
-    [formControl]="control">
+    [formControl]="control"
+    [attr.min]="type === 'number' ? '0' : null">
   <mat-icon matSuffix>{{icon}}</mat-icon>
 
   <mat-error  *ngIf="control.errors?.['required']">
@@ -14,5 +15,18 @@
   <mat-error  *ngIf="control.errors?.['maxlength']">
     {{label}} {{ 'validation-maxlenght-too-long' | translate }}
   </mat-error>
+
+  <mat-error *ngIf="control.errors?.['invalidUrl']">
+    Cannot get duration by this URL.
+  </mat-error>
+
+  <mat-error *ngIf="control.errors?.['uniqName']">
+    uniqName
+  </mat-error>
+
+  <mat-error *ngIf="control.errors?.['uniqplaybackQueue']">
+    uniqplaybackQueue
+  </mat-error>
+
 
 </mat-form-field>

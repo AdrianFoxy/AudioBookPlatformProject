@@ -68,11 +68,64 @@
   </cdk-step>
   <cdk-step [label]="'AudioFiles'">
     <hr>
-    <div class="card">
-      <div class="card-body">
-        This is some text within a card body.
-      </div>
+    <div class="audiofile-form">
+      <form [formGroup]="newAudioFileForm">
+
+        <app-text-input-v2 type="text" label="name"
+          placeholder="please enter audiobook name" icon="title"
+          [formControl]="newAudioFileForm.controls['name']">
+        </app-text-input-v2>
+
+        <app-text-input-v2 type="text" label="Audio File URL"
+          placeholder="please enter audiobook name" icon="title"
+          [formControl]="newAudioFileForm.controls['audioFileUrl']"
+          (input)="getAudioDuration($event)">
+        </app-text-input-v2>
+
+        <app-text-input-v2 type="number" label="Playback Queue"
+          placeholder="please enter audiobook name" icon="title"
+          [formControl]="newAudioFileForm.controls['playbackQueue']" min="0">
+        </app-text-input-v2>
+
+        <button
+          type="button" class="admin-btn"
+          (click)="addAudioFile()"
+          [disabled]="newAudioFileForm.invalid">
+          Save file
+        </button>
+      </form>
     </div>
 
+    <div class="table-responsive mt-3">
+      <table class="table table-bordered table-hover rounded-3 overflow-hidden">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Audio File URL</th>
+            <th scope="col">Duration</th>
+            <th scope="col">Playback Queue</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let audioFile of addAudioFiles; let i = index">
+            <td>{{ audioFile.name }}</td>
+            <td>{{ audioFile.audioFileUrl }}</td>
+            <td>{{ audioFile.duration }}</td>
+            <td>{{ audioFile.playbackQueue }}</td>
+            <td>
+              <button class="admin-btn action mr-1 mb-1" (click)="editAudioFile(i)">
+                <i class="fa fa-edit"></i>
+                {{ 'Edit' | translate }}
+              </button>
+              <button class="admin-btn action delete-btn" (click)="deleteAudioFile(i)">
+                <i class="fa fa-trash"></i>
+                {{ 'Delete' | translate }}
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </cdk-step>
+
 </app-stepper>
