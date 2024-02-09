@@ -1,0 +1,143 @@
+<app-stepper [linearModeSelected]="false" #appStepper>
+  <cdk-step [label]="'AudioBook'" [completed]="addAudioBookForm.valid">
+    <hr>
+    <form [formGroup]="addAudioBookForm">
+      <div>
+        <app-text-input-v2 type="text" label="name"
+          placeholder="please enter audiobook name" icon="title"
+          [formControl]="addAudioBookForm.controls['name']">
+        </app-text-input-v2>
+
+        <app-textarea-input type="text" label="{{ 'description' | translate }}"
+          placeholder="{{ 'Please-enter-author-description' | translate }}" icon="description"
+          [formControl]="addAudioBookForm.controls['description']">
+        </app-textarea-input>
+
+        <app-multi-select
+          [formControl]="addAudioBookForm.controls['authorsIds']"
+          [label]="'authors'"
+          [selectList]="authors"
+          [localization]="true">
+        </app-multi-select>
+
+        <app-multi-select
+          [formControl]="addAudioBookForm.controls['genresIds']"
+          [label]="'genres'"
+          [selectList]="genres"
+          [localization]="true">
+        </app-multi-select>
+
+        <app-single-select
+          [formControl]="addAudioBookForm.controls['bookSeriesId']"
+          [label]="'book series'"
+          [selectList]="bookSeries"
+          [localization]="true">
+        </app-single-select>
+
+        <app-text-input-v2 type="text" label="order in series"
+          placeholder="please enter order in series" icon="border_color"
+          [formControl]="addAudioBookForm.controls['orderInSeries']">
+        </app-text-input-v2>
+
+        <app-single-select
+          [formControl]="addAudioBookForm.controls['narratorId']"
+          [label]="'narrator'"
+          [selectList]="narrators">
+        </app-single-select>
+
+        <app-single-select
+          [formControl]="addAudioBookForm.controls['bookLanguageId']"
+          [label]="'language'"
+          [selectList]="languages"
+          [localization]="true">
+        </app-single-select>
+
+        <app-image-upload
+          [form]="addAudioBookForm"
+          [imageUrl]="url"
+          (fileSelected)="onFileSelected($event)">
+        </app-image-upload>
+      </div>
+    </form>
+
+    <div class="btns-section mt-2">
+      <button type="button" class="admin-btn return-btn mr-2" routerLink="/admin/audiobook">{{ 'Back' | translate }}</button>
+      <button type="submit" class="admin-btn" cdkStepperNext>Next to audiofiles</button>
+    </div>
+  </cdk-step>
+  <cdk-step [label]="'AudioFiles'">
+    <hr>
+    <div class="audiofile-form">
+      <form [formGroup]="newAudioFileForm">
+
+        <app-text-input-v2 type="text" label="name"
+          placeholder="please enter audiobook name" icon="title"
+          [formControl]="newAudioFileForm.controls['name']">
+        </app-text-input-v2>
+
+        <app-text-input-v2 type="text" label="Audio File URL"
+          placeholder="please enter audiobook name" icon="title"
+          [formControl]="newAudioFileForm.controls['audioFileUrl']"
+          (input)="getAudioDuration($event)">
+        </app-text-input-v2>
+
+        <app-text-input-v2 type="number" label="Playback Queue"
+          placeholder="please enter audiobook name" icon="title"
+          [formControl]="newAudioFileForm.controls['playbackQueue']" min="0">
+        </app-text-input-v2>
+
+        <button
+          type="button" class="admin-btn"
+          (click)="addAudioFile()"
+          [disabled]="newAudioFileForm.invalid">
+          Save file
+        </button>
+      </form>
+    </div>
+
+    <div class="table-responsive mt-3">
+      <table class="table table-bordered table-hover rounded-3 overflow-hidden">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Audio File URL</th>
+            <th scope="col">Duration</th>
+            <th scope="col">Playback Queue</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let audioFile of addAudioFiles; let i = index">
+            <td>{{ audioFile.name }}</td>
+            <td>{{ audioFile.audioFileUrl }}</td>
+            <td>{{ audioFile.duration ? timeConvertService.secondstoHHMMSS(audioFile.duration) : 'N/A' }}</td>
+            <td>{{ audioFile.playbackQueue }}</td>
+            <td>
+              <button class="admin-btn action mr-1 mb-1" (click)="editAudioFile(i)">
+                <i class="fa fa-edit"></i>
+                {{ 'Edit' | translate }}
+              </button>
+              <button class="admin-btn action delete-btn" (click)="deleteAudioFile(i)">
+                <i class="fa fa-trash"></i>
+                {{ 'Delete' | translate }}
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="btns-section mt-2">
+      <button type="button" class="admin-btn return-btn mr-2"
+        cdkStepperPrevious>
+        Back to audiobook
+      </button>
+      <button type="submit" class="admin-btn"
+        [disabled]="addAudioBookForm.invalid || !addAudioFiles || addAudioFiles.length === 0"
+        (click)="onSubmitAudioBook()">
+        Add Audiobook
+      </button>
+    </div>
+
+  </cdk-step>
+
+</app-stepper>

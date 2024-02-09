@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DarkModeService } from '../core/services/dark-mode-service/dark-mode.service';
+import { DarkModeService } from '../core/services/dark-mode.service';
 
 @Component({
   selector: 'app-home',

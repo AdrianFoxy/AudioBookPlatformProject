@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 import { Selection } from 'src/app/shared/models/libraryModels/selection';
 import { SelectionService } from '../selection.service';
 import { ActivatedRoute } from '@angular/router';
-import { LanguageService } from 'src/app/core/services/language-service/language.service';
+import { LanguageService } from 'src/app/core/services/language.service';
 import { AudioBook } from 'src/app/shared/models/libraryModels/audiobook';
 import { sortingAndPaginationParams } from 'src/app/shared/models/paramsModels/sortingAndPaginationParams';
-import { LoaderService } from 'src/app/core/services/loader-service/loader.service';
+import { LoaderService } from 'src/app/core/services/loader.service';
 
 @Component({
   selector: 'app-selection-details',

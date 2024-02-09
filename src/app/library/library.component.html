@@ -52,7 +52,8 @@
         <div class="filters mt-2">
           <mat-form-field class="single-element">
             <mat-label>{{ 'Sorting' | translate }}</mat-label>
-            <mat-select (selectionChange)="onSortSelected($event)" [(ngModel)]="sortingAndPaginationParams.sort">
+            <select id="sorting-select" style="display: none;"></select>  <!-- add this line  TEMPORARY SOLUTION with incorrent use of <label for=FORM_ELEMENT> for angular materials -->
+            <mat-select id="sorting-select" (selectionChange)="onSortSelected($event)" [(ngModel)]="sortingAndPaginationParams.sort">
               <mat-option *ngFor="let sort of sortOptions" [value]="sort.value">
                 {{ langService.whatCurrentLang() === 'en-US' ? sort.engName : sort.name }}
               </mat-option>
@@ -61,7 +62,8 @@
 
           <mat-form-field class="full-width">
             <mat-label>{{ 'Genres' | translate }}</mat-label>
-            <mat-select [formControl]="selectedIdGenres" multiple
+            <select id="genres-filtering-select" style="display: none;"></select>
+            <mat-select id="genres-filtering-select" [formControl]="selectedIdGenres" multiple
               (selectionChange)="onFilterSelected(selectedIdGenres.value, 'genreIds')">
               <mat-select-trigger>
                 <mat-chip-listbox>
@@ -89,7 +91,8 @@
 
           <mat-form-field class="full-width">
             <mat-label>{{ 'Authors' | translate }}</mat-label>
-            <mat-select [formControl]="selectedIdAuthors" multiple
+            <select id="authors-filtering-select" style="display: none;"></select>
+            <mat-select id="authors-filtering-select" [formControl]="selectedIdAuthors" multiple
               (selectionChange)="onFilterSelected(selectedIdAuthors.value, 'authorIds')">
               <mat-select-trigger>
                 <mat-chip-listbox>
@@ -117,7 +120,8 @@
 
           <mat-form-field class="full-width">
             <mat-label>{{ 'Narrators' | translate }}</mat-label>
-            <mat-select [formControl]="selectedIdNarrators" multiple
+            <select id="narrators-filtering-select" style="display: none;"></select>
+            <mat-select id="narrators-filtering-select" [formControl]="selectedIdNarrators" multiple
               (selectionChange)="onFilterSelected(selectedIdNarrators.value, 'narratorIds')">
               <mat-select-trigger>
                 <mat-chip-listbox>
@@ -143,7 +147,8 @@
 
           <mat-form-field class="full-width">
             <mat-label>{{ 'Book Series' | translate }}</mat-label>
-            <mat-select [formControl]="selectedIdBookSeries" multiple
+            <select id="book-series-filtering-select" style="display: none;"></select>
+            <mat-select id="book-series-filtering-select" [formControl]="selectedIdBookSeries" multiple
               (selectionChange)="onFilterSelected(selectedIdBookSeries.value, 'bookSeriresIds')">
               <mat-select-trigger>
                 <mat-chip-listbox>
@@ -171,7 +176,8 @@
 
           <mat-form-field class="full-width">
             <mat-label>{{ 'Language' | translate }}</mat-label>
-            <mat-select [formControl]="selectedIdBookLanguages" multiple
+            <select id="language-filtering-select" style="display: none;"></select>
+            <mat-select id="language-filtering-select" [formControl]="selectedIdBookLanguages" multiple
               (selectionChange)="onFilterSelected(selectedIdBookLanguages.value, 'bookLanguageIds')">
               <mat-select-trigger>
                 <mat-chip-listbox>
@@ -215,7 +221,8 @@
           <p class="filtering-label mt-3">{{ 'Exceptions' | translate }}</p>
           <mat-form-field class="full-width">
             <mat-label>{{ 'Genres' | translate }}</mat-label>
-            <mat-select [formControl]="selectedIdGenresException" multiple
+            <select id="genres-exeption-filtering-select" style="display: none;"></select>
+            <mat-select id="genres-exeption-filtering-select" [formControl]="selectedIdGenresException" multiple
               (selectionChange)="onFilterSelected(selectedIdGenresException.value, 'genreIdsException')">
               <mat-select-trigger>
                 <mat-chip-listbox>
@@ -243,7 +250,8 @@
 
           <mat-form-field class="full-width">
             <mat-label>{{ 'Authors' | translate }}</mat-label>
-            <mat-select [formControl]="selectedIdAuthorsException" multiple
+            <select id="authors-exeption-filtering-select" style="display: none;"></select>
+            <mat-select id="authors-exeption-filtering-select" [formControl]="selectedIdAuthorsException" multiple
               (selectionChange)="onFilterSelected(selectedIdAuthorsException.value, 'authorIdsException')">
               <mat-select-trigger>
                 <mat-chip-listbox>
@@ -271,7 +279,8 @@
 
           <mat-form-field class="full-width">
             <mat-label>{{ 'Narrators' | translate }}</mat-label>
-            <mat-select [formControl]="selectedIdNarratorsException" multiple
+            <select id="narrators-exeption-filtering-select" style="display: none;"></select>
+            <mat-select id="narrators-exeption-filtering-select" [formControl]="selectedIdNarratorsException" multiple
               (selectionChange)="onFilterSelected(selectedIdNarratorsException.value, 'narratorIdsException')">
               <mat-select-trigger>
                 <mat-chip-listbox>
@@ -297,7 +306,8 @@
 
           <mat-form-field class="full-width">
             <mat-label>{{ 'Book Series' | translate }}</mat-label>
-            <mat-select [formControl]="selectedIdBookSeriesException" multiple
+            <select id="book-series-exeption-filtering-select" style="display: none;"></select>
+            <mat-select id="book-series-exeption-filtering-select" [formControl]="selectedIdBookSeriesException" multiple
               (selectionChange)="onFilterSelected(selectedIdBookSeriesException.value, 'bookSeriresIdsException')">
               <mat-select-trigger>
                 <mat-chip-listbox>
@@ -325,7 +335,8 @@
 
           <mat-form-field class="full-width">
             <mat-label>{{ 'Language' | translate }}</mat-label>
-            <mat-select [formControl]="selectedIdBookLanguagesException" multiple
+            <select id="language-exeption-filtering-select" style="display: none;"></select>
+            <mat-select id="language-exeption-filtering-select" [formControl]="selectedIdBookLanguagesException" multiple
               (selectionChange)="onFilterSelected(selectedIdBookLanguagesException.value, 'bookLanguageIdsException')">
               <mat-select-trigger>
                 <mat-chip-listbox>

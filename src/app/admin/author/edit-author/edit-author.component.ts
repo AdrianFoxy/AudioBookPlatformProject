@@ -3,10 +3,11 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Author } from 'src/app/shared/models/adminModels/author/author';
 import { AdminService } from '../../admin.service';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { LanguageService } from 'src/app/core/services/language-service/language.service';
+import { LanguageService } from 'src/app/core/services/language.service';
 import { updateAuthor } from 'src/app/shared/models/adminModels/author/updateAuthor';
+import { CustomValidators } from 'src/app/core/validators/customValidators';
 
 @Component({
   selector: 'app-edit-author',
@@ -62,34 +63,10 @@ export class EditAuthorComponent implements OnInit, OnDestroy{
     updatedAt: new FormControl({ value: '', disabled: true }, [Validators.required]),
     createdAt: new FormControl({ value: '', disabled: true }, [Validators.required]),
     picture: new FormControl(null as File | null, [
-      this.fileExtensionValidator(['jpg', 'jpeg', 'png']),
-      this.fileSizeValidator(2 * 1024 * 1024)
+      CustomValidators.fileExtensionValidator(['jpg', 'jpeg', 'png']),
+      CustomValidators.fileSizeValidator(2 * 1024 * 1024)
     ])
   });
-
-  fileExtensionValidator(allowedExtensions: string[]) {
-    return (control: AbstractControl): { [key: string]: any } | null => {
-      if (control.value) {
-        const fileExtension = control.value.name.split('.').pop()?.toLowerCase();
-        if (fileExtension && allowedExtensions.indexOf(fileExtension) === -1) {
-          return { invalidExtension: true };
-        }
-      }
-      return null;
-    };
-  }
-
-  fileSizeValidator(maxSize: number) {
-    return (control: AbstractControl): { [key: string]: any } | null => {
-      if (control.value) {
-        const fileSize = control.value.size
-        if (fileSize > maxSize) {
-          return { invalidSize: true };
-        }
-      }
-      return null;
-    };
-  }
 
   onFormSubmit(): void {
 

@@ -1,0 +1,32 @@
+<mat-form-field>
+  <mat-label>{{ label }}</mat-label>
+  <mat-select [formControl]="control" multiple>
+    <mat-select-trigger>
+      <mat-chip-listbox>
+        <mat-chip *ngFor="let item of getByIds(control.value, selectList)" [removable]="true" (removed)="removeItem(item.id)">
+          {{ (localization && langService.whatCurrentLang() === 'en-US') ? item.enName : item.name }}
+          <mat-icon matChipRemove>close</mat-icon>
+        </mat-chip>
+      </mat-chip-listbox>
+    </mat-select-trigger>
+    <mat-option>
+      <ngx-mat-select-search
+        [formControl]="searchCtrl"
+        placeholderLabel="{{ 'Search' | translate }}"
+        noEntriesFoundLabel="{{ 'FilteringnoEntriesFoundLabel' | translate }}"
+      ></ngx-mat-select-search>
+    </mat-option>
+
+    <mat-option
+      *ngFor="let item of selectList
+      | filter: searchCtrl.value: (localization && langService.whatCurrentLang() === 'en-US' ? 'enName' : 'name')"
+      [value]="item.id">
+      {{ (localization && langService.whatCurrentLang() === 'en-US') ? item.enName : item.name }}
+    </mat-option>
+
+  </mat-select>
+
+  <mat-error  *ngIf="control.errors?.['required']">
+    {{ 'validation-please-enter' | translate }} {{label}}
+  </mat-error>
+</mat-form-field>

@@ -1,0 +1,9 @@
+.btn-td{
+  min-width: 330px;
+}
+@media (max-width: 800px) {
+  .btn-td {
+    min-width: unset;
+  }
+}
+

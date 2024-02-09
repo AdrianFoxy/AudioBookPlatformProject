@@ -1,8 +1,8 @@
 import { Component, ViewChild, ChangeDetectorRef, AfterViewInit } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { DarkModeService } from '../services/dark-mode-service/dark-mode.service';
-import { LanguageService } from '../services/language-service/language.service';
+import { DarkModeService } from '../services/dark-mode.service';
+import { LanguageService } from '../services/language.service';
 import { AccountService } from 'src/app/account/account.service';
 
 @Component({

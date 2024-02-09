@@ -170,5 +170,7 @@
   "enDescription": "English description",
   "validation-select-image": "Please select an image.",
   "validation-invalid-extention": "Please select an image with a valid extension (.jpg, .jpeg, .png).",
-  "validation-invalid-size": "Please select an image with a valid size, less or equal 2 MB."
+  "validation-invalid-size": "Please select an image with a valid size, less or equal 2 MB.",
+  "Add-new-audiobook": "Add new audiobook",
+  "Details": "Details"
 }

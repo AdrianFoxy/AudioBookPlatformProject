@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { User } from 'src/app/shared/models/user';
 import { UserProfileService } from '../user-profile.service';
-import { LanguageService } from 'src/app/core/services/language-service/language.service';
+import { LanguageService } from 'src/app/core/services/language.service';
 import { DateAdapter } from '@angular/material/core';
 import { ToastrService } from 'ngx-toastr';
 

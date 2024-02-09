@@ -22,6 +22,10 @@ import { EditBookLanguageComponent } from './book-language/edit-book-language/ed
 import { AuthorComponent } from './author/author.component';
 import { AddAuthorComponent } from './author/add-author/add-author.component';
 import { EditAuthorComponent } from './author/edit-author/edit-author.component';
+import { AudiobookComponent } from './audiobook/audiobook.component';
+import { AddAudiobookComponent } from './audiobook/add-audiobook/add-audiobook.component';
+import { EditAudiobookComponent } from './audiobook/edit-audiobook/edit-audiobook.component';
+import { DetailsAudiobookComponent } from './audiobook/details-audiobook/details-audiobook.component';
 
 
 @NgModule({
@@ -42,6 +46,10 @@ import { EditAuthorComponent } from './author/edit-author/edit-author.component'
     AuthorComponent,
     AddAuthorComponent,
     EditAuthorComponent,
+    AudiobookComponent,
+    AddAudiobookComponent,
+    EditAudiobookComponent,
+    DetailsAudiobookComponent,
   ],
   imports: [
     CommonModule,

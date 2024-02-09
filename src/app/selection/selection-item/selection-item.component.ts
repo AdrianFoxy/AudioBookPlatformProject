@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { LanguageService } from 'src/app/core/services/language-service/language.service';
+import { LanguageService } from 'src/app/core/services/language.service';
 import { Selection } from 'src/app/shared/models/libraryModels/selection';
 
 @Component({

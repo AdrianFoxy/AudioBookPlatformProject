@@ -2,18 +2,19 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Pagination } from '../shared/models/pagination';
 import { AudioBook } from '../shared/models/libraryModels/audiobook';
-import { Genre } from '../shared/models/libraryModels/genre';
+import { SelectGenre } from '../shared/models/selectModels/selectGenre';
 import { filtreingParams } from '../shared/models/paramsModels/filtreingParams';
 import { Author } from '../shared/models/libraryModels/author';
-import { Narrator } from '../shared/models/libraryModels/narrator';
-import { BookSeries } from '../shared/models/libraryModels/bookSeries';
-import { BookLanguage } from '../shared/models/libraryModels/bookLanguage';
+import { SelectBookSeries } from '../shared/models/selectModels/selectbookSeries';
+import { SelectBookLanguage } from '../shared/models/selectModels/selectBookLanguage';
 import { sortingAndPaginationParams } from '../shared/models/paramsModels/sortingAndPaginationParams';
 import { SingleAudioBook } from '../shared/models/libraryModels/singleAudioBook';
 import { environment } from 'src/environments/environment';
 import { Review } from '../shared/models/libraryModels/review/review';
 import { ReviewDto } from '../shared/models/libraryModels/review/reviewDto';
 import { bookMarkForm } from '../shared/models/libraryModels/bookMarkForm';
+import { SelectAuthor } from '../shared/models/selectModels/selectAuthor';
+import { SelectNarrator } from '../shared/models/selectModels/selectNarrator';
 
 @Injectable({
   providedIn: 'root'
@@ -144,23 +145,23 @@ export class LibraryService {
   }
 
   getGenresForFilter() {
-    return this.http.get<Genre[]>(this.baseUrl + 'Filtering/filter-genres');
+    return this.http.get<SelectGenre[]>(this.baseUrl + 'Filtering/filter-genres');
   }
 
   getAuthorsForFilter() {
-    return this.http.get<Author[]>(this.baseUrl + 'Filtering/filter-authors');
+    return this.http.get<SelectAuthor[]>(this.baseUrl + 'Filtering/filter-authors');
   }
 
   getNarratorsForFilter() {
-    return this.http.get<Narrator[]>(this.baseUrl + 'Filtering/filter-narrator');
+    return this.http.get<SelectNarrator[]>(this.baseUrl + 'Filtering/filter-narrator');
   }
 
   getBookSeriesForFilter() {
-    return this.http.get<BookSeries[]>(this.baseUrl + 'Filtering/filter-bookSeries');
+    return this.http.get<SelectBookSeries[]>(this.baseUrl + 'Filtering/filter-bookSeries');
   }
 
   getBookLanguagesForFilter() {
-    return this.http.get<BookLanguage[]>(this.baseUrl + 'Filtering/filter-bookLanguage');
+    return this.http.get<SelectBookLanguage[]>(this.baseUrl + 'Filtering/filter-bookLanguage');
   }
 
   incrementViewCount(id: number) {

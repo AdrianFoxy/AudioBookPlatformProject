@@ -49,7 +49,8 @@
               <h5>{{ 'MyLibrary-profile' | translate }}</h5>
               <mat-form-field class="single-element mb-0">
                 <mat-label>{{ 'Bookstatus-profile' | translate }}</mat-label>
-                <mat-select (selectionChange)="onSortSelected($event)" [(ngModel)]="userLibraryParams.statusId">
+                <select id="user-library-status-select" style="display: none;"></select>
+                <mat-select id="user-library-status-select" (selectionChange)="onSortSelected($event)" [(ngModel)]="userLibraryParams.statusId">
                   <mat-option *ngFor="let sort of sortOptions" [value]="sort.value">
                     {{ langService.whatCurrentLang() === 'en-US' ? sort.engName : sort.name }}
                   </mat-option>

@@ -5,7 +5,7 @@ import { BookSeries } from 'src/app/shared/models/adminModels/book-series/book-s
 import { AdminService } from '../../admin.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { LanguageService } from 'src/app/core/services/language-service/language.service';
+import { LanguageService } from 'src/app/core/services/language.service';
 import { UpdateBookSeries } from 'src/app/shared/models/adminModels/book-series/updateBookSeries';
 
 @Component({

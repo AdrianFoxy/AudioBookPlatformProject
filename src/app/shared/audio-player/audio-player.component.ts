@@ -1,11 +1,11 @@
 import { ChangeDetectorRef, Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { StreamState } from '../models/stream-state';
-import { AudioService } from 'src/app/core/services/audio_service/audio.service';
-import { DarkModeService } from 'src/app/core/services/dark-mode-service/dark-mode.service';
+import { AudioService } from 'src/app/core/services/audio.service';
+import { DarkModeService } from 'src/app/core/services/dark-mode.service';
 import { SingleAudioBook } from '../models/libraryModels/singleAudioBook';
 import { ActivatedRoute, NavigationStart, Router } from '@angular/router';
 import { BookAudioFile } from '../models/libraryModels/bookAudioFile';
-import { LanguageService } from 'src/app/core/services/language-service/language.service';
+import { LanguageService } from 'src/app/core/services/language.service';
 import { Subscription } from 'rxjs';
 
 @Component({

@@ -1,8 +1,5 @@
 import { Author } from "./author";
 import { BookAudioFile } from "./bookAudioFile";
-import { BookLanguage } from "./bookLanguage";
-import { Genre } from "./genre";
-import { Narrator } from "./narrator";
 
 export interface SingleAudioBook {
   id: number;
@@ -18,7 +15,31 @@ export interface SingleAudioBook {
   bookAudioFile: BookAudioFile[];
   bookLanguage: BookLanguage;
   narrator: Narrator;
-  bookSeries: Genre;
+  bookSeries: BookSeries;
   orderInSeries: number;
   libraryStatusId: number;
+}
+
+export interface Genre {
+  id: number;
+  name: string;
+  enName: string;
+}
+
+export interface BookSeries {
+  id: number;
+  name: string;
+  enName: string;
+}
+
+export interface BookLanguage {
+  id: number;
+  name: string;
+  enName: string;
+}
+
+export interface Narrator {
+  id: number;
+  name: string;
+  mediaUrl: string;
 }

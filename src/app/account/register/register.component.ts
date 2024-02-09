@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 import { AbstractControl, AsyncValidatorFn, FormBuilder, Validators } from '@angular/forms';
 import { AccountService } from '../account.service';
 import { Router } from '@angular/router';
-import { DarkModeService } from 'src/app/core/services/dark-mode-service/dark-mode.service';
+import { DarkModeService } from 'src/app/core/services/dark-mode.service';
 import { debounceTime, finalize, map, switchMap, take } from 'rxjs';
 import { DateAdapter } from '@angular/material/core';
-import { LanguageService } from 'src/app/core/services/language-service/language.service';
+import { LanguageService } from 'src/app/core/services/language.service';
 
 @Component({
   selector: 'app-register',
