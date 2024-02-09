@@ -3,8 +3,8 @@ import { BookSeries } from 'src/app/shared/models/adminModels/book-series/book-s
 import { paginationAndSearchParams } from 'src/app/shared/models/paramsModels/paginationAndSearchParams';
 import { AdminService } from '../admin.service';
 import { ToastrService } from 'ngx-toastr';
-import { LanguageService } from 'src/app/core/services/language-service/language.service';
-import { LoaderService } from 'src/app/core/services/loader-service/loader.service';
+import { LanguageService } from 'src/app/core/services/language.service';
+import { LoaderService } from 'src/app/core/services/loader.service';
 
 @Component({
   selector: 'app-book-series',

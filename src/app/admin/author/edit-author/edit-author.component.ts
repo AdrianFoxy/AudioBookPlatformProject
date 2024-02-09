@@ -5,7 +5,7 @@ import { Author } from 'src/app/shared/models/adminModels/author/author';
 import { AdminService } from '../../admin.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { LanguageService } from 'src/app/core/services/language-service/language.service';
+import { LanguageService } from 'src/app/core/services/language.service';
 import { updateAuthor } from 'src/app/shared/models/adminModels/author/updateAuthor';
 import { CustomValidators } from 'src/app/core/validators/customValidators';
 

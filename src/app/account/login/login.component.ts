@@ -1,6 +1,6 @@
 import { Component, ElementRef, NgZone, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { DarkModeService } from 'src/app/core/services/dark-mode-service/dark-mode.service';
+import { DarkModeService } from 'src/app/core/services/dark-mode.service';
 import { AccountService } from '../account.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CredentialResponse, PromptMomentNotification } from 'google-one-tap';

@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { DarkModeService } from '../core/services/dark-mode-service/dark-mode.service';
-import { LanguageService } from '../core/services/language-service/language.service';
+import { DarkModeService } from '../core/services/dark-mode.service';
+import { LanguageService } from '../core/services/language.service';
 import { AccountService } from '../account/account.service';
-import { LoaderService } from '../core/services/loader-service/loader.service';
+import { LoaderService } from '../core/services/loader.service';
 import { MatDialog } from '@angular/material/dialog';
 import { EditUserComponent } from './edit-user/edit-user.component';
 import * as moment from 'moment';

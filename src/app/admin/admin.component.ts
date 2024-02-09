@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AdminService } from './admin.service';
 import { AccountService } from '../account/account.service';
-import { LanguageService } from '../core/services/language-service/language.service';
+import { LanguageService } from '../core/services/language.service';
 
 @Component({
   selector: 'app-admin',

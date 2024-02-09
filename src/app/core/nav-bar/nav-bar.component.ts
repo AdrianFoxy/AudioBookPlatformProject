@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { DarkModeService } from '../services/dark-mode-service/dark-mode.service';
-import { LanguageService } from '../services/language-service/language.service';
-import { LoaderService } from '../services/loader-service/loader.service';
+import { DarkModeService } from '../services/dark-mode.service';
+import { LanguageService } from '../services/language.service';
+import { LoaderService } from '../services/loader.service';
 import { AccountService } from 'src/app/account/account.service';
 
 @Component({

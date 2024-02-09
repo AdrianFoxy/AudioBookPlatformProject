@@ -7,8 +7,8 @@ import { filtreingParams } from '../shared/models/paramsModels/filtreingParams';
 import { SelectBookSeries } from '../shared/models/selectModels/selectbookSeries';
 import { SelectBookLanguage } from '../shared/models/selectModels/selectBookLanguage';
 import { sortingAndPaginationParams } from '../shared/models/paramsModels/sortingAndPaginationParams';
-import { LanguageService } from '../core/services/language-service/language.service';
-import { LoaderService } from '../core/services/loader-service/loader.service';
+import { LanguageService } from '../core/services/language.service';
+import { LoaderService } from '../core/services/loader.service';
 
 import { SelectAuthor } from '../shared/models/selectModels/selectAuthor';
 import { SelectNarrator } from '../shared/models/selectModels/selectNarrator';

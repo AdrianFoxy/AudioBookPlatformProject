@@ -2,7 +2,7 @@ import { Component, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AdminService } from '../../admin.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { LanguageService } from 'src/app/core/services/language-service/language.service';
+import { LanguageService } from 'src/app/core/services/language.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({

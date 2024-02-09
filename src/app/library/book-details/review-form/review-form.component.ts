@@ -6,7 +6,7 @@ import { AccountService } from 'src/app/account/account.service';
 import { Review } from 'src/app/shared/models/libraryModels/review/review';
 import { ReviewDto } from 'src/app/shared/models/libraryModels/review/reviewDto';
 import { ToastrService } from 'ngx-toastr';
-import { LanguageService } from 'src/app/core/services/language-service/language.service';
+import { LanguageService } from 'src/app/core/services/language.service';
 
 @Component({
   selector: 'app-review-form',

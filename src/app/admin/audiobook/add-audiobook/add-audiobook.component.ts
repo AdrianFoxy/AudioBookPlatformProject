@@ -3,7 +3,7 @@ import { Subscription } from 'rxjs';
 import { AdminService } from '../../admin.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { LanguageService } from 'src/app/core/services/language-service/language.service';
+import { LanguageService } from 'src/app/core/services/language.service';
 import { CustomValidators } from 'src/app/core/validators/customValidators';
 import { LibraryService } from 'src/app/library/library.service';
 import { SelectBookSeries } from 'src/app/shared/models/selectModels/selectbookSeries';
@@ -12,6 +12,8 @@ import { SelectNarrator } from 'src/app/shared/models/selectModels/selectNarrato
 import { SelectBookLanguage } from 'src/app/shared/models/selectModels/selectBookLanguage';
 import { SelectAuthor } from 'src/app/shared/models/selectModels/selectAuthor';
 import { AddAudioFile } from 'src/app/shared/models/adminModels/audiobook/audiofile/addAudioFile';
+import { AddAudioBook } from 'src/app/shared/models/adminModels/audiobook/addAudioBook';
+import { TimeConvertService } from 'src/app/core/services/time-convert.service';
 
 @Component({
   selector: 'app-add-audiobook',
@@ -33,7 +35,7 @@ export class AddAudiobookComponent implements OnInit, OnDestroy{
   editIndex: number | null = null;
 
   constructor(private adminService: AdminService, private libraryService: LibraryService,
-     private toastr: ToastrService, public langService: LanguageService) {
+     private toastr: ToastrService, public langService: LanguageService, public timeConvertService: TimeConvertService) {
   }
   ngOnInit(): void {
     this.getBookSeriesForSelect();
@@ -52,12 +54,11 @@ export class AddAudiobookComponent implements OnInit, OnDestroy{
     bookLanguageId: new FormControl('', [Validators.required]),
     authorsIds: new FormControl([], [Validators.required]),
     genresIds: new FormControl([], [Validators.required]),
-    audioFiles: new FormControl([] as AddAudioFile[]),
     picture: new FormControl(null as File | null, [
       Validators.required,
       CustomValidators.fileExtensionValidator(['jpg', 'jpeg', 'png']),
       CustomValidators.fileSizeValidator(2 * 1024 * 1024)
-    ])
+    ]),
   });
 
   newAudioFileForm = new FormGroup({
@@ -87,32 +88,38 @@ export class AddAudiobookComponent implements OnInit, OnDestroy{
     }
   }
 
-  onFormSubmit() {
-    console.log(this.addAudioBookForm.value);
+  onSubmitAudioBook() {
 
-    // const translationKeys = ['Added-Success', 'Something-went-wrong'];
-    // this.langService.getTranslatedMessages(translationKeys).subscribe((translations: Record<string, string>) => {
-    //   const { 'Added-Success': translatedMessage2, 'Something-went-wrong': translatedMessage1 } = translations;
+    const formData = this.addAudioBookForm.value;
+    const audioBookData: AddAudioBook = {
+      name: formData.name ?? '',
+      description: formData.description ?? '',
+      bookLanguageId: formData.bookLanguageId ? parseInt(formData.bookLanguageId, 10) : 0,
+      narratorId: formData.narratorId ? parseInt(formData.narratorId, 10) : 0,
+      bookSeriesId: formData.bookSeriesId ? parseInt(formData.bookSeriesId, 10) : 0,
+      orderInSeries: formData.orderInSeries ? parseInt(formData.orderInSeries, 10) : 0,
+      authorsIds: formData.authorsIds ?? [],
+      genresIds: formData.genresIds ?? [],
+      audioFileUrls: this.addAudioFiles,
+      picture: formData.picture!
+    };
 
-    //   if (this.addAudioBookForm.valid) {
-    //     this.addAudioBookSubscription = this.adminService.addAuthor(this.addAudioBookForm.value).subscribe({
-    //       next: (response) => {
-    //         this.toastr.success(translatedMessage2);
-    //         // The problem is that after resetting the field they get an error, bcs it is empty
-    //         this.addAudioBookForm.reset();
-    //         Object.keys(this.addAudioBookForm.controls).forEach(controlName => {
-    //           const control = this.addAudioBookForm.get(controlName);
-    //           control?.setErrors(null);
-    //         });
-    //         this.addAudioBookForm.setErrors({ 'invalid': true });
-    //       },
-    //       error: (error) => {
-    //         this.toastr.error(translatedMessage1);
-    //       }
-    //     });
-    //   }
-    // });
+    if (this.addAudioBookForm.valid) {
+      this.addAudioBookSubscription = this.adminService.addAudioBook(audioBookData).subscribe({
+        next: (response) => {
+          this.addAudioBookForm.reset();
+          this.newAudioFileForm.reset();
+          this.addAudioFiles = [];
+        },
+        error: (error) => {
+          console.log('error');
+        }
+      });
+    }
+
+    console.log(audioBookData);
   }
+
 
   addAudioFile() {
     const newAudioFileValue = this.newAudioFileForm.value;

@@ -1,7 +1,7 @@
 <app-stepper [linearModeSelected]="false" #appStepper>
-  <cdk-step [label]="'AudioBook'">
+  <cdk-step [label]="'AudioBook'" [completed]="addAudioBookForm.valid">
     <hr>
-    <form [formGroup]="addAudioBookForm" (ngSubmit)="onFormSubmit()">
+    <form [formGroup]="addAudioBookForm">
       <div>
         <app-text-input-v2 type="text" label="name"
           placeholder="please enter audiobook name" icon="title"
@@ -57,14 +57,13 @@
           [imageUrl]="url"
           (fileSelected)="onFileSelected($event)">
         </app-image-upload>
-
-        <div class="btns-section mt-2">
-          <button type="button" class="admin-btn return-btn mr-2" routerLink="/admin/author">{{ 'Back' | translate }}</button>
-          <button type="submit" class="admin-btn" [disabled]="addAudioBookForm.invalid">{{ 'Add-new-author' | translate }}</button>
-        </div>
       </div>
     </form>
 
+    <div class="btns-section mt-2">
+      <button type="button" class="admin-btn return-btn mr-2" routerLink="/admin/audiobook">{{ 'Back' | translate }}</button>
+      <button type="submit" class="admin-btn" cdkStepperNext>Next to audiofiles</button>
+    </div>
   </cdk-step>
   <cdk-step [label]="'AudioFiles'">
     <hr>
@@ -110,7 +109,7 @@
           <tr *ngFor="let audioFile of addAudioFiles; let i = index">
             <td>{{ audioFile.name }}</td>
             <td>{{ audioFile.audioFileUrl }}</td>
-            <td>{{ audioFile.duration }}</td>
+            <td>{{ audioFile.duration ? timeConvertService.secondstoHHMMSS(audioFile.duration) : 'N/A' }}</td>
             <td>{{ audioFile.playbackQueue }}</td>
             <td>
               <button class="admin-btn action mr-1 mb-1" (click)="editAudioFile(i)">
@@ -126,6 +125,19 @@
         </tbody>
       </table>
     </div>
+
+    <div class="btns-section mt-2">
+      <button type="button" class="admin-btn return-btn mr-2"
+        cdkStepperPrevious>
+        Back to audiobook
+      </button>
+      <button type="submit" class="admin-btn"
+        [disabled]="addAudioBookForm.invalid || !addAudioFiles || addAudioFiles.length === 0"
+        (click)="onSubmitAudioBook()">
+        Add Audiobook
+      </button>
+    </div>
+
   </cdk-step>
 
 </app-stepper>

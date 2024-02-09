@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { DarkModeService } from 'src/app/core/services/dark-mode-service/dark-mode.service';
-import { LanguageService } from 'src/app/core/services/language-service/language.service';
+import { DarkModeService } from 'src/app/core/services/dark-mode.service';
+import { LanguageService } from 'src/app/core/services/language.service';
 
 @Component({
   selector: 'app-image-upload',

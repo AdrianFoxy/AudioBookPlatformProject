@@ -6,7 +6,7 @@ import { Genre } from 'src/app/shared/models/adminModels/genre/genre';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { UpdateGenre } from 'src/app/shared/models/adminModels/genre/updateGenre';
 import { ToastrService } from 'ngx-toastr';
-import { LanguageService } from 'src/app/core/services/language-service/language.service';
+import { LanguageService } from 'src/app/core/services/language.service';
 
 @Component({
   selector: 'app-edit-genre',

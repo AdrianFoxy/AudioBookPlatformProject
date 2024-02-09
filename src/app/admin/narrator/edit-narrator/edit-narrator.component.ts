@@ -5,7 +5,7 @@ import { Narrator } from 'src/app/shared/models/adminModels/narrator/narrator';
 import { AdminService } from '../../admin.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { LanguageService } from 'src/app/core/services/language-service/language.service';
+import { LanguageService } from 'src/app/core/services/language.service';
 import { UpdateNarrator } from 'src/app/shared/models/adminModels/narrator/updateNarrator';
 
 @Component({

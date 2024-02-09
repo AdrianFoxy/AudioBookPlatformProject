@@ -9,7 +9,6 @@ export interface AddAudioBook {
   orderInSeries: number;
   authorsIds: number[];
   genresIds: number[];
-  bookSelectionsIds: number[];
   audioFileUrls: AddAudioFile[];
   picture?: File;
 }
