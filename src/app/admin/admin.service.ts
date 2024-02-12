@@ -18,6 +18,7 @@ import { Author } from '../shared/models/adminModels/author/author';
 import { updateAuthor } from '../shared/models/adminModels/author/updateAuthor';
 import { AudioBookInList } from '../shared/models/adminModels/audiobook/audiobookInList';
 import { AddAudioFile } from '../shared/models/adminModels/audiobook/audiofile/addAudioFile';
+import { AddAudioBook } from '../shared/models/adminModels/audiobook/addAudioBook';
 
 @Injectable({
   providedIn: 'root'
@@ -243,7 +244,7 @@ export class AdminService {
     return this.http.get<Pagination<AudioBookInList[]>>(this.baseUrl + 'AdminManagmentAudioBook', { params, headers, withCredentials: true });
   }
 
-  addAudioBook(model: any) {
+  addAudioBook(model: AddAudioBook) {
     const headers = new HttpHeaders().set('Accept-Language', this.getLang());
 
     const formData = new FormData();
@@ -266,8 +267,8 @@ export class AdminService {
       });
     }
 
-    if (model.audioFileUrls && Array.isArray(model.audioFileUrls)) {
-      const audioFilesJsonString = JSON.stringify(model.audioFileUrls);
+    if (model.audioFiles && Array.isArray(model.audioFiles)) {
+      const audioFilesJsonString = JSON.stringify(model.audioFiles);
       formData.append("AudioFiles", audioFilesJsonString);
     }
 
@@ -277,8 +278,4 @@ export class AdminService {
 
     return this.http.post(this.baseUrl + 'AdminManagmentAudioBook', formData, { headers, withCredentials: true });
   }
-
-
-
-
 }

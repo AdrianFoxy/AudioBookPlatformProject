@@ -1,53 +1,53 @@
 <app-stepper [linearModeSelected]="false" #appStepper>
-  <cdk-step [label]="'AudioBook'" [completed]="addAudioBookForm.valid">
+  <cdk-step label="{{ 'AudioBook' | translate }}" [completed]="addAudioBookForm.valid">
     <hr>
     <form [formGroup]="addAudioBookForm">
       <div>
-        <app-text-input-v2 type="text" label="name"
-          placeholder="please enter audiobook name" icon="title"
+        <app-text-input-v2 type="text" label="{{ 'audiobook-name' | translate }}"
+          placeholder="{{ 'Please-enter-audiobook-name' | translate }}" icon="title"
           [formControl]="addAudioBookForm.controls['name']">
         </app-text-input-v2>
 
         <app-textarea-input type="text" label="{{ 'description' | translate }}"
-          placeholder="{{ 'Please-enter-author-description' | translate }}" icon="description"
+          placeholder="{{ 'Please-enter-audiobook-description' | translate }}" icon="description"
           [formControl]="addAudioBookForm.controls['description']">
         </app-textarea-input>
 
         <app-multi-select
           [formControl]="addAudioBookForm.controls['authorsIds']"
-          [label]="'authors'"
+          label="{{ 'Authors' | translate }}"
           [selectList]="authors"
           [localization]="true">
         </app-multi-select>
 
         <app-multi-select
           [formControl]="addAudioBookForm.controls['genresIds']"
-          [label]="'genres'"
+          label="{{ 'Genres' | translate }}"
           [selectList]="genres"
           [localization]="true">
         </app-multi-select>
 
         <app-single-select
           [formControl]="addAudioBookForm.controls['bookSeriesId']"
-          [label]="'book series'"
+          label="{{ 'Book Series' | translate }}"
           [selectList]="bookSeries"
           [localization]="true">
         </app-single-select>
 
-        <app-text-input-v2 type="text" label="order in series"
-          placeholder="please enter order in series" icon="border_color"
+        <app-text-input-v2 type="text" label="{{ 'order-in-series' | translate }}"
+          placeholder="{{ 'Please-enter-order-in-series' | translate }}" icon="border_color"
           [formControl]="addAudioBookForm.controls['orderInSeries']">
         </app-text-input-v2>
 
         <app-single-select
           [formControl]="addAudioBookForm.controls['narratorId']"
-          [label]="'narrator'"
+          label="{{ 'Narrators' | translate }}"
           [selectList]="narrators">
         </app-single-select>
 
         <app-single-select
           [formControl]="addAudioBookForm.controls['bookLanguageId']"
-          [label]="'language'"
+          label="{{ 'Language' | translate }}"
           [selectList]="languages"
           [localization]="true">
         </app-single-select>
@@ -62,27 +62,27 @@
 
     <div class="btns-section mt-2">
       <button type="button" class="admin-btn return-btn mr-2" routerLink="/admin/audiobook">{{ 'Back' | translate }}</button>
-      <button type="submit" class="admin-btn" cdkStepperNext>Next to audiofiles</button>
+      <button type="submit" class="admin-btn" cdkStepperNext>{{ 'Next-to-audiofiles' | translate }}</button>
     </div>
   </cdk-step>
-  <cdk-step [label]="'AudioFiles'">
+  <cdk-step label="{{ 'Audiofiles' | translate }}">
     <hr>
     <div class="audiofile-form">
       <form [formGroup]="newAudioFileForm">
 
-        <app-text-input-v2 type="text" label="name"
-          placeholder="please enter audiobook name" icon="title"
+        <app-text-input-v2 type="text" label="{{ 'name-name' | translate }}"
+          placeholder="{{ 'Please-enter-name-name' | translate }}" icon="title"
           [formControl]="newAudioFileForm.controls['name']">
         </app-text-input-v2>
 
-        <app-text-input-v2 type="text" label="Audio File URL"
-          placeholder="please enter audiobook name" icon="title"
+        <app-text-input-v2 type="text" label="{{ 'audiofileURL' | translate }}"
+          placeholder="{{ 'Please-enter-audiofileURL' | translate }}" icon="title"
           [formControl]="newAudioFileForm.controls['audioFileUrl']"
           (input)="getAudioDuration($event)">
         </app-text-input-v2>
 
-        <app-text-input-v2 type="number" label="Playback Queue"
-          placeholder="please enter audiobook name" icon="title"
+        <app-text-input-v2 type="number" label="{{ 'PlaybackQueue' | translate }}"
+          placeholder="{{ 'Please-enter-playbackQueue' | translate }}" icon="title"
           [formControl]="newAudioFileForm.controls['playbackQueue']" min="0">
         </app-text-input-v2>
 
@@ -90,7 +90,7 @@
           type="button" class="admin-btn"
           (click)="addAudioFile()"
           [disabled]="newAudioFileForm.invalid">
-          Save file
+          {{ 'Save-file' | translate }}
         </button>
       </form>
     </div>
@@ -105,7 +105,7 @@
             <th scope="col">Playback Queue</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody *ngIf="addAudioFiles.length > 0; else emptyTable">
           <tr *ngFor="let audioFile of addAudioFiles; let i = index">
             <td>{{ audioFile.name }}</td>
             <td>{{ audioFile.audioFileUrl }}</td>
@@ -123,21 +123,29 @@
             </td>
           </tr>
         </tbody>
+        <ng-template #emptyTable>
+          <tbody>
+            <tr>
+              <td colspan="5" class="text-center">
+                {{ 'There-are-currently-no-audio-files' | translate }}
+              </td>
+            </tr>
+          </tbody>
+        </ng-template>
+
       </table>
     </div>
 
     <div class="btns-section mt-2">
       <button type="button" class="admin-btn return-btn mr-2"
         cdkStepperPrevious>
-        Back to audiobook
+        {{ 'Back-to-audiobook' | translate }}
       </button>
       <button type="submit" class="admin-btn"
         [disabled]="addAudioBookForm.invalid || !addAudioFiles || addAudioFiles.length === 0"
         (click)="onSubmitAudioBook()">
-        Add Audiobook
+        {{ 'Add-new-audiobook' | translate }}
       </button>
     </div>
-
   </cdk-step>
-
 </app-stepper>

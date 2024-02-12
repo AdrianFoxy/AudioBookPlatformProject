@@ -172,5 +172,21 @@
   "validation-invalid-extention": "Please select an image with a valid extension (.jpg, .jpeg, .png).",
   "validation-invalid-size": "Please select an image with a valid size, less or equal 2 MB.",
   "Add-new-audiobook": "Add new audiobook",
-  "Details": "Details"
+  "Details": "Details",
+  "audiobook-name": "Audiobook name",
+  "Please-enter-audiobook-name": "Please enter a name of the audiobook",
+  "Please-enter-audiobook-description": "Please enter a description of the audiobook",
+  "order-in-series": "Order in series",
+  "Please-enter-order-in-series": "Please enter a order in series",
+  "name-name": "Name",
+  "Please-enter-name-name": "Please enter a name",
+  "audiofileURL": "audiofile URL link",
+  "Please-enter-audiofileURL": "Please enter an audiofile URL link",
+  "PlaybackQueue": "Playback Queue",
+  "Please-enter-playbackQueue": "Please enter a playbackQueue",
+  "There-are-currently-no-audio-files": "There are currently no audio files",
+  "AudioBook": "Audiobook",
+  "Next-to-audiofiles": "Next to audiofiles",
+  "Back-to-audiobook": "Back to audiobook",
+  "Save-file": "Save file"
 }
