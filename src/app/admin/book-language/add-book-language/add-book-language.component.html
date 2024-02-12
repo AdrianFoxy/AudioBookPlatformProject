@@ -1,6 +1,6 @@
 <h1>{{ 'Add-new-book-language' | translate }}</h1>
 <hr>
-<form [formGroup]="addBookLanguageForm" (ngSubmit)="onFormSubmit()">
+<form [formGroup]="addBookLanguageForm">
   <div>
     <app-text-input-v2
       type="text"
@@ -20,7 +20,7 @@
 
     <div class="btns-section">
       <button type="button" class="admin-btn return-btn mr-2" routerLink="/admin/book-language">{{ 'Back' | translate }}</button>
-      <button type="submit" class="admin-btn" [disabled]="addBookLanguageForm.invalid">{{ 'Add-new-book-language' | translate }}</button>
+      <button type="button" class="admin-btn" [disabled]="addBookLanguageForm.invalid" (click)="onFormSubmit()">{{ 'Add-new-book-language' | translate }}</button>
     </div>
   </div>
 </form>

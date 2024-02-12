@@ -1,6 +1,6 @@
 <h1>{{ 'Add-new-genre' | translate }}</h1>
 <hr>
-<form [formGroup]="addGenreForm" (ngSubmit)="onFormSubmit()">
+<form [formGroup]="addGenreForm">
   <div>
     <app-text-input-v2
       type="text"
@@ -20,7 +20,7 @@
 
     <div class="btns-section">
       <button type="button" class="admin-btn return-btn mr-2" routerLink="/admin/genre">{{ 'Back' | translate }}</button>
-      <button type="submit" class="admin-btn" [disabled]="addGenreForm.invalid">{{ 'Add-new-genre' | translate }}</button>
+      <button type="button" class="admin-btn" [disabled]="addGenreForm.invalid" (click)="onFormSubmit()">{{ 'Add-new-genre' | translate }}</button>
     </div>
   </div>
 </form>

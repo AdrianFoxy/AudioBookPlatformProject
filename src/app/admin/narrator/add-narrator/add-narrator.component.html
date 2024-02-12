@@ -1,6 +1,6 @@
 <h1>{{ 'Add-new-narrator' | translate }}</h1>
 <hr>
-<form [formGroup]="addNarratorForm" (ngSubmit)="onFormSubmit()">
+<form [formGroup]="addNarratorForm">
   <div>
     <app-text-input-v2
       type="text"
@@ -20,7 +20,7 @@
 
     <div class="btns-section">
       <button type="button" class="admin-btn return-btn mr-2" routerLink="/admin/narrator">{{ 'Back' | translate }}</button>
-      <button type="submit" class="admin-btn" [disabled]="addNarratorForm.invalid">{{ 'Add-new-narrator' | translate }}</button>
+      <button type="button" class="admin-btn" [disabled]="addNarratorForm.invalid" (click)="onFormSubmit()">{{ 'Add-new-narrator' | translate }}</button>
     </div>
   </div>
 </form>

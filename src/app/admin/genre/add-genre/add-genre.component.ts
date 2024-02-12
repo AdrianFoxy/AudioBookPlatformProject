@@ -33,13 +33,7 @@ export class AddGenreComponent implements OnDestroy {
         this.addGenreSubscription = this.adminService.addGenre(this.addGenreForm.value).subscribe({
           next: (response) => {
             this.toastr.success(translatedMessage2);
-            // The problem is that after resetting the field they get an error, bcs it is empty
             this.addGenreForm.reset();
-            Object.keys(this.addGenreForm.controls).forEach(controlName => {
-              const control = this.addGenreForm.get(controlName);
-              control?.setErrors(null);
-            });
-            this.addGenreForm.setErrors({ 'invalid': true });
           },
           error: (error) => {
             this.toastr.error(translatedMessage1);
@@ -48,12 +42,6 @@ export class AddGenreComponent implements OnDestroy {
       }
     });
   }
-
-  resetForm() {
-    this.addGenreForm.reset({});
-    this.addGenreForm.setErrors({ 'invalid': true });
-  }
-
 
   ngOnDestroy(): void {
     this.addGenreSubscription?.unsubscribe();

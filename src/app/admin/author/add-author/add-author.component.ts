@@ -34,20 +34,12 @@ export class AddAuthorComponent {
 
   onFileSelected(event: any) {
     const uploadedfile: File = event.target.files[0];
-
-    // Check if a file is selected
     if (uploadedfile) {
       const reader = new FileReader();
-
       reader.onload = (e: any) => {
-        // Assign the data URL to the 'url' variable
         this.url = e.target.result;
       };
-
-      // Read the image as a data URL
       reader.readAsDataURL(uploadedfile);
-
-      // Update the form control value
       this.addAuthorForm.patchValue({
         picture: uploadedfile
       });
@@ -63,13 +55,8 @@ export class AddAuthorComponent {
         this.addAuthorSubscription = this.adminService.addAuthor(this.addAuthorForm.value).subscribe({
           next: (response) => {
             this.toastr.success(translatedMessage2);
-            // The problem is that after resetting the field they get an error, bcs it is empty
             this.addAuthorForm.reset();
-            Object.keys(this.addAuthorForm.controls).forEach(controlName => {
-              const control = this.addAuthorForm.get(controlName);
-              control?.setErrors(null);
-            });
-            this.addAuthorForm.setErrors({ 'invalid': true });
+            this.url = '';
           },
           error: (error) => {
             this.toastr.error(translatedMessage1);
@@ -77,11 +64,6 @@ export class AddAuthorComponent {
         });
       }
     });
-  }
-
-  resetForm() {
-    this.addAuthorForm.reset({});
-    this.addAuthorForm.setErrors({ 'invalid': true });
   }
 
   ngOnDestroy(): void {
