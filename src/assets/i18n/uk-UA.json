@@ -172,5 +172,21 @@
   "validation-invalid-extention": "Будь ласка оберіть файл з одним з наступних розширень: (.jpg, .jpeg, .png).",
   "validation-invalid-size": "Будь ласка оберіть файл, що менше або дорівнює 2 МБ.",
   "Add-new-audiobook": "Додати нову аудіокнигу",
-  "Details": "Деталі"
+  "Details": "Деталі",
+  "audiobook-name": "Назва аудіокниги",
+  "Please-enter-audiobook-name": "Будь ласка введіть назву аудіокниги",
+  "Please-enter-audiobook-description": "Будь ласка введіть опис аудіокниги",
+  "order-in-series": "Номер у серії",
+  "Please-enter-order-in-series": "Будь ласка введіть номер у серії",
+  "name-name": "Назва",
+  "Please-enter-name-name": "Будь ласка введіть назву",
+  "audiofileURL": "URL посилання на аудіофайлі",
+  "Please-enter-audiofileURL": "Будь ласка введіть URL посилання на аудіофайлі",
+  "PlaybackQueue": "Черга програвання",
+  "Please-enter-playbackQueue": "Будь ласка введіть чергу програвання",
+  "There-are-currently-no-audio-files": "Поки що тут нема аудіофайлів",
+  "AudioBook": "Аудіокнига",
+  "Next-to-audiofiles": "Далі до аудіофайлів",
+  "Back-to-audiobook": "Назад до аудіокниги",
+  "Save-file": "Зберегти файл"
 }

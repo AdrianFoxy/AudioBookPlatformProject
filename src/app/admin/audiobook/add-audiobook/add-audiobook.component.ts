@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AdminService } from '../../admin.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -68,9 +68,8 @@ export class AddAudiobookComponent implements OnInit, OnDestroy{
       Validators.required,
       CustomValidators.nonZeroValidator()
     ]),
-    playbackQueue: new FormControl(0, [Validators.required])
+    playbackQueue: new FormControl('', [Validators.required])
   });
-
 
   onFileSelected(event: any) {
     const uploadedfile: File = event.target.files[0];
@@ -89,43 +88,47 @@ export class AddAudiobookComponent implements OnInit, OnDestroy{
   }
 
   onSubmitAudioBook() {
-
     const formData = this.addAudioBookForm.value;
     const audioBookData: AddAudioBook = {
       name: formData.name ?? '',
       description: formData.description ?? '',
-      bookLanguageId: formData.bookLanguageId ? parseInt(formData.bookLanguageId, 10) : 0,
-      narratorId: formData.narratorId ? parseInt(formData.narratorId, 10) : 0,
-      bookSeriesId: formData.bookSeriesId ? parseInt(formData.bookSeriesId, 10) : 0,
-      orderInSeries: formData.orderInSeries ? parseInt(formData.orderInSeries, 10) : 0,
+      bookLanguageId: formData.bookLanguageId ? parseInt(formData.bookLanguageId) : 0,
+      narratorId: formData.narratorId ? parseInt(formData.narratorId) : 0,
+      bookSeriesId: formData.bookSeriesId ? parseInt(formData.bookSeriesId) : 0,
+      orderInSeries: formData.orderInSeries ? parseInt(formData.orderInSeries) : 0,
       authorsIds: formData.authorsIds ?? [],
       genresIds: formData.genresIds ?? [],
-      audioFileUrls: this.addAudioFiles,
+      audioFiles: this.addAudioFiles,
       picture: formData.picture!
     };
 
-    if (this.addAudioBookForm.valid) {
-      this.addAudioBookSubscription = this.adminService.addAudioBook(audioBookData).subscribe({
-        next: (response) => {
-          this.addAudioBookForm.reset();
-          this.newAudioFileForm.reset();
-          this.addAudioFiles = [];
-        },
-        error: (error) => {
-          console.log('error');
-        }
-      });
-    }
+    const translationKeys = ['Added-Success', 'Something-went-wrong'];
+    this.langService.getTranslatedMessages(translationKeys).subscribe((translations: Record<string, string>) => {
+      const { 'Added-Success': translatedMessage2, 'Something-went-wrong': translatedMessage1 } = translations;
 
-    console.log(audioBookData);
+      if (this.addAudioBookForm.valid) {
+        this.addAudioBookSubscription = this.adminService.addAudioBook(audioBookData).subscribe({
+          next: (response) => {
+            this.toastr.success(translatedMessage2);
+
+            this.addAudioBookForm.reset();
+            this.newAudioFileForm.reset();
+            this.url = '';
+            this.addAudioFiles = [];
+          },
+          error: (error) => {
+            this.toastr.error(translatedMessage1);
+          }
+        });
+      }
+    });
   }
-
 
   addAudioFile() {
     const newAudioFileValue = this.newAudioFileForm.value;
 
-    const isNameUnique = !this.addAudioFiles.some(file => file.name === newAudioFileValue.name);
-    const isPlaybackQueueUnique = !this.addAudioFiles.some(file => file.playbackQueue === newAudioFileValue.playbackQueue);
+    const isNameUnique = !this.addAudioFiles.some((file, index) => index !== this.editIndex && file.name === newAudioFileValue.name);
+    const isPlaybackQueueUnique = !this.addAudioFiles.some((file, index) => index !== this.editIndex && file.playbackQueue === newAudioFileValue.playbackQueue);
 
     if (!isNameUnique) {
       this.newAudioFileForm.controls['name'].setErrors({ 'uniqName': true });
@@ -141,7 +144,7 @@ export class AddAudiobookComponent implements OnInit, OnDestroy{
       name: newAudioFileValue.name ? newAudioFileValue.name : '',
       audioFileUrl: newAudioFileValue.audioFileUrl ? newAudioFileValue.audioFileUrl : '',
       duration: newAudioFileValue.duration !== undefined ? newAudioFileValue.duration : null,
-      playbackQueue: newAudioFileValue.playbackQueue !== undefined ? newAudioFileValue.playbackQueue : null
+      playbackQueue: newAudioFileValue.playbackQueue ? newAudioFileValue.playbackQueue : '',
     };
 
     if (this.editIndex !== null) {
@@ -170,7 +173,6 @@ export class AddAudiobookComponent implements OnInit, OnDestroy{
     this.addAudioFiles.splice(index, 1);
   }
 
-
   getAudioDuration(event: any) {
     const audioUrl = event?.target?.value;
     if (audioUrl) {
@@ -187,7 +189,6 @@ export class AddAudiobookComponent implements OnInit, OnDestroy{
       this.newAudioFileForm.patchValue({ duration: 0 });
     }
   }
-
 
   getBookSeriesForSelect(){
     this.libraryService.getBookSeriesForFilter().subscribe({

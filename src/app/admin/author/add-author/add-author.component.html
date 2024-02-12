@@ -1,6 +1,6 @@
 <h1>{{ 'Add-new-author' | translate }}</h1>
 <hr>
-<form [formGroup]="addAuthorForm" (ngSubmit)="onFormSubmit()">
+<form [formGroup]="addAuthorForm">
   <div>
     <app-text-input-v2
       type="text"
@@ -38,7 +38,7 @@
 
     <div class="btns-section mt-2">
       <button type="button" class="admin-btn return-btn mr-2" routerLink="/admin/author">{{ 'Back' | translate }}</button>
-      <button type="submit" class="admin-btn" [disabled]="addAuthorForm.invalid">{{ 'Add-new-author' | translate }}</button>
+      <button type="button" class="admin-btn" [disabled]="addAuthorForm.invalid" (click)="onFormSubmit()">{{ 'Add-new-author' | translate }}</button>
     </div>
   </div>
 </form>

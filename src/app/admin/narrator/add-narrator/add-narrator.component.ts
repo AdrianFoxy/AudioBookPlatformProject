@@ -12,7 +12,6 @@ import { LanguageService } from 'src/app/core/services/language.service';
 })
 export class AddNarratorComponent implements OnDestroy {
 
-  // addGenreForm: FormGroup;
   private addNarratorSubscription?: Subscription;
 
   constructor(private adminService: AdminService, private fb: FormBuilder, private toastr: ToastrService,
@@ -33,13 +32,7 @@ export class AddNarratorComponent implements OnDestroy {
         this.addNarratorSubscription = this.adminService.addNarrator(this.addNarratorForm.value).subscribe({
           next: (response) => {
             this.toastr.success(translatedMessage2);
-            // The problem is that after resetting the field they get an error, bcs it is empty
             this.addNarratorForm.reset();
-            Object.keys(this.addNarratorForm.controls).forEach(controlName => {
-              const control = this.addNarratorForm.get(controlName);
-              control?.setErrors(null);
-            });
-            this.addNarratorForm.setErrors({ 'invalid': true });
           },
           error: (error) => {
             this.toastr.error(translatedMessage1);
@@ -49,14 +42,7 @@ export class AddNarratorComponent implements OnDestroy {
     });
   }
 
-  resetForm() {
-    this.addNarratorForm.reset({});
-    this.addNarratorForm.setErrors({ 'invalid': true });
-  }
-
-
   ngOnDestroy(): void {
     this.addNarratorSubscription?.unsubscribe();
   }
-
 }

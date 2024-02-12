@@ -62,10 +62,6 @@
         <td>{{ audiobook.bookDuration }}</td>
         <td>{{ audiobook.rating }}</td>
         <td class="btn-td">
-          <button class="admin-btn mr-1 action mb-1" routerLink="/admin/audiobook/details-audiobook/{{audiobook.id}}">
-            <i class="fa fa-info"></i>
-            {{ 'Details' | translate }}
-          </button>
           <button class="admin-btn action mr-1 mb-1" routerLink="/admin/audiobook/edit-audiobook/{{audiobook.id}}">
             <i class="fa fa-edit"></i>
             {{ 'Edit' | translate }}
