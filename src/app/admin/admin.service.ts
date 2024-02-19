@@ -17,8 +17,8 @@ import { UpdateBookLanguage } from '../shared/models/adminModels/book-language/u
 import { Author } from '../shared/models/adminModels/author/author';
 import { updateAuthor } from '../shared/models/adminModels/author/updateAuthor';
 import { AudioBookInList } from '../shared/models/adminModels/audiobook/audiobookInList';
-import { AddAudioFile } from '../shared/models/adminModels/audiobook/audiofile/addAudioFile';
 import { AddAudioBook } from '../shared/models/adminModels/audiobook/addAudioBook';
+import { AudioBook } from '../shared/models/adminModels/audiobook/audiobook';
 
 @Injectable({
   providedIn: 'root'
@@ -277,5 +277,10 @@ export class AdminService {
     }
 
     return this.http.post(this.baseUrl + 'AdminManagmentAudioBook', formData, { headers, withCredentials: true });
+  }
+
+  getAudioBookById(id: string): Observable<AudioBook> {
+    const headers = this.createHeaders();
+    return this.http.get<AudioBook>(this.baseUrl + 'AdminManagmentAudioBook/' + id, { headers: headers, withCredentials: true })
   }
 }
