@@ -24,10 +24,10 @@ export class AudiobookComponent implements OnInit {
               public langService: LanguageService, public loaderService : LoaderService) { }
 
   ngOnInit() {
-    this.getAuthorList();
+    this.getAudiobookList();
   }
 
-  getAuthorList() {
+  getAudiobookList() {
     this.adminService.getAudioBooksList(this.paginationAndSearchParams).subscribe({
       next: response => {
         this.audiobooks = response.data;
@@ -45,7 +45,7 @@ export class AudiobookComponent implements OnInit {
   onPageChanged(event: any) {
     if (this.paginationAndSearchParams.pageNumber !== event) {
       this.paginationAndSearchParams.pageNumber = event;
-      this.getAuthorList();
+      this.getAudiobookList();
     }
   }
 
@@ -55,7 +55,26 @@ export class AudiobookComponent implements OnInit {
 
     this.paginationAndSearchParams.search = this.searchTerm?.nativeElement.value;
     this.paginationAndSearchParams.pageNumber = 1;
-    this.getAuthorList();
+    this.getAudiobookList();
   }
+
+  onDelete(id: number) {
+    const translationKeys = ['Confirm-delete-main', 'Success-delete-main'];
+
+    this.langService.getTranslatedMessages(translationKeys)
+    .subscribe(({ 'Confirm-delete-main': confirmMessage, 'Success-delete-main': successMessage }:
+     Record<string, string>) => {
+      if (confirm(confirmMessage)) {
+        this.adminService.deleteAudiobook(id).subscribe({
+          next: () => {
+            this.toastr.error(successMessage);
+            this.getAudiobookList();
+          },
+          error: (err) => console.log(err)
+        });
+      }
+    });
+  }
+
 
 }

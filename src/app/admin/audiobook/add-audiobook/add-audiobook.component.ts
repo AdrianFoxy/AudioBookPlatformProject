@@ -170,7 +170,16 @@ export class AddAudiobookComponent implements OnInit, OnDestroy{
   }
 
   deleteAudioFile(index: number) {
-    this.addAudioFiles.splice(index, 1);
+    const translationKeys = ['Confirm-delete-main'];
+
+    this.langService.getTranslatedMessages(translationKeys)
+      .subscribe(({ 'Confirm-delete-main': confirmMessage }: Record<string, string>) => {
+        const confirmDelete = confirm(confirmMessage);
+
+        if (confirmDelete) {
+          this.addAudioFiles.splice(index, 1);
+        }
+      });
   }
 
   getAudioDuration(event: any) {

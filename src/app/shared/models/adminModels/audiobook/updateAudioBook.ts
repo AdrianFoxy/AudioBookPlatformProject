@@ -1,6 +1,7 @@
 import { AddAudioFile } from "./audiofile/addAudioFile";
 
 export interface UpdateAudioBook {
+  id: number,
   name: string;
   description: string;
   bookLanguageId: number;
