@@ -17,8 +17,9 @@ import { UpdateBookLanguage } from '../shared/models/adminModels/book-language/u
 import { Author } from '../shared/models/adminModels/author/author';
 import { updateAuthor } from '../shared/models/adminModels/author/updateAuthor';
 import { AudioBookInList } from '../shared/models/adminModels/audiobook/audiobookInList';
-import { AddAudioFile } from '../shared/models/adminModels/audiobook/audiofile/addAudioFile';
 import { AddAudioBook } from '../shared/models/adminModels/audiobook/addAudioBook';
+import { AudioBook } from '../shared/models/adminModels/audiobook/audiobook';
+import { UpdateAudioBook } from '../shared/models/adminModels/audiobook/updateAudioBook';
 
 @Injectable({
   providedIn: 'root'
@@ -244,6 +245,11 @@ export class AdminService {
     return this.http.get<Pagination<AudioBookInList[]>>(this.baseUrl + 'AdminManagmentAudioBook', { params, headers, withCredentials: true });
   }
 
+  getAudioBookById(id: string): Observable<AudioBook> {
+    const headers = this.createHeaders();
+    return this.http.get<AudioBook>(this.baseUrl + 'AdminManagmentAudioBook/' + id, { headers: headers, withCredentials: true })
+  }
+
   addAudioBook(model: AddAudioBook) {
     const headers = new HttpHeaders().set('Accept-Language', this.getLang());
 
@@ -278,4 +284,51 @@ export class AdminService {
 
     return this.http.post(this.baseUrl + 'AdminManagmentAudioBook', formData, { headers, withCredentials: true });
   }
+
+  updateAudioBook(model: UpdateAudioBook){
+    const headers = new HttpHeaders().set('Accept-Language', this.getLang());
+
+    const formData = new FormData();
+    formData.append("name", model.name);
+    formData.append("description", model.description);
+    formData.append("bookLanguageId", String(model.bookLanguageId));
+    formData.append("narratorId", String(model.narratorId));
+    formData.append("bookSeriesId", String(model.bookSeriesId));
+    formData.append("orderInSeries", String(model.orderInSeries));
+
+    if (model.authorsIds && Array.isArray(model.authorsIds)) {
+      model.authorsIds.forEach((authorId: number) => {
+        formData.append("authorsIds", String(authorId));
+      });
+    }
+
+    if (model.genresIds && Array.isArray(model.genresIds)) {
+      model.genresIds.forEach((genreId: number) => {
+        formData.append("genresIds", String(genreId));
+      });
+    }
+
+    if (model.audioFilesToDelete && Array.isArray(model.audioFilesToDelete)) {
+      model.audioFilesToDelete.forEach((deleteId: number) => {
+        formData.append("audioFilesToDelete", String(deleteId));
+      });
+    }
+
+    if (model.audioFiles && Array.isArray(model.audioFiles)) {
+      const audioFilesJsonString = JSON.stringify(model.audioFiles);
+      formData.append("AudioFiles", audioFilesJsonString);
+    }
+
+    if (model.picture) {
+      formData.append("picture", model.picture);
+    }
+
+    return this.http.put(this.baseUrl + 'AdminManagmentAudioBook/' + model.id, formData, { headers, withCredentials: true });
+  }
+
+  deleteAudiobook(id: number) {
+    const headers = this.createHeaders();
+    return this.http.delete<AudioBook>(this.baseUrl + 'AdminManagmentAudioBook/' + id, { headers: headers, withCredentials: true });
+  }
+
 }

@@ -1,4 +1,4 @@
-import { Component, Input, Self } from '@angular/core';
+import { Component, Input, Self, OnInit } from '@angular/core';
 import { ControlValueAccessor, FormControl, NgControl } from '@angular/forms';
 import { LanguageService } from 'src/app/core/services/language.service';
 
@@ -10,12 +10,11 @@ import { LanguageService } from 'src/app/core/services/language.service';
 export class SingleSelectComponent implements ControlValueAccessor {
   @Input() label = '';
   @Input() selectList: { id: number, name: string, enName?: string }[] = [];
+  @Input() selectedItemId: string | number | undefined = '';
   @Input() localization = false;
   searchText: string = '';
 
-  // Search string for filtering params
   searchCtrl = new FormControl();
-
 
   constructor(@Self() public controlDir: NgControl, public langService: LanguageService) {
     this.controlDir.valueAccessor = this;

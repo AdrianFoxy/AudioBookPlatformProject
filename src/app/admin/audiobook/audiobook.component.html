@@ -66,7 +66,8 @@
             <i class="fa fa-edit"></i>
             {{ 'Edit' | translate }}
           </button>
-          <button class="admin-btn action delete-btn">
+          <button class="admin-btn action delete-btn"
+          (click)="onDelete(audiobook.id)">
             <i class="fa fa-trash"></i>
             {{ 'Delete' | translate }}
           </button>

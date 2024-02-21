@@ -1,1 +1,179 @@
-<p>edit-audiobook works!</p>
+<app-stepper [linearModeSelected]="false" #appStepper>
+  <cdk-step label="{{ 'AudioBook' | translate }}" [completed]="editAudiobookForm.valid">
+    <hr>
+    <form [formGroup]="editAudiobookForm">
+      <app-text-input-v2 type="text" label="{{ 'Id' | translate }}"
+        icon="title" [formControl]="editAudiobookForm.controls['id']">
+      </app-text-input-v2>
+
+      <app-text-input-v2 type="text" label="{{ 'audiobook-name' | translate }}"
+        placeholder="{{ 'Please-enter-audiobook-name' | translate }}" icon="title"
+        [formControl]="editAudiobookForm.controls['name']">
+      </app-text-input-v2>
+
+      <app-textarea-input type="text" label="{{ 'description' | translate }}"
+        placeholder="{{ 'Please-enter-audiobook-description' | translate }}" icon="description"
+        [formControl]="editAudiobookForm.controls['description']">
+      </app-textarea-input>
+
+      <app-multi-select
+        [formControl]="editAudiobookForm.controls['authorsIds']"
+        label="{{ 'Authors' | translate }}"
+        [selectList]="authors"
+        [localization]="true">
+      </app-multi-select>
+
+
+      <app-multi-select
+        [formControl]="editAudiobookForm.controls['genresIds']"
+        label="{{ 'Genres' | translate }}"
+        [selectList]="genres"
+        [localization]="true">
+      </app-multi-select>
+
+      <app-single-select
+        [formControl]="editAudiobookForm.controls['bookSeriesId']"
+        label="{{ 'Book Series' | translate }}"
+        [selectList]="bookSeries"
+        [localization]="true"
+        [selectedItemId]="audiobook?.bookSeries?.id">
+      </app-single-select>
+
+      <app-text-input-v2 type="text" label="{{ 'order-in-series' | translate }}"
+        placeholder="{{ 'Please-enter-order-in-series' | translate }}" icon="border_color"
+        [formControl]="editAudiobookForm.controls['orderInSeries']">
+      </app-text-input-v2>
+
+      <app-single-select
+        [formControl]="editAudiobookForm.controls['narratorId']"
+        label="{{ 'Narrators' | translate }}"
+        [selectList]="narrators"
+        [selectedItemId]="audiobook?.narrator?.id">
+      </app-single-select>
+
+      <app-single-select
+        [formControl]="editAudiobookForm.controls['bookLanguageId']"
+        label="{{ 'Language' | translate }}"
+        [selectList]="languages"
+        [localization]="true"
+        [selectedItemId]="audiobook?.bookLanguage?.id">
+      </app-single-select>
+
+      <app-text-input-v2 type="text" label="{{ 'Rating' | translate }}"
+        icon="title" [formControl]="editAudiobookForm.controls['rating']">
+      </app-text-input-v2>
+
+      <app-text-input-v2 type="text" label="{{ 'Duration' | translate }}"
+        icon="title" [formControl]="editAudiobookForm.controls['bookDuration']">
+      </app-text-input-v2>
+
+      <app-text-input-v2 type="text" label="{{ 'view count' | translate }}"
+        icon="title" [formControl]="editAudiobookForm.controls['viewCount']">
+      </app-text-input-v2>
+
+      <app-text-input-v2 type="text" label="{{ 'book marks count' | translate }}"
+        icon="title" [formControl]="editAudiobookForm.controls['bookMarksCount']">
+      </app-text-input-v2>
+
+      <app-text-input-v2 type="text" label="{{ 'createdAt' | translate }}"
+        icon="calendar_today" [formControl]="editAudiobookForm.controls['updatedAt']">
+      </app-text-input-v2>
+
+      <app-text-input-v2 type="text" label="{{ 'updatedAt' | translate }}"
+        icon="calendar_today" [formControl]="editAudiobookForm.controls['createdAt']">
+      </app-text-input-v2>
+
+      <app-image-upload [form]="editAudiobookForm" [defaultImgUrl]="authorDefaultUrl" [imageUrl]="url" (fileSelected)="onFileSelected($event)"></app-image-upload>
+
+    </form>
+    <div class="btns-section mt-2">
+      <button type="button" class="admin-btn return-btn mr-2" routerLink="/admin/audiobook">{{ 'Back' | translate }}</button>
+      <button type="submit" class="admin-btn" cdkStepperNext>{{ 'Next-to-audiofiles' | translate }}</button>
+    </div>
+
+  </cdk-step>
+  <cdk-step label="{{ 'Audiofiles' | translate }}">
+    <hr>
+    <div class="audiofile-form">
+      <form [formGroup]="AudioFileForm">
+
+        <app-text-input-v2 type="text" label="{{ 'name-name' | translate }}"
+          placeholder="{{ 'Please-enter-name-name' | translate }}" icon="title"
+          [formControl]="AudioFileForm.controls['name']">
+        </app-text-input-v2>
+
+        <app-text-input-v2 type="text" label="{{ 'audiofileURL' | translate }}"
+          placeholder="{{ 'Please-enter-audiofileURL' | translate }}" icon="title"
+          [formControl]="AudioFileForm.controls['audioFileUrl']"
+          (input)="getAudioDuration($event)">
+        </app-text-input-v2>
+
+        <app-text-input-v2 type="number" label="{{ 'PlaybackQueue' | translate }}"
+          placeholder="{{ 'Please-enter-playbackQueue' | translate }}" icon="title"
+          [formControl]="AudioFileForm.controls['playbackQueue']" min="0">
+        </app-text-input-v2>
+
+        <button
+          type="button" class="admin-btn"
+          (click)="addAudioFile()"
+          [disabled]="AudioFileForm.invalid">
+          {{ 'Save-file' | translate }}
+        </button>
+      </form>
+    </div>
+
+
+    <div class="table-responsive mt-3">
+      <table class="table table-bordered table-hover rounded-3 overflow-hidden">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Audio File URL</th>
+            <th scope="col">Duration</th>
+            <th scope="col">Playback Queue</th>
+          </tr>
+        </thead>
+        <tbody *ngIf="audioFiles.length > 0; else emptyTable">
+          <tr *ngFor="let audioFile of audioFiles; let i = index">
+            <td>{{ audioFile.name }}</td>
+            <td style="max-width: 400px; word-wrap: break-word;">{{ audioFile.audioFileUrl }}</td>
+            <td>{{ audioFile.duration ? timeConvertService.secondstoHHMMSS(audioFile.duration) : 'N/A' }}</td>
+            <td>{{ audioFile.playbackQueue }}</td>
+            <td>
+              <button class="admin-btn action mr-1 mb-1" (click)="editAudioFile(i)">
+                <i class="fa fa-edit"></i>
+                {{ 'Edit' | translate }}
+              </button>
+              <button class="admin-btn action delete-btn" (click)="deleteAudioFile(i)">
+                <i class="fa fa-trash"></i>
+                {{ 'Delete' | translate }}
+              </button>
+            </td>
+          </tr>
+        </tbody>
+        <ng-template #emptyTable>
+          <tbody>
+            <tr>
+              <td colspan="5" class="text-center">
+                {{ 'There-are-currently-no-audio-files' | translate }}
+              </td>
+            </tr>
+          </tbody>
+        </ng-template>
+
+      </table>
+    </div>
+
+    <div class="btns-section mt-2">
+      <button type="button" class="admin-btn return-btn mr-2"
+        cdkStepperPrevious>
+        {{ 'Back-to-audiobook' | translate }}
+      </button>
+      <button type="submit" class="admin-btn"
+        (click)="onSubmitAudioBook()"
+        [disabled]="editAudiobookForm.invalid || audioFiles.length === 0">
+        {{ 'Save-changes' | translate }}
+      </button>
+    </div>
+  </cdk-step>
+</app-stepper>
