@@ -7,7 +7,7 @@ Also click here to see the [demo](https://foxwithbook.azurewebsites.net/).
 
 ## Screenshots
 ### Home page
-![enter image description here]([https://media.discordapp.net/attachments/1210173124570644520/1210173186998542396/image.png?ex=65e9989b&is=65d7239b&hm=1f6c42f214ada2ff43a7ed48654f35f16abf7cb4a6350587641abcbcf5b24354&=&format=webp&quality=lossless&width=833&height=1200](https://freeimage.host/i/1.JXSNhS1))
+![enter image description here](https://freeimage.host/i/1.JXSNhS1))
 ### Login&Registration
 ![enter image description here](https://media.discordapp.net/attachments/1210173124570644520/1210179000782295140/image.png?ex=65e99e05&is=65d72905&hm=1ac50ace548725378d09ef23283621ab2b616b6ee8500ac73dd3ff18ab5a8358&=&format=webp&quality=lossless&width=833&height=554)
 ![enter image description here](https://media.discordapp.net/attachments/1210173124570644520/1210179054335172648/image.png?ex=65e99e12&is=65d72912&hm=1b638464c39a3ba9c9490938b181d54d45b877a724fae8abd56a5fde911286ed&=&format=webp&quality=lossless&width=833&height=600)
