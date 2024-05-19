@@ -2,7 +2,7 @@
 # FoxWithBook audiobook platform
 This is the client side for the audiobook platform project. The project includes a home page, catalog, audiobook details, user profile, and an admin panel with CRUD operations for basic entities such as genre, author, and audiobook. It also features dark/light mode and supports two languages: Ukrainian and English. The interface is also optimized for mobile devices.
 
-Backend of this projest you can found [here](https://github.com/AdrianFoxy/AudioBookPlatformProjectBackend?tab=readme-ov-file). 
+Backend of this project you can found [here](https://github.com/AdrianFoxy/AudioBookPlatformProjectBackend?tab=readme-ov-file). 
 Also click here to see the [demo](https://foxwithbook.azurewebsites.net/).
 
 ## Screenshots
